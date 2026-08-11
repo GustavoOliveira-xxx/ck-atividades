@@ -1,18 +1,6 @@
-/* ============================================================
-   Acervo CK — comportamento da página
-
-   A lista de atividades vive em atividades.js (window.ACERVO_CK).
-   Tudo aqui — cartões, filtros, contadores, ticker e vitrine 3D —
-   é gerado a partir dela, então publicar uma atividade nova é
-   apenas acrescentar um objeto naquele arquivo.
-   ============================================================ */
-
 (() => {
   "use strict";
 
-  /* ---------------------------------------------------------
-     01. Utilidades
-     --------------------------------------------------------- */
   const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const temHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -24,8 +12,6 @@
       { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
     ));
 
-  /* "2026-08-18" → Date local. Evita o deslocamento de um dia que
-     acontece quando a string ISO é interpretada como UTC. */
   const paraData = (iso) => {
     const [a, m, d] = String(iso || "").split("-").map(Number);
     return a && m && d ? new Date(a, m - 1, d) : null;
@@ -38,13 +24,9 @@
     day: "2-digit", month: "short", year: "numeric",
   });
 
-  /* "Educação Física" → "educacao fisica": busca que ignora acento */
   const semAcento = (texto) =>
     String(texto).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-  /* "#E50914" \u2192 "229, 9, 20". O CSS monta as transpar\u00eancias da
-     atividade com rgba(var(--acento-rgb), \u2026), o que funciona em
-     qualquer navegador. Aceita tamb\u00e9m a forma curta (#abc). */
   const hexParaRgb = (hex) => {
     const limpo = String(hex || "").trim().replace("#", "");
     const cheio = limpo.length === 3
@@ -57,14 +39,9 @@
     return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
   };
 
-  /* estilo inline com as duas faces da cor de acento da atividade */
   const estiloAcento = (cor) =>
     `--acento:${esc(cor || "#a855f7")};--acento-rgb:${hexParaRgb(cor)}`;
 
-
-  /* ---------------------------------------------------------
-     02. Dados do acervo
-     --------------------------------------------------------- */
   const ROTULO_ESTADO = {
     pronta: "Pronta",
     andamento: "Em andamento",
@@ -89,10 +66,6 @@
 
   const disciplinas = [...new Set(atividades.map((a) => a.disciplina).filter(Boolean))];
 
-
-  /* ---------------------------------------------------------
-     03. Acervo — cartões, filtros, busca e contadores
-     --------------------------------------------------------- */
   const grade = $("[data-grade]");
 
   const montarFicha = (item) => `
@@ -132,7 +105,6 @@
       </div>
     </article>`;
 
-  /* fecha a grade com o lugar reservado da próxima entrega */
   const fichaVagaGrade = `
     <article class="ficha ficha--vaga" data-vaga aria-hidden="true">
       <i>+</i>
@@ -144,7 +116,6 @@
     grade.innerHTML = atividades.map(montarFicha).join("") + fichaVagaGrade;
   }
 
-  /* filtros por disciplina, montados a partir dos próprios dados */
   const caixaFiltros = $("[data-filtros]");
 
   if (caixaFiltros) {
@@ -162,7 +133,6 @@
     caixaFiltros.innerHTML = botoes.join("");
   }
 
-  /* filtragem + busca */
   const campoBusca = $("[data-busca]");
   const avisoVazio = $("[data-vazio]");
   const contagem = $("[data-contagem]");
@@ -186,7 +156,6 @@
       if (mostrar) visiveis += 1;
     });
 
-    /* o lugar vago só faz sentido na visão completa do acervo */
     const vaga = $("[data-vaga]", grade);
     if (vaga) vaga.classList.toggle("is-oculta", !!termo || filtroAtivo !== "todas");
 
@@ -220,7 +189,6 @@
 
   aplicarFiltros();
 
-  /* contadores do hero */
   const animarNumero = (el, alvo) => {
     if (semMovimento || alvo === 0) {
       el.textContent = String(alvo);
@@ -263,7 +231,6 @@
     }
   });
 
-  /* ticker: frases fixas + o título de cada atividade */
   const ticker = $("[data-ticker]");
 
   if (ticker) {
@@ -275,16 +242,10 @@
       ...atividades.map((a) => `${a.disciplina} · ${a.titulo}`),
     ];
     const bloco = frases.map((f) => `<span>${esc(f)}</span><i>◆</i>`).join("");
-    /* duplicado: a animação desliza 50% e emenda sem costura */
+
     ticker.innerHTML = bloco + bloco;
   }
 
-
-  /* ---------------------------------------------------------
-     04. Vitrine 3D — carrossel de fichas
-         O anel sempre guarda pelo menos um espaço vazio, para
-         deixar visível que o arquivo continua crescendo.
-     --------------------------------------------------------- */
   const palcoVitrine = $("[data-vitrine]");
   const anelVitrine = $("[data-vitrine-anel]");
 
@@ -292,10 +253,6 @@
     const vagas = Math.max(6, atividades.length + 1);
     const passoAng = 360 / vagas;
 
-    /* O raio nasce da largura real da ficha (que é fluida no CSS):
-       metade da largura dividida pela tangente do meio-passo é a
-       distância mínima para as fichas não se atravessarem — mais
-       uma folga proporcional. Recalculado quando a tela muda. */
     const calcularRaio = () => {
       const largura = anelVitrine.getBoundingClientRect().width || 220;
       return Math.round((largura / 2) / Math.tan(Math.PI / vagas) + largura * 0.18);
@@ -339,8 +296,8 @@
     });
 
     const rotulo = $("[data-vitrine-rotulo]");
-    let angulo = 0;      /* rotação atual do anel, em graus */
-    let alvo = null;     /* destino quando se usa os botões */
+    let angulo = 0;
+    let alvo = null;
     let arrastando = false;
     let pausado = false;
     let inicioX = 0;
@@ -382,7 +339,6 @@
 
     requestAnimationFrame(quadro);
 
-    /* arrastar para girar */
     palcoVitrine.addEventListener("pointerdown", (e) => {
       arrastando = true;
       alvo = null;
@@ -402,7 +358,7 @@
       arrastando = false;
       palcoVitrine.classList.remove("is-arrastando");
       palcoVitrine.releasePointerCapture?.(e.pointerId);
-      /* encaixa na ficha mais próxima */
+
       alvo = Math.round(angulo / passoAng) * passoAng;
     };
 
@@ -423,15 +379,11 @@
     $("[data-vitrine-proxima]")?.addEventListener("click", () => girarPara(1));
   }
 
-
-  /* ---------------------------------------------------------
-     05. Marca 3D — extrusão da logo por camadas em Z
-     --------------------------------------------------------- */
   const bloco = $("[data-marca-bloco]");
 
   if (bloco) {
     const CAMADAS = 14;
-    const PROFUNDIDADE = 34;   /* px totais de espessura */
+    const PROFUNDIDADE = 34;
     const partes = [];
 
     for (let i = 0; i < CAMADAS; i += 1) {
@@ -447,7 +399,6 @@
     bloco.innerHTML = partes.join("");
   }
 
-  /* parallax: o palco 3D acompanha o ponteiro */
   const parallax3d = (el, maxX, maxY, repousoX = 6, repousoY = -18) => {
     if (!el || !temHover || semMovimento) return;
 
@@ -467,10 +418,6 @@
 
   parallax3d($("[data-marca] .marca3d__palco"), 14, 20);
 
-
-  /* ---------------------------------------------------------
-     06. Abertura — o arquivo abrindo
-     --------------------------------------------------------- */
   const abertura = $("[data-abertura]");
 
   if (abertura) {
@@ -480,7 +427,6 @@
     const titulo = $("[data-abertura-titulo]", abertura);
     const CIRCUNFERENCIA = 2 * Math.PI * 54;
 
-    /* o título entra letra a letra */
     if (titulo && !semMovimento) {
       const texto = titulo.textContent.trim();
       titulo.innerHTML = [...texto]
@@ -502,11 +448,11 @@
       window.addEventListener("load", encerrar, { once: true });
     } else {
       const INICIO = performance.now();
-      const MINIMO = 700;     /* tempo mínimo em tela, para a animação ser lida */
-      const LIMITE = 2600;    /* depois do load, não insiste além disso */
+      const MINIMO = 700;
+      const LIMITE = 2600;
 
       let atual = 0;
-      let teto = 88;          /* trava até a página terminar de carregar */
+      let teto = 88;
       let carregou = false;
       let ultimo = INICIO;
       let vivo = true;
@@ -525,16 +471,11 @@
         if (estado) estado.textContent = "pronto";
       }, { once: true });
 
-      /* Rede de segurança em relógio de parede: vale mesmo se o rAF
-         estiver suspenso (aba em segundo plano) ou se algum recurso
-         externo nunca responder. */
       setTimeout(finalizar, 7000);
 
       const avancar = (agora) => {
         if (!vivo) return;
 
-        /* O avanço é medido em tempo, não em quadros: num aparelho
-           lento a barra leva o mesmo tanto de segundos que num rápido. */
         const dt = Math.min(agora - ultimo, 120);
         ultimo = agora;
 
@@ -557,10 +498,6 @@
     }
   }
 
-
-  /* ---------------------------------------------------------
-     07. Header, menu, progresso e seção ativa
-     --------------------------------------------------------- */
   const header = $("body > header");
   const nav = header && $("nav", header);
   const navLinks = nav ? $$("a[href^='#']", nav) : [];
@@ -568,7 +505,6 @@
     .map((link) => $(link.getAttribute("href")))
     .filter(Boolean);
 
-  /* botão de menu criado por JS: sem JS ele não teria função */
   let toggle = null;
 
   if (header && nav) {
@@ -611,7 +547,7 @@
     const y = window.scrollY;
 
     header?.classList.toggle("is-scrolled", y > 20);
-    /* esconde o header ao descer, devolve ao subir */
+
     if (header && !nav?.classList.contains("is-open")) {
       header.classList.toggle("is-hidden", y > ultimoY && y > 320);
     }
@@ -647,10 +583,6 @@
     secoes.forEach((s) => espiao.observe(s));
   }
 
-
-  /* ---------------------------------------------------------
-     08. Reveal na rolagem
-     --------------------------------------------------------- */
   const alvosReveal = [
     ["#inicio .hero-metrics .metric-card", ""],
     [".painel", ""],
@@ -690,13 +622,6 @@
     elementosReveal.forEach((el) => el.classList.add("is-visible"));
   }
 
-
-  /* ---------------------------------------------------------
-     09. Fundo animado — campo de fluxo
-         As partículas não andam em linha reta: cada uma lê o
-         ângulo de um campo de ruído na posição em que está e
-         segue por ele, deixando um rastro que se apaga sozinho.
-     --------------------------------------------------------- */
   const telaFluxo = $("[data-fluxo]");
 
   if (telaFluxo && !semMovimento) {
@@ -710,7 +635,6 @@
 
     const CORES = ["168, 85, 247", "192, 132, 252", "254, 200, 0"];
 
-    /* ruído barato e suave o bastante para orientar o fluxo */
     const campo = (x, y, t) => {
       const a = Math.sin(x * 0.0016 + t) + Math.cos(y * 0.0019 - t * 0.8);
       const b = Math.sin((x + y) * 0.0011 + t * 1.4);
@@ -745,8 +669,6 @@
 
       tempo += 0.0016;
 
-      /* apaga o rastro sem pintar por cima: mantém o canvas
-         transparente e deixa o degradê do fundo aparecer */
       ctx.globalCompositeOperation = "destination-out";
       ctx.fillStyle = "rgba(0, 0, 0, 0.055)";
       ctx.fillRect(0, 0, largura, altura);
@@ -761,7 +683,6 @@
         p.x += Math.cos(angulo) * p.velocidade;
         p.y += Math.sin(angulo) * p.velocidade;
 
-        /* o ponteiro empurra o fluxo à sua volta */
         const dx = p.x - ponteiro.x;
         const dy = p.y - ponteiro.y;
         const dist = Math.hypot(dx, dy);
@@ -780,7 +701,6 @@
           continue;
         }
 
-        /* aparece e some suavemente nas pontas da vida */
         const t = p.idade / p.vida;
         const alpha = Math.sin(t * Math.PI) * 0.42;
 
@@ -815,17 +735,12 @@
       ponteiro.y = -9999;
     });
 
-    /* aba escondida não gasta bateria */
     document.addEventListener("visibilitychange", () => {
       animando = !document.hidden;
       if (animando) requestAnimationFrame(desenhar);
     });
   }
 
-
-  /* ---------------------------------------------------------
-     10. Cursor personalizado
-     --------------------------------------------------------- */
   const cursor = $("[data-cursor]");
   const halo = $("[data-cursor-halo]");
 
@@ -861,10 +776,6 @@
     });
   }
 
-
-  /* ---------------------------------------------------------
-     11. Tilt 3D nos cartões
-     --------------------------------------------------------- */
   if (temHover && !semMovimento) {
     $$("[data-tilt]").forEach((card) => {
       const intensidade = 9;
@@ -892,10 +803,6 @@
     });
   }
 
-
-  /* ---------------------------------------------------------
-     12. Botões magnéticos
-     --------------------------------------------------------- */
   if (temHover && !semMovimento) {
     $$("[data-magnetico]").forEach((btn) => {
       btn.addEventListener("pointermove", (e) => {
@@ -911,10 +818,6 @@
     });
   }
 
-
-  /* ---------------------------------------------------------
-     13. Texto que se digita
-     --------------------------------------------------------- */
   const typed = $("[data-typed]");
 
   if (typed) {
@@ -952,5 +855,4 @@
       }
     }
   }
-
 })();
