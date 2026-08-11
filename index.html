@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Acervo CK — Arquivo de Atividades</title>
+  <link rel="icon" type="image/png" href="assets/logo-ck.png">
+
+  <meta name="description"
+    content="Acervo CK: o arquivo de todas as atividades escolares desenvolvidas em HTML pelo Grupo CK — Conscious Knowledge. Cada trabalho entregue fica publicado, acessível e pronto para apresentar.">
+  <meta name="author" content="Conscious Knowledge">
+  <meta name="theme-color" content="#050409">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Acervo CK — Arquivo de Atividades">
+  <meta property="og:description"
+    content="O arquivo vivo das atividades do Grupo CK. Seminários, apresentações e trabalhos feitos em HTML, todos a um clique.">
+  <meta property="og:image" content="assets/logo-ck.png">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="atividades.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ================= PRELOADER · abertura do arquivo ================= -->
+  <div class="abertura" data-abertura aria-hidden="true">
+    <span class="abertura__folha abertura__folha--cima"></span>
+    <span class="abertura__folha abertura__folha--baixo"></span>
+
+    <div class="abertura__nucleo">
+      <div class="abertura__marca">
+        <svg class="abertura__aro" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="abertura__aro-trilho" cx="60" cy="60" r="54" />
+          <circle class="abertura__aro-carga" cx="60" cy="60" r="54" data-abertura-aro />
+        </svg>
+        <img src="assets/logo-ck.png" alt="" class="abertura__logo" decoding="async">
+      </div>
+
+      <p class="abertura__titulo" data-abertura-titulo>Acervo CK</p>
+
+      <div class="abertura__leitura">
+        <span class="abertura__percent" data-abertura-percent>000</span>
+        <span class="abertura__estado" data-abertura-estado>abrindo o arquivo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FUNDO ANIMADO · campo de fluxo ================= -->
+  <div class="cena" aria-hidden="true">
+    <canvas class="cena__fluxo" data-fluxo></canvas>
+    <span class="cena__farol"></span>
+    <span class="orbe orbe--1"></span>
+    <span class="orbe orbe--2"></span>
+    <span class="orbe orbe--3"></span>
+    <span class="cena__horizonte"></span>
+    <span class="cena__grao"></span>
+  </div>
+
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+  <div class="cursor cursor--halo" data-cursor-halo aria-hidden="true"></div>
+
+  <a class="pular" href="#inicio">Pular para o conteúdo</a>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+
+    <div class="logo-container">
+      <a href="#inicio" aria-label="Acervo CK — início">
+        <img src="assets/logo-ck.png" alt="Logo Conscious Knowledge" width="72" height="108">
+      </a>
+      <span class="logo-wordmark">
+        <strong>Acervo</strong>
+        <small>Conscious Knowledge</small>
+      </span>
+    </div>
+
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#acervo">Acervo</a></li>
+        <li><a href="#vitrine">Vitrine</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section id="inicio">
+      <div class="hero-content">
+
+        <div class="hero-brand">
+
+          <!-- 3D · Marca extrudada: a logo ganha profundidade real -->
+          <div class="marca3d" data-marca>
+            <div class="marca3d__palco">
+              <div class="marca3d__bloco" data-marca-bloco></div>
+              <span class="marca3d__anel marca3d__anel--a"></span>
+              <span class="marca3d__anel marca3d__anel--b"></span>
+              <span class="marca3d__orbita"><i class="marca3d__satelite"></i></span>
+              <span class="marca3d__orbita marca3d__orbita--2"><i
+                  class="marca3d__satelite marca3d__satelite--ouro"></i></span>
+              <span class="marca3d__base"></span>
+              <span class="marca3d__halo"></span>
+            </div>
+          </div>
+
+          <div class="hero-text">
+            <p class="hero-eyebrow">
+              <span class="ponto-vivo"></span>
+              Arquivo vivo · ETEC Taboão da Serra
+            </p>
+
+            <h1>Acervo<br>de Atividades</h1>
+
+            <p class="hero-typed">
+              Todo trabalho entregue vira
+              <span class="typed" data-typed
+                data-palavras="página publicada|apresentação pronta|arquivo permanente|link que não expira"><span
+                  class="typed__texto"></span><span class="typed__cursor"></span></span>
+            </p>
+
+            <p class="hero-description">
+              Este é o arquivo do <strong>Grupo CK</strong>: cada atividade escolar construída em HTML
+              fica guardada aqui, catalogada por disciplina e a um clique de distância. Nada de pen drive
+              perdido, nada de arquivo que só abre num computador — <strong>o link é a entrega</strong>.
+            </p>
+
+            <div class="hero-acoes">
+              <a class="btn btn--primario" href="#acervo" data-magnetico>
+                <span>Ver o acervo</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+              <a class="btn btn--fantasma" href="#vitrine" data-magnetico>
+                <span>Girar a vitrine</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-metrics" aria-label="Resumo do acervo">
+          <div class="metric-card" data-tilt>
+            <span class="metric-label">Arquivadas</span>
+            <strong data-contador-acervo="atividades">0</strong>
+            <p>atividades publicadas e acessíveis por link direto.</p>
+          </div>
+          <div class="metric-card" data-tilt>
+            <span class="metric-label">Disciplinas</span>
+            <strong data-contador-acervo="disciplinas">0</strong>
+            <p>matérias já representadas dentro do arquivo.</p>
+          </div>
+          <div class="metric-card" data-tilt>
+            <span class="metric-label">Última entrega</span>
+            <strong data-contador-acervo="ultima">—</strong>
+            <p>data da atividade mais recente do acervo.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <a class="hero-scroll" href="#acervo" aria-label="Rolar para o acervo">
+        <span class="hero-scroll__mouse"><i></i></span>
+        <span class="hero-scroll__texto">role</span>
+      </a>
+    </section>
+
+    <!-- ========== TICKER ========== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__trilha" data-ticker></div>
+    </div>
+
+    <!-- ========== ACERVO ========== -->
+    <section id="acervo">
+
+      <header>
+        <p class="secao-indice">01 — O arquivo</p>
+        <h2>Acervo de Atividades</h2>
+        <p class="secao-sub">
+          Cada cartão abre a atividade original, exatamente como ela foi entregue.
+          Filtre por disciplina ou busque pelo nome.
+        </p>
+      </header>
+
+      <div class="painel">
+        <div class="filtros" data-filtros role="group" aria-label="Filtrar por disciplina"></div>
+
+        <label class="busca">
+          <span class="busca__icone" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="m16 16 4.5 4.5" />
+            </svg>
+          </span>
+          <input type="search" data-busca placeholder="Buscar atividade, tema ou tag…"
+            aria-label="Buscar no acervo" autocomplete="off">
+        </label>
+      </div>
+
+      <p class="acervo-contagem" aria-live="polite" data-contagem></p>
+
+      <div class="acervo-grade" data-grade></div>
+
+      <p class="acervo-vazio" data-vazio hidden>
+        Nenhuma atividade corresponde a essa busca. Tente outro termo ou volte para
+        <button type="button" data-limpar>todas as disciplinas</button>.
+      </p>
+
+      <noscript>
+        <div class="acervo-noscript">
+          <h3>Atividades disponíveis</h3>
+          <ul>
+            <li><a href="atividades/mma/apresentacao-mma.html">MMA — Mixed Martial Arts · Educação Física</a></li>
+          </ul>
+        </div>
+      </noscript>
+
+    </section>
+
+    <!-- ========== VITRINE 3D ========== -->
+    <section id="vitrine">
+
+      <header>
+        <p class="secao-indice">02 — Vitrine</p>
+        <h2>O carrossel do arquivo</h2>
+        <p class="secao-sub">
+          As mesmas atividades, montadas como fichas de um arquivo giratório.
+          Arraste para girar — as fichas tracejadas são os espaços que ainda vão ser preenchidos.
+        </p>
+      </header>
+
+      <div class="vitrine-palco" data-vitrine>
+        <div class="vitrine-anel" data-vitrine-anel></div>
+        <span class="vitrine-palco__sombra" aria-hidden="true"></span>
+        <span class="vitrine-dica">arraste para girar</span>
+      </div>
+
+      <div class="vitrine-controles">
+        <button type="button" class="vitrine-btn" data-vitrine-anterior aria-label="Ficha anterior">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 6l-6 6 6 6" />
+          </svg>
+        </button>
+        <p class="vitrine-rotulo" aria-live="polite" data-vitrine-rotulo>—</p>
+        <button type="button" class="vitrine-btn" data-vitrine-proxima aria-label="Próxima ficha">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ========== SOBRE ========== -->
+    <section id="sobre">
+
+      <header>
+        <p class="secao-indice">03 — Como funciona</p>
+        <h2>Um arquivo que cresce</h2>
+        <p class="secao-sub">
+          O acervo foi construído para receber atividade nova sem retrabalho: a página se
+          reorganiza sozinha a cada item adicionado.
+        </p>
+      </header>
+
+      <div class="sobre-grade">
+
+        <article>
+          <p>
+            O <strong>Acervo CK</strong> é a extensão natural do site da
+            <a href="https://gustavooliveira-xxx.github.io/ck-group/" target="_blank" rel="noopener">Conscious
+              Knowledge</a>.
+            Enquanto o site institucional apresenta a empresa e o FinCK, este arquivo guarda o que a
+            turma produz no dia a dia: seminários, apresentações e trabalhos feitos em HTML puro.
+          </p>
+          <p>
+            Toda atividade entra como <strong>página autossuficiente</strong> — imagens embutidas,
+            sem dependência de internet, sem pasta de anexos para carregar. O que se compartilha é
+            um endereço, e ele cai direto no primeiro slide.
+          </p>
+          <p>
+            Adicionar uma atividade nova é editar um único arquivo,
+            <code>atividades.js</code>, com um objeto de poucas linhas. Cartões, filtros,
+            contadores, ticker e vitrine 3D leem essa mesma lista.
+          </p>
+
+          <div class="etimologia">
+            <div class="etimologia__peca">
+              <span>Entrega</span>
+              <strong>Arquivada</strong>
+            </div>
+            <span class="etimologia__mais">+</span>
+            <div class="etimologia__peca">
+              <span>Endereço</span>
+              <strong>Permanente</strong>
+            </div>
+            <span class="etimologia__igual">=</span>
+            <div class="etimologia__peca etimologia__peca--destaque">
+              <span>Resultado</span>
+              <strong>Trabalho que não se perde</strong>
+            </div>
+          </div>
+        </article>
+
+        <div class="pilares">
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="6" rx="1.6" />
+                <rect x="3" y="14" width="18" height="6" rx="1.6" />
+                <path d="M10 7h4M10 17h4" />
+              </svg>
+            </span>
+            <h3>Catalogado</h3>
+            <p>Disciplina, data, tipo e tags em toda atividade — dá para achar qualquer trabalho em segundos.</p>
+          </div>
+
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M13 3 4.5 13.5H11l-1 7.5 8.5-10.5H12l1-7.5Z" />
+              </svg>
+            </span>
+            <h3>Um clique</h3>
+            <p>O cartão leva direto à apresentação. Sem download, sem descompactar, sem instalar nada.</p>
+          </div>
+
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3a9 9 0 1 0 9 9" />
+                <path d="M21 3v6h-6" />
+                <path d="M12 8v4l2.8 1.8" />
+              </svg>
+            </span>
+            <h3>Offline</h3>
+            <p>Cada página traz as próprias imagens embutidas: apresenta igual mesmo sem rede na sala.</p>
+          </div>
+
+          <div class="pilar" data-tilt>
+            <span class="pilar__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </span>
+            <h3>Expansível</h3>
+            <p>Uma linha de dados publica a próxima atividade. A vitrine já guarda o espaço vazio dela.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <h3 class="titulo-bloco">Como uma atividade entra no arquivo</h3>
+      <ol class="fluxo">
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">01</span>
+          <h4>A atividade é construída</h4>
+          <p>A entrega é feita em HTML, CSS e JavaScript, do zero, como qualquer produto da CK.</p>
+        </li>
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">02</span>
+          <h4>Vira arquivo único</h4>
+          <p>Imagens são embutidas na própria página, que passa a funcionar sozinha e offline.</p>
+        </li>
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">03</span>
+          <h4>Entra no acervo</h4>
+          <p>A página é publicada em <code>atividades/</code> e ganha uma ficha em <code>atividades.js</code>.</p>
+        </li>
+        <li class="fluxo__passo" data-tilt>
+          <span class="fluxo__num">04</span>
+          <h4>Fica pronta para sempre</h4>
+          <p>Um endereço fixo que abre no celular, no projetor da sala ou no computador da banca.</p>
+        </li>
+      </ol>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-grade">
+      <div class="footer-marca">
+        <img src="assets/logo-ck.png" alt="Logo Conscious Knowledge" width="64" height="96" loading="lazy"
+          decoding="async">
+        <div>
+          <strong>Acervo CK</strong>
+          <span>O arquivo de atividades da Conscious Knowledge.</span>
+        </div>
+      </div>
+
+      <nav class="footer-links" aria-label="Navegação do rodapé">
+        <a href="#acervo">Acervo</a>
+        <a href="#vitrine">Vitrine</a>
+        <a href="#sobre">Sobre</a>
+        <a href="https://gustavooliveira-xxx.github.io/ck-group/" target="_blank" rel="noopener">Site da CK</a>
+        <a href="https://github.com/GustavoOliveira-xxx/ck-atividades" target="_blank" rel="noopener">Repositório</a>
+      </nav>
+    </div>
+
+    <div class="footer-base">
+      <p>© 2026 Conscious Knowledge.</p>
+      <p>2º C — M-Tec Informática para Internet · ETEC Taboão da Serra.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
