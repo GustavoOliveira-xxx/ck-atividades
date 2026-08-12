@@ -36,8 +36,8 @@ body{
 /* ---------- palco 16:9 escalado ---------- */
 #stage-wrap{position:fixed;inset:0;display:grid;place-items:center;perspective:1800px}
 #stage{
-  position:relative;width:1600px;height:900px;flex:none;
-  transform-origin:center center;
+  position:absolute;left:0;top:0;width:1600px;height:900px;flex:none;
+  transform-origin:0 0;
   background:radial-gradient(120% 90% at 50% 0%,#171719 0%,#08080A 45%,#000 100%);
   overflow:hidden;transform-style:preserve-3d;
 }
@@ -187,6 +187,15 @@ h1 em{font-style:normal;color:var(--red);
 .tight p,.tight li{font-size:14.6px;line-height:1.46}
 .tight h3{margin-bottom:7px}
 .tight .card{padding:16px 19px}
+
+.compacto .sub{margin-top:6px;line-height:1.38}
+.compacto .card{padding:14px 21px}
+.compacto .card h3{margin-bottom:6px}
+.compacto .card p,.compacto .card li{line-height:1.46}
+.compacto .stat{padding:13px 19px}
+.compacto .chip{padding:8px 17px}
+.compacto .tight .card{padding:11px 19px}
+.compacto .tight p,.compacto .tight li{line-height:1.4}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
@@ -560,7 +569,7 @@ tr:hover td{background:rgba(229,9,20,.10)}
   <!-- ============================================================
        S2 — O QUE É
        ============================================================ -->
-  <section class="slide" data-t="O que é MMA">
+  <section class="slide compacto" data-t="O que é MMA">
     <div class="ep rv d1"><b>CAP. 01</b><span>Definição &amp; Anatomia do Esporte</span></div>
     <h1 class="rv d1">O QUE É O <em>MMA</em>?</h1>
     <div class="hr rv d1"></div>
@@ -569,7 +578,7 @@ tr:hover td{background:rgba(229,9,20,.10)}
       (quedas, projeções, imobilizações e finalizações), em pé ou no solo. Não é uma arte marcial isolada:
       é a <b>síntese competitiva de várias delas</b> sob um regulamento único.</p>
 
-    <div class="grid g4 rv d3" style="margin-top:22px">
+    <div class="grid g4 rv d3" style="margin-top:12px">
       <div class="card"><h3><svg><use href="#i-strike"/></svg>1 · Trocação</h3>
         <p>Combate em pé à distância. Bases: <b>boxe, muay thai, karatê, kickboxing e taekwondo</b>.
           Vale soco, chute, joelhada e cotovelada.</p></div>
@@ -581,7 +590,7 @@ tr:hover td{background:rgba(229,9,20,.10)}
         <p>Domínio no chão, passagem de guarda e finalizações. Bases: <b>jiu-jitsu brasileiro, luta livre e sambo</b>.</p></div>
     </div>
 
-    <div class="grid rv d5" style="grid-template-columns:1.55fr 1fr;gap:16px;margin-top:16px;align-items:start">
+    <div class="grid rv d5" style="grid-template-columns:1.55fr 1fr;gap:16px;margin-top:10px;align-items:start">
       <div class="card gold"><h3><svg><use href="#i-book"/></svg>Características que definem o esporte</h3>
         <ul style="grid-template-columns:1fr 1fr;display:grid;gap:6px 22px">
           <li><b>Híbrido:</b> nenhum estilo único vence sozinho.</li>
@@ -598,7 +607,7 @@ tr:hover td{background:rgba(229,9,20,.10)}
       </div>
     </div>
 
-    <div class="strip rv d7" style="margin-top:16px">
+    <div class="strip rv d7" style="margin-top:10px">
       <div class="lbl">As artes marciais que se fundem no MMA</div>
       <div class="chips mini">
         <span class="chip"><svg><use href="#i-strike"/></svg><span><b>Boxe</b><span>Mãos, esquiva e ritmo</span></span></span>
@@ -612,7 +621,7 @@ tr:hover td{background:rgba(229,9,20,.10)}
       </div>
     </div>
 
-    <div class="grid g3 rv d8 tight" style="margin-top:12px;max-width:1310px">
+    <div class="grid g3 rv d8 tight" style="margin-top:8px;max-width:1310px">
       <div class="card"><h3><svg><use href="#i-book"/></svg>De onde vem o nome</h3>
         <p>Já se chamou <b>Vale-Tudo</b> no Brasil e <i>No Holds Barred</i> nos EUA. O nome
           <b>“Mixed Martial Arts”</b> se firmou em <b>1995</b>, junto com a busca por regulamentação.</p></div>
@@ -1258,11 +1267,45 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
 
   /* ---------- escala do palco ---------- */
   var stage = document.getElementById('stage');
-  function fit(){
-    var s = Math.min(innerWidth / 1600, innerHeight / 900);
-    stage.style.transform = 'scale(' + s + ')';
+  var wrap  = document.getElementById('stage-wrap');
+  var escalaAtual = -1;
+
+  function medida(){
+    var r = wrap.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    var vv = window.visualViewport;
+    if(!w) w = vv ? vv.width  : innerWidth;
+    if(!h) h = vv ? vv.height : innerHeight;
+    return [w, h];
   }
-  addEventListener('resize', fit); fit();
+
+  function fit(){
+    var m = medida();
+    var s = Math.min(m[0] / 1600, m[1] / 900);
+    if(!(s > 0)) return;
+    var x = (m[0] - 1600 * s) / 2, y = (m[1] - 900 * s) / 2;
+    if(Math.abs(s - escalaAtual) < 0.0002 && stage.style.transform) return;
+    escalaAtual = s;
+    stage.style.transform = 'translate(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px) scale(' + s + ')';
+  }
+
+  var reajustes = [];
+  function reajustar(){
+    fit();
+    for(var i=0;i<reajustes.length;i++) clearTimeout(reajustes[i]);
+    reajustes = [60, 180, 400, 800, 1400].map(function(ms){ return setTimeout(fit, ms); });
+    requestAnimationFrame(fit);
+  }
+
+  addEventListener('resize', reajustar);
+  addEventListener('orientationchange', reajustar);
+  addEventListener('pageshow', reajustar);
+  document.addEventListener('fullscreenchange', reajustar);
+  document.addEventListener('webkitfullscreenchange', reajustar);
+  if(window.visualViewport) visualViewport.addEventListener('resize', reajustar);
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(wrap);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  fit();
 
   /* ---------- slides ---------- */
   var slides = [].slice.call(document.querySelectorAll('.slide'));
@@ -1296,6 +1339,27 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
   function next(){ go(cur+1, false); }
   function prev(){ go(cur-1, true); }
 
+  /* ---------- tela cheia ---------- */
+  function estaEmTelaCheia(){
+    return document.fullscreenElement || document.webkitFullscreenElement ||
+           document.msFullscreenElement || null;
+  }
+
+  function telaCheia(){
+    var d = document, el = d.documentElement, r;
+    if(estaEmTelaCheia()){
+      r = (d.exitFullscreen || d.webkitExitFullscreen || d.msExitFullscreen);
+      if(r) r.call(d);
+    } else {
+      r = (el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen);
+      if(r){
+        var p = r.call(el);
+        if(p && p.catch) p.catch(function(){});
+      }
+    }
+    reajustar();
+  }
+
   var hint = document.getElementById('hint');
   var hid = false;
   addEventListener('keydown', function(e){
@@ -1304,10 +1368,7 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
     else if(k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace'){ e.preventDefault(); prev(); }
     else if(k === 'Home'){ go(0, true); }
     else if(k === 'End'){ go(n-1, false); }
-    else if(k === 'f' || k === 'F'){
-      if(document.fullscreenElement) document.exitFullscreen();
-      else if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
-    }
+    else if(k === 'f' || k === 'F'){ telaCheia(); }
     if(!hid){ hid = true; hint.classList.add('gone'); }
   });
   addEventListener('click', function(e){ (e.clientX < innerWidth*0.22) ? prev() : next(); });
