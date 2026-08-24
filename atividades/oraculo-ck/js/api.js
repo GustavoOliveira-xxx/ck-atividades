@@ -240,7 +240,7 @@ CK.api = (() => {
      ======================================================================== */
 
   // Famílias que não servem para o nosso caso (imagem, áudio, embeddings…).
-  const FORA = /embedding|aqa|imagen|veo|tts|audio|image-generation|learnlm/i;
+  const FORA = /embedding|aqa|imagen|image|veo|tts|audio|learnlm/i;
 
   /** Ordena os modelos por adequação ao projeto: rápido, estável e atual. */
   const pontuar = (id) => {
@@ -472,6 +472,17 @@ CK.api = (() => {
     const fila = [modelo, ...reserva.filter((id) => id !== modelo)].slice(0, 5);
     let ultimoErro = null;
 
+    // Falhas que dizem respeito AO MODELO, não à chave: vale tentar o próximo.
+    // 404 = aposentado · 429 = cota daquele modelo · 500/503 = sobrecarga.
+    // Já 400/401/403 são problemas de chave — trocar de modelo não resolve.
+    const TROCAR_MODELO = new Set(["HTTP 404", "HTTP 429", "HTTP 500", "HTTP 503"]);
+
+    // Teto de tempo para a fila inteira. Cada tentativa já tem seu próprio
+    // limite de 30 s, mas cinco tentativas seguidas deixariam o usuário
+    // olhando para o carregamento por minutos. Passou daqui, desistimos e
+    // mostramos o último erro.
+    const ORCAMENTO = 45000;
+
     const tentar = async (candidato) => {
       const { texto, truncada } = await chamarGemini({
         chave,
@@ -494,18 +505,20 @@ CK.api = (() => {
         return await tentar(candidato);
       } catch (erro) {
         ultimoErro = traduzirRede(erro);
-        // Só vale insistir com outro modelo quando o problema é o modelo.
-        if (ultimoErro.codigo !== "HTTP 404") throw ultimoErro;
+        if (!TROCAR_MODELO.has(ultimoErro.codigo)) throw ultimoErro;
+        if (performance.now() - inicio > ORCAMENTO) throw ultimoErro;
       }
     }
 
-    // Toda a fila deu 404: os nomes que conhecíamos morreram. Última cartada —
-    // perguntar à API quais modelos existem agora e tentar o melhor deles.
+    // A fila inteira falhou por causa dos modelos. Última cartada: perguntar
+    // à API quais existem agora e tentar o melhor deles.
     try {
       const modelos = await listarModelos(chave);
       const novo = modelos.find(({ id }) => !fila.includes(id));
 
       if (novo) {
+        // guarda o catálogo antes de tentar: mesmo que esta tentativa falhe,
+        // as próximas consultas já partem de nomes que existem
         CK.armazenamento.salvarModelosDescobertos(modelos);
         CK.armazenamento.salvarModelo(novo.id);
         return await tentar(novo.id);

@@ -118,12 +118,25 @@ Um `404` nem chega ao usuário: a aplicação tenta os outros modelos da fila e,
 se todos falharem, **redescobre o catálogo real na API** e tenta o melhor
 modelo novo — dentro da mesma consulta.
 
+A fila avança quando a falha é **do modelo** (404 aposentado, 429 cota daquele
+modelo, 500/503 sobrecarga) e para imediatamente quando é **da chave**
+(400/401/403), porque aí trocar de modelo não resolveria. Há um teto de 45 s
+para a fila inteira.
+
 ### Por que isso existe
 
-Nomes de modelo têm prazo de validade. A lista em `config.js` é só uma semente:
-quem manda é o catálogo que a própria API devolve em `GET /v1beta/models`.
-Assim, se o Google aposentar um modelo, a aplicação se corrige sozinha em vez
-de quebrar calada — inclusive no dia da apresentação.
+Nomes de modelo têm prazo de validade — e não é teoria. Quando testamos com
+uma chave válida, os três modelos da nossa lista original já retornavam 404:
+
+```
+gemini-2.5-flash       404  "no longer available to new users"
+gemini-2.5-flash-lite  404  "no longer available to new users"
+gemini-2.0-flash       404  não existe mais
+```
+
+Sem a descoberta automática, o app teria falhado por completo no dia da
+apresentação, sem ninguém ter mexido em nada. A lista em `config.js` é só uma
+semente: quem manda é o catálogo que a própria API devolve.
 
 ---
 
@@ -139,6 +152,19 @@ de quebrar calada — inclusive no dia da apresentação.
 | Thiago Wilson Vieira Serbino | Documentação e apresentação |
 
 O domínio do projeto é coletivo: todos sabem explicar qualquer parte do código.
+
+---
+
+## Detalhe de configuração: `maxOutputTokens`
+
+Está em **3000**, e não é arbitrário. Os modelos Gemini 3.x geram tokens
+internos de raciocínio antes de escrever, e eles contam no mesmo teto. Medimos:
+o raciocínio sozinho consome de **830 a 1070 tokens**. Com o teto em 1100, a
+resposta saía cortada no meio (`MAX_TOKENS`), sem o conselho final.
+
+Desligar o raciocínio com `thinkingConfig: { thinkingBudget: 0 }` não serve:
+o `gemini-3.6-flash` recusa esse campo com HTTP 400. Como o modelo é escolhido
+dinamicamente, aumentar o teto é a solução que funciona em todos.
 
 ---
 
