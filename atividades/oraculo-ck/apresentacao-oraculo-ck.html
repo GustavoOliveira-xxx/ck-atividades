@@ -1200,8 +1200,8 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
     <div class="grid g3 rv d6" style="margin-top:9px">
       <div class="card ok">
         <h3><svg><use href="#i-check"/></svg>A aplicação se conserta sozinha</h3>
-        <p>Se todos os modelos que conhecemos derem <b>404</b>, a aplicação pergunta à API
-          quais existem agora e tenta o melhor — <b>na mesma consulta</b>.</p>
+        <p>No teste real, o primeiro modelo deu <b>503</b> e a aplicação passou sozinha
+          para o seguinte, que respondeu. O usuário só viu a resposta.</p>
       </div>
       <div class="card teal">
         <h3><svg><use href="#i-shield"/></svg>Antes de gastar requisição</h3>
@@ -1210,8 +1210,8 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
       </div>
       <div class="card lima">
         <h3><svg><use href="#i-gear"/></svg>Como testamos</h3>
-        <p>Simulamos cada status e também chamamos a <b>API de verdade</b>.
-          <b>93 verificações</b>, todas passando.</p>
+        <p>Simulamos cada status e chamamos a <b>API de verdade</b>, com chave válida.
+          <b>102 verificações</b>, todas passando.</p>
       </div>
     </div>
   </section>
@@ -1291,10 +1291,10 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
           <li><b>fetch não rejeita em 4xx.</b> Nossos primeiros erros passavam batido; só descobrimos testando com chave errada</li>
           <li><b>O atributo <code style="font:500 12.6px/1.4 var(--mono);color:var(--neon-2)">hidden</code> perdia para o <code style="font:500 12.6px/1.4 var(--mono);color:var(--neon-2)">display:grid</code>.</b>
             Os quatro estados apareciam juntos</li>
-          <li><b>Resposta em formato variável.</b> Resolvido impondo o formato pela <code style="font:500 12.6px/1.4 var(--mono);color:var(--neon-2)">systemInstruction</code></li>
-          <li><b>Rolagem horizontal no celular</b>, causada pelos elementos de fundo</li>
-          <li><b>Nunca tínhamos conferido o nome do modelo.</b> A API valida a chave <i>antes</i> do
-            modelo — sem chave válida, qualquer nome dá o mesmo erro</li>
+          <li><b>A nossa lista de modelos já estava morta.</b> Ao testar com chave válida,
+            os três nomes retornavam <b>404</b>: <i>"no longer available to new users"</i></li>
+          <li><b>A resposta vinha cortada.</b> Os modelos 3.x gastam ~1000 tokens
+            <i>pensando</i>, e isso consumia todo o teto de saída</li>
         </ul>
       </div>
 
@@ -1314,12 +1314,11 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
         <ul>
           <li><b>Curto prazo:</b> streaming com <code style="font:500 12.6px/1.4 var(--mono);color:var(--neon-2)">streamGenerateContent</code> e histórico de conversa</li>
           <li><b>Médio:</b> proxy simples (Cloud Function) para tirar a chave do navegador</li>
-          <li><b>Já feito:</b> descoberta automática de modelos — a aplicação pergunta à API
-            quais existem e se corrige sozinha</li>
+          <li><b>Já feito:</b> descoberta automática de modelos — foi o que salvou o projeto</li>
+          <li><b>Já feito:</b> teto de saída em 3000 tokens, medido, não chutado</li>
           <li><b>Sempre:</b> o modo demonstração garante a apresentação mesmo sem rede</li>
         </ul>
-        <p style="margin-top:9px">Nenhum requisito da proposta ficou de fora — o que listamos acima são
-          melhorias, não pendências.</p>
+
       </div>
     </div>
 
