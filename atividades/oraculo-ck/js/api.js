@@ -230,6 +230,68 @@ CK.api = (() => {
   };
 
   /* ==========================================================================
+     DESCOBERTA DE MODELOS
+     Nomes de modelo mudam com o tempo: um "gemini-2.5-flash" de hoje pode
+     sumir amanhã. Em vez de confiar numa lista fixa, perguntamos à própria
+     API quais modelos existem AGORA e ficamos com os que sabem gerar texto.
+
+     A lista fixa de config.js vira só a semente, usada até a primeira
+     descoberta dar certo.
+     ======================================================================== */
+
+  // Famílias que não servem para o nosso caso (imagem, áudio, embeddings…).
+  const FORA = /embedding|aqa|imagen|veo|tts|audio|image-generation|learnlm/i;
+
+  /** Ordena os modelos por adequação ao projeto: rápido, estável e atual. */
+  const pontuar = (id) => {
+    let pontos = 0;
+
+    if (/flash/i.test(id)) pontos += 40;          // rápido e generoso no plano gratuito
+    else if (/pro/i.test(id)) pontos += 22;
+
+    const versao = Number((id.match(/(\d+\.\d+)/) || [])[1] || 0);
+    pontos += versao * 10;
+
+    if (/lite/i.test(id)) pontos -= 8;            // ótimo reserva, default não
+    if (/preview|exp|thinking/i.test(id)) pontos -= 25;
+    if (/-\d{3,4}$/.test(id)) pontos -= 6;        // versões datadas, ex.: -001
+
+    return pontos;
+  };
+
+  const listarModelos = async (chave) => {
+    const controlador = new AbortController();
+    const relogio = setTimeout(() => controlador.abort(), 15000);
+
+    try {
+      const resposta = await fetch(`${BASE}?pageSize=200`, {
+        headers: { "x-goog-api-key": chave },
+        signal: controlador.signal,
+      });
+
+      if (!resposta.ok) {
+        const { error } = await resposta.json().catch(() => ({}));
+        throw traduzirHttp(resposta.status, error?.message?.slice(0, 90) || "");
+      }
+
+      const { models } = await resposta.json();
+
+      return (models ?? [])
+        .filter(({ name, supportedGenerationMethods }) =>
+          (supportedGenerationMethods ?? []).includes("generateContent") && !FORA.test(name))
+        .map(({ name, displayName, description }) => {
+          const id = String(name).replace(/^models\//, "");
+          return { id, rotulo: displayName || id, descricao: description || "", peso: pontuar(id) };
+        })
+        .sort((a, b) => b.peso - a.peso);
+    } catch (erro) {
+      throw traduzirRede(erro);
+    } finally {
+      clearTimeout(relogio);
+    }
+  };
+
+  /* ==========================================================================
      PROVEDOR DEMONSTRAÇÃO
      Gera localmente uma resposta no MESMO formato que o modelo produz, para
      que a interface possa ser apresentada sem chave e sem internet.
@@ -403,30 +465,53 @@ CK.api = (() => {
     }
 
     // Fila de tentativas: o modelo escolhido primeiro, os outros como reserva.
-    const fila = [modelo, ...MODELOS.map(({ id }) => id).filter((id) => id !== modelo)];
+    // Se a descoberta já rodou, a reserva são modelos que existem de verdade;
+    // senão, caímos na lista semente de config.js.
+    const descobertos = CK.armazenamento.lerModelosDescobertos().map(({ id }) => id);
+    const reserva = descobertos.length ? descobertos : MODELOS.map(({ id }) => id);
+    const fila = [modelo, ...reserva.filter((id) => id !== modelo)].slice(0, 5);
     let ultimoErro = null;
+
+    const tentar = async (candidato) => {
+      const { texto, truncada } = await chamarGemini({
+        chave,
+        modelo: candidato,
+        instrucao,
+        pergunta: textoPergunta,
+      });
+
+      return {
+        texto,
+        modelo: candidato,
+        modo: "api",
+        ms: Math.round(performance.now() - inicio),
+        truncada,
+      };
+    };
 
     for (const candidato of fila) {
       try {
-        const { texto, truncada } = await chamarGemini({
-          chave,
-          modelo: candidato,
-          instrucao,
-          pergunta: textoPergunta,
-        });
-
-        return {
-          texto,
-          modelo: candidato,
-          modo: "api",
-          ms: Math.round(performance.now() - inicio),
-          truncada,
-        };
+        return await tentar(candidato);
       } catch (erro) {
         ultimoErro = traduzirRede(erro);
         // Só vale insistir com outro modelo quando o problema é o modelo.
         if (ultimoErro.codigo !== "HTTP 404") throw ultimoErro;
       }
+    }
+
+    // Toda a fila deu 404: os nomes que conhecíamos morreram. Última cartada —
+    // perguntar à API quais modelos existem agora e tentar o melhor deles.
+    try {
+      const modelos = await listarModelos(chave);
+      const novo = modelos.find(({ id }) => !fila.includes(id));
+
+      if (novo) {
+        CK.armazenamento.salvarModelosDescobertos(modelos);
+        CK.armazenamento.salvarModelo(novo.id);
+        return await tentar(novo.id);
+      }
+    } catch {
+      // Se nem a descoberta funcionar, vale o erro original.
     }
 
     throw ultimoErro;
@@ -467,5 +552,5 @@ CK.api = (() => {
     }
   };
 
-  return { consultar, testarChave, cancelar, ErroOraculo };
+  return { consultar, testarChave, listarModelos, cancelar, ErroOraculo };
 })();

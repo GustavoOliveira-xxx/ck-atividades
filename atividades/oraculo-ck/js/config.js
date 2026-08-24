@@ -23,12 +23,16 @@ CK.config = (() => {
 
   const BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 
-  // Ordem de tentativa: se o primeiro modelo não existir mais (HTTP 404),
-  // o cliente tenta o próximo automaticamente.
+  // Lista SEMENTE. Vale só até a aplicação perguntar à própria API quais
+  // modelos existem de verdade (ver `listarModelos` em js/api.js) — a partir
+  // daí, o catálogo real substitui esta lista e fica guardado no navegador.
+  // Se um destes nomes for aposentado, o HTTP 404 faz o cliente tentar o
+  // próximo e, em último caso, redescobrir o catálogo sozinho.
   const MODELOS = [
     { id: "gemini-2.5-flash", rotulo: "Gemini 2.5 Flash — equilibrado" },
     { id: "gemini-2.5-flash-lite", rotulo: "Gemini 2.5 Flash Lite — mais rápido" },
     { id: "gemini-2.0-flash", rotulo: "Gemini 2.0 Flash — alternativa" },
+    { id: "gemini-flash-latest", rotulo: "Gemini Flash (mais recente)" },
   ];
 
   const MODELO_PADRAO = MODELOS[0].id;
