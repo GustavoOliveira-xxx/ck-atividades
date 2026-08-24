@@ -394,11 +394,18 @@
     if (!el.dlg) return;
 
     if (el.inputChave) el.inputChave.value = CK.armazenamento.lerChave();
+
+    // Sempre remonta a lista: pode ter sido descoberta desde a última abertura.
+    CK.ui.montarModelos(el.inputModelo);
     if (el.inputModelo) el.inputModelo.value = CK.armazenamento.lerModelo();
+
+    const descobertos = CK.armazenamento.lerModelosDescobertos().length;
 
     dizerNoDialogo(
       CK.armazenamento.temChave()
-        ? "Chave guardada neste navegador."
+        ? descobertos
+          ? `Chave guardada neste navegador · ${descobertos} modelos disponíveis.`
+          : "Chave guardada neste navegador."
         : "Nenhuma chave salva — a aplicação está em modo demonstração.",
       "neutro"
     );
@@ -416,7 +423,6 @@
 
     el.salvarChave?.addEventListener("click", async () => {
       const chave = el.inputChave?.value.trim() ?? "";
-      const modelo = el.inputModelo?.value ?? CK.config.MODELO_PADRAO;
 
       if (!chave) {
         dizerNoDialogo("Cole a chave antes de salvar.", "erro");
@@ -424,15 +430,52 @@
       }
 
       CK.armazenamento.salvarChave(chave);
-      CK.armazenamento.salvarModelo(modelo);
       atualizarSelo();
-
-      dizerNoDialogo("Testando a chave na API…", "neutro");
       el.salvarChave.disabled = true;
 
+      // 1) Pergunta à API quais modelos existem de verdade neste momento.
+      //    Assim um nome de modelo aposentado nunca quebra a aplicação.
+      let modelo = el.inputModelo?.value ?? CK.config.MODELO_PADRAO;
+
       try {
+        dizerNoDialogo("Procurando os modelos disponíveis…", "neutro");
+
+        const modelos = await CK.api.listarModelos(chave);
+
+        if (modelos.length) {
+          CK.armazenamento.salvarModelosDescobertos(modelos);
+
+          // Mantém a escolha do usuário se ela ainda existir; senão, a melhor.
+          const aindaExiste = modelos.some(({ id }) => id === modelo);
+          modelo = aindaExiste ? modelo : modelos[0].id;
+
+          CK.armazenamento.salvarModelo(modelo);
+          CK.ui.montarModelos(el.inputModelo, modelos);
+          if (el.inputModelo) el.inputModelo.value = modelo;
+        }
+      } catch (erro) {
+        // Descoberta é um bônus: se falhar, seguimos com a lista semente.
+        if (erro?.codigo?.startsWith("HTTP 4")) {
+          dizerNoDialogo(`${erro.titulo}: ${erro.message}`, "erro");
+          el.salvarChave.disabled = false;
+          return;
+        }
+      }
+
+      // 2) Confirma a chave com uma requisição curta de verdade.
+      CK.armazenamento.salvarModelo(modelo);
+
+      try {
+        dizerNoDialogo(`Testando a chave com ${modelo}…`, "neutro");
         await CK.api.testarChave(chave, modelo);
-        dizerNoDialogo("Chave válida — o Oráculo está conectado.", "ok");
+
+        const n = CK.armazenamento.lerModelosDescobertos().length;
+        dizerNoDialogo(
+          n
+            ? `Chave válida — ${n} ${n === 1 ? "modelo disponível" : "modelos disponíveis"}, usando ${modelo}.`
+            : `Chave válida — o Oráculo está conectado usando ${modelo}.`,
+          "ok"
+        );
         toast("Chave salva e testada com sucesso.");
       } catch (erro) {
         dizerNoDialogo(`${erro.titulo}: ${erro.message}`, "erro");
@@ -454,11 +497,44 @@
      PARTIDA
      ======================================================================== */
 
+  /* ==========================================================================
+     DESCOBERTA EM SEGUNDO PLANO
+     Se já existe chave mas nunca perguntamos à API quais modelos existem,
+     fazemos isso em silêncio ao abrir. Assim, mesmo quem só colou a chave em
+     config.js nunca esbarra num nome de modelo aposentado.
+     ======================================================================== */
+
+  const descobrirEmSilencio = async () => {
+    if (!CK.armazenamento.temChave()) return;
+    if (CK.armazenamento.lerModelosDescobertos().length) return;
+
+    try {
+      const modelos = await CK.api.listarModelos(CK.armazenamento.lerChave());
+      if (!modelos.length) return;
+
+      CK.armazenamento.salvarModelosDescobertos(modelos);
+
+      // Grava sempre o modelo resolvido: mantém a escolha do usuário se ela
+      // sobreviveu, senão assume o melhor do catálogo. Deixar implícito
+      // funcionaria, mas gravar torna o estado previsível e depurável.
+      const atual = CK.armazenamento.lerModelo();
+      const valido = modelos.some(({ id }) => id === atual);
+      CK.armazenamento.salvarModelo(valido ? atual : modelos[0].id);
+
+      CK.ui.montarModelos(el.inputModelo, modelos);
+    } catch {
+      // Silencioso de propósito: é um reforço, não um requisito.
+    }
+  };
+
+  /* ========================================================================== */
+
   montar();
   ligarFormulario();
   ligarHistorico();
   ligarDialogo();
   CK.ui.ligarEfeitos();
+  descobrirEmSilencio();
 
   // Pré-seleciona o primeiro jogo para que a interface nunca comece "morta".
   CK.ui.$$(".jogo", el.jogos)[0]?.click();

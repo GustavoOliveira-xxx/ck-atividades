@@ -15,6 +15,7 @@ CK.armazenamento = (() => {
   const CHAVE_API = `${PREFIXO}chave`;
   const CHAVE_MODELO = `${PREFIXO}modelo`;
   const CHAVE_HISTORICO = `${PREFIXO}historico`;
+  const CHAVE_MODELOS = `${PREFIXO}modelos`;
   const LIMITE_HISTORICO = 8;
 
   /* ---------- acesso protegido ---------- */
@@ -55,12 +56,36 @@ CK.armazenamento = (() => {
 
   const temChave = () => lerChave().length > 0;
 
+  /* ---------- modelos descobertos na API ---------- */
+
+  /** Lista real de modelos, consultada na API e guardada aqui. */
+  const lerModelosDescobertos = () => {
+    try {
+      const lista = JSON.parse(ler(CHAVE_MODELOS) || "[]");
+      return Array.isArray(lista) ? lista : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const salvarModelosDescobertos = (lista) =>
+    gravar(CHAVE_MODELOS, JSON.stringify(lista.slice(0, 20)));
+
+  /** Catálogo em uso: o descoberto, se houver; senão a semente de config.js. */
+  const catalogoModelos = () => {
+    const descobertos = lerModelosDescobertos();
+    return descobertos.length ? descobertos : CK.config.MODELOS;
+  };
+
   /* ---------- modelo escolhido ---------- */
 
   const lerModelo = () => {
     const salvo = ler(CHAVE_MODELO);
-    const existe = CK.config.MODELOS.some(({ id }) => id === salvo);
-    return existe ? salvo : CK.config.MODELO_PADRAO;
+    const catalogo = catalogoModelos();
+    const existe = catalogo.some(({ id }) => id === salvo);
+    if (existe) return salvo;
+    // O modelo salvo sumiu do catálogo: assume o primeiro da lista.
+    return catalogo[0]?.id || CK.config.MODELO_PADRAO;
   };
 
   const salvarModelo = (modelo) => gravar(CHAVE_MODELO, modelo);
@@ -97,6 +122,9 @@ CK.armazenamento = (() => {
     temChave,
     lerModelo,
     salvarModelo,
+    lerModelosDescobertos,
+    salvarModelosDescobertos,
+    catalogoModelos,
     lerHistorico,
     adicionarHistorico,
     limparHistorico,

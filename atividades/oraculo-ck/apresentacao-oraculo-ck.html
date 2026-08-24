@@ -821,7 +821,7 @@ h1.xs{font-size:50px}
 │   ├── <b>config.js</b>       <u>catálogo e endpoint</u>
 │   ├── <b>armazenamento.js</b><u>localStorage</u>
 │   ├── <b>prompt.js</b>       <u>monta o prompt</u>
-│   ├── <b>api.js</b>          <u>fetch e erros</u>
+│   ├── <b>api.js</b>          <u>fetch, erros, modelos</u>
 │   ├── <b>cena.js</b>         <u>fundo em canvas</u>
 │   ├── <b>ui.js</b>           <u>desenha a tela</u>
 │   └── <b>app.js</b>          <u>liga tudo</u>
@@ -908,7 +908,7 @@ h1.xs{font-size:50px}
           <tr>
             <td><b>Google Gemini API</b></td>
             <td>O modelo generativo</td>
-            <td>Camada gratuita generosa, responde CORS para o navegador e aceita <code>systemInstruction</code> — que é como fixamos o formato.</td>
+            <td>Camada gratuita generosa e aceita <code>systemInstruction</code> — que é como fixamos o formato. Confirmamos no preflight real que ela libera <code>content-type</code> e <code>x-goog-api-key</code>: sem isso, uma aplicação sem backend não funcionaria.</td>
           </tr>
           <tr>
             <td><b>localStorage</b></td>
@@ -1197,11 +1197,11 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
       </table>
     </div>
 
-    <div class="grid g3 rv d6" style="margin-top:14px">
+    <div class="grid g3 rv d6" style="margin-top:9px">
       <div class="card ok">
-        <h3><svg><use href="#i-check"/></svg>Recuperação automática</h3>
-        <p>Um <b>404</b> não vira erro na cara do usuário: a fila de modelos tenta o próximo
-          sozinha. Só se todos falharem é que a mensagem aparece.</p>
+        <h3><svg><use href="#i-check"/></svg>A aplicação se conserta sozinha</h3>
+        <p>Se todos os modelos que conhecemos derem <b>404</b>, a aplicação pergunta à API
+          quais existem agora e tenta o melhor — <b>na mesma consulta</b>.</p>
       </div>
       <div class="card teal">
         <h3><svg><use href="#i-shield"/></svg>Antes de gastar requisição</h3>
@@ -1210,8 +1210,8 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
       </div>
       <div class="card lima">
         <h3><svg><use href="#i-gear"/></svg>Como testamos</h3>
-        <p>Simulamos cada status pelo navegador e conferimos título, código e dica.
-          Os <b>26 casos</b> de contrato e de erro passaram.</p>
+        <p>Simulamos cada status e também chamamos a <b>API de verdade</b>.
+          <b>93 verificações</b>, todas passando.</p>
       </div>
     </div>
   </section>
@@ -1276,7 +1276,7 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
   <!-- ============================================================
        S13 — DESAFIOS E PLANO DE RECUPERAÇÃO
        ============================================================ -->
-  <section class="slide" data-t="Desafios">
+  <section class="slide dense" data-t="Desafios">
     <div class="ep rv d1"><b>12</b><span>Honestidade técnica</span></div>
     <h1 class="sm rv d1">DESAFIOS E <em>PLANO</em></h1>
     <div class="hr rv d1"></div>
@@ -1293,6 +1293,8 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
             Os quatro estados apareciam juntos</li>
           <li><b>Resposta em formato variável.</b> Resolvido impondo o formato pela <code style="font:500 12.6px/1.4 var(--mono);color:var(--neon-2)">systemInstruction</code></li>
           <li><b>Rolagem horizontal no celular</b>, causada pelos elementos de fundo</li>
+          <li><b>Nunca tínhamos conferido o nome do modelo.</b> A API valida a chave <i>antes</i> do
+            modelo — sem chave válida, qualquer nome dá o mesmo erro</li>
         </ul>
       </div>
 
@@ -1301,6 +1303,7 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
         <ul>
           <li>A chave fica exposta no navegador — limitação assumida do modelo client-side</li>
           <li>Sem streaming: a resposta aparece de uma vez, não palavra a palavra</li>
+          <li>A cota gratuita é do Google: se estourar, cai no modo demonstração</li>
           <li>Sem conversa em várias rodadas — cada consulta é independente</li>
           <li>Testes são manuais e por script, não automatizados em CI</li>
         </ul>
@@ -1311,6 +1314,8 @@ Pergunta: <em>como counterar deck de ciclo rápido?</em></pre>
         <ul>
           <li><b>Curto prazo:</b> streaming com <code style="font:500 12.6px/1.4 var(--mono);color:var(--neon-2)">streamGenerateContent</code> e histórico de conversa</li>
           <li><b>Médio:</b> proxy simples (Cloud Function) para tirar a chave do navegador</li>
+          <li><b>Já feito:</b> descoberta automática de modelos — a aplicação pergunta à API
+            quais existem e se corrige sozinha</li>
           <li><b>Sempre:</b> o modo demonstração garante a apresentação mesmo sem rede</li>
         </ul>
         <p style="margin-top:9px">Nenhum requisito da proposta ficou de fora — o que listamos acima são
