@@ -42,7 +42,7 @@ window.ACERVO_CK = [
       "dez tipos de erro tratados em português e layout responsivo. " +
       "HTML, CSS e JavaScript puro: sem backend, sem banco de dados e sem framework.",
     destaques: [
-      "11 arquivos separados",
+      "12 arquivos separados",
       "fetch + async/await",
       "9 jogos · 6 conselhos",
       "Modo demonstração offline",
