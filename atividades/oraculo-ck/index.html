@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Oráculo CK — Assistente de Jogos Mobile</title>
+  <link rel="icon" type="image/png" href="assets/logo-ck-remaster.png">
+
+  <meta name="description"
+    content="Oráculo CK: interface web client-side que consulta uma API de IA generativa para devolver dicas, builds e estratégias de jogos mobile. Projeto de Interface Web II — Grupo CK, Conscious Knowledge.">
+  <meta name="author" content="Conscious Knowledge">
+  <meta name="theme-color" content="#02100b">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Oráculo CK — Assistente de Jogos Mobile">
+  <meta property="og:description"
+    content="Escolha o jogo, faça a pergunta e receba a resposta da IA. HTML, CSS e JavaScript puro, sem servidor.">
+  <meta property="og:image" content="assets/logo-ck-remaster.png">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+
+  <script src="js/config.js" defer></script>
+  <script src="js/armazenamento.js" defer></script>
+  <script src="js/prompt.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/cena.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ==================== ABERTURA ==================== -->
+  <div class="abertura" data-abertura aria-hidden="true">
+    <span class="abertura__folha abertura__folha--cima"></span>
+    <span class="abertura__folha abertura__folha--baixo"></span>
+
+    <div class="abertura__nucleo">
+      <div class="abertura__marca">
+        <svg class="abertura__aro" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="abertura__aro-trilho" cx="60" cy="60" r="54" />
+          <circle class="abertura__aro-carga" cx="60" cy="60" r="54" data-abertura-aro />
+        </svg>
+        <img src="assets/logo-ck-remaster.png" alt="" class="abertura__logo" decoding="async">
+      </div>
+
+      <p class="abertura__titulo" data-abertura-titulo>Oráculo CK</p>
+
+      <div class="abertura__leitura">
+        <span class="abertura__percent" data-abertura-percent>000</span>
+        <span class="abertura__estado" data-abertura-estado>acendendo o cajado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CENA DE FUNDO ==================== -->
+  <div class="cena" aria-hidden="true">
+    <canvas class="cena__runas" data-runas></canvas>
+    <span class="cena__grade"></span>
+    <span class="orbe orbe--1"></span>
+    <span class="orbe orbe--2"></span>
+    <span class="orbe orbe--3"></span>
+    <span class="cena__varredura"></span>
+    <span class="cena__horizonte"></span>
+    <span class="cena__grao"></span>
+  </div>
+
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+  <div class="cursor cursor--halo" data-cursor-halo aria-hidden="true"></div>
+
+  <a class="pular" href="#consultar">Pular para a consulta</a>
+
+  <!-- ==================== TOPO ==================== -->
+  <header class="topo" data-topo>
+    <a class="topo__marca" href="#inicio" aria-label="Oráculo CK — início">
+      <span class="topo__logo">
+        <img src="assets/logo-ck-remaster.png" alt="Logo Conscious Knowledge" width="46" height="47"
+          decoding="async">
+      </span>
+      <span class="topo__nome">
+        <strong>Oráculo CK</strong>
+        <small>Conscious Knowledge</small>
+      </span>
+    </a>
+
+    <nav class="topo__nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#consultar">Consultar</a></li>
+        <li><a href="#historico">Histórico</a></li>
+        <li><a href="#arquitetura">Arquitetura</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+      </ul>
+    </nav>
+
+    <div class="topo__acoes">
+      <button type="button" class="selo-chave" data-abrir-chave aria-haspopup="dialog">
+        <span class="selo-chave__ponto" data-selo-ponto></span>
+        <span class="selo-chave__texto" data-selo-texto>Sem chave</span>
+      </button>
+
+      <button type="button" class="nav-toggle" data-nav-toggle aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==================== HERO ==================== -->
+    <section id="inicio" class="hero">
+      <div class="hero__texto">
+        <p class="eyebrow">
+          <span class="ponto-vivo"></span>
+          Interface Web II · 2º C · ETEC Taboão da Serra
+        </p>
+
+        <h1>O oráculo<br><em>dos jogos</em><br>mobile</h1>
+
+        <p class="hero__typed">
+          Pergunte sobre
+          <span class="typed" data-typed
+            data-palavras="build de personagem|estratégia de partida|como counterar|economia de recursos|sensibilidade ideal"><span
+              class="typed__texto"></span><span class="typed__cursor"></span></span>
+        </p>
+
+        <p class="hero__descricao">
+          Uma interface <strong>100% client-side</strong> — HTML, CSS e JavaScript puro, sem servidor e
+          sem banco de dados — que conversa direto com uma <strong>API de IA generativa</strong> pelo
+          navegador. Você escolhe o jogo, define o tipo de conselho e o Oráculo responde.
+        </p>
+
+        <div class="hero__acoes">
+          <a class="btn btn--primario" href="#consultar" data-magnetico>
+            <span>Consultar o Oráculo</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a class="btn btn--fantasma" href="#arquitetura" data-magnetico>
+            <span>Ver a arquitetura</span>
+          </a>
+        </div>
+
+        <dl class="hero__metricas">
+          <div class="metrica" data-tilt>
+            <dt>Jogos no catálogo</dt>
+            <dd data-contador="9">0</dd>
+          </div>
+          <div class="metrica" data-tilt>
+            <dt>Tipos de conselho</dt>
+            <dd data-contador="6">0</dd>
+          </div>
+          <div class="metrica" data-tilt>
+            <dt>Linhas de servidor</dt>
+            <dd data-contador="0">0</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="hero__palco">
+        <!-- ORBE 3D DO ORÁCULO -->
+        <div class="oraculo" data-oraculo data-estado="repouso">
+          <div class="oraculo__cena">
+            <span class="oraculo__anel oraculo__anel--a"></span>
+            <span class="oraculo__anel oraculo__anel--b"></span>
+            <span class="oraculo__anel oraculo__anel--c"></span>
+
+            <span class="oraculo__nucleo">
+              <i class="oraculo__brilho"></i>
+              <i class="oraculo__malha"></i>
+            </span>
+
+            <span class="oraculo__orbita"><i class="oraculo__satelite"></i></span>
+            <span class="oraculo__orbita oraculo__orbita--2"><i class="oraculo__satelite oraculo__satelite--lima"></i></span>
+
+            <div class="oraculo__runas">
+              <b style="--i:0">◆</b><b style="--i:1">✦</b><b style="--i:2">◇</b>
+              <b style="--i:3">✧</b><b style="--i:4">◈</b><b style="--i:5">✶</b>
+            </div>
+
+            <span class="oraculo__base"></span>
+          </div>
+
+          <!-- MARCA EM CAMADAS 3D (preenchida por js/ui.js) -->
+          <div class="marca3d" data-marca>
+            <div class="marca3d__palco" data-marca-palco>
+              <div class="marca3d__bloco" data-marca-bloco></div>
+              <span class="marca3d__halo"></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="hero__legenda" data-oraculo-legenda>o cajado está em repouso</p>
+      </div>
+
+      <a class="hero__scroll" href="#consultar" aria-label="Rolar para a consulta">
+        <span class="hero__scroll-mouse"><i></i></span>
+        <span>role</span>
+      </a>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__trilha" data-ticker></div>
+    </div>
+
+    <!-- ==================== CONSOLE DE CONSULTA ==================== -->
+    <section id="consultar" class="console">
+
+      <header class="secao-topo">
+        <p class="secao-indice">01 — O console</p>
+        <h2>Faça a sua pergunta</h2>
+        <p class="secao-sub">
+          Três escolhas e um texto. O que você monta aqui vira o <em>prompt</em> enviado à API de IA
+          por <code>fetch</code> — e a resposta volta direto para o painel ao lado.
+        </p>
+      </header>
+
+      <div class="console__grade">
+
+        <!-- ---------- PAINEL DE CONSULTA ---------- -->
+        <form class="consulta" data-form novalidate>
+
+          <fieldset class="campo">
+            <legend>
+              <span class="campo__num">1</span>
+              Escolha o jogo
+            </legend>
+
+            <div class="jogos" data-jogos role="radiogroup" aria-label="Jogo"></div>
+
+            <label class="campo-livre" data-jogo-livre hidden>
+              <span>Qual jogo?</span>
+              <input type="text" data-jogo-outro placeholder="Ex.: Honor of Kings" maxlength="48"
+                autocomplete="off">
+            </label>
+          </fieldset>
+
+          <fieldset class="campo">
+            <legend>
+              <span class="campo__num">2</span>
+              Tipo de conselho
+            </legend>
+            <div class="chips" data-tipos role="radiogroup" aria-label="Tipo de conselho"></div>
+          </fieldset>
+
+          <fieldset class="campo">
+            <legend>
+              <span class="campo__num">3</span>
+              Seu nível
+            </legend>
+            <div class="niveis" data-niveis role="radiogroup" aria-label="Nível do jogador"></div>
+          </fieldset>
+
+          <fieldset class="campo campo--pergunta">
+            <legend>
+              <span class="campo__num">4</span>
+              A pergunta
+            </legend>
+
+            <div class="caixa-texto">
+              <textarea data-pergunta rows="4" maxlength="400"
+                placeholder="Ex.: qual a melhor build de suporte para subir de elo?"
+                aria-label="Escreva a sua pergunta"></textarea>
+              <span class="caixa-texto__contador"><b data-contador-texto>0</b>/400</span>
+            </div>
+
+            <div class="sugestoes" data-sugestoes aria-label="Sugestões de pergunta"></div>
+          </fieldset>
+
+          <div class="consulta__rodape">
+            <button type="submit" class="btn btn--consultar" data-enviar data-magnetico>
+              <span class="btn__carga"></span>
+              <span class="btn__rotulo">Consultar o Oráculo</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+
+            <button type="button" class="btn btn--cancelar" data-cancelar hidden>
+              Cancelar
+            </button>
+
+            <p class="consulta__aviso" data-aviso-modo></p>
+          </div>
+        </form>
+
+        <!-- ---------- PAINEL DE RESPOSTA ---------- -->
+        <article class="resposta" data-painel data-estado="vazio" aria-live="polite" aria-busy="false">
+
+          <header class="resposta__topo">
+            <span class="resposta__selo" data-resposta-selo>Painel do Oráculo</span>
+            <span class="resposta__estado" data-resposta-estado>aguardando</span>
+          </header>
+
+          <!-- estado: vazio -->
+          <div class="estado estado--vazio" data-estado-vazio>
+            <span class="estado__icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" />
+                <circle cx="12" cy="12" r="3.4" />
+              </svg>
+            </span>
+            <h3>O cajado ainda não foi aceso</h3>
+            <p>Monte a consulta ao lado e clique em <strong>Consultar o Oráculo</strong>. A resposta da
+              IA aparece aqui, formatada e pronta para copiar.</p>
+          </div>
+
+          <!-- estado: carregando -->
+          <div class="estado estado--carregando" data-estado-carregando hidden>
+            <div class="carga" aria-hidden="true">
+              <span class="carga__anel"></span>
+              <span class="carga__anel carga__anel--2"></span>
+              <span class="carga__nucleo"></span>
+            </div>
+            <h3 data-carregando-titulo>Consultando o Oráculo…</h3>
+            <p class="carga__passo" data-carregando-passo>abrindo o grimório</p>
+            <div class="carga__barra"><i data-carregando-barra></i></div>
+            <ul class="carga__linhas" aria-hidden="true">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+
+          <!-- estado: erro -->
+          <div class="estado estado--erro" data-estado-erro hidden role="alert">
+            <span class="estado__icone estado__icone--erro" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 8.5v5M12 17h.01" />
+                <path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+              </svg>
+            </span>
+            <h3 data-erro-titulo>Algo deu errado</h3>
+            <p data-erro-texto></p>
+            <p class="estado__dica" data-erro-dica></p>
+            <code class="estado__codigo" data-erro-codigo></code>
+            <div class="estado__acoes">
+              <button type="button" class="btn btn--pequeno" data-erro-repetir>Tentar de novo</button>
+              <button type="button" class="btn btn--pequeno btn--fantasma" data-erro-chave>Configurar a chave</button>
+              <button type="button" class="btn btn--pequeno btn--fantasma" data-erro-demo>Usar o modo demonstração</button>
+            </div>
+          </div>
+
+          <!-- estado: sucesso -->
+          <div class="estado estado--pronto" data-estado-pronto hidden>
+            <div class="resposta__cabecalho">
+              <h3 data-resposta-titulo>Resposta do Oráculo</h3>
+              <ul class="resposta__meta" data-resposta-meta></ul>
+            </div>
+
+            <div class="resposta__corpo" data-resposta-corpo></div>
+
+            <footer class="resposta__acoes">
+              <button type="button" class="btn btn--pequeno" data-copiar>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="9" y="9" width="12" height="12" rx="2" />
+                  <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+                </svg>
+                <span>Copiar</span>
+              </button>
+              <button type="button" class="btn btn--pequeno btn--fantasma" data-nova>Nova consulta</button>
+              <span class="resposta__isencao">Conteúdo gerado por IA — confira antes de usar.</span>
+            </footer>
+          </div>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== HISTÓRICO ==================== -->
+    <section id="historico" class="historico">
+      <header class="secao-topo">
+        <p class="secao-indice">02 — Memória local</p>
+        <h2>Suas últimas consultas</h2>
+        <p class="secao-sub">
+          Guardadas no <code>localStorage</code> do seu próprio navegador. Nada sai do aparelho e
+          nada vai para servidor nenhum — porque servidor, aqui, não existe.
+        </p>
+      </header>
+
+      <div class="historico__lista" data-historico></div>
+
+      <p class="historico__vazio" data-historico-vazio>
+        Nenhuma consulta ainda. A primeira aparece aqui assim que o Oráculo responder.
+      </p>
+
+      <button type="button" class="btn btn--pequeno btn--fantasma" data-limpar-historico hidden>
+        Limpar histórico
+      </button>
+    </section>
+
+    <!-- ==================== ARQUITETURA ==================== -->
+    <section id="arquitetura" class="arquitetura">
+      <header class="secao-topo">
+        <p class="secao-indice">03 — Como funciona</p>
+        <h2>Do clique à resposta</h2>
+        <p class="secao-sub">
+          Quatro blocos e nenhum servidor no meio. O navegador é, ao mesmo tempo, a interface e o
+          cliente HTTP que fala com a API de IA.
+        </p>
+      </header>
+
+      <ol class="fluxo">
+        <li class="fluxo__bloco" data-tilt>
+          <span class="fluxo__num">01</span>
+          <h3>Usuário</h3>
+          <p>Escolhe jogo, tipo de conselho, nível e escreve a pergunta na interface.</p>
+          <code>submit</code>
+        </li>
+        <li class="fluxo__bloco" data-tilt>
+          <span class="fluxo__num">02</span>
+          <h3>Frontend</h3>
+          <p>O JavaScript valida os campos, monta o prompt e dispara a requisição HTTP.</p>
+          <code>fetch() + async/await</code>
+        </li>
+        <li class="fluxo__bloco" data-tilt>
+          <span class="fluxo__num">03</span>
+          <h3>API de IA</h3>
+          <p>O modelo generativo processa o prompt e devolve o texto em JSON.</p>
+          <code>generateContent</code>
+        </li>
+        <li class="fluxo__bloco" data-tilt>
+          <span class="fluxo__num">04</span>
+          <h3>Resposta</h3>
+          <p>O front lê o JSON, formata o texto e pinta o painel — ou o erro tratado.</p>
+          <code>render()</code>
+        </li>
+      </ol>
+
+      <div class="arq-grade">
+        <article class="arq-card" data-tilt>
+          <h3>Arquivos separados</h3>
+          <pre class="arvore"><code>oraculo-ck/
+├── index.html
+├── css/
+│   ├── base.css
+│   ├── layout.css
+│   ├── componentes.css
+│   └── animacoes.css
+├── js/
+│   ├── config.js
+│   ├── armazenamento.js
+│   ├── prompt.js
+│   ├── api.js
+│   ├── cena.js
+│   ├── ui.js
+│   └── app.js
+└── assets/</code></pre>
+        </article>
+
+        <article class="arq-card" data-tilt>
+          <h3>A chamada à API</h3>
+          <pre class="codigo"><code><b>const</b> resposta = <b>await</b> fetch(url, {
+  method: <s>"POST"</s>,
+  headers: { <s>"Content-Type"</s>: <s>"application/json"</s> },
+  body: JSON.stringify({ contents, systemInstruction }),
+  signal: controlador.signal
+});
+
+<b>if</b> (!resposta.ok) <b>throw</b> erroHttp(resposta.status);
+
+<b>const</b> { candidates } = <b>await</b> resposta.json();
+<b>const</b> [primeiro] = candidates ?? [];
+<b>return</b> primeiro?.content?.parts?.[0]?.text ?? <s>""</s>;</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== EQUIPE ==================== -->
+    <section id="equipe" class="equipe">
+      <header class="secao-topo">
+        <p class="secao-indice">04 — Quem construiu</p>
+        <h2>Grupo CK</h2>
+        <p class="secao-sub">
+          Seis integrantes do 2º C — M-Tec Informática para Internet, ETEC Taboão da Serra.
+          Divisão de tarefas declarada, domínio do código coletivo.
+        </p>
+      </header>
+
+      <div class="equipe__grade" data-equipe></div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__grade">
+      <div class="rodape__marca">
+        <img src="assets/logo-ck-remaster.png" alt="Logo Conscious Knowledge" width="64" height="66"
+          loading="lazy" decoding="async">
+        <div>
+          <strong>Oráculo CK</strong>
+          <span>Projeto de Interface Web II — Conscious Knowledge</span>
+        </div>
+      </div>
+
+      <nav class="rodape__links" aria-label="Navegação do rodapé">
+        <a href="#consultar">Consultar</a>
+        <a href="#arquitetura">Arquitetura</a>
+        <a href="#equipe">Equipe</a>
+        <a href="apresentacao-oraculo-ck.html">Apresentação</a>
+        <a href="../../index.html">Acervo CK</a>
+      </nav>
+    </div>
+
+    <div class="rodape__base">
+      <p>© 2026 Conscious Knowledge · 2º C — M-Tec Informática para Internet.</p>
+      <p>HTML5 · CSS3 · JavaScript · sem backend, sem banco de dados.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== DIÁLOGO DA CHAVE ==================== -->
+  <dialog class="dlg" data-dlg-chave aria-labelledby="dlg-titulo">
+    <form method="dialog" class="dlg__fechar-area">
+      <button class="dlg__fechar" aria-label="Fechar">×</button>
+    </form>
+
+    <div class="dlg__corpo">
+      <h2 id="dlg-titulo">Chave da API</h2>
+      <p class="dlg__sub">
+        A aplicação é client-side: a chave fica <strong>só no seu navegador</strong>
+        (<code>localStorage</code>) e é enviada direto para a API do Google. Ela nunca passa por um
+        servidor nosso — porque não há servidor nosso.
+      </p>
+
+      <label class="dlg__campo">
+        <span>Chave do Google AI Studio</span>
+        <input type="password" data-input-chave placeholder="AIza…" autocomplete="off"
+          spellcheck="false">
+      </label>
+
+      <label class="dlg__campo">
+        <span>Modelo</span>
+        <select data-input-modelo></select>
+      </label>
+
+      <div class="dlg__acoes">
+        <button type="button" class="btn btn--pequeno" data-salvar-chave>Salvar e testar</button>
+        <button type="button" class="btn btn--pequeno btn--fantasma" data-apagar-chave>Apagar chave</button>
+      </div>
+
+      <p class="dlg__estado" data-dlg-estado></p>
+
+      <details class="dlg__ajuda">
+        <summary>Onde consigo uma chave?</summary>
+        <ol>
+          <li>Acesse <code>aistudio.google.com/app/apikey</code> com uma conta Google.</li>
+          <li>Clique em <strong>Create API key</strong> e copie o valor gerado.</li>
+          <li>Cole no campo acima e clique em <strong>Salvar e testar</strong>.</li>
+        </ol>
+        <p class="dlg__nota">
+          Sem chave, a aplicação continua funcionando no <strong>modo demonstração</strong>, com
+          respostas locais de exemplo — útil para apresentar sem internet.
+        </p>
+      </details>
+    </div>
+  </dialog>
+
+  <div class="aviso-toast" data-toast role="status" aria-live="polite"></div>
+
+  <noscript>
+    <div class="sem-js">
+      <h2>JavaScript desativado</h2>
+      <p>O Oráculo CK depende de JavaScript para montar o prompt e conversar com a API de IA.
+        Ative o JavaScript no navegador para usar a aplicação.</p>
+    </div>
+  </noscript>
+
+</body>
+
+</html>
