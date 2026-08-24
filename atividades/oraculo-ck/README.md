@@ -46,10 +46,21 @@ python3 -m http.server 5500      # ou:  npx serve .
 
 A aplicação usa a **Google Gemini API** (Generative Language API).
 
-1. Pegue uma chave gratuita em <https://aistudio.google.com/app/apikey>.
-2. Com a aplicação aberta, clique no selo no canto superior direito
+1. Abra <https://aistudio.google.com/app/apikey> e entre com uma conta Google
+   (na primeira vez, aceite os termos de uso).
+2. Clique em **Create API key** → **Create API key in new project**.
+3. Copie a chave — começa com `AIza`, ~39 caracteres.
+4. Com a aplicação aberta, clique no selo no canto superior direito
    (*Sem chave* / *Modo demo*).
-3. Cole a chave e clique em **Salvar e testar**.
+5. Cole a chave e clique em **Salvar e testar**.
+
+> **O tropeço mais comum:** contas de menores de idade e contas escolares
+> (Google Workspace for Education) têm o AI Studio bloqueado — o botão de
+> criar chave simplesmente não aparece. Use uma conta Google pessoal de
+> alguém com 18 anos ou mais. Não há como contornar isso pela aplicação.
+
+A chave é como uma senha: não publique no GitHub, não mostre em slide. Se
+vazar, apague no AI Studio e crie outra — a antiga para de funcionar na hora.
 
 Ao salvar, a aplicação pergunta à própria API quais modelos existem naquele
 momento, preenche o seletor com os reais e escolhe o melhor. Você não precisa
