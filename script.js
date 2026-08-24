@@ -68,6 +68,53 @@
 
   const grade = $("[data-grade]");
 
+  /* ---------------------------------------------------------------------
+     Recursos de uma atividade
+     Cada cartão pode oferecer vários arquivos — a aplicação, a apresentação
+     e o documento, por exemplo. Atividades antigas, que só têm `href`,
+     continuam funcionando: viram um recurso único.
+     ------------------------------------------------------------------- */
+
+  const ICONE_RECURSO = {
+    app: '<path d="M3 5h18v14H3z"/><path d="M3 9h18"/><circle cx="6" cy="7" r=".6"/>',
+    slides: '<rect x="3" y="4" width="18" height="12" rx="1.6"/><path d="M12 16v4M8 20h8"/>',
+    doc: '<path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7l-4-4Z"/><path d="M14 3v4h4M9 13h6M9 17h6"/>',
+    codigo: '<path d="m9 17-5-5 5-5M15 7l5 5-5 5"/>',
+    link: '<path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/>',
+  };
+
+  const svgRecurso = (nome) =>
+    `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONE_RECURSO[nome] || ICONE_RECURSO.link}</svg>`;
+
+  const recursosDe = (item) => {
+    if (Array.isArray(item.recursos) && item.recursos.length) return item.recursos;
+    return [{ rotulo: "Abrir atividade", href: item.href, tipo: item.tipo, icone: "link" }];
+  };
+
+  const montarRecursos = (item) => {
+    const lista = recursosDe(item);
+
+    return `
+      <ul class="ficha__recursos">
+        ${lista.map(({ rotulo, href, tipo, icone, baixar }, i) => `
+          <li>
+            <a class="recurso${i === 0 ? " recurso--principal" : ""}"
+               href="${esc(href)}"${baixar ? " download" : ""}>
+              <span class="recurso__icone" aria-hidden="true">${svgRecurso(icone)}</span>
+              <span class="recurso__texto">
+                <strong>${esc(rotulo)}</strong>
+                ${tipo ? `<small>${esc(tipo)}</small>` : ""}
+              </span>
+              <svg class="recurso__seta" viewBox="0 0 24 24" aria-hidden="true">
+                ${baixar
+                  ? '<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/>'
+                  : '<path d="M5 12h14M13 6l6 6-6 6"/>'}
+              </svg>
+            </a>
+          </li>`).join("")}
+      </ul>`;
+  };
+
   const montarFicha = (item) => `
     <article class="ficha" style="${estiloAcento(item.cor)}"
              data-disciplina="${esc(item.disciplina)}" data-tilt>
@@ -96,12 +143,13 @@
         ${item.tags.map((t) => `<li>${esc(t)}</li>`).join("")}
       </ul>` : ""}
 
+      ${montarRecursos(item)}
+
       <div class="ficha__rodape">
-        <a class="ficha__abrir" href="${esc(item.href)}">
-          <span>Abrir apresentação</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
         <span class="ficha__tipo">${esc(item.tipo || "")}</span>
+        <span class="ficha__contagem">
+          ${recursosDe(item).length} ${recursosDe(item).length === 1 ? "arquivo" : "arquivos"}
+        </span>
       </div>
     </article>`;
 

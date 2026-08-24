@@ -1,0 +1,340 @@
+@charset "UTF-8";
+
+/* ============================================================================
+   ORÁCULO CK — base.css
+   Tokens de design, reset e tipografia.
+   Paleta extraída da logo remaster da Conscious Knowledge:
+   verde neon do cajado, jade e teal da armadura, menta das legendas.
+   ========================================================================== */
+
+:root {
+  /* ---------- fundos ---------- */
+  --void-0: #010604;
+  --void-1: #030d09;
+  --void-2: #05140f;
+  --void-3: #081d16;
+  --void-4: #0c281f;
+
+  /* ---------- verdes da marca ---------- */
+  --neon-500: #35ffa0;
+  --neon-400: #6dffbb;
+  --neon-300: #a6ffd4;
+  --jade-700: #018f5d;
+  --jade-600: #00b877;
+  --jade-500: #00e5a0;
+  --teal-600: #00a89e;
+  --teal-500: #00c8c0;
+  --teal-400: #35ded6;
+  --cyan-300: #7ff0e6;
+  --mint-100: #d8fff2;
+  --lima-400: #d8ff7a;
+
+  --neon-glow: rgba(53, 255, 160, .42);
+  --neon-glow-forte: rgba(53, 255, 160, .78);
+  --teal-glow: rgba(0, 200, 192, .32);
+  --lima-glow: rgba(216, 255, 122, .3);
+
+  --alerta: #ffb03a;
+  --erro: #ff5a6e;
+  --ok: #35ffa0;
+
+  /* ---------- texto ---------- */
+  --texto-0: #f2fffa;
+  --texto-1: #cfe8de;
+  --texto-2: #93b3a8;
+  --texto-3: #5d7a71;
+
+  /* ---------- superfícies ---------- */
+  --borda: rgba(140, 255, 210, .1);
+  --borda-forte: rgba(53, 255, 160, .34);
+  --vidro: rgba(6, 20, 15, .68);
+  --vidro-alto: rgba(11, 33, 26, .82);
+
+  /* ---------- gradientes ---------- */
+  --grad-marca: linear-gradient(120deg, var(--jade-700) 0%, var(--jade-500) 44%, var(--neon-500) 100%);
+  --grad-mista: linear-gradient(115deg, var(--teal-600) 0%, var(--neon-500) 52%, var(--lima-400) 122%);
+  --grad-linha: linear-gradient(90deg, transparent, var(--neon-500), var(--lima-400), transparent);
+  --grad-vidro: linear-gradient(158deg, rgba(200, 255, 235, .06), rgba(200, 255, 235, 0) 58%);
+  --grad-texto: linear-gradient(102deg, var(--mint-100) 4%, var(--neon-400) 42%, var(--teal-400) 76%, var(--lima-400) 104%);
+
+  /* ---------- forma ---------- */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
+  --r-xl: 34px;
+
+  --sombra-suave: 0 12px 40px rgba(0, 0, 0, .6);
+  --sombra-funda: 0 32px 90px rgba(0, 0, 0, .74);
+  --sombra-neon: 0 0 0 1px rgba(53, 255, 160, .18), 0 18px 54px rgba(0, 60, 40, .55);
+
+  /* ---------- tipografia ---------- */
+  --f-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", "Consolas", ui-monospace, monospace;
+
+  /* ---------- métrica ---------- */
+  --topo-h: 76px;
+  --secao-py: clamp(4.5rem, 9vw, 7.5rem);
+  --largura: min(1220px, calc(100% - 2.5rem));
+
+  /* ---------- movimento ---------- */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-mola: cubic-bezier(.34, 1.56, .64, 1);
+  --t: .4s var(--ease);
+}
+
+/* ============================================================================
+   RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topo-h) + 1.25rem);
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+/* O atributo `hidden` precisa vencer qualquer `display` declarado depois —
+   sem isto, um `.estado { display: grid }` deixaria os quatro estados do
+   painel visíveis ao mesmo tempo. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--f-sans);
+  font-size: 1rem;
+  line-height: 1.72;
+  color: var(--texto-1);
+  background: var(--void-0);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.is-travado {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--t);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+fieldset {
+  border: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--f-mono);
+}
+
+::selection {
+  background: rgba(53, 255, 160, .28);
+  color: var(--mint-100);
+}
+
+:focus-visible {
+  outline: 2px solid var(--neon-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* barra de rolagem */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--void-1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--jade-700), var(--teal-600));
+  border-radius: 8px;
+  border: 2px solid var(--void-1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--jade-500), var(--neon-500));
+}
+
+/* ============================================================================
+   TIPOGRAFIA
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: var(--texto-0);
+}
+
+h1 {
+  font-size: clamp(2.6rem, 6.6vw, 4.6rem);
+  text-transform: uppercase;
+}
+
+h1 em {
+  font-style: normal;
+  background: var(--grad-texto);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 26px var(--neon-glow));
+}
+
+h2 {
+  font-size: clamp(1.9rem, 3.9vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+strong,
+b {
+  color: var(--texto-0);
+  font-weight: 600;
+}
+
+em {
+  color: var(--neon-400);
+  font-style: italic;
+}
+
+/* ============================================================================
+   ACESSÓRIOS GLOBAIS
+   ========================================================================== */
+
+.pular {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 999;
+  padding: .7rem 1.2rem;
+  border-radius: var(--r-sm);
+  background: var(--neon-500);
+  color: #012014;
+  font-weight: 700;
+  transition: top .25s var(--ease);
+}
+
+.pular:focus {
+  top: 1rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+
+.ponto-vivo {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-500);
+  box-shadow: 0 0 0 0 var(--neon-glow-forte);
+  animation: pulso 2.2s infinite;
+}
+
+.secao-indice {
+  font-family: var(--f-mono);
+  font-size: .74rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--neon-500);
+  margin-bottom: .85rem;
+}
+
+.secao-sub {
+  margin-top: 1rem;
+  max-width: 62ch;
+  color: var(--texto-2);
+}
+
+.secao-sub code,
+.dlg__sub code,
+.historico .secao-sub code {
+  font-size: .88em;
+  padding: .12em .42em;
+  border-radius: 5px;
+  background: rgba(53, 255, 160, .1);
+  color: var(--neon-400);
+}
+
+.sem-js {
+  max-width: 40rem;
+  margin: 6rem auto;
+  padding: 2rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--r-lg);
+  background: var(--vidro-alto);
+  text-align: center;
+}
+
+.sem-js h2 {
+  margin-bottom: .75rem;
+}
