@@ -51,6 +51,10 @@ A aplicação usa a **Google Gemini API** (Generative Language API).
    (*Sem chave* / *Modo demo*).
 3. Cole a chave e clique em **Salvar e testar**.
 
+Ao salvar, a aplicação pergunta à própria API quais modelos existem naquele
+momento, preenche o seletor com os reais e escolhe o melhor. Você não precisa
+saber nome de modelo nenhum.
+
 A chave fica **apenas no `localStorage` daquele navegador**, sob a chave
 `oraculo-ck:chave`, e vai para a API no cabeçalho `x-goog-api-key` — nunca na URL.
 O botão **Apagar chave** remove-a a qualquer momento.
@@ -79,7 +83,7 @@ Usuário ──submit──► Frontend ──HTTPS POST──► API de IA
 | `config.js` | Endpoint, modelos e catálogo (jogos, conselhos, níveis) |
 | `armazenamento.js` | Camada sobre o `localStorage` (chave, modelo, histórico) |
 | `prompt.js` | Valida os campos e monta a instrução de sistema + o prompt |
-| `api.js` | `fetch` com `async/await`, tempo limite, cancelamento e erros |
+| `api.js` | `fetch` com `async/await`, tempo limite, cancelamento, descoberta de modelos e erros |
 | `cena.js` | Fundo animado em `<canvas>` |
 | `ui.js` | Monta os controles, formata a resposta e troca os estados |
 | `app.js` | Orquestra: liga a interface à camada de rede |
@@ -99,8 +103,16 @@ explicação e dica de ação, em português:
 `HTTP 5xx` · `TEMPO_ESGOTADO` · `SEM_CONEXAO` · `BLOQUEADO_*` ·
 `RESPOSTA_FILTRADA` · `CANCELADO`
 
-Um `404` nem chega ao usuário: a fila de modelos em `config.js` tenta o próximo
-automaticamente.
+Um `404` nem chega ao usuário: a aplicação tenta os outros modelos da fila e,
+se todos falharem, **redescobre o catálogo real na API** e tenta o melhor
+modelo novo — dentro da mesma consulta.
+
+### Por que isso existe
+
+Nomes de modelo têm prazo de validade. A lista em `config.js` é só uma semente:
+quem manda é o catálogo que a própria API devolve em `GET /v1beta/models`.
+Assim, se o Google aposentar um modelo, a aplicação se corrige sozinha em vez
+de quebrar calada — inclusive no dia da apresentação.
 
 ---
 

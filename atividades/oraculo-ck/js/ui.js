@@ -146,11 +146,16 @@ CK.ui = (() => {
     }).join("");
   };
 
-  const montarModelos = (select) => {
+  /** Preenche o seletor de modelos. Sem lista, usa o catálogo em uso. */
+  const montarModelos = (select, lista) => {
     if (!select) return;
 
-    select.innerHTML = CK.config.MODELOS
-      .map(({ id, rotulo }) => `<option value="${esc(id)}">${esc(rotulo)}</option>`)
+    const catalogo = lista?.length ? lista : CK.armazenamento.catalogoModelos();
+    const escolhido = CK.armazenamento.lerModelo();
+
+    select.innerHTML = catalogo
+      .map(({ id, rotulo }) =>
+        `<option value="${esc(id)}"${id === escolhido ? " selected" : ""}>${esc(rotulo || id)}</option>`)
       .join("");
   };
 
