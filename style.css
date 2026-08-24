@@ -1364,55 +1364,132 @@ main>section>header {
   opacity: .7;
 }
 
+/* ---------- recursos da atividade ----------
+   Uma atividade pode entregar vários arquivos: a aplicação, a apresentação
+   e o documento. Cada um vira uma linha clicável dentro do próprio cartão. */
+
+.ficha__recursos {
+  display: grid;
+  gap: .5rem;
+  margin-top: auto;
+  padding-top: 1.4rem;
+  list-style: none;
+  transform: translateZ(30px);
+}
+
+.recurso {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .65rem .85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, .028);
+  transition: border-color var(--transition), background var(--transition),
+    box-shadow var(--transition), transform .28s var(--ease);
+}
+
+.recurso:hover {
+  transform: translateX(3px);
+  border-color: rgba(var(--acento-rgb), .55);
+  background: rgba(var(--acento-rgb), .12);
+  box-shadow: 0 8px 24px rgba(var(--acento-rgb), .18);
+}
+
+.recurso--principal {
+  border-color: rgba(var(--acento-rgb), .45);
+  background: rgba(var(--acento-rgb), .14);
+}
+
+.recurso--principal:hover {
+  background: rgba(var(--acento-rgb), .24);
+}
+
+.recurso__icone {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid rgba(var(--acento-rgb), .3);
+  background: rgba(var(--acento-rgb), .12);
+  color: var(--acento);
+  transition: transform .3s var(--ease);
+}
+
+.recurso:hover .recurso__icone {
+  transform: scale(1.08);
+}
+
+.recurso__icone svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.7;
+}
+
+.recurso__texto {
+  display: grid;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.recurso__texto strong {
+  font-family: var(--font-display);
+  font-size: .87rem;
+  font-weight: 600;
+  color: var(--text-0);
+}
+
+.recurso__texto small {
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.recurso__seta {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  flex: none;
+  color: var(--text-3);
+  transition: transform var(--transition), color var(--transition);
+}
+
+.recurso:hover .recurso__seta {
+  color: var(--acento);
+  transform: translateX(3px);
+}
+
+.recurso[download]:hover .recurso__seta {
+  transform: translateY(3px);
+}
+
 .ficha__rodape {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: .7rem 1rem;
-  margin-top: auto;
-  padding-top: 1.4rem;
+  gap: .5rem 1rem;
+  margin-top: 1rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--border);
 }
 
-.ficha__abrir {
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  padding: .7rem 1.25rem;
-  border-radius: 999px;
-  border: 1px solid rgba(var(--acento-rgb), .45);
-  background: rgba(var(--acento-rgb), .12);
-  font-family: var(--font-display);
-  font-size: .88rem;
-  font-weight: 600;
-  color: var(--text-0);
-  white-space: nowrap;
-  transform: translateZ(34px);
-  transition: background var(--transition), box-shadow var(--transition), transform .25s var(--ease);
-}
-
-.ficha__abrir svg {
-  width: 16px;
-  height: 16px;
-  transition: transform var(--transition);
-}
-
-.ficha__abrir:hover {
-  background: rgba(var(--acento-rgb), .26);
-  box-shadow: 0 8px 26px rgba(var(--acento-rgb), .28);
-}
-
-.ficha__abrir:hover svg {
-  transform: translateX(3px);
-}
-
-.ficha__tipo {
+.ficha__tipo,
+.ficha__contagem {
   font-family: var(--font-mono);
-  font-size: .7rem;
-  letter-spacing: .14em;
+  font-size: .68rem;
+  letter-spacing: .13em;
   text-transform: uppercase;
   color: var(--text-3);
-  text-align: right;
+}
+
+.ficha__contagem {
+  color: var(--acento);
+  opacity: .8;
 }
 
 .ficha--vaga {
@@ -2210,16 +2287,19 @@ body>footer {
 
   .ficha__rodape {
     flex-direction: column;
-    align-items: stretch;
-    gap: .7rem;
-  }
-
-  .ficha__abrir {
-    justify-content: center;
-  }
-
-  .ficha__tipo {
+    align-items: center;
+    gap: .35rem;
     text-align: center;
+  }
+
+  .recurso {
+    padding: .6rem .7rem;
+    gap: .6rem;
+  }
+
+  .recurso__icone {
+    width: 28px;
+    height: 28px;
   }
 }
 
