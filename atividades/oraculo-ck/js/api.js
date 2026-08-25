@@ -128,11 +128,13 @@ CK.api = (() => {
      PROVEDOR GEMINI — a chamada real
      ======================================================================== */
 
-  const chamarGemini = async ({ chave, modelo, instrucao, pergunta }) => {
+  const chamarGemini = async ({ chave, modelo, instrucao, pergunta, limite = TEMPO_LIMITE }) => {
     // AbortController permite cancelar a requisição — por tempo limite
     // ou porque o usuário clicou em "Cancelar".
+    // O limite chega de fora porque a última tentativa da fila não pode
+    // estourar o orçamento total: ela recebe só o tempo que ainda sobra.
     const controlador = new AbortController();
-    const relogio = setTimeout(() => controlador.abort(), TEMPO_LIMITE);
+    const relogio = setTimeout(() => controlador.abort(), limite);
     controladorAtual = controlador;
 
     const corpo = {
@@ -473,9 +475,12 @@ CK.api = (() => {
     let ultimoErro = null;
 
     // Falhas que dizem respeito AO MODELO, não à chave: vale tentar o próximo.
-    // 404 = aposentado · 429 = cota daquele modelo · 500/503 = sobrecarga.
+    // 404 = aposentado · 429 = cota daquele modelo · 500/503 = sobrecarga ·
+    // TEMPO_ESGOTADO = o modelo não respondeu no prazo, outro pode responder.
     // Já 400/401/403 são problemas de chave — trocar de modelo não resolve.
-    const TROCAR_MODELO = new Set(["HTTP 404", "HTTP 429", "HTTP 500", "HTTP 503"]);
+    const TROCAR_MODELO = new Set([
+      "HTTP 404", "HTTP 429", "HTTP 500", "HTTP 503", "TEMPO_ESGOTADO",
+    ]);
 
     // Teto de tempo para a fila inteira. Cada tentativa já tem seu próprio
     // limite de 30 s, mas cinco tentativas seguidas deixariam o usuário
@@ -483,12 +488,15 @@ CK.api = (() => {
     // mostramos o último erro.
     const ORCAMENTO = 45000;
 
+    const restante = () => ORCAMENTO - (performance.now() - inicio);
+
     const tentar = async (candidato) => {
       const { texto, truncada } = await chamarGemini({
         chave,
         modelo: candidato,
         instrucao,
         pergunta: textoPergunta,
+        limite: Math.min(TEMPO_LIMITE, Math.max(restante(), 5000)),
       });
 
       return {
@@ -506,7 +514,8 @@ CK.api = (() => {
       } catch (erro) {
         ultimoErro = traduzirRede(erro);
         if (!TROCAR_MODELO.has(ultimoErro.codigo)) throw ultimoErro;
-        if (performance.now() - inicio > ORCAMENTO) throw ultimoErro;
+        // menos de 5 s de orçamento não dá para nova tentativa nenhuma
+        if (restante() < 5000) throw ultimoErro;
       }
     }
 

@@ -436,11 +436,17 @@
       // 1) Pergunta à API quais modelos existem de verdade neste momento.
       //    Assim um nome de modelo aposentado nunca quebra a aplicação.
       let modelo = el.inputModelo?.value ?? CK.config.MODELO_PADRAO;
+      let chaveProvada = false;
 
       try {
         dizerNoDialogo("Procurando os modelos disponíveis…", "neutro");
 
         const modelos = await CK.api.listarModelos(chave);
+
+        // Se a API respondeu a lista, ela autenticou a chave. Isso já é prova
+        // suficiente de que a chave é válida — o teste de geração adiante é
+        // um extra, e não pode desmentir esta conclusão.
+        chaveProvada = true;
 
         if (modelos.length) {
           CK.armazenamento.salvarModelosDescobertos(modelos);
@@ -478,7 +484,22 @@
         );
         toast("Chave salva e testada com sucesso.");
       } catch (erro) {
-        dizerNoDialogo(`${erro.titulo}: ${erro.message}`, "erro");
+        // Um modelo sobrecarregado, sem cota ou lento NÃO significa chave ruim.
+        // Se a listagem já autenticou, dizer "erro" aqui seria mentir para o
+        // usuário e mandá-lo procurar problema onde não existe.
+        const problemaDoModelo = ["HTTP 429", "HTTP 500", "HTTP 503", "TEMPO_ESGOTADO"]
+          .includes(erro?.codigo);
+
+        if (chaveProvada && problemaDoModelo) {
+          dizerNoDialogo(
+            `Chave válida. O modelo ${modelo} está ocupado agora (${erro.titulo.toLowerCase()}), ` +
+            "mas a consulta tenta os outros da fila automaticamente.",
+            "ok"
+          );
+          toast("Chave salva e validada.");
+        } else {
+          dizerNoDialogo(`${erro.titulo}: ${erro.message}`, "erro");
+        }
       } finally {
         el.salvarChave.disabled = false;
       }
