@@ -46,10 +46,25 @@ python3 -m http.server 5500      # ou:  npx serve .
 
 A aplicação usa a **Google Gemini API** (Generative Language API).
 
-1. Pegue uma chave gratuita em <https://aistudio.google.com/app/apikey>.
-2. Com a aplicação aberta, clique no selo no canto superior direito
+1. Abra <https://aistudio.google.com/app/apikey> e entre com uma conta Google
+   (na primeira vez, aceite os termos de uso).
+2. Clique em **Create API key** → **Create API key in new project**.
+3. Copie a chave — começa com `AIza`, ~39 caracteres.
+4. Com a aplicação aberta, clique no selo no canto superior direito
    (*Sem chave* / *Modo demo*).
-3. Cole a chave e clique em **Salvar e testar**.
+5. Cole a chave e clique em **Salvar e testar**.
+
+> **O tropeço mais comum:** contas de menores de idade e contas escolares
+> (Google Workspace for Education) têm o AI Studio bloqueado — o botão de
+> criar chave simplesmente não aparece. Use uma conta Google pessoal de
+> alguém com 18 anos ou mais. Não há como contornar isso pela aplicação.
+
+A chave é como uma senha: não publique no GitHub, não mostre em slide. Se
+vazar, apague no AI Studio e crie outra — a antiga para de funcionar na hora.
+
+Ao salvar, a aplicação pergunta à própria API quais modelos existem naquele
+momento, preenche o seletor com os reais e escolhe o melhor. Você não precisa
+saber nome de modelo nenhum.
 
 A chave fica **apenas no `localStorage` daquele navegador**, sob a chave
 `oraculo-ck:chave`, e vai para a API no cabeçalho `x-goog-api-key` — nunca na URL.
@@ -79,7 +94,7 @@ Usuário ──submit──► Frontend ──HTTPS POST──► API de IA
 | `config.js` | Endpoint, modelos e catálogo (jogos, conselhos, níveis) |
 | `armazenamento.js` | Camada sobre o `localStorage` (chave, modelo, histórico) |
 | `prompt.js` | Valida os campos e monta a instrução de sistema + o prompt |
-| `api.js` | `fetch` com `async/await`, tempo limite, cancelamento e erros |
+| `api.js` | `fetch` com `async/await`, tempo limite, cancelamento, descoberta de modelos e erros |
 | `cena.js` | Fundo animado em `<canvas>` |
 | `ui.js` | Monta os controles, formata a resposta e troca os estados |
 | `app.js` | Orquestra: liga a interface à camada de rede |
@@ -99,8 +114,29 @@ explicação e dica de ação, em português:
 `HTTP 5xx` · `TEMPO_ESGOTADO` · `SEM_CONEXAO` · `BLOQUEADO_*` ·
 `RESPOSTA_FILTRADA` · `CANCELADO`
 
-Um `404` nem chega ao usuário: a fila de modelos em `config.js` tenta o próximo
-automaticamente.
+Um `404` nem chega ao usuário: a aplicação tenta os outros modelos da fila e,
+se todos falharem, **redescobre o catálogo real na API** e tenta o melhor
+modelo novo — dentro da mesma consulta.
+
+A fila avança quando a falha é **do modelo** (404 aposentado, 429 cota daquele
+modelo, 500/503 sobrecarga) e para imediatamente quando é **da chave**
+(400/401/403), porque aí trocar de modelo não resolveria. Há um teto de 45 s
+para a fila inteira.
+
+### Por que isso existe
+
+Nomes de modelo têm prazo de validade — e não é teoria. Quando testamos com
+uma chave válida, os três modelos da nossa lista original já retornavam 404:
+
+```
+gemini-2.5-flash       404  "no longer available to new users"
+gemini-2.5-flash-lite  404  "no longer available to new users"
+gemini-2.0-flash       404  não existe mais
+```
+
+Sem a descoberta automática, o app teria falhado por completo no dia da
+apresentação, sem ninguém ter mexido em nada. A lista em `config.js` é só uma
+semente: quem manda é o catálogo que a própria API devolve.
 
 ---
 
@@ -116,6 +152,19 @@ automaticamente.
 | Thiago Wilson Vieira Serbino | Documentação e apresentação |
 
 O domínio do projeto é coletivo: todos sabem explicar qualquer parte do código.
+
+---
+
+## Detalhe de configuração: `maxOutputTokens`
+
+Está em **3000**, e não é arbitrário. Os modelos Gemini 3.x geram tokens
+internos de raciocínio antes de escrever, e eles contam no mesmo teto. Medimos:
+o raciocínio sozinho consome de **830 a 1070 tokens**. Com o teto em 1100, a
+resposta saía cortada no meio (`MAX_TOKENS`), sem o conselho final.
+
+Desligar o raciocínio com `thinkingConfig: { thinkingBudget: 0 }` não serve:
+o `gemini-3.6-flash` recusa esse campo com HTTP 400. Como o modelo é escolhido
+dinamicamente, aumentar o teto é a solução que funciona em todos.
 
 ---
 
