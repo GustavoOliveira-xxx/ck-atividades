@@ -94,7 +94,12 @@ body{font-family:var(--ui);color:var(--ink-0);-webkit-font-smoothing:antialiased
 .bruma.b{width:600px;height:600px;right:-160px;bottom:-200px;background:#0a6d76;animation:resp 17s ease-in-out infinite reverse}
 @keyframes resp{0%,100%{transform:scale(1);opacity:.24}50%{transform:scale(1.24);opacity:.5}}
 
-.canto{position:absolute;width:38px;height:38px;border:2px solid var(--linha-2);opacity:.5;z-index:3}
+.canto{position:absolute;width:38px;height:38px;border:2px solid var(--linha-2);opacity:.5;z-index:3;
+  animation:respirar 5.5s ease-in-out infinite}
+.canto.tr{animation-delay:.4s}.canto.bl{animation-delay:.8s}.canto.br{animation-delay:1.2s}
+/* só opacidade: um box-shadow desenharia a caixa toda e a cantoneira
+   deixaria de parecer um 'L' para virar um quadrado */
+@keyframes respirar{0%,100%{opacity:.3}50%{opacity:.75}}
 .canto.tl{left:20px;top:20px;border-right:0;border-bottom:0}
 .canto.tr{right:20px;top:20px;border-left:0;border-bottom:0}
 .canto.bl{left:20px;bottom:20px;border-right:0;border-top:0}
@@ -102,6 +107,16 @@ body{font-family:var(--ui);color:var(--ink-0);-webkit-font-smoothing:antialiased
 
 .vinheta{position:absolute;inset:0;pointer-events:none;z-index:2;
   background:radial-gradient(78% 68% at 50% 46%,transparent 40%,rgba(0,0,0,.68) 100%)}
+
+/* grão fino: tira o "liso demais" do fundo escuro sem pesar */
+.grao{position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* varredura lenta de luz atravessando o palco */
+.varre{position:absolute;top:-30%;left:-30%;width:26%;height:170%;pointer-events:none;z-index:1;
+  background:linear-gradient(100deg,transparent,rgba(216,255,242,.05) 44%,rgba(53,255,160,.09) 56%,transparent);
+  transform:rotate(12deg);animation:varrer 16s ease-in-out infinite}
+@keyframes varrer{0%{left:-32%}58%,100%{left:118%}}
 
 /* ============================================================================
    TRILHO DE NAVEGAÇÃO — substitui os pontinhos de rodapé
@@ -133,6 +148,11 @@ body{font-family:var(--ui);color:var(--ink-0);-webkit-font-smoothing:antialiased
 #anel .trilha{fill:none;stroke:rgba(53,255,160,.14);stroke-width:3}
 #anel .carga{fill:none;stroke:var(--neon);stroke-width:3;stroke-linecap:round;
   filter:drop-shadow(0 0 6px rgba(53,255,160,.7));transition:stroke-dashoffset .5s cubic-bezier(.2,.9,.3,1)}
+#anel::after{content:"";position:absolute;left:50%;top:50%;width:82px;height:82px;
+  margin:-41px 0 0 -41px;border-radius:50%;animation:orbitar 9s linear infinite;
+  background:radial-gradient(circle 3px at 50% 0,var(--lima) 0 100%,transparent 100%);
+  filter:drop-shadow(0 0 5px var(--lima));opacity:.85;pointer-events:none}
+@keyframes orbitar{to{transform:rotate(360deg)}}
 #anel b{position:absolute;inset:0;display:grid;place-items:center;align-content:center;
   font:700 21px/1 var(--dis);color:var(--neon);letter-spacing:-.02em}
 #anel b s{text-decoration:none;font:500 10px/1 var(--mono);color:var(--ink-3);
@@ -152,7 +172,9 @@ body{font-family:var(--ui);color:var(--ink-0);-webkit-font-smoothing:antialiased
    grupo, então nenhum slide fica empilhado no topo com um vazio embaixo.
    (a logo é absoluta, logo fora do fluxo — o flex a ignora) */
 .slide.on{display:flex;flex-direction:column}
-.slide > .cab{flex:none}
+.slide > .cab{flex:none;position:relative}
+.slide > .cab::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:1px;
+  background:linear-gradient(90deg,rgba(53,255,160,.34),rgba(53,255,160,.06) 42%,transparent 72%)}
 .slide > .cab + *{margin-top:auto}
 .slide > *:last-child{margin-bottom:auto}
 .slide.on{animation:entra .62s cubic-bezier(.16,.86,.3,1) both}
@@ -171,23 +193,28 @@ body{font-family:var(--ui);color:var(--ink-0);-webkit-font-smoothing:antialiased
 
 /* ---------- cabeçalho: numeral gigante + título ao lado ---------- */
 .cab{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;margin-bottom:22px}
-.numeral{font:700 88px/.8 var(--dis);letter-spacing:-.06em;color:transparent;
+.numeral{position:relative;font:700 88px/.8 var(--dis);letter-spacing:-.06em;color:transparent;
   -webkit-text-stroke:2px rgba(53,255,160,.32);padding-top:2px;user-select:none}
+.numeral::before,.numeral::after{
+  content:"";position:absolute;left:2px;width:26px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--neon),transparent);opacity:.55}
+.numeral::before{top:-12px}
+.numeral::after{bottom:-10px;background:linear-gradient(90deg,var(--lima),transparent);opacity:.4}
 .cab-txt{padding-top:4px}
 .rotulo{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .rotulo s{text-decoration:none;width:22px;height:2px;background:var(--neon);border-radius:2px;
   box-shadow:0 0 8px var(--neon)}
 .rotulo span{font:600 11px/1 var(--ui);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2)}
-h1{font:700 45px/1.02 var(--dis);letter-spacing:-.03em;color:var(--ink-0)}
+h1{font:700 49px/1.02 var(--dis);letter-spacing:-.03em;color:var(--ink-0)}
 h1 em{font-style:normal;
   background:linear-gradient(96deg,var(--mint) 0%,var(--neon-2) 38%,var(--teal) 72%,var(--lima) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   filter:drop-shadow(0 0 22px rgba(53,255,160,.4))}
-.sub{margin-top:8px;font:400 17.4px/1.5 var(--ui);color:var(--ink-1);max-width:1090px}
+.sub{margin-top:9px;font:400 18.6px/1.52 var(--ui);color:var(--ink-1);max-width:1110px}
 .sub b{color:var(--ink-0);font-weight:700}
-.slide.mini h1{font-size:37px}
+.slide.mini h1{font-size:40px}
 .slide.mini .numeral{font-size:72px}
-.slide.mini .sub{font-size:16.2px;margin-top:6px}
+.slide.mini .sub{font-size:17.2px;margin-top:7px}
 .slide.mini .cab{margin-bottom:16px}
 
 /* ============================================================================
@@ -209,17 +236,20 @@ h1 em{font-style:normal;
 }
 .placa::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;
   background:var(--neon);box-shadow:0 0 10px var(--neon)}
+/* risco no chanfro inferior esquerdo — assina a peça sem pedir atenção */
+.placa::after{content:"";position:absolute;left:-1px;bottom:14px;width:20px;height:1px;
+  background:var(--linha-2);transform:rotate(-45deg);transform-origin:left center;opacity:.7}
 .placa.roxa::before{background:var(--serie-2);box-shadow:0 0 10px var(--serie-2)}
 .placa.ambar::before{background:var(--serie-3);box-shadow:0 0 10px var(--serie-3)}
 .placa.ruim::before{background:var(--erro);box-shadow:0 0 10px var(--erro)}
 .placa:hover{border-color:var(--linha-2);transform:translateY(-3px)}
-.placa h3{font:700 14.6px/1.2 var(--ui);letter-spacing:.08em;text-transform:uppercase;
+.placa h3{font:700 15.4px/1.2 var(--ui);letter-spacing:.08em;text-transform:uppercase;
   margin-bottom:9px;display:flex;align-items:center;gap:8px;color:var(--ink-0)}
 .placa h3 svg{width:18px;height:18px;flex:none;fill:var(--neon);stroke:none}
 .placa.roxa h3 svg{fill:var(--serie-2)}
 .placa.ambar h3 svg{fill:var(--serie-3)}
 .placa.ruim h3 svg{fill:var(--erro)}
-.placa p,.placa li{font:400 15.2px/1.52 var(--ui);color:var(--ink-1)}
+.placa p,.placa li{font:400 16.4px/1.54 var(--ui);color:var(--ink-1)}
 .placa b{color:var(--ink-0);font-weight:700}
 .placa ul{list-style:none;display:grid;gap:5px}
 .placa li{padding-left:14px;position:relative}
@@ -232,7 +262,7 @@ h1 em{font-style:normal;
 .cifra{position:relative;padding:12px 15px;border:1px solid var(--linha);
   background:linear-gradient(150deg,rgba(53,255,160,.08),rgba(255,255,255,.012));
   clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
-.cifra u{display:block;text-decoration:none;font:700 33px/1 var(--dis);letter-spacing:-.03em;color:var(--neon)}
+.cifra u{display:block;text-decoration:none;font:700 36px/1 var(--dis);letter-spacing:-.03em;color:var(--neon)}
 .cifra u.roxo{color:#a687f7}
 .cifra u.branco{color:var(--ink-0)}
 .cifra u.lima{color:var(--lima)}
@@ -243,9 +273,12 @@ h1 em{font-style:normal;
   background:linear-gradient(120deg,rgba(53,255,160,.09),rgba(0,200,192,.03));
   border:1px solid var(--linha-2);
   clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
-  font:400 15.4px/1.5 var(--ui);color:var(--mint)}
+  font:400 16.4px/1.5 var(--ui);color:var(--mint)}
 .nota::before{content:"◆";position:absolute;left:16px;top:13px;color:var(--neon);font-size:13px}
-.nota b{display:block;margin-top:6px;font:700 10px/1 var(--ui);letter-spacing:.2em;
+/* o <b> solto no meio da frase é ênfase; só o ÚLTIMO é a assinatura da nota.
+   Sem essa distinção, um "node_modules" no meio do texto virava etiqueta. */
+.nota b{color:var(--mint);font-weight:700}
+.nota b:last-child{display:block;margin-top:7px;font:700 10px/1 var(--ui);letter-spacing:.2em;
   text-transform:uppercase;color:var(--ink-3)}
 
 /* ---------- código ---------- */
@@ -257,7 +290,7 @@ h1 em{font-style:normal;
   clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
 .cod .barra em:first-child{background:var(--neon)}
 .cod .barra span{font:500 11px/1 var(--mono);color:var(--ink-3);letter-spacing:.06em}
-.cod pre{padding:12px 16px;font:400 12.9px/1.5 var(--mono);color:var(--ink-1);
+.cod pre{padding:13px 17px;font:400 13.6px/1.52 var(--mono);color:var(--ink-1);
   white-space:pre;overflow:hidden}
 .cod k{color:var(--neon);font-weight:500}
 .cod s{text-decoration:none;color:var(--lima)}
@@ -268,7 +301,7 @@ h1 em{font-style:normal;
 .passos{display:grid;gap:6px;align-content:start}
 .passos button{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;text-align:left;
   padding:8px 12px;border:1px solid var(--linha);cursor:pointer;background:rgba(6,24,16,.6);
-  color:var(--ink-1);font:400 13.6px/1.44 var(--ui);
+  color:var(--ink-1);font:400 14.5px/1.46 var(--ui);
   clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
   transition:border-color .3s,background .3s,transform .3s}
 .passos button:hover{border-color:var(--linha-2);background:rgba(53,255,160,.07);transform:translateX(3px)}
@@ -277,14 +310,14 @@ h1 em{font-style:normal;
 .passos button b{color:var(--ink-0)}
 
 /* ---------- tabela ---------- */
-table{width:100%;border-collapse:collapse;font:400 14.2px/1.42 var(--ui)}
+table{width:100%;border-collapse:collapse;font:400 15.2px/1.44 var(--ui)}
 th{text-align:left;padding:8px 12px;font:700 10.8px/1.3 var(--ui);letter-spacing:.16em;
   text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--linha-2)}
 td{padding:7.5px 12px;border-bottom:1px solid var(--linha);color:var(--ink-1);vertical-align:top}
 tr:last-child td{border-bottom:none}
 tbody tr{transition:background .3s}
 tbody tr:hover{background:rgba(53,255,160,.055)}
-td code,.placa code,.sub code,li code,p code{font:500 12.4px/1.4 var(--mono);color:var(--neon-2);
+td code,.placa code,.sub code,li code,p code{font:500 13.2px/1.4 var(--mono);color:var(--neon-2);
   background:rgba(53,255,160,.1);padding:1.5px 6px;border-radius:4px;white-space:nowrap}
 td b{color:var(--ink-0)}
 
@@ -376,7 +409,7 @@ td b{color:var(--ink-0)}
   font:700 13.5px/1 var(--dis);color:var(--neon)}
 .pessoa.lider .av{background:linear-gradient(140deg,var(--neon),var(--lima));color:#01180f;
   border-color:transparent;box-shadow:0 0 16px rgba(53,255,160,.45)}
-.pessoa b{display:block;font:700 13.8px/1.25 var(--ui);color:var(--ink-0)}
+.pessoa b{display:block;font:700 14.6px/1.25 var(--ui);color:var(--ink-0)}
 .pessoa span{display:block;margin-top:2px;font:600 9.4px/1.3 var(--ui);letter-spacing:.14em;
   text-transform:uppercase;color:var(--ink-3)}
 .pessoa.lider span{color:var(--neon)}
@@ -465,6 +498,8 @@ td b{color:var(--ink-0)}
       </svg>
     </div>
 
+    <span class="varre"></span>
+    <span class="grao"></span>
     <span class="vinheta"></span>
   </div>
 
