@@ -357,6 +357,27 @@
 
           <!-- estado: sucesso -->
           <div class="estado estado--pronto" data-estado-pronto hidden>
+            <!-- Faixa que só aparece no modo demonstração. Sem ela, uma
+                 resposta local de exemplo passa por resposta da IA — e quem
+                 estiver assistindo não tem como saber a diferença. -->
+            <div class="faixa-demo" data-faixa-demo hidden>
+              <span class="faixa-demo__icone" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 8.5v5M12 17h.01" />
+                  <path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+                </svg>
+              </span>
+              <p>
+                <strong>Isto é uma resposta de demonstração.</strong>
+                A IA <strong>não</strong> foi consultada — o texto abaixo é um exemplo local, igual
+                para qualquer pergunta do mesmo tipo. Configure a chave para receber uma resposta
+                de verdade sobre o que você perguntou.
+              </p>
+              <button type="button" class="btn btn--pequeno" data-faixa-demo-chave>
+                Configurar a chave
+              </button>
+            </div>
+
             <div class="resposta__cabecalho">
               <h3 data-resposta-titulo>Resposta do Oráculo</h3>
               <ul class="resposta__meta" data-resposta-meta></ul>

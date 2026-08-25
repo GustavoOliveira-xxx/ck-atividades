@@ -419,7 +419,15 @@ CK.api = (() => {
     await new Promise((resolver) => setTimeout(resolver, 900 + Math.random() * 700));
 
     const receita = RECEITAS[tipo.id] ?? RECEITAS.iniciante;
-    const linhas = [receita.resumo.replace("{jogo}", jogo), ""];
+
+    // A primeira linha vai junto no texto — e não só na interface — para que
+    // uma resposta copiada e colada em outro lugar continue identificada.
+    const linhas = [
+      "**Resposta de demonstração — a IA não foi consultada.**",
+      "",
+      receita.resumo.replace("{jogo}", jogo),
+      "",
+    ];
 
     receita.blocos.forEach(([titulo, itens]) => {
       linhas.push(`## ${titulo}`);
