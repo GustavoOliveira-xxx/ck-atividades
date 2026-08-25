@@ -186,6 +186,7 @@
     $("[data-erro-repetir]")?.addEventListener("click", () => consultar());
     $("[data-erro-chave]")?.addEventListener("click", () => abrirDialogo());
     $("[data-erro-demo]")?.addEventListener("click", () => consultar("demo"));
+    $("[data-faixa-demo-chave]")?.addEventListener("click", () => abrirDialogo());
   };
 
   let relogioPassos;
