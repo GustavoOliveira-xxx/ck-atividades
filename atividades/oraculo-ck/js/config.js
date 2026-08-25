@@ -23,12 +23,16 @@ CK.config = (() => {
 
   const BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 
-  // Ordem de tentativa: se o primeiro modelo não existir mais (HTTP 404),
-  // o cliente tenta o próximo automaticamente.
+  // Lista SEMENTE. Vale só até a aplicação perguntar à própria API quais
+  // modelos existem de verdade (ver `listarModelos` em js/api.js) — a partir
+  // daí, o catálogo real substitui esta lista e fica guardado no navegador.
+  // Se um destes nomes for aposentado, o HTTP 404 faz o cliente tentar o
+  // próximo e, em último caso, redescobrir o catálogo sozinho.
   const MODELOS = [
-    { id: "gemini-2.5-flash", rotulo: "Gemini 2.5 Flash — equilibrado" },
-    { id: "gemini-2.5-flash-lite", rotulo: "Gemini 2.5 Flash Lite — mais rápido" },
-    { id: "gemini-2.0-flash", rotulo: "Gemini 2.0 Flash — alternativa" },
+    { id: "gemini-flash-latest", rotulo: "Gemini Flash — sempre o atual" },
+    { id: "gemini-3.6-flash", rotulo: "Gemini 3.6 Flash — equilibrado" },
+    { id: "gemini-3.5-flash", rotulo: "Gemini 3.5 Flash — alternativa" },
+    { id: "gemini-flash-lite-latest", rotulo: "Gemini Flash Lite — mais rápido" },
   ];
 
   const MODELO_PADRAO = MODELOS[0].id;
@@ -36,7 +40,16 @@ CK.config = (() => {
   const GERACAO = {
     temperature: 0.85,
     topP: 0.95,
-    maxOutputTokens: 1100,
+
+    // ATENÇÃO ao mexer neste número. Os modelos Gemini 3.x "pensam" antes de
+    // escrever, e esses tokens de raciocínio contam no mesmo teto da resposta.
+    // Medimos: o raciocínio sozinho consome de 830 a 1070 tokens. Com o teto
+    // em 1100, o modelo gastava a cota inteira pensando e a resposta saía
+    // cortada no meio (finishReason MAX_TOKENS), sem o conselho final.
+    // Com 3000 sobra espaço de folga e todos os modelos testados concluíram.
+    // O tamanho real da resposta é controlado pela instrução de sistema
+    // (~300 palavras), não por este teto.
+    maxOutputTokens: 3000,
   };
 
   const TEMPO_LIMITE = 30000; // ms — corta a requisição com AbortController
