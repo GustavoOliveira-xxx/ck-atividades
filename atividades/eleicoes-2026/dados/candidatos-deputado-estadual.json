@@ -1,0 +1,49 @@
+{
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "dadosGerais": {
+    "ano": 2026,
+    "uf": "SP",
+    "cargo": "Deputado Estadual",
+    "codigoCargo": "7",
+    "abrangencia": "São Paulo (SP)",
+    "vagas": 94,
+    "totalCandidatosRegistrados": 2100,
+    "totalNesteRecorte": 3,
+    "dataConsulta": "2026-09-02T20:00:00-03:00"
+  },
+  "candidatos": [
+    {
+      "id": "7-001",
+      "nomeCompleto": "Bruna Cristina Jequier Furlan",
+      "nomeUrna": "BRUNA FURLAN",
+      "siglaPartido": "PSDB",
+      "numero": "45045",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/bruna-furlan.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
+    },
+    {
+      "id": "7-002",
+      "nomeCompleto": "Anderson Mecca de Oliveira",
+      "nomeUrna": "MAJOR MECCA",
+      "siglaPartido": "PL",
+      "numero": "22222",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/major-mecca.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
+    },
+    {
+      "id": "7-003",
+      "nomeCompleto": "Carlos Giannazi",
+      "nomeUrna": "PROFESSOR CARLOS GIANNAZI",
+      "siglaPartido": "PSOL",
+      "numero": "50123",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/carlos-giannazi.png",
+      "vice": "—",
+      "coligacao": "Federação PSOL REDE"
+    }
+  ]
+}

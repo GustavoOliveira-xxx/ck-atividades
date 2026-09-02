@@ -1,0 +1,460 @@
+@charset "UTF-8";
+
+/* ============================================================================
+   CK ELEIÇÕES 2026 — CARGA (loader) E ANIMAÇÕES
+   ========================================================================== */
+
+/* ==========================================================================
+   TELA DE CARGA
+   ========================================================================== */
+
+.carga {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.carga__cortina {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  background: linear-gradient(180deg, #061510, var(--bg-0));
+  transition: transform 1s var(--ease-out);
+  will-change: transform;
+}
+
+.carga__cortina--esq {
+  left: 0;
+  border-right: 1px solid rgba(37, 240, 162, .3);
+  box-shadow: 8px 0 46px rgba(13, 122, 90, .28);
+}
+
+.carga__cortina--dir {
+  right: 0;
+  border-left: 1px solid rgba(37, 240, 162, .3);
+  box-shadow: -8px 0 46px rgba(13, 122, 90, .28);
+}
+
+.carga__nucleo {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 1.4rem;
+  padding: 1rem;
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+
+/* --- Urna 3D que gira durante o carregamento ---------------------------- */
+.carga__urna {
+  --l: 78px;
+  --a: 62px;
+  --p: 56px;
+
+  position: relative;
+  width: var(--l);
+  height: var(--a);
+  margin: 2.2rem 0 3.4rem;
+  transform-style: preserve-3d;
+  animation: carga-urna-gira 6s linear infinite;
+}
+
+.carga__urna-face {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(37, 240, 162, .48);
+  background: linear-gradient(155deg, rgba(16, 51, 38, .95), rgba(4, 16, 12, .95));
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, .6);
+  opacity: 0;
+  animation: face-monta .55s var(--ease-out) forwards;
+}
+
+.carga__urna-face--frente,
+.carga__urna-face--tras {
+  inset: 0;
+}
+
+.carga__urna-face--frente {
+  transform: translateZ(calc(var(--p) / 2));
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, .5), 0 0 28px rgba(37, 240, 162, .3);
+  animation-delay: .05s;
+}
+
+.carga__urna-face--frente img {
+  width: 66%;
+  filter: drop-shadow(0 0 10px var(--menta-glow-forte));
+}
+
+.carga__urna-face--tras {
+  transform: translateZ(calc(var(--p) / -2)) rotateY(180deg);
+  animation-delay: .2s;
+}
+
+.carga__urna-face--esq,
+.carga__urna-face--dir {
+  top: 0;
+  bottom: 0;
+  width: var(--p);
+  left: calc(50% - var(--p) / 2);
+  background: linear-gradient(180deg, rgba(10, 85, 64, .9), rgba(4, 16, 12, .95));
+}
+
+.carga__urna-face--esq {
+  transform: rotateY(-90deg) translateZ(calc(var(--l) / 2));
+  animation-delay: .32s;
+}
+
+.carga__urna-face--dir {
+  transform: rotateY(90deg) translateZ(calc(var(--l) / 2));
+  animation-delay: .44s;
+}
+
+.carga__urna-face--topo,
+.carga__urna-face--base {
+  left: 0;
+  right: 0;
+  height: var(--p);
+  top: calc(50% - var(--p) / 2);
+  background: linear-gradient(180deg, rgba(18, 168, 120, .5), rgba(6, 56, 42, .95));
+}
+
+.carga__urna-face--topo {
+  transform: rotateX(90deg) translateZ(calc(var(--a) / 2));
+  animation-delay: .56s;
+}
+
+.carga__urna-face--base {
+  transform: rotateX(-90deg) translateZ(calc(var(--a) / 2));
+  animation-delay: .68s;
+}
+
+/* A cédula que cai dentro da urna, em laço */
+.carga__cedula {
+  position: absolute;
+  z-index: 5;
+  top: -46px;
+  left: 50%;
+  width: 30px;
+  height: 20px;
+  margin-left: -15px;
+  border-radius: 2px;
+  background: linear-gradient(160deg, var(--luz), var(--menta-300));
+  box-shadow: 0 0 16px var(--menta-glow-forte);
+  transform-style: preserve-3d;
+  animation: cedula-cai 2.6s var(--ease-out) infinite;
+}
+
+/* --- Aro de progresso --------------------------------------------------- */
+.carga__aro {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 232px;
+  height: 232px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  pointer-events: none;
+}
+
+.carga__aro-trilho {
+  fill: none;
+  stroke: rgba(37, 240, 162, .13);
+  stroke-width: 2;
+}
+
+.carga__aro-carga {
+  fill: none;
+  stroke: var(--menta-400);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 578.05;
+  stroke-dashoffset: 578.05;
+  filter: drop-shadow(0 0 8px var(--menta-glow-forte));
+  transition: stroke-dashoffset .35s var(--ease-out);
+}
+
+.carga__titulo {
+  display: flex;
+  gap: .1em;
+  font-family: var(--fonte-titulo);
+  font-size: .88rem;
+  font-weight: 700;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--txt-2);
+}
+
+.carga__titulo span {
+  opacity: 0;
+  animation: letra-entra .5s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * .055s);
+}
+
+.carga__leitura {
+  display: grid;
+  justify-items: center;
+  gap: .3rem;
+  font-family: var(--fonte-mono);
+}
+
+.carga__percent {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--luz);
+  text-shadow: 0 0 22px var(--menta-glow);
+}
+
+.carga__fase {
+  font-size: .68rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--txt-3);
+}
+
+/* --- Etapas do boot ----------------------------------------------------- */
+.carga__etapas {
+  display: grid;
+  gap: .4rem;
+  list-style: none;
+  margin-top: .5rem;
+  min-width: 220px;
+}
+
+.carga__etapas li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding-left: 1.4rem;
+  position: relative;
+  font-family: var(--fonte-mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  color: var(--txt-3);
+  opacity: .4;
+  transition: opacity .35s var(--ease), color .35s var(--ease);
+}
+
+.carga__etapas li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  transition: background .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+.carga__etapas li.is-ativa {
+  opacity: 1;
+  color: var(--ciano-300);
+}
+
+.carga__etapas li.is-ativa::before {
+  background: var(--ciano-400);
+  box-shadow: 0 0 10px var(--ciano-glow);
+}
+
+.carga__etapas li.is-feita {
+  opacity: .85;
+  color: var(--menta-300);
+}
+
+.carga__etapas li.is-feita::before {
+  background: var(--menta-400);
+  box-shadow: 0 0 10px var(--menta-glow);
+}
+
+.carga__etapas code {
+  padding: 0 .3em;
+  font-size: inherit;
+}
+
+/* --- Saída -------------------------------------------------------------- */
+.carga.is-aberta .carga__nucleo {
+  opacity: 0;
+  transform: scale(.93);
+}
+
+.carga.is-aberta .carga__cortina--esq {
+  transform: translateX(-101%);
+}
+
+.carga.is-aberta .carga__cortina--dir {
+  transform: translateX(101%);
+}
+
+.carga.is-encerrada {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   REVELAÇÃO AO ROLAR
+   ========================================================================== */
+
+[data-revelar] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+  transition-delay: var(--atraso, 0ms);
+}
+
+[data-revelar].is-visivel {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes carga-urna-gira {
+  from { transform: rotateX(-14deg) rotateY(0deg); }
+  to   { transform: rotateX(-14deg) rotateY(360deg); }
+}
+
+@keyframes face-monta {
+  from { opacity: 0; filter: blur(6px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+@keyframes cedula-cai {
+  0%        { transform: translateY(0) rotateX(0deg) rotateZ(-8deg); opacity: 0; }
+  12%       { opacity: 1; }
+  62%       { transform: translateY(56px) rotateX(70deg) rotateZ(6deg); opacity: 1; }
+  78%, 100% { transform: translateY(76px) rotateX(90deg) rotateZ(0deg); opacity: 0; }
+}
+
+@keyframes letra-entra {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes urna-gira {
+  from { transform: translateY(-6%) rotateY(0deg); }
+  to   { transform: translateY(-6%) rotateY(360deg); }
+}
+
+@keyframes anel-gira {
+  from { transform: rotateX(var(--ax, 74deg)) rotateY(var(--ay, 0deg)) rotateZ(0deg); }
+  to   { transform: rotateX(var(--ax, 74deg)) rotateY(var(--ay, 0deg)) rotateZ(360deg); }
+}
+
+@keyframes mapa-respira {
+  0%, 100% { transform: rotateX(72deg) translateZ(-104px) scale(1); opacity: .9; }
+  50%      { transform: rotateX(72deg) translateZ(-92px) scale(1.03); opacity: 1; }
+}
+
+@keyframes eco {
+  0%   { r: 5; opacity: .9; }
+  100% { r: 26; opacity: 0; }
+}
+
+@keyframes cone-pulsa {
+  0%, 100% { opacity: .55; }
+  50%      { opacity: .95; }
+}
+
+@keyframes plinto-respira {
+  0%, 100% { opacity: .8; transform: rotateX(80deg) translateZ(-92px) scale(1); }
+  50%      { opacity: 1;  transform: rotateX(80deg) translateZ(-92px) scale(1.05); }
+}
+
+@keyframes pulsa-halo {
+  0%, 100% { opacity: .6; transform: translateZ(-130px) scale(1); }
+  50%      { opacity: 1;  transform: translateZ(-130px) scale(1.06); }
+}
+
+@keyframes faisca-flutua {
+  0%, 100% { transform: translate3d(0, 0, 40px) scale(1); opacity: .3; }
+  50%      { transform: translate3d(10px, -22px, 90px) scale(1.35); opacity: 1; }
+}
+
+@keyframes varre {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
+
+@keyframes aurora-gira {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes orbe-flutua {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(4%, -6%) scale(1.07); }
+  66%      { transform: translate(-5%, 4%) scale(.95); }
+}
+
+@keyframes malha-corre {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 0 62px, 62px 0; }
+}
+
+@keyframes pulso {
+  0%   { box-shadow: 0 0 0 0 var(--menta-glow); }
+  70%  { box-shadow: 0 0 0 11px rgba(37, 240, 162, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 240, 162, 0); }
+}
+
+@keyframes pisca {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+@keyframes rolar {
+  0%        { transform: translateY(0); opacity: 1; }
+  70%       { transform: translateY(12px); opacity: 0; }
+  71%, 100% { transform: translateY(0); opacity: 0; }
+}
+
+@keyframes corre {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes brilho-corre {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes aparece {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   PREFERÊNCIA POR MENOS MOVIMENTO
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-revelar] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cena__particulas,
+  .cena__aurora,
+  .cena__malha {
+    display: none;
+  }
+}

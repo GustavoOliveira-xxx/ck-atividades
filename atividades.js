@@ -27,6 +27,57 @@
 
 window.ACERVO_CK = [
   {
+    id: "eleicoes-2026",
+    titulo: "CK Eleições 2026",
+    subtitulo: "Sistema de Transparência Eleitoral — São Paulo",
+    disciplina: "Interface Web II",
+    sigla: "IW",
+    tipo: "Aplicação web + XML + API",
+    data: "2026-09-04",
+    turma: "2º C — M-Tec Informática para Internet",
+    resumo:
+      "Adaptação da Atividade Prática de XML, JSON e APIs para o tema Eleições 2026. " +
+      "A Parte 1 lê os cinco cargos em disputa direto da variável xmlTexto com DOMParser, " +
+      "colore o selo pelo atributo poder e exporta XML e CSV pelo navegador com Blob. " +
+      "A Parte 2 consulta os candidatos com fetch em recortes no formato do TSE e monta " +
+      "cards 3D que viram para mostrar as propostas. Quinze candidatos, cinco cargos, " +
+      "sem framework e sem backend.",
+    destaques: [
+      "5 cargos · 15 candidatos",
+      "DOMParser + querySelectorAll",
+      "fetch + async/await",
+      "CSV com BOM para Excel",
+      "Cards 3D com virada",
+    ],
+    tags: [
+      "Projeto", "XML", "DOMParser", "JSON", "API", "fetch", "CSV",
+      "JavaScript", "Eleições", "São Paulo", "3D", "Responsivo",
+    ],
+    cor: "#25f0a2",
+    href: "atividades/eleicoes-2026/index.html",
+    recursos: [
+      {
+        rotulo: "Abrir aplicação",
+        href: "atividades/eleicoes-2026/index.html",
+        tipo: "Interface web",
+        icone: "app",
+      },
+      {
+        rotulo: "Documentação",
+        href: "atividades/eleicoes-2026/README.md",
+        tipo: "README do projeto",
+        icone: "doc",
+      },
+      {
+        rotulo: "A variável xmlTexto",
+        href: "atividades/eleicoes-2026/js/dados-xml.js",
+        tipo: "Base de dados em XML",
+        icone: "codigo",
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "oraculo-ck",
     titulo: "Oráculo CK",
     subtitulo: "Assistente de Jogos Mobile com IA",
