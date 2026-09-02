@@ -247,8 +247,8 @@
       const nx = limitar((e.clientX - cx) / (window.innerWidth / 2), -1, 1);
       const ny = limitar((e.clientY - cy) / (window.innerHeight / 2), -1, 1);
 
-      camera.style.setProperty("--ry", `${-16 + nx * 20}deg`);
-      camera.style.setProperty("--rx", `${10 - ny * 12}deg`);
+      camera.style.setProperty("--ry", `${-18 + nx * 18}deg`);
+      camera.style.setProperty("--rx", `${-22 + ny * 10}deg`);
     }, { passive: true });
   }
 
