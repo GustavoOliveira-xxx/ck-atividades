@@ -1,0 +1,49 @@
+{
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "dadosGerais": {
+    "ano": 2026,
+    "uf": "SP",
+    "cargo": "Deputado Federal",
+    "codigoCargo": "6",
+    "abrangencia": "São Paulo (SP)",
+    "vagas": 70,
+    "totalCandidatosRegistrados": 1500,
+    "totalNesteRecorte": 3,
+    "dataConsulta": "2026-09-02T20:00:00-03:00"
+  },
+  "candidatos": [
+    {
+      "id": "6-001",
+      "nomeCompleto": "Guilherme Castro Boulos",
+      "nomeUrna": "GUILHERME BOULOS",
+      "siglaPartido": "PSOL",
+      "numero": "50777",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/guilherme-boulos.png",
+      "vice": "—",
+      "coligacao": "Federação PSOL REDE"
+    },
+    {
+      "id": "6-002",
+      "nomeCompleto": "Tabata Claudia Amaral de Pontes",
+      "nomeUrna": "TABATA AMARAL",
+      "siglaPartido": "PSB",
+      "numero": "40100",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/tabata-amaral.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
+    },
+    {
+      "id": "6-003",
+      "nomeCompleto": "Nikolas Ferreira de Oliveira",
+      "nomeUrna": "NIKOLAS FERREIRA",
+      "siglaPartido": "PL",
+      "numero": "22000",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/nikolas-ferreira.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
+    }
+  ]
+}

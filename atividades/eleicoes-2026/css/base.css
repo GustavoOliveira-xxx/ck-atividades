@@ -1,0 +1,265 @@
+@charset "UTF-8";
+
+/* ============================================================================
+   CK ELEIÇÕES 2026 — BASE
+   Paleta puxada da logo remasterizada da CK: jade, menta e luz sobre obsidiana.
+   Os vermelhos e azuis institucionais aparecem só nos selos de poder, como
+   pede o Passo 1.2 da atividade.
+   ========================================================================== */
+
+:root {
+  /* Fundos */
+  --bg-0: #04100c;
+  --bg-1: #061510;
+  --bg-2: #081d16;
+  --bg-3: #0b271d;
+  --bg-4: #103326;
+
+  /* Jade / menta — identidade da logo remaster */
+  --jade-900: #04241a;
+  --jade-800: #06382a;
+  --jade-700: #0a5540;
+  --jade-600: #0d7a5a;
+  --jade-500: #12a878;
+  --menta-400: #25f0a2;
+  --menta-300: #6ff5c0;
+  --menta-200: #b3ffdd;
+  --luz: #eaffdf;
+
+  --ciano-500: #17b8c9;
+  --ciano-400: #32d7e6;
+  --ciano-300: #7ee9f2;
+
+  --menta-glow: rgba(37, 240, 162, .42);
+  --menta-glow-forte: rgba(56, 255, 180, .72);
+  --ciano-glow: rgba(50, 215, 230, .38);
+
+  /* Herança da marca original — usada no selo duplo e nos detalhes */
+  --roxo-500: #9333c4;
+  --roxo-400: #a855f7;
+  --roxo-300: #c084fc;
+  --ouro-400: #fec800;
+  --roxo-glow: rgba(147, 51, 196, .5);
+
+  /* Poderes institucionais (Passo 1.2) */
+  --executivo: #e74c3c;
+  --executivo-suave: rgba(231, 76, 60, .16);
+  --legislativo: #3498db;
+  --legislativo-suave: rgba(52, 152, 219, .16);
+
+  /* Texto */
+  --txt-0: #f2fff8;
+  --txt-1: #cfe8dd;
+  --txt-2: #93b3a7;
+  --txt-3: #5f7a70;
+
+  --borda: rgba(255, 255, 255, .08);
+  --borda-viva: rgba(37, 240, 162, .3);
+  --vidro: rgba(8, 26, 20, .68);
+  --vidro-alto: rgba(13, 40, 30, .84);
+
+  --grad-marca: linear-gradient(120deg, var(--jade-600) 0%, var(--menta-400) 52%, var(--ciano-400) 100%);
+  --grad-fusao: linear-gradient(115deg, var(--roxo-400) 0%, var(--menta-400) 48%, var(--ciano-300) 100%);
+  --grad-linha: linear-gradient(90deg, transparent, var(--menta-400), var(--ciano-400), transparent);
+  --grad-vidro: linear-gradient(160deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, 0) 58%);
+
+  --raio-sm: 12px;
+  --raio-md: 18px;
+  --raio-lg: 28px;
+  --raio-xl: 36px;
+
+  --sombra-suave: 0 12px 40px rgba(0, 0, 0, .55);
+  --sombra-funda: 0 32px 90px rgba(0, 0, 0, .72);
+
+  --fonte: "Inter", "Segoe UI", system-ui, sans-serif;
+  --fonte-titulo: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --fonte-mono: "JetBrains Mono", "Consolas", ui-monospace, monospace;
+
+  --topo-h: 78px;
+  --secao-py: clamp(5rem, 9vw, 8rem);
+  --container: min(1200px, calc(100% - 2.5rem));
+
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --transicao: .4s var(--ease);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--topo-h) + 1.5rem);
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--fonte);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--txt-1);
+  background: var(--bg-0);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.is-travado {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transicao);
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+code {
+  font-family: var(--fonte-mono);
+  font-size: .86em;
+  padding: .12em .44em;
+  border-radius: 6px;
+  background: rgba(37, 240, 162, .1);
+  border: 1px solid rgba(37, 240, 162, .2);
+  color: var(--menta-200);
+}
+
+strong {
+  color: var(--txt-0);
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--menta-400);
+  color: var(--bg-0);
+}
+
+/* Barra de rolagem ------------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--jade-600) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-1);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 3px solid var(--bg-1);
+  background: var(--jade-600);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--menta-400);
+}
+
+/* Acessibilidade --------------------------------------------------------- */
+.pular {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 4000;
+  padding: .75rem 1.25rem;
+  border-radius: var(--raio-sm);
+  background: var(--menta-400);
+  color: var(--bg-0);
+  font-weight: 600;
+  transition: top var(--transicao);
+}
+
+.pular:focus-visible {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--menta-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.gradiente {
+  background: var(--grad-marca);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cursor personalizado --------------------------------------------------- */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2500;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--menta-400);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  transition: opacity .3s ease, width .25s var(--ease), height .25s var(--ease);
+}
+
+.cursor--halo {
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid rgba(37, 240, 162, .45);
+}
+
+.cursor.is-ativo {
+  opacity: 1;
+}
+
+.cursor--halo.is-crescido {
+  width: 62px;
+  height: 62px;
+  border-color: var(--menta-400);
+  background: rgba(37, 240, 162, .08);
+}
+
+@media (hover: none),
+(pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}
