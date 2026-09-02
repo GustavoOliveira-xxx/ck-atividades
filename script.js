@@ -427,25 +427,44 @@
     $("[data-vitrine-proxima]")?.addEventListener("click", () => girarPara(1));
   }
 
-  const bloco = $("[data-marca-bloco]");
+  /* Extrusão por fatias: cada marca é a mesma imagem repetida em vários
+     translateZ, o que dá volume real ao girar. Vale para as duas logos. */
+  const MARCAS = {
+    origem: {
+      src: "assets/logo-ck.png",
+      alt: "Logo original Conscious Knowledge",
+      w: 720,
+      h: 1080,
+    },
+    futuro: {
+      src: "assets/logo-ck-remaster.png",
+      alt: "Logo remasterizada Conscious Knowledge",
+      w: 1080,
+      h: 720,
+    },
+  };
 
-  if (bloco) {
-    const CAMADAS = 14;
-    const PROFUNDIDADE = 34;
+  $$("[data-duo-astro]").forEach((astro) => {
+    const marca = MARCAS[astro.dataset.duoAstro];
+    if (!marca) return;
+
+    const CAMADAS = 12;
+    const PROFUNDIDADE = 30;
     const partes = [];
 
     for (let i = 0; i < CAMADAS; i += 1) {
       const z = (PROFUNDIDADE / 2) - (i * (PROFUNDIDADE / (CAMADAS - 1)));
-      const frente = i === 0 ? " marca3d__fatia--frente" : "";
+      const frente = i === 0 ? " duo3d__fatia--frente" : "";
+
       partes.push(
-        `<img src="assets/logo-ck.png" alt="${i === 0 ? "Logo Conscious Knowledge" : ""}"
-              class="marca3d__fatia${frente}" style="--i:${i};--z:${z.toFixed(2)}"
-              width="720" height="1080" decoding="async"${i === 0 ? "" : ' aria-hidden="true"'}>`
+        `<img src="${marca.src}" alt="${i === 0 ? marca.alt : ""}"
+              class="duo3d__fatia${frente}" style="--i:${i};--z:${z.toFixed(2)}"
+              width="${marca.w}" height="${marca.h}" decoding="async"${i === 0 ? "" : ' aria-hidden="true"'}>`
       );
     }
 
-    bloco.innerHTML = partes.join("");
-  }
+    astro.innerHTML = partes.join("");
+  });
 
   const parallax3d = (el, maxX, maxY, repousoX = 6, repousoY = -18) => {
     if (!el || !temHover || semMovimento) return;
@@ -464,7 +483,7 @@
     }, { passive: true });
   };
 
-  parallax3d($("[data-marca] .marca3d__palco"), 14, 20);
+  parallax3d($("[data-duo-palco]"), 12, 18, 8, -14);
 
   const abertura = $("[data-abertura]");
 
@@ -473,7 +492,14 @@
     const percent = $("[data-abertura-percent]", abertura);
     const estado = $("[data-abertura-estado]", abertura);
     const titulo = $("[data-abertura-titulo]", abertura);
+    const eclipse = $("[data-abertura-eclipse]", abertura);
     const CIRCUNFERENCIA = 2 * Math.PI * 54;
+
+    /* O eclipse acompanha o progresso: a marca remasterizada entra pela
+       direita e cobre a original conforme a barra enche. */
+    const moverEclipse = (progresso) => {
+      if (eclipse) eclipse.style.setProperty("--eclipse", progresso.toFixed(3));
+    };
 
     if (titulo && !semMovimento) {
       const texto = titulo.textContent.trim();
@@ -493,6 +519,7 @@
     };
 
     if (semMovimento) {
+      moverEclipse(1);
       window.addEventListener("load", encerrar, { once: true });
     } else {
       const INICIO = performance.now();
@@ -510,6 +537,7 @@
         vivo = false;
         if (percent) percent.textContent = "100";
         if (aro) aro.style.strokeDashoffset = "0";
+        moverEclipse(1);
         setTimeout(encerrar, 300);
       };
 
@@ -532,6 +560,7 @@
 
         if (percent) percent.textContent = String(Math.floor(atual)).padStart(3, "0");
         if (aro) aro.style.strokeDashoffset = String(CIRCUNFERENCIA * (1 - atual / 100));
+        moverEclipse(atual / 100);
 
         const decorrido = agora - INICIO;
         if (carregou && decorrido > MINIMO && (atual >= 99.4 || decorrido > LIMITE)) {
