@@ -1,0 +1,49 @@
+{
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "dadosGerais": {
+    "ano": 2026,
+    "uf": "SP",
+    "cargo": "Senador",
+    "codigoCargo": "5",
+    "abrangencia": "São Paulo (SP)",
+    "vagas": 2,
+    "totalCandidatosRegistrados": 14,
+    "totalNesteRecorte": 3,
+    "dataConsulta": "2026-09-02T20:00:00-03:00"
+  },
+  "candidatos": [
+    {
+      "id": "5-001",
+      "nomeCompleto": "Guilherme Muraro Derrite",
+      "nomeUrna": "DERRITE",
+      "siglaPartido": "PP",
+      "numero": "111",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/guilherme-derrite.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
+    },
+    {
+      "id": "5-002",
+      "nomeCompleto": "Maria Osmarina Marina Silva Vaz de Lima",
+      "nomeUrna": "MARINA SILVA",
+      "siglaPartido": "Rede",
+      "numero": "181",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/marina-silva.png",
+      "vice": "—",
+      "coligacao": "Federação PSOL REDE"
+    },
+    {
+      "id": "5-003",
+      "nomeCompleto": "Simone Nassar Tebet",
+      "nomeUrna": "SIMONE TEBET",
+      "siglaPartido": "PSB",
+      "numero": "401",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/simone-tebet.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
+    }
+  ]
+}

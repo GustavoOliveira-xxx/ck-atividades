@@ -1,0 +1,49 @@
+{
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "dadosGerais": {
+    "ano": 2026,
+    "uf": "SP",
+    "cargo": "Presidente",
+    "codigoCargo": "1",
+    "abrangencia": "Brasil (BR)",
+    "vagas": 1,
+    "totalCandidatosRegistrados": 13,
+    "totalNesteRecorte": 3,
+    "dataConsulta": "2026-09-02T20:00:00-03:00"
+  },
+  "candidatos": [
+    {
+      "id": "1-001",
+      "nomeCompleto": "Luiz Inácio Lula da Silva",
+      "nomeUrna": "LULA",
+      "siglaPartido": "PT",
+      "numero": "13",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/luis-inacio-lula.png",
+      "vice": "Geraldo Alckmin",
+      "coligacao": "Federação Brasil da Esperança (PT/PC do B/PV)"
+    },
+    {
+      "id": "1-002",
+      "nomeCompleto": "Flávio Nantes Bolsonaro",
+      "nomeUrna": "FLÁVIO BOLSONARO",
+      "siglaPartido": "PL",
+      "numero": "22",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/flavio-bolsonaro.png",
+      "vice": "A definir em coligação",
+      "coligacao": "Coligação em formação"
+    },
+    {
+      "id": "1-003",
+      "nomeCompleto": "Ronaldo Ramos Caiado",
+      "nomeUrna": "RONALDO CAIADO",
+      "siglaPartido": "PSD",
+      "numero": "55",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/ronaldo-caiado.png",
+      "vice": "A definir em coligação",
+      "coligacao": "Coligação em formação"
+    }
+  ]
+}

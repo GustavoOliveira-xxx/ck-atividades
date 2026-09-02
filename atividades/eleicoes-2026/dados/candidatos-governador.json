@@ -1,0 +1,49 @@
+{
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "dadosGerais": {
+    "ano": 2026,
+    "uf": "SP",
+    "cargo": "Governador",
+    "codigoCargo": "3",
+    "abrangencia": "São Paulo (SP)",
+    "vagas": 1,
+    "totalCandidatosRegistrados": 7,
+    "totalNesteRecorte": 3,
+    "dataConsulta": "2026-09-02T20:00:00-03:00"
+  },
+  "candidatos": [
+    {
+      "id": "3-001",
+      "nomeCompleto": "Tarcísio Gomes de Freitas",
+      "nomeUrna": "TARCÍSIO DE FREITAS",
+      "siglaPartido": "Republicanos",
+      "numero": "10",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/tarcisio-de-freitas.png",
+      "vice": "A definir em coligação",
+      "coligacao": "Coligação em formação"
+    },
+    {
+      "id": "3-002",
+      "nomeCompleto": "Fernando Haddad",
+      "nomeUrna": "FERNANDO HADDAD",
+      "siglaPartido": "PT",
+      "numero": "13",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/fernando-haddad.png",
+      "vice": "A definir em coligação",
+      "coligacao": "Federação Brasil da Esperança"
+    },
+    {
+      "id": "3-003",
+      "nomeCompleto": "Vera Lúcia Pereira da Silva Salgado",
+      "nomeUrna": "VERA",
+      "siglaPartido": "PSTU",
+      "numero": "16",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/vera-lucia.png",
+      "vice": "Candidatura própria",
+      "coligacao": "PSTU"
+    }
+  ]
+}

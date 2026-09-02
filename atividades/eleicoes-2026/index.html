@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CK Eleições 2026 — São Paulo · XML, JSON e APIs</title>
+  <link rel="icon" type="image/png" href="assets/logo-ck-remaster.png">
+
+  <meta name="description"
+    content="Sistema de Transparência Eleitoral (SP) — projeto acadêmico do Grupo CK para Interface Web II. Cargos em disputa lidos de XML com DOMParser e candidatos carregados por fetch em JSON.">
+  <meta name="author" content="Conscious Knowledge">
+  <meta name="theme-color" content="#04100c">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CK Eleições 2026 — São Paulo">
+  <meta property="og:description"
+    content="XML + DOMParser + fetch/JSON aplicados à transparência eleitoral paulista. Projeto acadêmico do Grupo CK.">
+  <meta property="og:image" content="assets/logo-ck-remaster.png">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/animacoes.css">
+</head>
+
+<body>
+
+  <!-- ==================================================================
+       CARGA — loader animado da aplicação
+       ================================================================== -->
+  <div class="carga" data-carga aria-hidden="true">
+    <span class="carga__cortina carga__cortina--esq"></span>
+    <span class="carga__cortina carga__cortina--dir"></span>
+
+    <div class="carga__nucleo">
+
+      <!-- Urna 3D que se monta durante o carregamento -->
+      <div class="carga__urna" data-carga-urna>
+        <span class="carga__urna-face carga__urna-face--frente">
+          <img src="assets/logo-ck-remaster.png" alt="" decoding="async">
+        </span>
+        <span class="carga__urna-face carga__urna-face--tras"></span>
+        <span class="carga__urna-face carga__urna-face--esq"></span>
+        <span class="carga__urna-face carga__urna-face--dir"></span>
+        <span class="carga__urna-face carga__urna-face--topo"></span>
+        <span class="carga__urna-face carga__urna-face--base"></span>
+        <span class="carga__cedula" aria-hidden="true"></span>
+      </div>
+
+      <svg class="carga__aro" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="carga__aro-trilho" cx="100" cy="100" r="92" />
+        <circle class="carga__aro-carga" cx="100" cy="100" r="92" data-carga-aro />
+      </svg>
+
+      <p class="carga__titulo" data-carga-titulo>Eleições 2026</p>
+
+      <div class="carga__leitura">
+        <span class="carga__percent" data-carga-percent>000</span>
+        <span class="carga__fase" data-carga-fase>iniciando urna</span>
+      </div>
+
+      <ol class="carga__etapas" data-carga-etapas>
+        <li data-etapa="xml">Lendo <code>xmlTexto</code></li>
+        <li data-etapa="parse">DOMParser · árvore XML</li>
+        <li data-etapa="cargos">Montando cargos</li>
+        <li data-etapa="api">fetch · candidatos</li>
+      </ol>
+
+    </div>
+  </div>
+
+  <!-- ==================================================================
+       CENÁRIO DE FUNDO
+       ================================================================== -->
+  <div class="cena" aria-hidden="true">
+    <canvas class="cena__particulas" data-particulas></canvas>
+    <span class="cena__aurora"></span>
+    <span class="orbe orbe--menta"></span>
+    <span class="orbe orbe--jade"></span>
+    <span class="orbe orbe--ciano"></span>
+    <span class="cena__malha"></span>
+    <span class="cena__grao"></span>
+  </div>
+
+  <div class="cursor" data-cursor aria-hidden="true"></div>
+  <div class="cursor cursor--halo" data-cursor-halo aria-hidden="true"></div>
+
+  <a class="pular" href="#inicio">Pular para o conteúdo</a>
+
+  <!-- ==================================================================
+       CABEÇALHO
+       ================================================================== -->
+  <header class="topo" data-topo>
+    <a class="topo__marca" href="../../index.html" aria-label="Voltar ao Acervo CK">
+      <span class="selo-duo selo-duo--mini" aria-hidden="true">
+        <span class="selo-duo__face selo-duo__face--origem">
+          <img src="assets/logo-ck.png" alt="" decoding="async">
+        </span>
+        <span class="selo-duo__face selo-duo__face--futuro">
+          <img src="assets/logo-ck-remaster.png" alt="" decoding="async">
+        </span>
+        <span class="selo-duo__fenda"></span>
+      </span>
+      <span class="topo__texto">
+        <strong>CK Eleições 2026</strong>
+        <small>Acervo · Interface Web II</small>
+      </span>
+    </a>
+
+    <nav class="topo__nav" aria-label="Navegação da atividade">
+      <ul>
+        <li><a href="#cargos">Cargos</a></li>
+        <li><a href="#xml">XML</a></li>
+        <li><a href="#candidatos">Candidatos</a></li>
+        <li><a href="#bastidores">Bastidores</a></li>
+      </ul>
+    </nav>
+
+    <a class="topo__voltar" href="../../index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+      <span>Acervo</span>
+    </a>
+  </header>
+
+  <main>
+
+    <!-- ================================================================
+         HERO
+         ================================================================ -->
+    <section id="inicio" class="hero">
+      <div class="hero__grade">
+
+        <div class="hero__texto">
+          <p class="etiqueta">
+            <span class="pulso"></span>
+            Projeto acadêmico · ETEC Taboão da Serra · 2º C
+          </p>
+
+          <h1>
+            <span class="hero__linha1">Eleições</span>
+            <span class="hero__ano" data-ano-3d>2026</span>
+            <span class="hero__linha2">São Paulo</span>
+          </h1>
+
+          <p class="hero__typed">
+            Um sistema de transparência que nasce de
+            <span class="typed" data-typed
+              data-palavras="um texto XML|uma árvore DOM|uma resposta JSON|um fetch assíncrono"><span
+                class="typed__texto"></span><span class="typed__cursor"></span></span>
+          </p>
+
+          <p class="hero__desc">
+            Adaptação do código-base da aula de <strong>XML, JSON e APIs</strong>: saiu o catálogo de
+            piadas, entrou o mapa eleitoral paulista. A <strong>Parte 1</strong> lê os cargos em
+            disputa direto da variável <code>xmlTexto</code> com <code>DOMParser</code>.
+            A <strong>Parte 2</strong> busca os candidatos com <code>fetch</code> e monta os cards
+            a partir do JSON recebido.
+          </p>
+
+          <div class="hero__acoes">
+            <a class="btn btn--solido" href="#cargos" data-magnetico>
+              <span>Abrir o mapa do poder</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="btn btn--vazado" href="#candidatos" data-magnetico>
+              <span>Ver os candidatos</span>
+            </a>
+          </div>
+
+          <dl class="hero__numeros">
+            <div>
+              <dt>Cargos em disputa</dt>
+              <dd data-contador="cargos">0</dd>
+            </div>
+            <div>
+              <dt>Candidatos no projeto</dt>
+              <dd data-contador="candidatos">0</dd>
+            </div>
+            <div>
+              <dt>Propostas catalogadas</dt>
+              <dd data-contador="propostas">0</dd>
+            </div>
+            <div>
+              <dt>Linhas de XML</dt>
+              <dd data-contador="linhas">0</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- ============================================================
+             PALCO 3D — urna holográfica sobre o mapa de SP
+             ============================================================ -->
+        <div class="palco" data-palco>
+          <div class="palco__camera" data-palco-camera>
+
+            <span class="palco__anel palco__anel--a"></span>
+            <span class="palco__anel palco__anel--b"></span>
+            <span class="palco__anel palco__anel--c"></span>
+
+            <div class="urna" data-urna>
+              <span class="urna__face urna__face--frente">
+                <span class="urna__tela">
+                  <span class="urna__tela-linha"></span>
+                  <strong>2026</strong>
+                  <small>SÃO PAULO</small>
+                  <span class="urna__varredura"></span>
+                </span>
+                <span class="urna__teclado" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  <i class="urna__tecla--branca"></i><i></i><i class="urna__tecla--verde"></i>
+                </span>
+              </span>
+              <span class="urna__face urna__face--tras">
+                <img src="assets/logo-ck-remaster.png" alt="" decoding="async">
+              </span>
+              <span class="urna__face urna__face--esq"></span>
+              <span class="urna__face urna__face--dir"></span>
+              <span class="urna__face urna__face--topo">
+                <span class="urna__fenda"></span>
+              </span>
+              <span class="urna__face urna__face--base"></span>
+            </div>
+
+            <!-- Mapa de SP flutuando como holograma -->
+            <div class="mapa-holo" data-mapa>
+              <svg viewBox="0 0 400 260" role="img" aria-label="Silhueta estilizada do estado de São Paulo">
+                <defs>
+                  <linearGradient id="grad-sp" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#25f0a2" stop-opacity=".55" />
+                    <stop offset="55%" stop-color="#32d7e6" stop-opacity=".28" />
+                    <stop offset="100%" stop-color="#eaffdf" stop-opacity=".12" />
+                  </linearGradient>
+                </defs>
+                <path class="mapa-holo__forma"
+                  d="M18 96 L60 72 L110 58 L150 64 L196 44 L232 52 L268 30 L300 44 L330 38 L356 60
+                     L368 86 L352 110 L322 132 L286 150 L250 166 L214 182 L176 196 L140 206 L104 196
+                     L72 178 L44 152 L26 124 Z" />
+                <circle class="mapa-holo__pino" cx="296" cy="118" r="5" />
+                <circle class="mapa-holo__eco" cx="296" cy="118" r="5" />
+                <text class="mapa-holo__rotulo" x="308" y="112">SP</text>
+              </svg>
+              <span class="mapa-holo__base"></span>
+            </div>
+
+            <span class="palco__cone"></span>
+            <span class="palco__plinto"></span>
+            <span class="palco__reflexo"></span>
+            <span class="palco__halo"></span>
+
+            <i class="faisca faisca--1"></i>
+            <i class="faisca faisca--2"></i>
+            <i class="faisca faisca--3"></i>
+            <i class="faisca faisca--4"></i>
+          </div>
+        </div>
+
+      </div>
+
+      <a class="hero__rolar" href="#cargos" aria-label="Rolar para os cargos">
+        <span class="hero__rolar-tubo"><i></i></span>
+        <span>role</span>
+      </a>
+    </section>
+
+    <!-- ================================================================
+         AVISO ACADÊMICO
+         ================================================================ -->
+    <div class="faixa-aviso" role="note">
+      <div class="faixa-aviso__trilha" data-faixa></div>
+    </div>
+
+    <!-- ================================================================
+         PARTE 1 — CARGOS (XML)
+         ================================================================ -->
+    <section id="cargos" class="secao">
+      <header class="secao__cabeca">
+        <p class="secao__indice">Parte 1 — XML local</p>
+        <h2>O mapa do <span class="gradiente">poder</span></h2>
+        <p class="secao__sub">
+          Cada cartão abaixo é um elemento <code>&lt;cargo titulo="…" poder="…"&gt;</code> do XML.
+          A cor do selo vem do atributo <code>poder</code>, resolvido por um dicionário no
+          JavaScript — vermelho para o Executivo, azul para o Legislativo.
+        </p>
+      </header>
+
+      <div class="legenda-poder">
+        <span class="badge badge-executivo">Executivo</span>
+        <span class="legenda-poder__seta" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </span>
+        <code>CLASSE_PODER[poder] || "badge-legislativo"</code>
+        <span class="legenda-poder__seta legenda-poder__seta--inversa" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+        </span>
+        <span class="badge badge-legislativo">Legislativo</span>
+      </div>
+
+      <div class="grade-cargos" data-grade-cargos></div>
+
+      <div class="exportacao">
+        <div class="exportacao__texto">
+          <h3>Levar os dados embora</h3>
+          <p>
+            O navegador gera os arquivos na hora, com <code>Blob</code> +
+            <code>URL.createObjectURL</code> — sem servidor. O CSV sai com BOM
+            <code>﻿</code> e separador <code>;</code>, do jeito que o Excel em
+            português abre direto, e com <code>replace(/;/g, ",")</code> aplicado a
+            cada campo para nenhuma descrição quebrar as colunas.
+          </p>
+        </div>
+
+        <div class="exportacao__botoes">
+          <button type="button" class="btn btn--vazado" data-exportar-xml data-magnetico>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12M8 11l4 4 4-4" /><path d="M4 21h16" />
+            </svg>
+            <span>Baixar XML original</span>
+          </button>
+          <button type="button" class="btn btn--vazado" data-exportar-csv-cargos data-magnetico>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M3 10h18M9 10v10M15 10v10" />
+            </svg>
+            <span>Cargos em planilha</span>
+          </button>
+          <button type="button" class="btn btn--vazado" data-exportar-csv-candidatos data-magnetico>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M3 10h18" /><circle cx="8" cy="15" r="1.6" /><path d="M12 14h6M12 17h4" />
+            </svg>
+            <span>Candidatos em planilha</span>
+          </button>
+        </div>
+
+        <p class="exportacao__aviso" data-aviso-exportacao role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         PAINEL XML + PIPELINE
+         ================================================================ -->
+    <section id="xml" class="secao">
+      <header class="secao__cabeca">
+        <p class="secao__indice">Parte 1 — Por dentro</p>
+        <h2>Do texto à <span class="gradiente">árvore</span></h2>
+        <p class="secao__sub">
+          O JavaScript não entende texto XML puro. O <code>DOMParser</code> transforma a string
+          em um documento navegável, e a partir daí valem os mesmos seletores de sempre.
+        </p>
+      </header>
+
+      <ol class="pipeline">
+        <li class="pipeline__no" data-revelar style="--atraso:0ms">
+          <span class="pipeline__caixa">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" />
+              <path d="M14 3v5h5M9 13h6M9 17h4" />
+            </svg>
+          </span>
+          <strong>xmlTexto</strong>
+          <code>const xmlTexto = &#96;&lt;?xml …&#96;</code>
+        </li>
+        <li class="pipeline__no" data-revelar style="--atraso:120ms">
+          <span class="pipeline__caixa">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.2" />
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" />
+            </svg>
+          </span>
+          <strong>DOMParser</strong>
+          <code>.parseFromString(xmlTexto, "text/xml")</code>
+        </li>
+        <li class="pipeline__no" data-revelar style="--atraso:240ms">
+          <span class="pipeline__caixa">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="4.5" r="2" /><circle cx="6" cy="13" r="2" />
+              <circle cx="18" cy="13" r="2" /><circle cx="6" cy="20" r="2" />
+              <circle cx="18" cy="20" r="2" />
+              <path d="M12 6.5v3M12 9.5H6v1.5M12 9.5h6v1.5M6 15v3M18 15v3" />
+            </svg>
+          </span>
+          <strong>xmlDoc</strong>
+          <code>documento navegável</code>
+        </li>
+        <li class="pipeline__no" data-revelar style="--atraso:360ms">
+          <span class="pipeline__caixa">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" />
+            </svg>
+          </span>
+          <strong>querySelectorAll</strong>
+          <code>("cargos &gt; cargo")</code>
+        </li>
+        <li class="pipeline__no pipeline__no--fim" data-revelar style="--atraso:480ms">
+          <span class="pipeline__caixa">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="7" height="16" rx="1.5" />
+              <rect x="14" y="4" width="7" height="7" rx="1.5" />
+              <rect x="14" y="14" width="7" height="6" rx="1.5" />
+            </svg>
+          </span>
+          <strong>Interface</strong>
+          <code>cards no DOM</code>
+        </li>
+      </ol>
+
+      <div class="visor-xml">
+        <div class="visor-xml__barra">
+          <span class="visor-xml__luzes" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visor-xml__nome">js/dados-xml.js — <em>const xmlTexto</em></span>
+          <span class="visor-xml__contagem">
+            <strong data-xml-linhas>0</strong> linhas
+          </span>
+        </div>
+        <pre class="visor-xml__corpo"><code data-xml-fonte></code></pre>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         PARTE 2 — CANDIDATOS (fetch + JSON)
+         ================================================================ -->
+    <section id="candidatos" class="secao">
+      <header class="secao__cabeca">
+        <p class="secao__indice">Parte 2 — fetch + JSON</p>
+        <h2>Quem está na <span class="gradiente">disputa</span></h2>
+        <p class="secao__sub">
+          Escolha um cargo: o JavaScript dispara um <code>fetch</code>, espera a resposta com
+          <code>await</code>, lê <code>dados.candidatos</code> e monta os cards.
+          Clique em um card para virá-lo e ver as propostas — que vêm do XML da Parte 1.
+        </p>
+      </header>
+
+      <div class="consulta">
+        <label class="consulta__campo">
+          <span class="consulta__rotulo">Cargo</span>
+          <select data-select-cargo aria-label="Escolher o cargo a consultar">
+            <option value="Presidente">Presidente</option>
+            <option value="Governador" selected>Governador de São Paulo</option>
+            <option value="Senador">Senador por São Paulo</option>
+            <option value="Deputado Federal">Deputado Federal</option>
+            <option value="Deputado Estadual">Deputado Estadual</option>
+          </select>
+          <svg class="consulta__chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </label>
+
+        <button type="button" class="btn btn--solido consulta__btn" data-btn-buscar data-magnetico>
+          <span>Buscar candidatos</span>
+          <span class="consulta__spinner" aria-hidden="true"></span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+
+        <p class="api-status" data-status-api role="status" aria-live="polite">pronto para consultar</p>
+      </div>
+
+      <div class="consulta__meta" data-meta-api aria-live="polite"></div>
+
+      <div class="grade-candidatos" data-resultado-api></div>
+
+      <p class="nota-fonte">
+        Recortes locais em <code>dados/*.json</code>, no mesmo formato do retorno do sistema
+        <strong>DivulgaCandContas</strong> do TSE — a abordagem de <em>mock</em> indicada na aula para
+        contornar o CORS. Fonte oficial:
+        <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">
+          divulgacandcontas.tse.jus.br</a>.
+      </p>
+    </section>
+
+    <!-- ================================================================
+         BASTIDORES
+         ================================================================ -->
+    <section id="bastidores" class="secao">
+      <header class="secao__cabeca">
+        <p class="secao__indice">Bastidores</p>
+        <h2>Como a atividade foi <span class="gradiente">adaptada</span></h2>
+        <p class="secao__sub">
+          O código do professor foi mantido no espírito e trocado no conteúdo. Abaixo, o antes
+          e o depois de cada peça.
+        </p>
+      </header>
+
+      <div class="matriz">
+        <div class="matriz__cabeca">
+          <span>App de Piadas</span>
+          <span>App de Eleições</span>
+          <span>Desafio técnico</span>
+        </div>
+
+        <div class="matriz__linha" data-revelar style="--atraso:0ms">
+          <span><code>&lt;piada categoria&gt;</code></span>
+          <span><code>&lt;cargo titulo poder&gt;</code></span>
+          <span>Refatorar o DOMParser para ler atributos novos e uma tag filha
+            <code>&lt;descricao&gt;</code>.</span>
+        </div>
+
+        <div class="matriz__linha" data-revelar style="--atraso:110ms">
+          <span>Badge por categoria de humor</span>
+          <span>Badge por poder institucional</span>
+          <span>Dicionário <code>CLASSE_PODER</code> com fallback <code>||</code> para não
+            quebrar a tela.</span>
+        </div>
+
+        <div class="matriz__linha" data-revelar style="--atraso:220ms">
+          <span><code>Categoria;Piada</code></span>
+          <span><code>Cargo;Poder;Descrição</code></span>
+          <span>BOM mantido e limpeza <code>replace(/;/g, ",")</code> em todo campo de texto.</span>
+        </div>
+
+        <div class="matriz__linha" data-revelar style="--atraso:330ms">
+          <span>JokeAPI + MyMemory</span>
+          <span>Recortes no formato TSE</span>
+          <span>Mesmo <code>fetch</code> + <code>await</code>; CORS resolvido pela
+            abordagem de mock local.</span>
+        </div>
+
+        <div class="matriz__linha" data-revelar style="--atraso:440ms">
+          <span>Texto da piada em <code>&lt;li&gt;</code></span>
+          <span>Card 3D de candidato</span>
+          <span>Manipulação de DOM ampliada: card com frente, verso e estado
+            <code>is-virado</code>.</span>
+        </div>
+      </div>
+
+      <div class="creditos">
+        <article class="creditos__bloco" data-tilt>
+          <h3>Feito com</h3>
+          <ul class="pilhas">
+            <li>HTML5 semântico</li>
+            <li>CSS puro · 3D transforms</li>
+            <li>JavaScript sem framework</li>
+            <li>DOMParser · XML</li>
+            <li>fetch · async/await</li>
+            <li>Blob · CSV · BOM</li>
+            <li>Canvas 2D</li>
+          </ul>
+        </article>
+
+        <article class="creditos__bloco creditos__bloco--aviso" data-tilt>
+          <h3>Aviso acadêmico</h3>
+          <p>
+            Trabalho escolar sem vínculo com a Justiça Eleitoral, com partidos ou com
+            campanhas. As propostas exibidas são <strong>resumos editoriais escritos pelo
+            grupo</strong> a partir da trajetória pública de cada candidato — não são
+            transcrição de programa de governo registrado.
+          </p>
+          <p>
+            O número mostrado é o <strong>número do partido</strong>, que corresponde ao número
+            de urna nas disputas majoritárias. Nas proporcionais, o número individual é definido
+            no registro da candidatura. Para dados oficiais, consulte sempre o TSE.
+          </p>
+        </article>
+
+        <article class="creditos__bloco" data-tilt>
+          <h3>Entrega</h3>
+          <dl class="ficha">
+            <dt>Disciplina</dt>
+            <dd>Interface Web II</dd>
+            <dt>Turma</dt>
+            <dd>2º C — M-Tec Informática para Internet</dd>
+            <dt>Professor</dt>
+            <dd>Clayton de Almeida Souza</dd>
+            <dt>Grupo</dt>
+            <dd>Conscious Knowledge</dd>
+            <dt>Base</dt>
+            <dd>Atividade Prática — XML, JSON e APIs</dd>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__grade">
+      <div class="rodape__marca">
+        <span class="selo-duo" aria-hidden="true">
+          <span class="selo-duo__face selo-duo__face--origem">
+            <img src="assets/logo-ck.png" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="selo-duo__face selo-duo__face--futuro">
+            <img src="assets/logo-ck-remaster.png" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="selo-duo__fenda"></span>
+        </span>
+        <div>
+          <strong>Conscious Knowledge</strong>
+          <span>Duas marcas, uma consciência. Acervo de atividades do Grupo CK.</span>
+        </div>
+      </div>
+
+      <nav class="rodape__links" aria-label="Navegação do rodapé">
+        <a href="../../index.html">Acervo CK</a>
+        <a href="#cargos">Cargos</a>
+        <a href="#candidatos">Candidatos</a>
+        <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">TSE · DivulgaCand</a>
+        <a href="https://dadosabertos.tse.jus.br" target="_blank" rel="noopener">Dados Abertos TSE</a>
+      </nav>
+    </div>
+
+    <div class="rodape__base">
+      <p>© 2026 Conscious Knowledge · projeto acadêmico.</p>
+      <p>2º C — M-Tec Informática para Internet · ETEC Taboão da Serra.</p>
+    </div>
+  </footer>
+
+  <script src="js/dados-xml.js"></script>
+  <script src="js/xml.js"></script>
+  <script src="js/exportar.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/cena.js"></script>
+  <script src="js/ui.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+{
+  "_aviso": "Índice dos recortes locais usados pela Parte 2 (fetch + JSON).",
+  "ano": 2026,
+  "uf": "SP",
+  "recortes": [
+    {
+      "cargo": "Presidente",
+      "codigo": "1",
+      "arquivo": "candidatos-presidente.json",
+      "vagas": 1,
+      "registrados": 13
+    },
+    {
+      "cargo": "Governador",
+      "codigo": "3",
+      "arquivo": "candidatos-governador.json",
+      "vagas": 1,
+      "registrados": 7
+    },
+    {
+      "cargo": "Senador",
+      "codigo": "5",
+      "arquivo": "candidatos-senador.json",
+      "vagas": 2,
+      "registrados": 14
+    },
+    {
+      "cargo": "Deputado Federal",
+      "codigo": "6",
+      "arquivo": "candidatos-deputado-federal.json",
+      "vagas": 70,
+      "registrados": 1500
+    },
+    {
+      "cargo": "Deputado Estadual",
+      "codigo": "7",
+      "arquivo": "candidatos-deputado-estadual.json",
+      "vagas": 94,
+      "registrados": 2100
+    }
+  ]
+}
