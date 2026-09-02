@@ -628,25 +628,21 @@ body>header.is-hidden {
   object-fit: contain;
 }
 
+/* No tamanho do cabeçalho, o corte diagonal escondia metade de cada marca.
+   Agora cada uma aparece INTEIRA e elas se alternam em fade, com o mesmo
+   tempo de tela para as duas: ciclo de 9s, 4,5s para cada. */
 .selo-duo__face--origem {
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  filter: drop-shadow(0 0 8px var(--purple-glow));
-}
-
-.selo-duo__face--origem img {
-  transform: translate(-6%, -4%) scale(1.12);
+  filter: drop-shadow(0 0 9px var(--purple-glow));
+  animation: selo-fade-origem 9s var(--ease) infinite;
 }
 
 .selo-duo__face--futuro {
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
   filter: drop-shadow(0 0 9px var(--menta-glow));
+  animation: selo-fade-futuro 9s var(--ease) infinite;
 }
 
-.selo-duo__face--futuro img {
-  transform: translate(7%, 5%) scale(1.18);
-}
-
-/* A fenda: o fio de luz que separa — e liga — as duas identidades */
+/* A fenda: o fio de luz na diagonal que varre a moldura a cada troca,
+   como se estivesse revelando a marca seguinte. */
 .selo-duo__fenda {
   position: absolute;
   top: 50%;
@@ -657,6 +653,7 @@ body>header.is-hidden {
   background: linear-gradient(90deg, transparent, var(--purple-300) 24%,
       var(--yellow-300) 50%, var(--menta-400) 76%, transparent);
   box-shadow: 0 0 12px rgba(37, 240, 162, .5);
+  animation: selo-fenda 9s var(--ease) infinite;
 }
 
 .selo-duo::after {
@@ -675,14 +672,12 @@ body>header.is-hidden {
     0 0 30px rgba(37, 240, 162, .3);
 }
 
-.logo-container a:hover .selo-duo__face--origem img,
-.footer-marca:hover .selo-duo__face--origem img {
-  transform: translate(-11%, -8%) scale(1.16);
-}
-
-.logo-container a:hover .selo-duo__face--futuro img,
-.footer-marca:hover .selo-duo__face--futuro img {
-  transform: translate(12%, 9%) scale(1.22);
+/* No hover, a troca acelera: dá a sensação de que a marca responde ao mouse */
+.logo-container a:hover .selo-duo__face,
+.footer-marca:hover .selo-duo__face,
+.logo-container a:hover .selo-duo__fenda,
+.footer-marca:hover .selo-duo__fenda {
+  animation-duration: 3.6s;
 }
 
 .logo-wordmark {
@@ -913,7 +908,7 @@ main>section>header {
 
 .duo3d {
   perspective: 1150px;
-  width: clamp(238px, 31vw, 400px);
+  width: clamp(250px, 33vw, 430px);
   aspect-ratio: 1;
   flex-shrink: 0;
 }
@@ -940,7 +935,7 @@ main>section>header {
 }
 
 .duo3d__braco {
-  --raio: clamp(62px, 8.6vw, 112px);
+  --raio: clamp(58px, 8vw, 104px);
   position: absolute;
   display: grid;
   place-items: center;
@@ -982,13 +977,13 @@ main>section>header {
 }
 
 .duo3d__astro--origem {
-  width: clamp(74px, 9.2vw, 118px);
-  aspect-ratio: 1365 / 2048;
+  width: clamp(70px, 8.6vw, 112px);
+  aspect-ratio: 720 / 1080;
 }
 
 .duo3d__astro--futuro {
-  width: clamp(96px, 11.8vw, 152px);
-  aspect-ratio: 1536 / 1024;
+  width: clamp(102px, 12.5vw, 163px);
+  aspect-ratio: 960 / 988;
   animation-delay: -3.5s;
 }
 
@@ -2362,6 +2357,31 @@ body>footer {
   to {
     transform: rotateX(var(--ax)) rotateY(var(--ay)) rotateZ(360deg);
   }
+}
+
+/* --- Selo duplo: fade em laço entre as duas marcas ----------------------
+   Cada marca fica 4,5s na tela e sai por fade + leve escala/rotação.
+   As duas animações são espelhadas, então o laço nunca deixa a moldura
+   vazia nem mostra as duas ao mesmo tempo por muito tempo. */
+@keyframes selo-fade-origem {
+  0%,  42%  { opacity: 1; transform: scale(1) rotate(0deg); }
+  50%, 92%  { opacity: 0; transform: scale(.86) rotate(-7deg); }
+  100%      { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes selo-fade-futuro {
+  0%,  42%  { opacity: 0; transform: scale(.86) rotate(7deg); }
+  50%, 92%  { opacity: 1; transform: scale(1) rotate(0deg); }
+  100%      { opacity: 0; transform: scale(.86) rotate(7deg); }
+}
+
+/* A fenda acende e varre exatamente nos dois momentos de troca */
+@keyframes selo-fenda {
+  0%,  38%  { opacity: .28; transform: translateY(-50%) rotate(-45deg) scaleX(1); }
+  46%       { opacity: 1;   transform: translateY(-50%) rotate(-45deg) scaleX(1.3); }
+  54%, 88%  { opacity: .28; transform: translateY(-50%) rotate(-45deg) scaleX(1); }
+  96%       { opacity: 1;   transform: translateY(-50%) rotate(-45deg) scaleX(1.3); }
+  100%      { opacity: .28; transform: translateY(-50%) rotate(-45deg) scaleX(1); }
 }
 
 /* --- Sistema binário das duas marcas ------------------------------------
