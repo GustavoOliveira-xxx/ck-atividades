@@ -45,6 +45,7 @@ eleicoes-2026/
 │   ├── xml.js                  DOMParser, leitura e render dos cargos
 │   ├── exportar.js             Blob → XML e CSV
 │   ├── api.js                  fetch + JSON → cards de candidato
+│   ├── urna.js                 a urna 3D votando em laço
 │   ├── cena.js                 partículas em canvas
 │   └── ui.js                   carga animada, tilt 3D, contadores
 ├── dados/                      recortes JSON no formato do TSE
@@ -55,6 +56,34 @@ eleicoes-2026/
     ├── logo-ck-remaster.png
     └── candidatos/             15 retratos
 ```
+
+---
+
+## A urna 3D do topo
+
+O objeto principal do hero é uma urna eletrônica montada só com transforms 3D
+— corpo em caixa de seis faces, painel inclinado e teclado numérico deitado.
+Nenhuma imagem: é CSS.
+
+E ela não é enfeite. O `js/urna.js` executa uma votação de verdade, em laço,
+com os candidatos lidos do XML da Parte 1:
+
+```
+mostra o cargo
+   ↓
+digita o número dígito a dígito, acendendo a tecla de cada um
+   ↓
+revela nome, partido e foto
+   ↓
+pisca "aperte confirma" e acende a tecla CONFIRMA
+   ↓
+FIM  →  próximo candidato
+```
+
+O roteiro intercala os cargos, então a urna passa por Presidente, Governador,
+Senador e os dois deputados antes de repetir alguém. A animação congela quando
+a urna sai da tela ou a aba perde o foco, e com `prefers-reduced-motion` ela
+nem começa: mostra uma ficha parada e já preenchida.
 
 ---
 

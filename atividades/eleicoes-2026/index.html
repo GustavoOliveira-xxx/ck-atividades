@@ -206,28 +206,83 @@
             <span class="palco__anel palco__anel--b"></span>
             <span class="palco__anel palco__anel--c"></span>
 
-            <div class="urna" data-urna>
-              <span class="urna__face urna__face--frente">
-                <span class="urna__tela">
-                  <span class="urna__tela-linha"></span>
-                  <strong>2026</strong>
-                  <small>SÃO PAULO</small>
-                  <span class="urna__varredura"></span>
-                </span>
-                <span class="urna__teclado" aria-hidden="true">
-                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i class="urna__tecla--branca"></i><i></i><i class="urna__tecla--verde"></i>
-                </span>
-              </span>
-              <span class="urna__face urna__face--tras">
-                <img src="assets/logo-ck-remaster.png" alt="" decoding="async">
-              </span>
-              <span class="urna__face urna__face--esq"></span>
-              <span class="urna__face urna__face--dir"></span>
-              <span class="urna__face urna__face--topo">
-                <span class="urna__fenda"></span>
-              </span>
-              <span class="urna__face urna__face--base"></span>
+            <!-- ========================================================
+                 URNA ELETRÔNICA 3D — o objeto principal da cena.
+                 Corpo em caixa, painel inclinado e teclado numérico, todos
+                 montados com transforms 3D. O js/urna.js "vota" nela em laço:
+                 digita o número de um candidato de verdade (lido do XML),
+                 acende as teclas, mostra a ficha e fecha com FIM.
+                 ======================================================== -->
+            <div class="urna3d" data-urna3d>
+
+              <!-- Corpo -->
+              <div class="urna3d__corpo">
+                <span class="urna3d__f urna3d__f--frente"></span>
+                <span class="urna3d__f urna3d__f--tras"></span>
+                <span class="urna3d__f urna3d__f--dir"></span>
+                <span class="urna3d__f urna3d__f--esq"></span>
+                <span class="urna3d__f urna3d__f--topo"></span>
+                <span class="urna3d__f urna3d__f--base"></span>
+              </div>
+
+              <!-- Painel inclinado com a tela do eleitor -->
+              <div class="urna3d__dobra">
+                <div class="urna3d__painel">
+                  <div class="urna3d__tela">
+
+                    <p class="urna3d__tela-titulo">Seu voto para</p>
+                    <p class="urna3d__cargo" data-urna-cargo>—</p>
+
+                    <div class="urna3d__ficha">
+                      <div class="urna3d__ficha-dados">
+                        <span class="urna3d__rotulo">Número</span>
+                        <div class="urna3d__digitos" data-urna-digitos></div>
+
+                        <span class="urna3d__rotulo">Nome</span>
+                        <p class="urna3d__nome" data-urna-nome></p>
+
+                        <span class="urna3d__rotulo">Partido</span>
+                        <p class="urna3d__partido" data-urna-partido></p>
+                      </div>
+
+                      <div class="urna3d__foto">
+                        <img data-urna-foto alt=""
+                             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                             decoding="async">
+                      </div>
+                    </div>
+
+                    <p class="urna3d__instrucao" data-urna-instrucao></p>
+                    <span class="urna3d__fim" data-urna-fim>FIM</span>
+                    <span class="urna3d__scan" aria-hidden="true"></span>
+                  </div>
+                  <span class="urna3d__painel-tras" aria-hidden="true"></span>
+                </div>
+              </div>
+
+              <!-- Teclado numérico, deitado na frente do topo -->
+              <div class="urna3d__mesa">
+                <div class="urna3d__teclado" data-urna-teclado>
+                  <span class="urna3d__tecla" data-tecla="1">1</span>
+                  <span class="urna3d__tecla" data-tecla="2">2</span>
+                  <span class="urna3d__tecla" data-tecla="3">3</span>
+                  <span class="urna3d__tecla" data-tecla="4">4</span>
+                  <span class="urna3d__tecla" data-tecla="5">5</span>
+                  <span class="urna3d__tecla" data-tecla="6">6</span>
+                  <span class="urna3d__tecla" data-tecla="7">7</span>
+                  <span class="urna3d__tecla" data-tecla="8">8</span>
+                  <span class="urna3d__tecla" data-tecla="9">9</span>
+                  <span class="urna3d__tecla urna3d__tecla--vazia"></span>
+                  <span class="urna3d__tecla" data-tecla="0">0</span>
+                  <span class="urna3d__tecla urna3d__tecla--vazia"></span>
+
+                  <span class="urna3d__tecla urna3d__tecla--branco" data-tecla="branco">branco</span>
+                  <span class="urna3d__tecla urna3d__tecla--corrige" data-tecla="corrige">corrige</span>
+                  <span class="urna3d__tecla urna3d__tecla--confirma" data-tecla="confirma">confirma</span>
+                </div>
+              </div>
+
+              <span class="urna3d__sombra" aria-hidden="true"></span>
             </div>
 
             <!-- Mapa de SP flutuando como holograma -->
@@ -617,6 +672,7 @@
   <script src="js/xml.js"></script>
   <script src="js/exportar.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/urna.js"></script>
   <script src="js/cena.js"></script>
   <script src="js/ui.js"></script>
 
