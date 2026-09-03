@@ -473,6 +473,64 @@
         </li>
       </ol>
 
+      <!-- ================================================================
+           CUBO DE DADOS CK — objeto 3D arrastável. Cada face é uma etapa do
+           caminho que o dado percorre na atividade, e a sexta traz a marca do
+           grupo. Arraste para girar; solte e ele volta a girar sozinho.
+           ================================================================ -->
+      <div class="cubo-bloco">
+        <div class="cubo-palco" data-cubo>
+          <div class="cubo" data-cubo-corpo>
+            <span class="cubo__face cubo__face--frente" data-face="xml">
+              <b>XML</b>
+              <code>&lt;cargo poder=""&gt;</code>
+              <small>a base de dados</small>
+            </span>
+            <span class="cubo__face cubo__face--dir" data-face="parser">
+              <b>DOMParser</b>
+              <code>parseFromString()</code>
+              <small>texto vira árvore</small>
+            </span>
+            <span class="cubo__face cubo__face--tras" data-face="json">
+              <b>JSON</b>
+              <code>dados.candidatos</code>
+              <small>formato do TSE</small>
+            </span>
+            <span class="cubo__face cubo__face--esq" data-face="fetch">
+              <b>fetch</b>
+              <code>await resposta.json()</code>
+              <small>assíncrono</small>
+            </span>
+            <span class="cubo__face cubo__face--topo" data-face="csv">
+              <b>CSV</b>
+              <code>Blob + BOM</code>
+              <small>abre no Excel</small>
+            </span>
+            <span class="cubo__face cubo__face--base" data-face="ck">
+              <img src="assets/logo-ck-remaster.png" alt="Logo Conscious Knowledge"
+                   width="960" height="988" loading="lazy" decoding="async">
+              <small>Conscious Knowledge</small>
+            </span>
+          </div>
+          <span class="cubo-palco__sombra" aria-hidden="true"></span>
+          <span class="cubo-palco__dica" data-cubo-dica>arraste para girar</span>
+        </div>
+
+        <div class="cubo-legenda">
+          <p class="cubo-legenda__indice">Objeto interativo</p>
+          <h3>As seis faces do dado</h3>
+          <p>
+            Cada face é uma etapa do caminho que a informação percorre nesta
+            atividade — do texto XML até a planilha que o professor abre no Excel.
+            <strong>Arraste o cubo</strong> para girar e ler todas; ao soltar,
+            ele volta a girar sozinho.
+          </p>
+          <p class="cubo-legenda__face" data-cubo-rotulo>
+            <span></span>
+          </p>
+        </div>
+      </div>
+
       <div class="visor-xml">
         <div class="visor-xml__barra">
           <span class="visor-xml__luzes" aria-hidden="true"><i></i><i></i><i></i></span>
@@ -674,6 +732,32 @@
       </nav>
     </div>
 
+    <!-- Assinatura do grupo, em relevo 3D -->
+    <div class="assinatura" data-assinatura>
+      <div class="assinatura__placa">
+        <span class="assinatura__brilho" aria-hidden="true"></span>
+        <div class="assinatura__marca">
+          <img src="assets/logo-ck-remaster.png" alt="Logo Conscious Knowledge"
+               width="960" height="988" loading="lazy" decoding="async">
+        </div>
+        <div class="assinatura__texto">
+          <p class="assinatura__eyebrow">Projeto desenvolvido por</p>
+          <strong class="assinatura__nome">Conscious Knowledge</strong>
+          <p class="assinatura__linha">
+            Grupo CK · 2º C — M-Tec Informática para Internet · ETEC Taboão da Serra
+          </p>
+          <p class="assinatura__entrega">
+            Interface Web II · Atividade Avaliativa II — XML, JSON e APIs ·
+            Prof. Clayton de Almeida Souza
+          </p>
+        </div>
+        <a class="assinatura__link" href="../../index.html">
+          <span>Ver o acervo da CK</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+      </div>
+    </div>
+
     <div class="rodape__base">
       <p>© 2026 Conscious Knowledge · projeto acadêmico.</p>
       <p>2º C — M-Tec Informática para Internet · ETEC Taboão da Serra.</p>
@@ -690,6 +774,7 @@
   <script src="js/exportar.js" defer></script>
   <script src="js/api.js" defer></script>
   <script src="js/urna.js" defer></script>
+  <script src="js/cubo.js" defer></script>
   <script src="js/cena.js" defer></script>
   <script src="js/ui.js" defer></script>
 

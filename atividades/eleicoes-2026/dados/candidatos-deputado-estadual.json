@@ -9,12 +9,12 @@
     "vagas": 94,
     "totalCandidatosRegistrados": 2100,
     "totalNesteRecorte": 3,
-    "dataConsulta": "2026-09-03T12:00:00-03:00"
+    "dataConsulta": "2026-09-11T12:00:00-03:00"
   },
   "candidatos": [
     {
       "id": "7-001",
-      "nomeCompleto": "Bruna Cristina Jequier Furlan",
+      "nomeCompleto": "Bruna Dias Furlan Vicente",
       "nomeUrna": "BRUNA FURLAN",
       "siglaPartido": "Republicanos",
       "numero": "10010",
@@ -25,17 +25,6 @@
     },
     {
       "id": "7-002",
-      "nomeCompleto": "Anderson Mecca de Oliveira",
-      "nomeUrna": "MAJOR MECCA",
-      "siglaPartido": "PL",
-      "numero": "22288",
-      "situacao": "Deferido",
-      "foto": "assets/candidatos/major-mecca.png",
-      "vice": "—",
-      "coligacao": "Coligação em formação"
-    },
-    {
-      "id": "7-003",
       "nomeCompleto": "Carlos Giannazi",
       "nomeUrna": "PROFESSOR CARLOS GIANNAZI",
       "siglaPartido": "PSOL",
@@ -44,6 +33,17 @@
       "foto": "assets/candidatos/carlos-giannazi.png",
       "vice": "—",
       "coligacao": "Federação PSOL REDE"
+    },
+    {
+      "id": "7-003",
+      "nomeCompleto": "Caio Kanji Pardo Aoqui",
+      "nomeUrna": "CAIO AOQUI",
+      "siglaPartido": "PSD",
+      "numero": "55300",
+      "situacao": "Deferido",
+      "foto": "assets/candidatos/caio-aoqui.png",
+      "vice": "—",
+      "coligacao": "Coligação em formação"
     }
   ]
 }

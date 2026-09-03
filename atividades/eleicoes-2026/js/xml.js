@@ -107,12 +107,14 @@
       const tipoPropostas =
         candidato.querySelector("propostas")?.getAttribute("tipo") || "pautas";
 
-      /* Marcado quando o número de urna ainda precisa de conferência no TSE */
-      const conferirNumero = candidato.getAttribute("conferir") === "numero";
+      /* O atributo conferir="..." diz O QUE ainda falta confirmar no TSE:
+         "numero" marca o número de urna, "pautas" marca as propostas. Sem o
+         atributo, o registro foi conferido por inteiro. */
+      const conferir = candidato.getAttribute("conferir") || "";
 
       candidatosData.push({
         indice, cargo, partido, numero, nome, partidoNome, perfil, propostas,
-        tipoPropostas, conferirNumero,
+        tipoPropostas, conferir,
         id: slug(nome),
         cargoId: slug(cargo),
         foto: `assets/candidatos/${foto}.png`,

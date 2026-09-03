@@ -1940,3 +1940,346 @@ a:hover .selo-duo__fenda {
     font-weight: 400;
   }
 }
+
+/* ==========================================================================
+   CUBO DE DADOS — objeto 3D arrastável com as seis etapas do dado
+   ========================================================================== */
+
+.cubo-bloco {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-lg);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(37, 240, 162, .08), transparent 60%),
+    var(--vidro);
+  backdrop-filter: blur(14px);
+}
+
+.cubo-palco {
+  --lado: clamp(126px, 14vw, 172px);
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: calc(var(--lado) * 1.9);
+  height: calc(var(--lado) * 1.85);
+  perspective: 780px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.cubo-palco.is-arrastando {
+  cursor: grabbing;
+}
+
+.cubo-palco:focus-visible {
+  outline: 2px solid var(--menta-400);
+  outline-offset: 6px;
+  border-radius: var(--raio-md);
+}
+
+.cubo {
+  position: relative;
+  width: var(--lado);
+  height: var(--lado);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--gx, -18deg)) rotateY(var(--gy, -28deg));
+}
+
+.cubo__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: .3rem;
+  padding: .8rem;
+  text-align: center;
+  border: 1px solid rgba(37, 240, 162, .42);
+  border-radius: 6px;
+  background:
+    linear-gradient(158deg, rgba(19, 58, 44, .92), rgba(5, 20, 15, .95));
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, .55),
+    0 0 22px rgba(37, 240, 162, .12);
+  backface-visibility: hidden;
+}
+
+.cubo__face b {
+  font-family: var(--fonte-titulo);
+  font-size: 1.05rem;
+  color: var(--menta-200);
+  text-shadow: 0 0 12px var(--menta-glow);
+}
+
+.cubo__face code {
+  font-size: .58rem;
+  padding: .18em .45em;
+  word-break: break-all;
+}
+
+.cubo__face small {
+  font-family: var(--fonte-mono);
+  font-size: .54rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--txt-3);
+}
+
+/* A face da marca: fundo mais claro e a logo em destaque */
+.cubo__face--base {
+  gap: .45rem;
+  padding: .6rem;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(37, 240, 162, .2), transparent 68%),
+    linear-gradient(158deg, rgba(24, 74, 57, .95), rgba(5, 20, 15, .96));
+  border-color: rgba(37, 240, 162, .6);
+}
+
+/* Altura, não largura: como grid item, a logo era espremida pela linha.
+   Fixando a altura e deixando a largura livre, ela mantém a proporção. */
+.cubo__face--base img {
+  width: auto;
+  height: 56%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px var(--menta-glow-forte));
+}
+
+/* Posicionamento das seis faces a partir do centro */
+.cubo__face--frente { transform: translateZ(calc(var(--lado) / 2)); }
+.cubo__face--tras   { transform: rotateY(180deg) translateZ(calc(var(--lado) / 2)); }
+.cubo__face--dir    { transform: rotateY(90deg)  translateZ(calc(var(--lado) / 2)); }
+.cubo__face--esq    { transform: rotateY(-90deg) translateZ(calc(var(--lado) / 2)); }
+.cubo__face--topo   { transform: rotateX(90deg)  translateZ(calc(var(--lado) / 2)); }
+.cubo__face--base   { transform: rotateX(-90deg) translateZ(calc(var(--lado) / 2)); }
+
+/* A face virada para a frente ganha um realce sutil */
+.cubo[data-face-ativa="xml"] .cubo__face--frente,
+.cubo[data-face-ativa="parser"] .cubo__face--dir,
+.cubo[data-face-ativa="json"] .cubo__face--tras,
+.cubo[data-face-ativa="fetch"] .cubo__face--esq,
+.cubo[data-face-ativa="csv"] .cubo__face--topo,
+.cubo[data-face-ativa="ck"] .cubo__face--base {
+  border-color: var(--menta-400);
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, .45),
+    0 0 34px rgba(37, 240, 162, .32);
+}
+
+.cubo-palco__sombra {
+  position: absolute;
+  bottom: 12%;
+  width: calc(var(--lado) * 1.1);
+  height: calc(var(--lado) * .3);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(37, 240, 162, .3), transparent 70%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.cubo-palco__dica {
+  position: absolute;
+  bottom: 0;
+  padding: .3rem .8rem;
+  border: 1px solid var(--borda-viva);
+  border-radius: 999px;
+  background: rgba(4, 16, 12, .8);
+  font-family: var(--fonte-mono);
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--menta-300);
+  pointer-events: none;
+  animation: pulsa-dica 2.6s ease-in-out infinite;
+  transition: opacity .4s var(--ease);
+}
+
+.cubo-palco__dica.is-oculta {
+  opacity: 0;
+}
+
+.cubo-legenda__indice {
+  font-family: var(--fonte-mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--menta-400);
+  margin-bottom: .5rem;
+}
+
+.cubo-legenda h3 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.4rem;
+  color: var(--txt-0);
+  margin-bottom: .7rem;
+}
+
+.cubo-legenda p {
+  font-size: .92rem;
+  color: var(--txt-2);
+}
+
+.cubo-legenda__face {
+  min-height: 2.6rem;
+  margin-top: 1rem;
+  padding: .7rem 1rem;
+  border-left: 2px solid var(--menta-400);
+  background: rgba(37, 240, 162, .07);
+  border-radius: 0 var(--raio-sm) var(--raio-sm) 0;
+  font-family: var(--fonte-mono);
+  font-size: .76rem;
+  color: var(--menta-200);
+}
+
+/* ==========================================================================
+   ASSINATURA DO GRUPO — placa em relevo no rodapé
+   ========================================================================== */
+
+.assinatura {
+  perspective: 1000px;
+  margin-bottom: 2rem;
+}
+
+.assinatura__placa {
+  position: relative;
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.8rem;
+  overflow: hidden;
+  border: 1px solid var(--borda-viva);
+  border-radius: var(--raio-lg);
+  background:
+    linear-gradient(148deg, rgba(24, 74, 57, .5), rgba(6, 21, 16, .9) 62%),
+    var(--vidro-alto);
+  box-shadow:
+    var(--sombra-funda),
+    inset 0 1px 0 rgba(255, 255, 255, .12);
+  transform-style: preserve-3d;
+  transform: rotateX(2deg);
+  transition: transform .6s var(--ease-out), box-shadow .6s var(--ease);
+}
+
+.assinatura__placa:hover {
+  transform: rotateX(0deg) translateY(-4px);
+  box-shadow:
+    var(--sombra-funda),
+    0 0 46px rgba(37, 240, 162, .2),
+    inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+/* Varredura de luz que atravessa a placa */
+.assinatura__brilho {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 35%,
+      rgba(37, 240, 162, .12) 48%,
+      rgba(234, 255, 223, .16) 52%,
+      transparent 65%);
+  animation: assinatura-varre 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.assinatura__marca {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  border-radius: 26px;
+  border: 1px solid var(--borda-viva);
+  background:
+    radial-gradient(circle at 40% 35%, rgba(37, 240, 162, .26), transparent 66%),
+    rgba(4, 16, 12, .8);
+  box-shadow: 0 0 30px rgba(37, 240, 162, .2), inset 0 0 22px rgba(0, 0, 0, .5);
+  transform: translateZ(30px);
+  animation: assinatura-flutua 6s ease-in-out infinite;
+}
+
+.assinatura__marca img {
+  width: 76%;
+  filter: drop-shadow(0 0 10px var(--menta-glow-forte));
+}
+
+.assinatura__texto {
+  transform: translateZ(16px);
+}
+
+.assinatura__eyebrow {
+  font-family: var(--fonte-mono);
+  font-size: .64rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--txt-3);
+}
+
+.assinatura__nome {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  background: var(--grad-marca);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: .1rem 0 .45rem;
+}
+
+.assinatura__linha {
+  font-size: .88rem;
+  color: var(--txt-1);
+}
+
+.assinatura__entrega {
+  font-size: .8rem;
+  color: var(--txt-3);
+  margin-top: .25rem;
+}
+
+.assinatura__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .7rem 1.3rem;
+  border: 1px solid var(--borda-viva);
+  border-radius: 999px;
+  background: rgba(4, 16, 12, .7);
+  font-size: .86rem;
+  font-weight: 600;
+  color: var(--menta-300);
+  white-space: nowrap;
+  transform: translateZ(24px);
+  transition: gap var(--transicao), border-color var(--transicao),
+    color var(--transicao), box-shadow var(--transicao);
+}
+
+.assinatura__link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.assinatura__link:hover {
+  gap: .8rem;
+  border-color: var(--menta-400);
+  color: var(--luz);
+  box-shadow: 0 0 26px rgba(37, 240, 162, .24);
+}
+
+@media (min-width: 720px) {
+  .cubo-bloco {
+    grid-template-columns: minmax(240px, 300px) 1fr;
+    gap: 2.5rem;
+  }
+
+  .assinatura__placa {
+    grid-template-columns: auto 1fr auto;
+  }
+}

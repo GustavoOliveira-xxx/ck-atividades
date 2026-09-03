@@ -9,7 +9,7 @@
     "vagas": 70,
     "totalCandidatosRegistrados": 1500,
     "totalNesteRecorte": 3,
-    "dataConsulta": "2026-09-03T12:00:00-03:00"
+    "dataConsulta": "2026-09-11T12:00:00-03:00"
   },
   "candidatos": [
     {
@@ -17,7 +17,7 @@
       "nomeCompleto": "Guilherme Castro Boulos",
       "nomeUrna": "GUILHERME BOULOS",
       "siglaPartido": "PSOL",
-      "numero": "5050",
+      "numero": "5010",
       "situacao": "Deferido",
       "foto": "assets/candidatos/guilherme-boulos.png",
       "vice": "—",
@@ -36,12 +36,12 @@
     },
     {
       "id": "6-003",
-      "nomeCompleto": "Nikolas Ferreira de Oliveira",
-      "nomeUrna": "NIKOLAS FERREIRA",
+      "nomeCompleto": "Dimas Mecca Sampaio",
+      "nomeUrna": "MAJOR MECCA",
       "siglaPartido": "PL",
-      "numero": "2222",
+      "numero": "2288",
       "situacao": "Deferido",
-      "foto": "assets/candidatos/nikolas-ferreira.png",
+      "foto": "assets/candidatos/major-mecca.png",
       "vice": "—",
       "coligacao": "Coligação em formação"
     }

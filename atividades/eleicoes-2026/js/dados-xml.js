@@ -40,7 +40,7 @@
    ========================================================================== */
 
 const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
-<eleicoes_sp ano="2026" uf="SP" atualizado="2026-09-03">
+<eleicoes_sp ano="2026" uf="SP" atualizado="2026-09-11">
   <cargos>
     <cargo titulo="Presidente" poder="Executivo" ambito="Federal" vagas="1" mandato="4 anos" icone="planalto">
       <descricao>Chefe do poder executivo federal e chefe de Estado. Comanda a administração pública da União, sanciona ou veta leis aprovadas pelo Congresso, edita medidas provisórias e representa o Brasil nas relações internacionais.</descricao>
@@ -199,7 +199,7 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
     </candidato>
 
     <!-- ===================== DEPUTADO FEDERAL ===================== -->
-    <candidato cargo="Deputado Federal" partido="PSOL" numero="5050" foto="guilherme-boulos" conferir="numero">
+    <candidato cargo="Deputado Federal" partido="PSOL" numero="5010" foto="guilherme-boulos">
       <nome>Guilherme Boulos</nome>
       <partido sigla="PSOL">Partido Socialismo e Liberdade</partido>
       <perfil>Psicólogo e coordenador de movimento de moradia, deputado federal por São Paulo.</perfil>
@@ -229,18 +229,18 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
       </propostas>
     </candidato>
 
-    <candidato cargo="Deputado Federal" partido="PL" numero="2222" foto="nikolas-ferreira">
-      <nome>Nikolas Ferreira</nome>
+    <candidato cargo="Deputado Federal" partido="PL" numero="2288" foto="major-mecca">
+      <nome>Major Mecca</nome>
       <partido sigla="PL">Partido Liberal</partido>
-      <perfil>Deputado federal por Minas Gerais, com forte atuação digital e pautas conservadoras.</perfil>
+      <perfil>Oficial da Polícia Militar de São Paulo, com atuação parlamentar voltada à segurança pública.</perfil>
       <propostas tipo="pautas">
-        <proposta eixo="Costumes">Defesa de pautas conservadoras.</proposta>
         <proposta eixo="Segurança">Fortalecimento da segurança pública.</proposta>
-        <proposta eixo="Legislação">Defesa do direito de legítima defesa.</proposta>
-        <proposta eixo="Legislação">Propostas de endurecimento de penas para determinados crimes.</proposta>
-        <proposta eixo="Transparência">Defesa de medidas contra corrupção e má gestão pública.</proposta>
-        <proposta eixo="Juventude">Propostas voltadas à juventude e educação.</proposta>
-        <proposta eixo="Economia">Defesa de maior liberdade econômica e individual.</proposta>
+        <proposta eixo="Forças policiais">Valorização das forças policiais.</proposta>
+        <proposta eixo="Crime organizado">Combate ao crime organizado.</proposta>
+        <proposta eixo="Legislação">Defesa de maior rigor contra criminosos.</proposta>
+        <proposta eixo="Agentes públicos">Apoio a políticas de segurança para agentes públicos.</proposta>
+        <proposta eixo="Costumes">Defesa de pautas conservadoras.</proposta>
+        <proposta eixo="Estrutura">Fortalecimento da estrutura das forças de segurança.</proposta>
       </propostas>
     </candidato>
 
@@ -259,21 +259,6 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
       </propostas>
     </candidato>
 
-    <candidato cargo="Deputado Estadual" partido="PL" numero="22288" foto="major-mecca" conferir="numero">
-      <nome>Major Mecca</nome>
-      <partido sigla="PL">Partido Liberal</partido>
-      <perfil>Oficial da Polícia Militar de São Paulo e deputado estadual, com atuação voltada à segurança pública.</perfil>
-      <propostas tipo="pautas">
-        <proposta eixo="Segurança">Fortalecimento da segurança pública.</proposta>
-        <proposta eixo="Forças policiais">Valorização das forças policiais.</proposta>
-        <proposta eixo="Crime organizado">Combate ao crime organizado.</proposta>
-        <proposta eixo="Legislação">Defesa de maior rigor contra criminosos.</proposta>
-        <proposta eixo="Agentes públicos">Apoio a políticas de segurança para agentes públicos.</proposta>
-        <proposta eixo="Costumes">Defesa de pautas conservadoras.</proposta>
-        <proposta eixo="Estrutura">Fortalecimento da estrutura das forças de segurança.</proposta>
-      </propostas>
-    </candidato>
-
     <candidato cargo="Deputado Estadual" partido="PSOL" numero="50789" foto="carlos-giannazi">
       <nome>Carlos Giannazi</nome>
       <partido sigla="PSOL">Partido Socialismo e Liberdade</partido>
@@ -286,6 +271,15 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
         <proposta eixo="Servidores">Defesa do pagamento retroativo relacionado aos períodos congelados dos servidores.</proposta>
         <proposta eixo="Servidores">Restabelecimento das faltas abonadas para servidores estaduais.</proposta>
         <proposta eixo="Privatizações">Combate às políticas de privatização de serviços públicos.</proposta>
+      </propostas>
+    </candidato>
+
+    <candidato cargo="Deputado Estadual" partido="PSD" numero="55300" foto="caio-aoqui" conferir="pautas">
+      <nome>Caio Aoqui</nome>
+      <partido sigla="PSD">Partido Social Democrático</partido>
+      <perfil>Administrador, candidato a deputado estadual por São Paulo com candidatura deferida.</perfil>
+      <propostas tipo="pautas">
+        <proposta eixo="A catalogar">Pautas ainda não levantadas pelo grupo. Consulte a candidatura no DivulgaCandContas do TSE antes da apresentação.</proposta>
       </propostas>
     </candidato>
 
@@ -313,7 +307,6 @@ const COR_PARTIDO = {
   "REDE": "#2fbf71",
   "PSB": "#e4572e",
   "PSOL": "#f2b705",
-  "PSDB": "#0072bb",
 };
 
 window.CK_XML = { xmlTexto, CLASSE_PODER, COR_PARTIDO };
