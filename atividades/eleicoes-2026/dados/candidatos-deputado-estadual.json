@@ -9,15 +9,15 @@
     "vagas": 94,
     "totalCandidatosRegistrados": 2100,
     "totalNesteRecorte": 3,
-    "dataConsulta": "2026-09-02T20:00:00-03:00"
+    "dataConsulta": "2026-09-03T12:00:00-03:00"
   },
   "candidatos": [
     {
       "id": "7-001",
       "nomeCompleto": "Bruna Cristina Jequier Furlan",
       "nomeUrna": "BRUNA FURLAN",
-      "siglaPartido": "PSDB",
-      "numero": "45045",
+      "siglaPartido": "Republicanos",
+      "numero": "10010",
       "situacao": "Deferido",
       "foto": "assets/candidatos/bruna-furlan.png",
       "vice": "—",
@@ -28,7 +28,7 @@
       "nomeCompleto": "Anderson Mecca de Oliveira",
       "nomeUrna": "MAJOR MECCA",
       "siglaPartido": "PL",
-      "numero": "22222",
+      "numero": "22288",
       "situacao": "Deferido",
       "foto": "assets/candidatos/major-mecca.png",
       "vice": "—",
@@ -39,7 +39,7 @@
       "nomeCompleto": "Carlos Giannazi",
       "nomeUrna": "PROFESSOR CARLOS GIANNAZI",
       "siglaPartido": "PSOL",
-      "numero": "50123",
+      "numero": "50789",
       "situacao": "Deferido",
       "foto": "assets/candidatos/carlos-giannazi.png",
       "vice": "—",

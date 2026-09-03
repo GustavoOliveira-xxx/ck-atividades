@@ -104,6 +104,22 @@
           </li>`).join("")
       : '<li><p>Propostas não informadas neste recorte.</p></li>';
 
+    /* Executivo tem programa de governo registrado; Legislativo não tem.
+       O rótulo muda para deixar essa diferença explícita no card. */
+    const ehPrograma = doXML.tipoPropostas === "programa";
+
+    const rotuloPropostas = ehPrograma
+      ? "Propostas de campanha"
+      : "Pautas e atuação";
+
+    const notaPropostas = ehPrograma
+      ? "Resumo do programa de governo e de declarações públicas de campanha."
+      : "Pautas e posições públicas do parlamentar — não é programa de governo.";
+
+    const avisoNumero = doXML.conferirNumero
+      ? '<span class="candidato__conferir" title="Número a confirmar no DivulgaCandContas do TSE">a conferir</span>'
+      : "";
+
     return `
     <article class="candidato" style="--cor-partido:${esc(cor)};--atraso:${i * 110}ms"
              data-candidato="${esc(slug(registro.nomeUrna))}" data-revelar>
@@ -128,6 +144,7 @@
               <span class="candidato__numero" aria-label="Número na urna">
                 ${esc(registro.numero)}
               </span>
+              ${avisoNumero}
             </div>
           </div>
 
@@ -142,6 +159,11 @@
         <div class="candidato__face candidato__face--verso">
           <p class="candidato__verso-nome">${esc(registro.nomeUrna)}</p>
           <p class="candidato__perfil">${esc(doXML.perfil || "")}</p>
+
+          <p class="candidato__rotulo-propostas">
+            ${esc(rotuloPropostas)}
+            <em>${esc(notaPropostas)}</em>
+          </p>
 
           <ul class="candidato__propostas">${listaPropostas}</ul>
 
