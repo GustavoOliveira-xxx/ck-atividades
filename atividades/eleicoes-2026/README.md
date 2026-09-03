@@ -159,29 +159,71 @@ python3 -m http.server 8000
 Três por cargo, quinze no total — recorte suficiente para demonstrar o XML, o `fetch`,
 os filtros e os cards, sem virar um portal eleitoral.
 
-| Cargo | Candidatos |
-| --- | --- |
-| Presidente | Lula (PT) · Flávio Bolsonaro (PL) · Ronaldo Caiado (PSD) |
-| Governador | Tarcísio de Freitas (Republicanos) · Fernando Haddad (PT) · Vera Lúcia (PSTU) |
-| Senador | Guilherme Derrite (PP) · Marina Silva (Rede) · Simone Tebet (PSB) |
-| Deputado Federal | Guilherme Boulos (PSOL) · Tabata Amaral (PSB) · Nikolas Ferreira (PL) |
-| Deputado Estadual | Bruna Furlan (PSDB) · Major Mecca (PL) · Carlos Giannazi (PSOL) |
+| Cargo | Candidato | Partido | Nº | Propostas |
+| --- | --- | --- | ---: | ---: |
+| Presidente | Luiz Inácio Lula da Silva | PT | 13 | 6 |
+| Presidente | Flávio Bolsonaro | PL | 22 | 7 |
+| Presidente | Ronaldo Caiado | PSD | 55 | 7 |
+| Governador | Tarcísio de Freitas | Republicanos | 10 | 7 |
+| Governador | Fernando Haddad | PT | 13 | 8 |
+| Governador | Vera Lúcia | PSTU | 16 | 7 |
+| Senador | Guilherme Derrite | PP | 111 | 6 |
+| Senador | Marina Silva | REDE | 180 | 7 |
+| Senador | Simone Tebet | PSB | 400 | 7 |
+| Dep. Federal | Guilherme Boulos | PSOL | 5050 ⚠️ | 7 |
+| Dep. Federal | Tabata Amaral | PSB | 4040 | 7 |
+| Dep. Federal | Nikolas Ferreira | PL | 2222 | 7 |
+| Dep. Estadual | Bruna Furlan | Republicanos | 10010 | 6 |
+| Dep. Estadual | Major Mecca | PL | 22288 ⚠️ | 7 |
+| Dep. Estadual | Carlos Giannazi | PSOL | 50789 | 7 |
+
+**103 propostas no total.** Os números seguem a regra do TSE: majoritário usa o
+número do partido, senador tem 3 dígitos, deputado federal 4 e deputado estadual 5,
+todos começando pelo número do partido.
+
+⚠️ Os dois marcados carregam `conferir="numero"` no XML e aparecem na interface com
+um selo **a conferir**: o número de Boulos não constava na fonte usada e o de Major
+Mecca veio com 4 dígitos, o que não fecha com a regra de 5 do cargo estadual.
+Confirme os dois no DivulgaCandContas antes de apresentar.
+
+---
+
+## Programa de governo × pauta parlamentar
+
+A atividade trata os dois casos de forma diferente, de propósito:
+
+| | Executivo (Presidente, Governador) | Legislativo (Senador, deputados) |
+| --- | --- | --- |
+| Existe plano de governo registrado? | Sim, no DivulgaCandContas | Não |
+| Atributo no XML | `<propostas tipo="programa">` | `<propostas tipo="pautas">` |
+| Rótulo no card | **Propostas de campanha** | **Pautas e atuação** |
+| Nota no card | "Resumo do programa de governo e de declarações públicas de campanha." | "Pautas e posições públicas do parlamentar — não é programa de governo." |
+| Coluna *Tipo* no CSV | `Programa de governo` | `Pautas parlamentares` |
+
+Parlamentar não registra plano de governo. Apresentar a pauta de um deputado como se
+fosse promessa de campanha seria impreciso, então a interface nomeia cada coisa pelo
+que ela é.
 
 ---
 
 ## Avisos
 
-1. **Trabalho escolar.** Nenhum vínculo com a Justiça Eleitoral, com partidos ou com campanhas.
-2. **As propostas são resumos editoriais escritos pelo grupo**, a partir da trajetória pública
-   de cada candidato. **Não são transcrição de programa de governo registrado.** Antes de
-   apresentar, confira cada texto contra o programa oficial no
-   [DivulgaCandContas](https://divulgacandcontas.tse.jus.br) e ajuste o que for necessário.
-3. **O número exibido é o número do partido**, que corresponde ao número de urna nas disputas
-   majoritárias (Presidente e Governador). Nas proporcionais, o número individual do candidato
-   é definido no registro da candidatura.
+1. **Trabalho escolar.** Nenhum vínculo com a Justiça Eleitoral, com partidos ou com
+   campanhas. Nada aqui é recomendação de voto: os textos descrevem posições, não as
+   endossam nem as comparam.
+2. **As propostas são resumos editoriais escritos pelo grupo.** Não são transcrição
+   literal de documento oficial. Para Presidente e Governador, o resumo parte do programa
+   de governo registrado e de declarações públicas de campanha; para Senador e deputados,
+   parte de pautas, projetos e posições públicas — ver a seção acima.
+3. **Dois números de urna ainda precisam de conferência** (Guilherme Boulos e Major Mecca).
+   Estão marcados no XML e sinalizados na interface.
 4. **Os arquivos em `dados/` são simulações de formato**, não retornos oficiais do TSE.
    Cada um traz um campo `_aviso` dizendo isso.
 5. As fotos foram fornecidas para uso neste trabalho escolar.
+
+**Antes de entregar**, confira nome de urna, partido, número e propostas de cada candidato
+no [DivulgaCandContas](https://divulgacandcontas.tse.jus.br) — o portal publica tanto o
+registro das candidaturas quanto os arquivos de proposta de governo.
 
 Fontes oficiais: [divulgacandcontas.tse.jus.br](https://divulgacandcontas.tse.jus.br) ·
 [dadosabertos.tse.jus.br](https://dadosabertos.tse.jus.br)

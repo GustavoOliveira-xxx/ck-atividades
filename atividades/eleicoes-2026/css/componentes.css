@@ -1389,7 +1389,7 @@ a:hover .selo-duo__fenda {
 
 .candidato {
   position: relative;
-  aspect-ratio: 3 / 4.15;
+  aspect-ratio: 3 / 4.6;
   transform-style: preserve-3d;
 }
 
@@ -1599,19 +1599,59 @@ a:hover .selo-duo__fenda {
   border-bottom: 1px solid var(--borda);
 }
 
+/* Rótulo que separa programa de governo (Executivo) de pauta parlamentar
+   (Legislativo). Sem isso, uma pauta de deputado pareceria promessa. */
+.candidato__rotulo-propostas {
+  font-family: var(--fonte-mono);
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--menta-300);
+}
+
+.candidato__rotulo-propostas em {
+  display: block;
+  margin-top: .15rem;
+  font-family: var(--fonte);
+  font-size: .68rem;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.35;
+  color: var(--txt-3);
+}
+
+/* Selo discreto nos números que ainda faltam confirmar no TSE */
+.candidato__conferir {
+  padding: .16rem .5rem;
+  border-radius: 999px;
+  border: 1px dashed rgba(254, 200, 0, .5);
+  background: rgba(254, 200, 0, .1);
+  font-family: var(--fonte-mono);
+  font-size: .56rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #ffdf7a;
+  white-space: nowrap;
+}
+
 .candidato__propostas {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   display: grid;
-  gap: .65rem;
+  gap: .5rem;
   align-content: start;
   list-style: none;
-  padding-right: .3rem;
+  padding-right: .35rem;
+  /* Esmaece a última linha quando ainda há proposta abaixo, para o corte
+     não parecer texto faltando. */
+  mask-image: linear-gradient(180deg, #000 calc(100% - 26px), transparent);
+  scrollbar-width: thin;
 }
 
 .candidato__propostas li {
-  padding-left: .8rem;
+  padding-left: .7rem;
   border-left: 2px solid color-mix(in srgb, var(--cor-partido) 60%, transparent);
 }
 
@@ -1638,7 +1678,7 @@ a:hover .selo-duo__fenda {
 
 /* Esqueleto de carregamento ---------------------------------------------- */
 .candidato-esqueleto {
-  aspect-ratio: 3 / 4.15;
+  aspect-ratio: 3 / 4.6;
   display: flex;
   flex-direction: column;
   gap: .7rem;
