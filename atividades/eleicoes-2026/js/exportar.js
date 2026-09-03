@@ -81,18 +81,39 @@
      Mesma disciplina de limpeza aplicada a todos os campos de texto.
      -------------------------------------------------------------------- */
   function exportarCandidatosParaPlanilha() {
-    let csv = "﻿Cargo;Candidato;Partido;Número;Proposta 1;Proposta 2;Proposta 3\n";
+    /* O número de propostas varia por candidato, então o cabeçalho é montado
+       a partir do maior caso — assim nenhuma linha fica com coluna sobrando. */
+    const maxPropostas = candidatosData.reduce(
+      (maior, c) => Math.max(maior, c.propostas.length), 0
+    );
+
+    const colunasPropostas = Array.from(
+      { length: maxPropostas },
+      (_, i) => `Proposta ${i + 1}`
+    ).join(";");
+
+    let csv = `﻿Cargo;Candidato;Partido;Número;Tipo;${colunasPropostas}\n`;
 
     candidatosData.forEach((candidato) => {
-      const propostas = [0, 1, 2]
-        .map((i) => limpar(candidato.propostas[i]?.texto || ""))
-        .join(";");
+      /* Todas as linhas recebem o mesmo número de colunas: quem tem menos
+         propostas fica com células vazias no fim. */
+      const propostas = Array.from(
+        { length: maxPropostas },
+        (_, i) => limpar(candidato.propostas[i]?.texto || "")
+      ).join(";");
+
+      /* Executivo tem programa de governo; Legislativo tem pauta. A planilha
+         carrega essa distinção junto, para o dado não sair ambíguo. */
+      const tipo = candidato.tipoPropostas === "programa"
+        ? "Programa de governo"
+        : "Pautas parlamentares";
 
       csv += [
         limpar(candidato.cargo),
         limpar(candidato.nome),
         limpar(candidato.partido),
         limpar(candidato.numero),
+        limpar(tipo),
         propostas,
       ].join(";") + "\n";
     });

@@ -298,7 +298,8 @@
   if (faixa) {
     const RECADOS = [
       "Projeto acadêmico — sem vínculo com a Justiça Eleitoral",
-      "Propostas: resumos editoriais do grupo, não programas oficiais",
+      "Propostas: resumos editoriais do grupo, não documentos oficiais",
+      "Executivo tem programa de governo · Legislativo tem pauta parlamentar",
       "Dados de candidatura: consulte o TSE · DivulgaCandContas",
       "Parte 1 · XML local lido com DOMParser",
       "Parte 2 · fetch + JSON no formato do TSE",
