@@ -46,6 +46,7 @@ eleicoes-2026/
 │   ├── exportar.js             Blob → XML e CSV
 │   ├── api.js                  fetch + JSON → cards de candidato
 │   ├── urna.js                 a urna 3D votando em laço
+│   ├── cubo.js                 o cubo de dados arrastável
 │   ├── cena.js                 partículas em canvas
 │   └── ui.js                   carga animada, tilt 3D, contadores
 ├── dados/                      recortes JSON no formato do TSE
@@ -84,6 +85,31 @@ O roteiro intercala os cargos, então a urna passa por Presidente, Governador,
 Senador e os dois deputados antes de repetir alguém. A animação congela quando
 a urna sai da tela ou a aba perde o foco, e com `prefers-reduced-motion` ela
 nem começa: mostra uma ficha parada e já preenchida.
+
+---
+
+## O cubo de dados
+
+Na seção do XML há um cubo 3D **arrastável**: cada uma das seis faces é uma
+etapa do caminho que a informação percorre na atividade.
+
+| Face | Etapa |
+| --- | --- |
+| XML | o texto guardado em `xmlTexto` |
+| DOMParser | o texto virando árvore navegável |
+| JSON | o recorte no formato do TSE |
+| fetch | a busca assíncrona do recorte |
+| CSV | a exportação que o Excel abre direto |
+| CK | a marca do grupo, autoria do projeto |
+
+Ele gira sozinho, mas dá para agarrar com o mouse ou com o dedo e girar — ao
+soltar, a inércia continua e o giro automático volta. Também responde às setas
+do teclado, para quem não usa mouse, e a legenda abaixo narra qual face está
+virada para a frente. Com `prefers-reduced-motion` ele para numa pose que mostra
+três faces de uma vez.
+
+No rodapé há ainda a **placa de assinatura** do grupo, em relevo, com a logo
+remasterizada da CK, a identificação da turma e o link de volta para o acervo.
 
 ---
 
@@ -159,32 +185,53 @@ python3 -m http.server 8000
 Três por cargo, quinze no total — recorte suficiente para demonstrar o XML, o `fetch`,
 os filtros e os cards, sem virar um portal eleitoral.
 
-| Cargo | Candidato | Partido | Nº | Propostas |
-| --- | --- | --- | ---: | ---: |
-| Presidente | Luiz Inácio Lula da Silva | PT | 13 | 6 |
-| Presidente | Flávio Bolsonaro | PL | 22 | 7 |
-| Presidente | Ronaldo Caiado | PSD | 55 | 7 |
-| Governador | Tarcísio de Freitas | Republicanos | 10 | 7 |
-| Governador | Fernando Haddad | PT | 13 | 8 |
-| Governador | Vera Lúcia | PSTU | 16 | 7 |
-| Senador | Guilherme Derrite | PP | 111 | 6 |
-| Senador | Marina Silva | REDE | 180 | 7 |
-| Senador | Simone Tebet | PSB | 400 | 7 |
-| Dep. Federal | Guilherme Boulos | PSOL | 5050 ⚠️ | 7 |
-| Dep. Federal | Tabata Amaral | PSB | 4040 | 7 |
-| Dep. Federal | Nikolas Ferreira | PL | 2222 | 7 |
-| Dep. Estadual | Bruna Furlan | Republicanos | 10010 | 6 |
-| Dep. Estadual | Major Mecca | PL | 22288 ⚠️ | 7 |
-| Dep. Estadual | Carlos Giannazi | PSOL | 50789 | 7 |
+| Cargo | Nome de urna | Nome completo | Partido | Nº | Propostas |
+| --- | --- | --- | --- | ---: | ---: |
+| Presidente | Lula | Luiz Inácio Lula da Silva | PT | 13 | 6 |
+| Presidente | Flávio Bolsonaro | Flávio Nantes Bolsonaro | PL | 22 | 7 |
+| Presidente | Ronaldo Caiado | Ronaldo Ramos Caiado | PSD | 55 | 7 |
+| Governador | Tarcísio de Freitas | Tarcísio Gomes de Freitas | Republicanos | 10 | 7 |
+| Governador | Fernando Haddad | Fernando Haddad | PT | 13 | 8 |
+| Governador | Vera | Vera Lúcia Pereira da Silva Salgado | PSTU | 16 | 7 |
+| Senador | Derrite | Guilherme Muraro Derrite | PP | 111 | 6 |
+| Senador | Marina Silva | Maria Osmarina Marina Silva Vaz de Lima | REDE | 180 | 7 |
+| Senador | Simone Tebet | Simone Nassar Tebet | PSB | 400 | 7 |
+| Dep. Federal | Guilherme Boulos | Guilherme Castro Boulos | PSOL | 5010 | 7 |
+| Dep. Federal | Tabata Amaral | Tabata Claudia Amaral de Pontes | PSB | 4040 | 7 |
+| Dep. Federal | Major Mecca | Dimas Mecca Sampaio | PL | 2288 | 7 |
+| Dep. Estadual | Bruna Furlan | Bruna Dias Furlan Vicente | Republicanos | 10010 | 6 |
+| Dep. Estadual | Professor Carlos Giannazi | Carlos Giannazi | PSOL | 50789 | 7 |
+| Dep. Estadual | Caio Aoqui | Caio Kanji Pardo Aoqui | PSD | 55300 | 1 ⚠️ |
 
-**103 propostas no total.** Os números seguem a regra do TSE: majoritário usa o
-número do partido, senador tem 3 dígitos, deputado federal 4 e deputado estadual 5,
-todos começando pelo número do partido.
+**97 propostas no total.** Todas as candidaturas constam como **Deferido**.
 
-⚠️ Os dois marcados carregam `conferir="numero"` no XML e aparecem na interface com
-um selo **a conferir**: o número de Boulos não constava na fonte usada e o de Major
-Mecca veio com 4 dígitos, o que não fecha com a regra de 5 do cargo estadual.
-Confirme os dois no DivulgaCandContas antes de apresentar.
+### Regra de dígitos do número de urna
+
+| Cargo | Dígitos | Confere? |
+| --- | ---: | --- |
+| Presidente e Governador | 2 (o número do partido) | ✅ 6 de 6 |
+| Senador | 3 | ✅ 3 de 3 |
+| Deputado Federal | 4 | ✅ 3 de 3 |
+| Deputado Estadual | 5 | ✅ 3 de 3 |
+
+Todos os números começam pelo número do partido, como manda a regra do TSE.
+
+⚠️ **Caio Aoqui** entrou com a ficha de candidatura completa, mas as pautas ainda
+não foram levantadas pelo grupo. O XML o marca com `conferir="pautas"` e o card
+mostra o selo **a catalogar** — preencha antes de apresentar.
+
+### Correções da auditoria de 11/09
+
+| Candidato | Antes | Depois |
+| --- | --- | --- |
+| Guilherme Boulos | nº 5050 | nº **5010** |
+| Major Mecca | Dep. **Estadual**, nº 22288 | Dep. **Federal**, nº **2288** |
+| Bruna Furlan | PSDB, nome curto | **Republicanos**, Bruna Dias Furlan Vicente |
+| Nikolas Ferreira | Dep. Federal por SP | **removido** — concorre por Minas Gerais |
+| Caio Aoqui | — | **incluído** como 3º Dep. Estadual (PSD, 55300) |
+
+A foto do Nikolas Ferreira saiu de `assets/candidatos/`, já que ele não faz mais
+parte do recorte paulista.
 
 ---
 
@@ -215,8 +262,9 @@ que ela é.
    literal de documento oficial. Para Presidente e Governador, o resumo parte do programa
    de governo registrado e de declarações públicas de campanha; para Senador e deputados,
    parte de pautas, projetos e posições públicas — ver a seção acima.
-3. **Dois números de urna ainda precisam de conferência** (Guilherme Boulos e Major Mecca).
-   Estão marcados no XML e sinalizados na interface.
+3. **As pautas de Caio Aoqui ainda não foram levantadas.** Ele está marcado com
+   `conferir="pautas"` no XML e o card mostra o selo **a catalogar**. Todos os
+   números de urna foram auditados e conferem com a regra de dígitos do TSE.
 4. **Os arquivos em `dados/` são simulações de formato**, não retornos oficiais do TSE.
    Cada um traz um campo `_aviso` dizendo isso.
 5. As fotos foram fornecidas para uso neste trabalho escolar.

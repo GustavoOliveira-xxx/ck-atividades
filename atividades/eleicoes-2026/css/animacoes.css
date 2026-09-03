@@ -496,4 +496,28 @@
     animation: none !important;
     transform: translateY(14px) rotateY(-22deg) !important;
   }
+
+  /* O cubo continua arrastável, mas sem giro automático nem varredura */
+  .assinatura__brilho,
+  .cubo-palco__dica {
+    animation: none !important;
+  }
+}
+
+/* --- Cubo de dados e assinatura ----------------------------------------- */
+@keyframes pulsa-dica {
+  0%, 100% { opacity: .55; }
+  50%      { opacity: 1; }
+}
+
+@keyframes assinatura-varre {
+  0%, 100% { transform: translateX(-40%); opacity: 0; }
+  45%      { opacity: 1; }
+  55%      { opacity: 1; }
+  100%     { transform: translateX(40%); opacity: 0; }
+}
+
+@keyframes assinatura-flutua {
+  0%, 100% { transform: translateZ(30px) translateY(0) rotate(0deg); }
+  50%      { transform: translateZ(30px) translateY(-7px) rotate(-3deg); }
 }

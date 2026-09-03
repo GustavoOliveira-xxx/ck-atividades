@@ -116,9 +116,13 @@
       ? "Resumo do programa de governo e de declarações públicas de campanha."
       : "Pautas e posições públicas do parlamentar — não é programa de governo.";
 
-    const avisoNumero = doXML.conferirNumero
-      ? '<span class="candidato__conferir" title="Número a confirmar no DivulgaCandContas do TSE">a conferir</span>'
-      : "";
+    /* O selo aparece exatamente onde está a pendência: ao lado do número ou
+       junto do bloco de propostas. */
+    const selo = (texto) =>
+      `<span class="candidato__conferir" title="Confirmar no DivulgaCandContas do TSE">${texto}</span>`;
+
+    const avisoNumero = doXML.conferir === "numero" ? selo("nº a conferir") : "";
+    const avisoPautas = doXML.conferir === "pautas" ? selo("a catalogar") : "";
 
     return `
     <article class="candidato" style="--cor-partido:${esc(cor)};--atraso:${i * 110}ms"
@@ -161,7 +165,7 @@
           <p class="candidato__perfil">${esc(doXML.perfil || "")}</p>
 
           <p class="candidato__rotulo-propostas">
-            ${esc(rotuloPropostas)}
+            ${esc(rotuloPropostas)} ${avisoPautas}
             <em>${esc(notaPropostas)}</em>
           </p>
 

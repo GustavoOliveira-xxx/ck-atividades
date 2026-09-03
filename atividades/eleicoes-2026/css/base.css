@@ -116,6 +116,10 @@ body.is-travado {
 
 img {
   max-width: 100%;
+  /* Sem height:auto, uma imagem com só a largura no CSS herda a altura do
+     atributo height do HTML e estica — foi o que aconteceu com a logo da
+     assinatura, que virou 988px dentro de uma moldura de 92px. */
+  height: auto;
   display: block;
 }
 
