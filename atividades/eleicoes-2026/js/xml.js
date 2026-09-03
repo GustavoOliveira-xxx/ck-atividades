@@ -100,8 +100,19 @@
           texto: proposta.textContent.trim(),
         }));
 
+      /* tipo="programa" (Executivo, com plano de governo registrado) ou
+         tipo="pautas" (Legislativo, onde não existe plano de governo). A
+         interface rotula os dois de forma diferente, para não apresentar
+         pauta de parlamentar como se fosse promessa de campanha. */
+      const tipoPropostas =
+        candidato.querySelector("propostas")?.getAttribute("tipo") || "pautas";
+
+      /* Marcado quando o número de urna ainda precisa de conferência no TSE */
+      const conferirNumero = candidato.getAttribute("conferir") === "numero";
+
       candidatosData.push({
         indice, cargo, partido, numero, nome, partidoNome, perfil, propostas,
+        tipoPropostas, conferirNumero,
         id: slug(nome),
         cargoId: slug(cargo),
         foto: `assets/candidatos/${foto}.png`,

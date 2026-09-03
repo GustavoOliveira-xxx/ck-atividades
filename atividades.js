@@ -40,10 +40,11 @@ window.ACERVO_CK = [
       "A Parte 1 lê os cinco cargos em disputa direto da variável xmlTexto com DOMParser, " +
       "colore o selo pelo atributo poder e exporta XML e CSV pelo navegador com Blob. " +
       "A Parte 2 consulta os candidatos com fetch em recortes no formato do TSE e monta " +
-      "cards 3D que viram para mostrar as propostas. Quinze candidatos, cinco cargos, " +
-      "sem framework e sem backend.",
+      "cards 3D que viram para mostrar as propostas. Quinze candidatos, cinco cargos " +
+      "e 103 propostas, sem framework e sem backend.",
     destaques: [
       "5 cargos · 15 candidatos",
+      "103 propostas catalogadas",
       "DOMParser + querySelectorAll",
       "fetch + async/await",
       "CSV com BOM para Excel",
