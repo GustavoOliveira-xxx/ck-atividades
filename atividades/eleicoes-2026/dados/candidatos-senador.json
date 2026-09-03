@@ -9,7 +9,7 @@
     "vagas": 2,
     "totalCandidatosRegistrados": 14,
     "totalNesteRecorte": 3,
-    "dataConsulta": "2026-09-02T20:00:00-03:00"
+    "dataConsulta": "2026-09-03T12:00:00-03:00"
   },
   "candidatos": [
     {
@@ -27,8 +27,8 @@
       "id": "5-002",
       "nomeCompleto": "Maria Osmarina Marina Silva Vaz de Lima",
       "nomeUrna": "MARINA SILVA",
-      "siglaPartido": "Rede",
-      "numero": "181",
+      "siglaPartido": "REDE",
+      "numero": "180",
       "situacao": "Deferido",
       "foto": "assets/candidatos/marina-silva.png",
       "vice": "—",
@@ -39,7 +39,7 @@
       "nomeCompleto": "Simone Nassar Tebet",
       "nomeUrna": "SIMONE TEBET",
       "siglaPartido": "PSB",
-      "numero": "401",
+      "numero": "400",
       "situacao": "Deferido",
       "foto": "assets/candidatos/simone-tebet.png",
       "vice": "—",

@@ -9,7 +9,7 @@
     "vagas": 70,
     "totalCandidatosRegistrados": 1500,
     "totalNesteRecorte": 3,
-    "dataConsulta": "2026-09-02T20:00:00-03:00"
+    "dataConsulta": "2026-09-03T12:00:00-03:00"
   },
   "candidatos": [
     {
@@ -17,7 +17,7 @@
       "nomeCompleto": "Guilherme Castro Boulos",
       "nomeUrna": "GUILHERME BOULOS",
       "siglaPartido": "PSOL",
-      "numero": "50777",
+      "numero": "5050",
       "situacao": "Deferido",
       "foto": "assets/candidatos/guilherme-boulos.png",
       "vice": "—",
@@ -28,7 +28,7 @@
       "nomeCompleto": "Tabata Claudia Amaral de Pontes",
       "nomeUrna": "TABATA AMARAL",
       "siglaPartido": "PSB",
-      "numero": "40100",
+      "numero": "4040",
       "situacao": "Deferido",
       "foto": "assets/candidatos/tabata-amaral.png",
       "vice": "—",
@@ -39,7 +39,7 @@
       "nomeCompleto": "Nikolas Ferreira de Oliveira",
       "nomeUrna": "NIKOLAS FERREIRA",
       "siglaPartido": "PL",
-      "numero": "22000",
+      "numero": "2222",
       "situacao": "Deferido",
       "foto": "assets/candidatos/nikolas-ferreira.png",
       "vice": "—",
