@@ -1,13 +1,5 @@
 @charset "UTF-8";
 
-/* ============================================================================
-   CK ELEIÇÕES 2026 — CARGA (loader) E ANIMAÇÕES
-   ========================================================================== */
-
-/* ==========================================================================
-   TELA DE CARGA
-   ========================================================================== */
-
 .carga {
   position: fixed;
   inset: 0;
@@ -49,7 +41,6 @@
   transition: opacity .45s var(--ease), transform .45s var(--ease);
 }
 
-/* --- Urna 3D que gira durante o carregamento ---------------------------- */
 .carga__urna {
   --l: 78px;
   --a: 62px;
@@ -133,7 +124,6 @@
   animation-delay: .68s;
 }
 
-/* A cédula que cai dentro da urna, em laço */
 .carga__cedula {
   position: absolute;
   z-index: 5;
@@ -149,7 +139,6 @@
   animation: cedula-cai 2.6s var(--ease-out) infinite;
 }
 
-/* --- Aro de progresso --------------------------------------------------- */
 .carga__aro {
   position: absolute;
   top: 50%;
@@ -216,7 +205,6 @@
   color: var(--txt-3);
 }
 
-/* --- Etapas do boot ----------------------------------------------------- */
 .carga__etapas {
   display: grid;
   gap: .4rem;
@@ -275,7 +263,6 @@
   font-size: inherit;
 }
 
-/* --- Saída -------------------------------------------------------------- */
 .carga.is-aberta .carga__nucleo {
   opacity: 0;
   transform: scale(.93);
@@ -293,10 +280,6 @@
   pointer-events: none;
 }
 
-/* ==========================================================================
-   REVELAÇÃO AO ROLAR
-   ========================================================================== */
-
 [data-revelar] {
   opacity: 0;
   transform: translateY(26px);
@@ -309,11 +292,6 @@
   transform: none;
 }
 
-/* ==========================================================================
-   KEYFRAMES
-   ========================================================================== */
-
-/* --- Selo duplo: fade em laço entre as duas marcas --------------------- */
 @keyframes selo-fade-origem {
   0%,  42%  { opacity: 1; transform: scale(1) rotate(0deg); }
   50%, 92%  { opacity: 0; transform: scale(.86) rotate(-7deg); }
@@ -356,8 +334,6 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* A urna não dá voltas completas: ela balança num arco, mantendo a tela
-   sempre legível — é o que deixa a animação de votação visível. */
 @keyframes urna-balanca {
   0%, 100% { transform: translateY(14px) rotateY(-30deg) rotateX(1deg); }
   50%      { transform: translateY(14px) rotateY(16deg) rotateX(-2deg); }
@@ -465,12 +441,7 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* ==========================================================================
-   PREFERÊNCIA POR MENOS MOVIMENTO
-   ========================================================================== */
-
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -491,20 +462,17 @@
     display: none;
   }
 
-  /* A urna para numa pose legível em vez de balançar */
   .urna3d {
     animation: none !important;
     transform: translateY(14px) rotateY(-22deg) !important;
   }
 
-  /* O cubo continua arrastável, mas sem giro automático nem varredura */
   .assinatura__brilho,
   .cubo-palco__dica {
     animation: none !important;
   }
 }
 
-/* --- Cubo de dados e assinatura ----------------------------------------- */
 @keyframes pulsa-dica {
   0%, 100% { opacity: .55; }
   50%      { opacity: 1; }

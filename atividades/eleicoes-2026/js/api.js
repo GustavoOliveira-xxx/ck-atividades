@@ -1,37 +1,11 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — PARTE 2 · CONSUMINDO UMA API COM FETCH (JSON)
-   ----------------------------------------------------------------------------
-   No código-base, a Parte 2 buscava piadas na JokeAPI e traduzia com a
-   MyMemory. Aqui o alvo é o sistema DivulgaCandContas do TSE.
-
-   SOBRE O CORS
-   O endpoint público do TSE não devolve o cabeçalho Access-Control-Allow-Origin,
-   então o navegador bloqueia a leitura da resposta a partir de outra origem —
-   é o erro 403/CORS mostrado na aula. Das três saídas apresentadas
-   (Mock, Proxy, Backend próprio), esta entrega usa a ABORDAGEM 1 — MOCK:
-   recortes locais em `dados/*.json`, com o MESMO formato do retorno do TSE.
-
-   O mecanismo exercitado é idêntico ao de uma API remota:
-
-       select cargo → fetch(url) → await resposta.json() → dados.candidatos
-                    → forEach/map → cards no DOM
-
-   Trocar para o TSE real depois é mudar uma constante: basta apontar
-   ORIGEM_DADOS para o proxy ou para o backend próprio.
-   ========================================================================== */
-
 (() => {
   "use strict";
 
   const { candidatosData, helpers } = window.CK_ELEICOES;
   const { $, esc, slug } = helpers;
 
-  /* URL base dos recortes. Em produção acadêmica, é a pasta local.
-     Para usar o TSE de verdade, troque por um proxy CORS ou backend próprio:
-       const ORIGEM_DADOS = "https://SEU-PROXY/divulgacandcontas.tse.jus.br/..."; */
   const ORIGEM_DADOS = "dados";
 
-  /* Mapa cargo → arquivo, no lugar do parâmetro de URL da API real. */
   const ARQUIVO_POR_CARGO = {
     "Presidente": "candidatos-presidente.json",
     "Governador": "candidatos-governador.json",
@@ -40,7 +14,6 @@
     "Deputado Estadual": "candidatos-deputado-estadual.json",
   };
 
-  /* Cache em memória: consultar o mesmo cargo duas vezes não refaz o fetch. */
   const cache = new Map();
 
   const selectCargo = $("[data-select-cargo]");
@@ -49,9 +22,6 @@
   const areaStatus = $("[data-status-api]");
   const areaMeta = $("[data-meta-api]");
 
-  /* --------------------------------------------------------------------------
-     A CHAMADA ASSÍNCRONA
-     -------------------------------------------------------------------- */
   async function buscarCandidatosDoCargo(cargo) {
     if (cache.has(cargo)) return cache.get(cargo);
 
@@ -60,8 +30,6 @@
 
     const resposta = await fetch(`${ORIGEM_DADOS}/${arquivo}`, { cache: "no-cache" });
 
-    /* fetch() só rejeita em falha de rede. Um 404 chega como resposta "ok: false",
-       então a checagem abaixo é obrigatória. */
     if (!resposta.ok) {
       throw new Error(`A consulta respondeu ${resposta.status} (${resposta.statusText}).`);
     }
@@ -76,21 +44,12 @@
     return dados;
   }
 
-  /* --------------------------------------------------------------------------
-     Cruza o retorno "da API" com as propostas que vieram do XML (Parte 1).
-     É aqui que os dois paradigmas da atividade se encontram.
-     -------------------------------------------------------------------- */
   const arquivoDaFoto = (caminho) => String(caminho).split("/").pop();
 
   const casarComXML = (registro) => candidatosData.find((c) =>
     arquivoDaFoto(c.foto) === arquivoDaFoto(registro.foto)
   );
 
-  /* --------------------------------------------------------------------------
-     DESENHO DOS CARDS — card 3D que vira ao clique
-     Frente: foto, nome de urna, partido, número.
-     Verso : perfil + as três propostas lidas do XML.
-     -------------------------------------------------------------------- */
   const cartaoCandidato = (registro, i) => {
     const doXML = casarComXML(registro) || {};
     const cor = doXML.cor || "#25f0a2";
@@ -104,8 +63,6 @@
           </li>`).join("")
       : '<li><p>Propostas não informadas neste recorte.</p></li>';
 
-    /* Executivo tem programa de governo registrado; Legislativo não tem.
-       O rótulo muda para deixar essa diferença explícita no card. */
     const ehPrograma = doXML.tipoPropostas === "programa";
 
     const rotuloPropostas = ehPrograma
@@ -116,8 +73,6 @@
       ? "Resumo do programa de governo e de declarações públicas de campanha."
       : "Pautas e posições públicas do parlamentar — não é programa de governo.";
 
-    /* O selo aparece exatamente onde está a pendência: ao lado do número ou
-       junto do bloco de propostas. */
     const selo = (texto) =>
       `<span class="candidato__conferir" title="Confirmar no DivulgaCandContas do TSE">${texto}</span>`;
 
@@ -187,9 +142,6 @@
     </article>`;
   };
 
-  /* --------------------------------------------------------------------------
-     ESTADOS DA TELA
-     -------------------------------------------------------------------- */
   const esqueletos = (quantidade = 3) => Array.from({ length: quantidade }, (_, i) => `
     <div class="candidato-esqueleto" style="--atraso:${i * 140}ms" aria-hidden="true">
       <span class="candidato-esqueleto__retrato"></span>
@@ -203,13 +155,9 @@
     areaStatus.className = `api-status${tipo ? ` api-status--${tipo}` : ""}`;
   };
 
-  /* --------------------------------------------------------------------------
-     O FLUXO COMPLETO (o "Novo Fluxo Assíncrono do Candidato" da aula)
-     -------------------------------------------------------------------- */
   async function consultarCargo() {
     const cargoEscolhido = selectCargo.value;
 
-    /* Desabilita o botão e avisa o usuário que está carregando */
     botaoBuscar.disabled = true;
     botaoBuscar.classList.add("is-carregando");
     definirStatus(`Consultando candidatos a ${cargoEscolhido}…`, "carregando");
@@ -220,11 +168,8 @@
       const dados = await buscarCandidatosDoCargo(cargoEscolhido);
       const { dadosGerais, candidatos } = dados;
 
-      /* Uma pequena espera deixa o estado de carregamento visível mesmo em
-         arquivo local — importante para demonstrar o assíncrono na apresentação. */
       await new Promise((resolve) => setTimeout(resolve, 420));
 
-      /* Percorre a matriz de objetos e monta os cards (forEach/map) */
       areaResultado.innerHTML = candidatos.map(cartaoCandidato).join("");
 
       if (areaMeta) {
@@ -242,7 +187,6 @@
 
       document.dispatchEvent(new CustomEvent("ck:candidatos-renderizados"));
     } catch (erro) {
-      /* Se algo der errado (sem rede, arquivo movido, JSON inválido), avisamos */
       areaResultado.innerHTML = `
         <div class="api-erro">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -258,20 +202,15 @@
       definirStatus("Falha na consulta.", "erro");
       console.error("Falha ao buscar candidatos:", erro);
     } finally {
-      /* Aconteça o que acontecer, o botão volta a funcionar */
       botaoBuscar.disabled = false;
       botaoBuscar.classList.remove("is-carregando");
     }
   }
 
-  /* --------------------------------------------------------------------------
-     LIGAÇÕES
-     -------------------------------------------------------------------- */
   if (selectCargo && botaoBuscar && areaResultado) {
     botaoBuscar.addEventListener("click", consultarCargo);
     selectCargo.addEventListener("change", consultarCargo);
 
-    /* Atalho vindo dos cards da Parte 1: "Ver candidatos" já dispara a consulta */
     document.addEventListener("click", (e) => {
       const gatilho = e.target.closest("[data-ir-cargo]");
       if (!gatilho) return;
@@ -281,14 +220,12 @@
       consultarCargo();
     });
 
-    /* Virar o card 3D */
     areaResultado.addEventListener("click", (e) => {
       const botao = e.target.closest("[data-virar]");
       if (!botao) return;
       botao.closest(".candidato")?.classList.toggle("is-virado");
     });
 
-    /* Primeira carga automática, para a página nunca abrir vazia */
     consultarCargo();
   }
 })();

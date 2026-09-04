@@ -1,33 +1,12 @@
-/* ============================================================================
-   ORÁCULO CK — config.js
-   Ponto único de configuração: endpoint da API, modelos, catálogo de jogos,
-   tipos de conselho, níveis e dados da equipe.
-
-   >>> A CHAVE DA API NÃO FICA AQUI. <<<
-   Ela é digitada pelo usuário no diálogo "Chave da API" e guardada apenas no
-   localStorage do próprio navegador (ver js/armazenamento.js). Se você preferir
-   deixar uma chave fixa para a apresentação, escreva-a em CHAVE_EMBUTIDA logo
-   abaixo — mas lembre: qualquer pessoa que abrir o código-fonte da página vai
-   enxergá-la, porque a aplicação é 100% client-side.
-   ========================================================================== */
-
 window.CK = window.CK || {};
 
 CK.config = (() => {
   "use strict";
 
-  /* ---------- API ---------- */
-
-  // Deixe "" para exigir que o usuário informe a chave pelo diálogo.
   const CHAVE_EMBUTIDA = "";
 
   const BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 
-  // Lista SEMENTE. Vale só até a aplicação perguntar à própria API quais
-  // modelos existem de verdade (ver `listarModelos` em js/api.js) — a partir
-  // daí, o catálogo real substitui esta lista e fica guardado no navegador.
-  // Se um destes nomes for aposentado, o HTTP 404 faz o cliente tentar o
-  // próximo e, em último caso, redescobrir o catálogo sozinho.
   const MODELOS = [
     { id: "gemini-flash-latest", rotulo: "Gemini Flash — sempre o atual" },
     { id: "gemini-3.6-flash", rotulo: "Gemini 3.6 Flash — equilibrado" },
@@ -41,20 +20,10 @@ CK.config = (() => {
     temperature: 0.85,
     topP: 0.95,
 
-    // ATENÇÃO ao mexer neste número. Os modelos Gemini 3.x "pensam" antes de
-    // escrever, e esses tokens de raciocínio contam no mesmo teto da resposta.
-    // Medimos: o raciocínio sozinho consome de 830 a 1070 tokens. Com o teto
-    // em 1100, o modelo gastava a cota inteira pensando e a resposta saía
-    // cortada no meio (finishReason MAX_TOKENS), sem o conselho final.
-    // Com 3000 sobra espaço de folga e todos os modelos testados concluíram.
-    // O tamanho real da resposta é controlado pela instrução de sistema
-    // (~300 palavras), não por este teto.
     maxOutputTokens: 3000,
   };
 
-  const TEMPO_LIMITE = 30000; // ms — corta a requisição com AbortController
-
-  /* ---------- catálogo de jogos ---------- */
+  const TEMPO_LIMITE = 30000;
 
   const JOGOS = [
     { id: "free-fire", nome: "Free Fire", genero: "Battle Royale", h: 78, icone: "mira" },
@@ -67,8 +36,6 @@ CK.config = (() => {
     { id: "genshin", nome: "Genshin Impact", genero: "RPG de mundo aberto", h: 184, icone: "elemento" },
     { id: "outro", nome: "Outro jogo", genero: "Você escolhe", h: 88, icone: "mais" },
   ];
-
-  /* ---------- tipos de conselho ---------- */
 
   const TIPOS = [
     {
@@ -109,15 +76,11 @@ CK.config = (() => {
     },
   ];
 
-  /* ---------- níveis ---------- */
-
   const NIVEIS = [
     { id: "iniciante", rotulo: "Iniciante", descricao: "está começando agora" },
     { id: "intermediario", rotulo: "Intermediário", descricao: "já joga com regularidade" },
     { id: "avancado", rotulo: "Avançado", descricao: "disputa ranqueadas de elo alto" },
   ];
-
-  /* ---------- sugestões rápidas por tipo ---------- */
 
   const SUGESTOES = {
     iniciante: [
@@ -152,8 +115,6 @@ CK.config = (() => {
     ],
   };
 
-  /* ---------- equipe ---------- */
-
   const EQUIPE = [
     { nome: "Gustavo Oliveira dos Santos", papel: "Líder · integração com a API", lider: true },
     { nome: "Éric Estrela Vieira", papel: "Interface e componentes" },
@@ -162,8 +123,6 @@ CK.config = (() => {
     { nome: "Pedro Alcantara dos Santos Fialho", papel: "Tratamento de erros e testes" },
     { nome: "Thiago Wilson Vieira Serbino", papel: "Documentação e apresentação" },
   ];
-
-  /* ---------- frases do ticker ---------- */
 
   const TICKER = [
     "Oráculo CK",
@@ -175,8 +134,6 @@ CK.config = (() => {
     "2º C · M-Tec Informática para Internet",
     "ETEC Taboão da Serra",
   ];
-
-  /* ---------- mensagens do carregamento ---------- */
 
   const PASSOS_CARGA = [
     "montando o prompt",

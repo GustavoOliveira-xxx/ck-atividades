@@ -1,44 +1,3 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — PARTE 1 · A BASE DE DADOS EM XML
-   ----------------------------------------------------------------------------
-   Este arquivo guarda a variável `xmlTexto`, exatamente como no código-base do
-   professor (linha 10 do script.js original). A diferença é o conteúdo: saiu o
-   catálogo de piadas, entrou o mapa eleitoral de São Paulo.
-
-   O XML tem dois blocos dentro de <eleicoes_sp>:
-
-     <cargos>      → os 5 cargos em disputa, cada um com os atributos
-                     titulo="..." e poder="..." e uma <descricao> interna.
-                     É a estrutura pedida no Passo 1.1 da atividade.
-
-     <candidatos>  → os 15 candidatos apresentados no projeto, três por cargo,
-                     com nome, partido, número de urna, foto, um perfil curto e
-                     a lista de propostas ou pautas.
-
-   Nada aqui vem de servidor: é texto puro, dentro de uma template string, que
-   o DOMParser transforma em um documento navegável (js/xml.js).
-
-   ⚠ AVISO ACADÊMICO
-   Os textos das propostas são RESUMOS EDITORIAIS escritos pelo grupo para fins
-   didáticos. O atributo tipo="..." de <propostas> separa dois casos:
-
-     tipo="programa" → Presidente e Governador, onde existe programa de governo
-                       registrado. O resumo é feito a partir dele e das
-                       declarações públicas de campanha.
-
-     tipo="pautas"   → Senador e deputados, onde NÃO existe plano de governo.
-                       São pautas, projetos e posições públicas do parlamentar,
-                       e a interface as rotula assim — nunca como "promessa".
-
-   Nenhum destes textos é transcrição literal de documento oficial. A fonte da
-   verdade é o portal DivulgaCandContas do TSE (divulgacandcontas.tse.jus.br),
-   que publica tanto o registro das candidaturas quanto os arquivos de proposta
-   de governo.
-
-   O atributo conferir="numero" marca os candidatos cujo número de urna ainda
-   precisa ser confirmado no DivulgaCandContas antes da entrega.
-   ========================================================================== */
-
 const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
 <eleicoes_sp ano="2026" uf="SP" atualizado="2026-09-11">
   <cargos>
@@ -287,16 +246,11 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
 </eleicoes_sp>
 `;
 
-/* Mapa que liga cada PODER do cargo à classe CSS do badge institucional.
-   É o Passo 1.2 da atividade: em vez de mapear categoria de humor, mapeamos
-   o atributo poder="..." para uma cor. Mantivemos o fallback com || para que
-   um poder não mapeado nunca quebre a interface. */
 const CLASSE_PODER = {
   "Executivo": "badge-executivo",
   "Legislativo": "badge-legislativo",
 };
 
-/* Cor de acento por partido — usada nos cards de candidato. */
 const COR_PARTIDO = {
   "PT": "#c8102e",
   "PL": "#0b3d91",

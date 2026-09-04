@@ -42,7 +42,6 @@
 
 <body>
 
-  <!-- ==================== ABERTURA ==================== -->
   <div class="abertura" data-abertura aria-hidden="true">
     <span class="abertura__folha abertura__folha--cima"></span>
     <span class="abertura__folha abertura__folha--baixo"></span>
@@ -65,7 +64,6 @@
     </div>
   </div>
 
-  <!-- ==================== CENA DE FUNDO ==================== -->
   <div class="cena" aria-hidden="true">
     <canvas class="cena__runas" data-runas></canvas>
     <span class="cena__grade"></span>
@@ -82,7 +80,6 @@
 
   <a class="pular" href="#consultar">Pular para a consulta</a>
 
-  <!-- ==================== TOPO ==================== -->
   <header class="topo" data-topo>
     <a class="topo__marca" href="#inicio" aria-label="Oráculo CK — início">
       <span class="topo__logo">
@@ -119,7 +116,6 @@
 
   <main>
 
-    <!-- ==================== HERO ==================== -->
     <section id="inicio" class="hero">
       <div class="hero__texto">
         <p class="eyebrow">
@@ -171,7 +167,7 @@
       </div>
 
       <div class="hero__palco">
-        <!-- ORBE 3D DO ORÁCULO -->
+
         <div class="oraculo" data-oraculo data-estado="repouso">
           <div class="oraculo__cena">
             <span class="oraculo__anel oraculo__anel--a"></span>
@@ -194,7 +190,6 @@
             <span class="oraculo__base"></span>
           </div>
 
-          <!-- MARCA EM CAMADAS 3D (preenchida por js/ui.js) -->
           <div class="marca3d" data-marca>
             <div class="marca3d__palco" data-marca-palco>
               <div class="marca3d__bloco" data-marca-bloco></div>
@@ -216,7 +211,6 @@
       <div class="ticker__trilha" data-ticker></div>
     </div>
 
-    <!-- ==================== CONSOLE DE CONSULTA ==================== -->
     <section id="consultar" class="console">
 
       <header class="secao-topo">
@@ -230,7 +224,6 @@
 
       <div class="console__grade">
 
-        <!-- ---------- PAINEL DE CONSULTA ---------- -->
         <form class="consulta" data-form novalidate>
 
           <fieldset class="campo">
@@ -297,7 +290,6 @@
           </div>
         </form>
 
-        <!-- ---------- PAINEL DE RESPOSTA ---------- -->
         <article class="resposta" data-painel data-estado="vazio" aria-live="polite" aria-busy="false">
 
           <header class="resposta__topo">
@@ -305,7 +297,6 @@
             <span class="resposta__estado" data-resposta-estado>aguardando</span>
           </header>
 
-          <!-- estado: vazio -->
           <div class="estado estado--vazio" data-estado-vazio>
             <span class="estado__icone" aria-hidden="true">
               <svg viewBox="0 0 24 24">
@@ -318,7 +309,6 @@
               IA aparece aqui, formatada e pronta para copiar.</p>
           </div>
 
-          <!-- estado: carregando -->
           <div class="estado estado--carregando" data-estado-carregando hidden>
             <div class="carga" aria-hidden="true">
               <span class="carga__anel"></span>
@@ -336,7 +326,6 @@
             </ul>
           </div>
 
-          <!-- estado: erro -->
           <div class="estado estado--erro" data-estado-erro hidden role="alert">
             <span class="estado__icone estado__icone--erro" aria-hidden="true">
               <svg viewBox="0 0 24 24">
@@ -355,7 +344,6 @@
             </div>
           </div>
 
-          <!-- estado: sucesso -->
           <div class="estado estado--pronto" data-estado-pronto hidden>
             <div class="resposta__cabecalho">
               <h3 data-resposta-titulo>Resposta do Oráculo</h3>
@@ -381,7 +369,6 @@
       </div>
     </section>
 
-    <!-- ==================== HISTÓRICO ==================== -->
     <section id="historico" class="historico">
       <header class="secao-topo">
         <p class="secao-indice">02 — Memória local</p>
@@ -403,7 +390,6 @@
       </button>
     </section>
 
-    <!-- ==================== ARQUITETURA ==================== -->
     <section id="arquitetura" class="arquitetura">
       <header class="secao-topo">
         <p class="secao-indice">03 — Como funciona</p>
@@ -480,7 +466,6 @@
       </div>
     </section>
 
-    <!-- ==================== EQUIPE ==================== -->
     <section id="equipe" class="equipe">
       <header class="secao-topo">
         <p class="secao-indice">04 — Quem construiu</p>
@@ -522,7 +507,6 @@
     </div>
   </footer>
 
-  <!-- ==================== DIÁLOGO DA CHAVE ==================== -->
   <dialog class="dlg" data-dlg-chave aria-labelledby="dlg-titulo">
     <form method="dialog" class="dlg__fechar-area">
       <button class="dlg__fechar" aria-label="Fechar">×</button>

@@ -1,61 +1,34 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — PARTE 1 · LENDO O XML COM JAVASCRIPT
-   ----------------------------------------------------------------------------
-   Aqui acontece o que a atividade pede: pegar o texto da variável `xmlTexto`
-   (js/dados-xml.js) e transformá-lo em um documento navegável com o DOMParser,
-   para então percorrer os elementos e montar a interface.
-
-        xmlTexto  →  DOMParser  →  xmlDoc  →  querySelectorAll  →  HTML
-
-   Nenhum dado desta parte vem da rede. É tudo texto que já estava no arquivo.
-   ========================================================================== */
-
 (() => {
   "use strict";
 
   const { xmlTexto, CLASSE_PODER, COR_PARTIDO } = window.CK_XML;
 
-  /* Guardamos os dados já convertidos aqui, para reaproveitar tanto na tela
-     quanto na exportação para planilha (mesma ideia do código-base). */
   const cargosData = [];
   const candidatosData = [];
 
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-  /* Escapa texto antes de injetar em innerHTML. */
   const esc = (txt) => String(txt ?? "").replace(/[&<>"']/g, (c) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   }[c]));
 
-  /* Slug simples: "Deputado Federal" → "deputado-federal" */
   const slug = (txt) => String(txt)
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-  /* ==========================================================================
-     1) O PARSE
-     ====================================================================== */
-
   const xmlDoc = new DOMParser().parseFromString(xmlTexto, "text/xml");
 
-  /* O DOMParser não lança exceção quando o XML está quebrado: ele devolve um
-     documento com <parsererror> dentro. Checar isso evita a tela em branco. */
   const falhaParse = xmlDoc.querySelector("parsererror");
 
   if (falhaParse) {
     console.error("XML inválido em xmlTexto:", falhaParse.textContent);
   }
 
-  /* ==========================================================================
-     2) CARGOS — <cargo titulo="..." poder="..."><descricao>…</descricao>
-     ====================================================================== */
-
   const lerCargos = () => {
     const cargos = xmlDoc.querySelectorAll("cargos > cargo");
 
     cargos.forEach((cargo) => {
-      /* Os metadados estão como ATRIBUTOS da tag <cargo …> */
       const titulo = cargo.getAttribute("titulo");
       const poder = cargo.getAttribute("poder");
       const ambito = cargo.getAttribute("ambito");
@@ -63,22 +36,16 @@
       const mandato = cargo.getAttribute("mandato");
       const icone = cargo.getAttribute("icone");
 
-      /* A descrição está DENTRO de uma tag filha <descricao> */
       const descricao = cargo.querySelector("descricao").textContent.trim();
 
       cargosData.push({
         titulo, poder, ambito, vagas, mandato, icone, descricao,
         id: slug(titulo),
-        /* Descobre a classe do badge institucional a partir do poder.
-           O fallback com || garante que um poder novo nunca quebre a tela. */
+
         classeBadge: CLASSE_PODER[poder] || "badge-legislativo",
       });
     });
   };
-
-  /* ==========================================================================
-     3) CANDIDATOS — <candidato cargo="..."><nome>…</nome><propostas>…
-     ====================================================================== */
 
   const lerCandidatos = () => {
     const candidatos = xmlDoc.querySelectorAll("candidatos > candidato");
@@ -93,23 +60,15 @@
       const partidoNome = candidato.querySelector("partido").textContent.trim();
       const perfil = candidato.querySelector("perfil").textContent.trim();
 
-      /* Cada <proposta> vira um item da lista, e o atributo eixo="…" é o rótulo */
       const propostas = [...candidato.querySelectorAll("propostas > proposta")]
         .map((proposta) => ({
           eixo: proposta.getAttribute("eixo"),
           texto: proposta.textContent.trim(),
         }));
 
-      /* tipo="programa" (Executivo, com plano de governo registrado) ou
-         tipo="pautas" (Legislativo, onde não existe plano de governo). A
-         interface rotula os dois de forma diferente, para não apresentar
-         pauta de parlamentar como se fosse promessa de campanha. */
       const tipoPropostas =
         candidato.querySelector("propostas")?.getAttribute("tipo") || "pautas";
 
-      /* O atributo conferir="..." diz O QUE ainda falta confirmar no TSE:
-         "numero" marca o número de urna, "pautas" marca as propostas. Sem o
-         atributo, o registro foi conferido por inteiro. */
       const conferir = candidato.getAttribute("conferir") || "";
 
       candidatosData.push({
@@ -122,10 +81,6 @@
       });
     });
   };
-
-  /* ==========================================================================
-     4) DESENHANDO OS CARGOS NA TELA
-     ====================================================================== */
 
   const ICONES = {
     planalto: '<path d="M3 20h18M5 20v-7l7-4 7 4v7"/><path d="M9 20v-4h6v4"/><path d="M12 5V3"/>',
@@ -169,12 +124,6 @@
     grade.innerHTML = cargosData.map(cartaoCargo).join("");
   };
 
-  /* ==========================================================================
-     5) O XML CRU NA TELA — painel didático
-     Mostra o conteúdo real da variável xmlTexto com destaque de sintaxe,
-     para deixar visível o que o DOMParser recebeu.
-     ====================================================================== */
-
   const destacarXML = (txt) => esc(txt)
     .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="xml-com">$1</span>')
     .replace(/(&lt;\?[\s\S]*?\?&gt;)/g, '<span class="xml-decl">$1</span>')
@@ -189,10 +138,6 @@
     const linhas = $("[data-xml-linhas]");
     if (linhas) linhas.textContent = String(xmlTexto.trim().split("\n").length);
   };
-
-  /* ==========================================================================
-     6) EXPOSIÇÃO
-     ====================================================================== */
 
   lerCargos();
   lerCandidatos();

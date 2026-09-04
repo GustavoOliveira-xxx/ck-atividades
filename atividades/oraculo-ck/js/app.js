@@ -1,19 +1,8 @@
-/* ============================================================================
-   ORÁCULO CK — app.js
-   O maestro. Guarda o estado da consulta, escuta os eventos da interface e
-   liga o formulário (ui.js) à API (api.js), passando pelo prompt (prompt.js)
-   e pelo armazenamento local (armazenamento.js).
-   ========================================================================== */
-
 (() => {
   "use strict";
 
   const { $, esc, toast, painel } = CK.ui;
   const { JOGOS, TIPOS, NIVEIS, PASSOS_CARGA } = CK.config;
-
-  /* ==========================================================================
-     ESTADO
-     ======================================================================== */
 
   const estado = {
     jogoId: null,
@@ -25,7 +14,6 @@
     ultima: null,
   };
 
-  /* ---------- referências do DOM ---------- */
   const el = {
     form: $("[data-form]"),
     jogos: $("[data-jogos]"),
@@ -54,10 +42,6 @@
     nova: $("[data-nova]"),
   };
 
-  /* ==========================================================================
-     AJUDANTES DE ESTADO
-     ======================================================================== */
-
   const jogoAtual = () => {
     const encontrado = JOGOS.find(({ id }) => id === estado.jogoId);
     if (!encontrado) return "";
@@ -81,10 +65,6 @@
     }
   };
 
-  /* ==========================================================================
-     MONTAGEM INICIAL
-     ======================================================================== */
-
   const montar = () => {
     CK.ui.montarJogos(el.jogos);
     CK.ui.montarTipos(el.tipos);
@@ -105,12 +85,7 @@
     desenharHistorico();
   };
 
-  /* ==========================================================================
-     EVENTOS DO FORMULÁRIO
-     ======================================================================== */
-
   const ligarFormulario = () => {
-    // ---------- escolha do jogo ----------
     el.jogos?.addEventListener("click", ({ target }) => {
       const botao = target.closest(".jogo");
       if (!botao) return;
@@ -132,7 +107,6 @@
       estado.jogoLivre = target.value;
     });
 
-    // ---------- tipo de conselho ----------
     el.tipos?.addEventListener("click", ({ target }) => {
       const botao = target.closest(".chip");
       if (!botao) return;
@@ -148,7 +122,6 @@
       CK.ui.montarSugestoes(el.sugestoes, estado.tipoId);
     });
 
-    // ---------- nível ----------
     el.niveis?.addEventListener("click", ({ target }) => {
       const botao = target.closest(".nivel");
       if (!botao) return;
@@ -162,7 +135,6 @@
       });
     });
 
-    // ---------- sugestões ----------
     el.sugestoes?.addEventListener("click", ({ target }) => {
       const botao = target.closest(".sugestao");
       if (!botao || !el.pergunta) return;
@@ -172,14 +144,12 @@
       el.pergunta.focus();
     });
 
-    // ---------- contador do textarea ----------
     el.pergunta?.addEventListener("input", ({ target }) => {
       const { length } = target.value;
       if (el.contador) el.contador.textContent = String(length);
       target.closest(".caixa-texto")?.classList.toggle("is-cheio", length > 360);
     });
 
-    // Ctrl+Enter envia
     el.pergunta?.addEventListener("keydown", (evento) => {
       if (evento.key === "Enter" && (evento.ctrlKey || evento.metaKey)) {
         evento.preventDefault();
@@ -187,7 +157,6 @@
       }
     });
 
-    // ---------- envio ----------
     el.form?.addEventListener("submit", (evento) => {
       evento.preventDefault();
       consultar();
@@ -198,7 +167,6 @@
       toast("Consulta cancelada.");
     });
 
-    // ---------- ações do painel ----------
     el.copiar?.addEventListener("click", async () => {
       if (!estado.ultima) return;
 
@@ -219,10 +187,6 @@
     $("[data-erro-chave]")?.addEventListener("click", () => abrirDialogo());
     $("[data-erro-demo]")?.addEventListener("click", () => consultar("demo"));
   };
-
-  /* ==========================================================================
-     FLUXO DA CONSULTA
-     ======================================================================== */
 
   let relogioPassos;
 
@@ -309,7 +273,6 @@
     } catch (bruto) {
       pararCarga();
 
-      // Qualquer falha inesperada também precisa virar uma mensagem legível.
       const erro = bruto instanceof CK.api.ErroOraculo ? bruto : new CK.api.ErroOraculo({
         codigo: "FALHA_INTERNA",
         titulo: "Erro inesperado na aplicação",
@@ -320,17 +283,12 @@
       painel.erro(erro);
 
       if (erro.codigo === "SEM_CHAVE") {
-        // Sem chave configurada: o caminho mais curto é abrir o diálogo.
         setTimeout(abrirDialogo, 400);
       }
     } finally {
       travarBotoes(false);
     }
   };
-
-  /* ==========================================================================
-     HISTÓRICO
-     ======================================================================== */
 
   const desenharHistorico = () => {
     const lista = CK.armazenamento.lerHistorico();
@@ -346,7 +304,6 @@
       const registro = lista[Number(botao.dataset.historicoIndice)];
       if (!registro) return;
 
-      // repõe a consulta no formulário
       const { jogoId, tipoId, nivelId, pergunta, jogo } = registro;
 
       const cartao = CK.ui.$$(".jogo", el.jogos)
@@ -380,10 +337,6 @@
     });
   };
 
-  /* ==========================================================================
-     DIÁLOGO DA CHAVE
-     ======================================================================== */
-
   const dizerNoDialogo = (mensagem, tom = "neutro") => {
     if (!el.dlgEstado) return;
     el.dlgEstado.textContent = mensagem;
@@ -395,7 +348,6 @@
 
     if (el.inputChave) el.inputChave.value = CK.armazenamento.lerChave();
 
-    // Sempre remonta a lista: pode ter sido descoberta desde a última abertura.
     CK.ui.montarModelos(el.inputModelo);
     if (el.inputModelo) el.inputModelo.value = CK.armazenamento.lerModelo();
 
@@ -433,8 +385,6 @@
       atualizarSelo();
       el.salvarChave.disabled = true;
 
-      // 1) Pergunta à API quais modelos existem de verdade neste momento.
-      //    Assim um nome de modelo aposentado nunca quebra a aplicação.
       let modelo = el.inputModelo?.value ?? CK.config.MODELO_PADRAO;
       let chaveProvada = false;
 
@@ -443,15 +393,11 @@
 
         const modelos = await CK.api.listarModelos(chave);
 
-        // Se a API respondeu a lista, ela autenticou a chave. Isso já é prova
-        // suficiente de que a chave é válida — o teste de geração adiante é
-        // um extra, e não pode desmentir esta conclusão.
         chaveProvada = true;
 
         if (modelos.length) {
           CK.armazenamento.salvarModelosDescobertos(modelos);
 
-          // Mantém a escolha do usuário se ela ainda existir; senão, a melhor.
           const aindaExiste = modelos.some(({ id }) => id === modelo);
           modelo = aindaExiste ? modelo : modelos[0].id;
 
@@ -460,7 +406,6 @@
           if (el.inputModelo) el.inputModelo.value = modelo;
         }
       } catch (erro) {
-        // Descoberta é um bônus: se falhar, seguimos com a lista semente.
         if (erro?.codigo?.startsWith("HTTP 4")) {
           dizerNoDialogo(`${erro.titulo}: ${erro.message}`, "erro");
           el.salvarChave.disabled = false;
@@ -468,7 +413,6 @@
         }
       }
 
-      // 2) Confirma a chave com uma requisição curta de verdade.
       CK.armazenamento.salvarModelo(modelo);
 
       try {
@@ -484,9 +428,6 @@
         );
         toast("Chave salva e testada com sucesso.");
       } catch (erro) {
-        // Um modelo sobrecarregado, sem cota ou lento NÃO significa chave ruim.
-        // Se a listagem já autenticou, dizer "erro" aqui seria mentir para o
-        // usuário e mandá-lo procurar problema onde não existe.
         const problemaDoModelo = ["HTTP 429", "HTTP 500", "HTTP 503", "TEMPO_ESGOTADO"]
           .includes(erro?.codigo);
 
@@ -514,17 +455,6 @@
     });
   };
 
-  /* ==========================================================================
-     PARTIDA
-     ======================================================================== */
-
-  /* ==========================================================================
-     DESCOBERTA EM SEGUNDO PLANO
-     Se já existe chave mas nunca perguntamos à API quais modelos existem,
-     fazemos isso em silêncio ao abrir. Assim, mesmo quem só colou a chave em
-     config.js nunca esbarra num nome de modelo aposentado.
-     ======================================================================== */
-
   const descobrirEmSilencio = async () => {
     if (!CK.armazenamento.temChave()) return;
     if (CK.armazenamento.lerModelosDescobertos().length) return;
@@ -535,20 +465,14 @@
 
       CK.armazenamento.salvarModelosDescobertos(modelos);
 
-      // Grava sempre o modelo resolvido: mantém a escolha do usuário se ela
-      // sobreviveu, senão assume o melhor do catálogo. Deixar implícito
-      // funcionaria, mas gravar torna o estado previsível e depurável.
       const atual = CK.armazenamento.lerModelo();
       const valido = modelos.some(({ id }) => id === atual);
       CK.armazenamento.salvarModelo(valido ? atual : modelos[0].id);
 
       CK.ui.montarModelos(el.inputModelo, modelos);
     } catch {
-      // Silencioso de propósito: é um reforço, não um requisito.
     }
   };
-
-  /* ========================================================================== */
 
   montar();
   ligarFormulario();
@@ -557,6 +481,5 @@
   CK.ui.ligarEfeitos();
   descobrirEmSilencio();
 
-  // Pré-seleciona o primeiro jogo para que a interface nunca comece "morta".
   CK.ui.$$(".jogo", el.jogos)[0]?.click();
 })();

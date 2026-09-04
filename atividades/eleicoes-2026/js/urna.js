@@ -1,22 +1,3 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — A URNA 3D VOTANDO
-   ----------------------------------------------------------------------------
-   A urna do hero não é enfeite: ela executa uma votação de verdade, em laço,
-   com dados lidos do XML da Parte 1.
-
-   Cada volta do laço faz o que uma urna real faz:
-
-     1. mostra o cargo na tela
-     2. digita o número dígito a dígito, acendendo a tecla correspondente
-     3. revela nome, partido e foto do candidato
-     4. pisca a instrução e aperta CONFIRMA
-     5. mostra FIM
-     6. limpa e passa para o próximo
-
-   A animação pausa sozinha quando a urna sai da tela ou quando a aba perde o
-   foco, e nem começa se o usuário pedir menos movimento.
-   ========================================================================== */
-
 (() => {
   "use strict";
 
@@ -38,17 +19,10 @@
     $$("[data-tecla]", urna).map((t) => [t.dataset.tecla, t])
   );
 
-  /* Um pixel transparente serve de estado "sem foto": deixar a <img> sem
-     src faria o navegador tratá-la como imagem quebrada. */
   const VAZIO = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
   const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* --------------------------------------------------------------------------
-     O roteiro: um candidato de cada cargo, na ordem em que aparecem no XML.
-     Assim a urna passa por Presidente, Governador, Senador e os dois
-     deputados antes de repetir alguém.
-     -------------------------------------------------------------------- */
   const montarRoteiro = () => {
     const porCargo = new Map();
 
@@ -61,7 +35,6 @@
     let rodada = 0;
     let achouAlgum = true;
 
-    /* Intercala: 1º de cada cargo, depois 2º de cada cargo, e assim por diante */
     while (achouAlgum) {
       achouAlgum = false;
       porCargo.forEach((lista) => {
@@ -79,17 +52,12 @@
   const roteiro = montarRoteiro();
   if (!roteiro.length) return;
 
-  /* --------------------------------------------------------------------------
-     Controle de execução: pausa fora da tela e com a aba escondida
-     -------------------------------------------------------------------- */
   let naTela = true;
   let abaVisivel = true;
   let parado = false;
 
   const podeRodar = () => naTela && abaVisivel && !parado;
 
-  /* Espera que só conta o tempo enquanto a urna está visível: se o usuário
-     rolar para longe, a animação congela no ponto em que estava. */
   const esperar = (ms) => new Promise((resolve) => {
     let restante = ms;
     let ultimo = performance.now();
@@ -116,9 +84,6 @@
     abaVisivel = !document.hidden;
   });
 
-  /* --------------------------------------------------------------------------
-     Peças da animação
-     -------------------------------------------------------------------- */
   const acender = async (chave, ms = 190) => {
     const tecla = teclas.get(chave);
     if (!tecla) return;
@@ -137,7 +102,6 @@
     elFoto.src = VAZIO;
   };
 
-  /* Desenha as casas vazias do número, para o dígito ter onde cair */
   const prepararDigitos = (quantidade) => {
     elDigitos.innerHTML = Array.from(
       { length: quantidade },
@@ -146,9 +110,6 @@
     return $$(".urna3d__digito", elDigitos);
   };
 
-  /* --------------------------------------------------------------------------
-     Uma votação completa
-     -------------------------------------------------------------------- */
   const votar = async (candidato) => {
     limparTela();
 
@@ -156,7 +117,6 @@
     elInstrucao.textContent = "digite o número";
     await esperar(700);
 
-    /* 1) Digita o número, acendendo a tecla de cada dígito */
     const numero = String(candidato.numero);
     const casas = prepararDigitos(numero.length);
 
@@ -169,7 +129,6 @@
       await esperar(360);
     }
 
-    /* 2) Revela a ficha do candidato */
     await esperar(320);
     elNome.textContent = candidato.nome;
     elPartido.textContent = candidato.partido;
@@ -177,30 +136,23 @@
     elFoto.alt = "";
     tela.classList.add("is-revelada");
 
-    /* 3) Pede confirmação */
     elInstrucao.textContent = "aperte confirma";
     elInstrucao.classList.add("is-piscando");
     await esperar(1500);
 
     if (parado) return;
 
-    /* 4) CONFIRMA */
     elInstrucao.classList.remove("is-piscando");
     await acender("confirma", 420);
 
-    /* 5) FIM */
     tela.classList.add("is-fim");
     elInstrucao.textContent = "voto registrado";
     await esperar(1400);
 
-    /* 6) Limpa e respira antes do próximo */
     tela.classList.remove("is-fim");
     await esperar(420);
   };
 
-  /* --------------------------------------------------------------------------
-     O laço
-     -------------------------------------------------------------------- */
   const rodar = async () => {
     let i = 0;
     while (!parado) {
@@ -210,7 +162,6 @@
   };
 
   if (semMovimento) {
-    /* Sem animação: a urna mostra uma ficha parada, já preenchida */
     const c = roteiro[0];
     elCargo.textContent = c.cargo;
     const casas = prepararDigitos(String(c.numero).length);

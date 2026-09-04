@@ -1,15 +1,3 @@
-/* ============================================================================
-   ORÁCULO CK — api.js
-   Camada de rede: é AQUI que a aplicação conversa com a API de IA.
-
-   Tudo acontece no navegador, com `fetch` e `async/await`. Não há servidor
-   intermediário: o próprio front é o cliente HTTP.
-
-   Dois provedores implementam a mesma interface:
-     · gemini        — chamada real à Google Generative Language API
-     · demonstracao  — respostas locais, para apresentar sem chave/sem internet
-   ========================================================================== */
-
 window.CK = window.CK || {};
 
 CK.api = (() => {
@@ -17,15 +5,8 @@ CK.api = (() => {
 
   const { BASE, MODELOS, GERACAO, TEMPO_LIMITE } = CK.config;
 
-  // Requisição em andamento — permite que o botão "Cancelar" a interrompa.
   let controladorAtual = null;
   let cancelamentoManual = false;
-
-  /* ==========================================================================
-     ERRO TIPADO
-     Todo problema vira um ErroOraculo com título, explicação e dica de ação.
-     A interface não precisa saber o que é um status HTTP — só exibir isso.
-     ======================================================================== */
 
   class ErroOraculo extends Error {
     constructor({ codigo, titulo, mensagem, dica = "", recuperavel = true }) {
@@ -37,10 +18,6 @@ CK.api = (() => {
       this.recuperavel = recuperavel;
     }
   }
-
-  /* ==========================================================================
-     TRADUÇÃO DE FALHAS
-     ======================================================================== */
 
   const traduzirHttp = (status, detalhe = "") => {
     const mapa = {
@@ -96,7 +73,6 @@ CK.api = (() => {
 
   const traduzirRede = (erro) => {
     if (erro?.name === "AbortError") {
-      // O mesmo AbortError serve para dois casos bem diferentes.
       if (cancelamentoManual) {
         return new ErroOraculo({
           codigo: "CANCELADO",
@@ -124,15 +100,7 @@ CK.api = (() => {
     });
   };
 
-  /* ==========================================================================
-     PROVEDOR GEMINI — a chamada real
-     ======================================================================== */
-
   const chamarGemini = async ({ chave, modelo, instrucao, pergunta, limite = TEMPO_LIMITE }) => {
-    // AbortController permite cancelar a requisição — por tempo limite
-    // ou porque o usuário clicou em "Cancelar".
-    // O limite chega de fora porque a última tentativa da fila não pode
-    // estourar o orçamento total: ela recebe só o tempo que ainda sobra.
     const controlador = new AbortController();
     const relogio = setTimeout(() => controlador.abort(), limite);
     controladorAtual = controlador;
@@ -154,7 +122,6 @@ CK.api = (() => {
         signal: controlador.signal,
       });
 
-      // fetch só rejeita em falha de rede: status de erro precisa ser checado.
       if (!resposta.ok) {
         const { error } = await resposta.json().catch(() => ({}));
         throw traduzirHttp(resposta.status, error?.message?.slice(0, 120) || "");
@@ -168,18 +135,12 @@ CK.api = (() => {
     }
   };
 
-  /** Interrompe a requisição em andamento, se houver. */
   const cancelar = () => {
     if (!controladorAtual) return false;
     cancelamentoManual = true;
     controladorAtual.abort();
     return true;
   };
-
-  /* ==========================================================================
-     LEITURA DA RESPOSTA
-     O JSON do Gemini é aninhado; encadeamento opcional evita um mar de ifs.
-     ======================================================================== */
 
   const extrairTexto = (dados) => {
     const { candidates, promptFeedback } = dados ?? {};
@@ -231,32 +192,20 @@ CK.api = (() => {
     };
   };
 
-  /* ==========================================================================
-     DESCOBERTA DE MODELOS
-     Nomes de modelo mudam com o tempo: um "gemini-2.5-flash" de hoje pode
-     sumir amanhã. Em vez de confiar numa lista fixa, perguntamos à própria
-     API quais modelos existem AGORA e ficamos com os que sabem gerar texto.
-
-     A lista fixa de config.js vira só a semente, usada até a primeira
-     descoberta dar certo.
-     ======================================================================== */
-
-  // Famílias que não servem para o nosso caso (imagem, áudio, embeddings…).
   const FORA = /embedding|aqa|imagen|image|veo|tts|audio|learnlm/i;
 
-  /** Ordena os modelos por adequação ao projeto: rápido, estável e atual. */
   const pontuar = (id) => {
     let pontos = 0;
 
-    if (/flash/i.test(id)) pontos += 40;          // rápido e generoso no plano gratuito
+    if (/flash/i.test(id)) pontos += 40;
     else if (/pro/i.test(id)) pontos += 22;
 
     const versao = Number((id.match(/(\d+\.\d+)/) || [])[1] || 0);
     pontos += versao * 10;
 
-    if (/lite/i.test(id)) pontos -= 8;            // ótimo reserva, default não
+    if (/lite/i.test(id)) pontos -= 8;
     if (/preview|exp|thinking/i.test(id)) pontos -= 25;
-    if (/-\d{3,4}$/.test(id)) pontos -= 6;        // versões datadas, ex.: -001
+    if (/-\d{3,4}$/.test(id)) pontos -= 6;
 
     return pontos;
   };
@@ -292,13 +241,6 @@ CK.api = (() => {
       clearTimeout(relogio);
     }
   };
-
-  /* ==========================================================================
-     PROVEDOR DEMONSTRAÇÃO
-     Gera localmente uma resposta no MESMO formato que o modelo produz, para
-     que a interface possa ser apresentada sem chave e sem internet.
-     Fica sempre identificada como demonstração — nunca se passa pela IA.
-     ======================================================================== */
 
   const RECEITAS = {
     iniciante: {
@@ -415,7 +357,6 @@ CK.api = (() => {
   };
 
   const chamarDemonstracao = async ({ jogo, tipo }) => {
-    // Espera curta só para que a interface de carregamento apareça de verdade.
     await new Promise((resolver) => setTimeout(resolver, 900 + Math.random() * 700));
 
     const receita = RECEITAS[tipo.id] ?? RECEITAS.iniciante;
@@ -431,11 +372,6 @@ CK.api = (() => {
 
     return { texto: linhas.join("\n"), truncada: false };
   };
-
-  /* ==========================================================================
-     ORQUESTRADOR
-     Escolhe o provedor, mede o tempo e tenta o próximo modelo em caso de 404.
-     ======================================================================== */
 
   const consultar = async ({ jogo, tipo, nivel, pergunta, modo, modelo }) => {
     const instrucao = CK.prompt.montarInstrucao();
@@ -466,26 +402,15 @@ CK.api = (() => {
       });
     }
 
-    // Fila de tentativas: o modelo escolhido primeiro, os outros como reserva.
-    // Se a descoberta já rodou, a reserva são modelos que existem de verdade;
-    // senão, caímos na lista semente de config.js.
     const descobertos = CK.armazenamento.lerModelosDescobertos().map(({ id }) => id);
     const reserva = descobertos.length ? descobertos : MODELOS.map(({ id }) => id);
     const fila = [modelo, ...reserva.filter((id) => id !== modelo)].slice(0, 5);
     let ultimoErro = null;
 
-    // Falhas que dizem respeito AO MODELO, não à chave: vale tentar o próximo.
-    // 404 = aposentado · 429 = cota daquele modelo · 500/503 = sobrecarga ·
-    // TEMPO_ESGOTADO = o modelo não respondeu no prazo, outro pode responder.
-    // Já 400/401/403 são problemas de chave — trocar de modelo não resolve.
     const TROCAR_MODELO = new Set([
       "HTTP 404", "HTTP 429", "HTTP 500", "HTTP 503", "TEMPO_ESGOTADO",
     ]);
 
-    // Teto de tempo para a fila inteira. Cada tentativa já tem seu próprio
-    // limite de 30 s, mas cinco tentativas seguidas deixariam o usuário
-    // olhando para o carregamento por minutos. Passou daqui, desistimos e
-    // mostramos o último erro.
     const ORCAMENTO = 45000;
 
     const restante = () => ORCAMENTO - (performance.now() - inicio);
@@ -514,34 +439,25 @@ CK.api = (() => {
       } catch (erro) {
         ultimoErro = traduzirRede(erro);
         if (!TROCAR_MODELO.has(ultimoErro.codigo)) throw ultimoErro;
-        // menos de 5 s de orçamento não dá para nova tentativa nenhuma
+
         if (restante() < 5000) throw ultimoErro;
       }
     }
 
-    // A fila inteira falhou por causa dos modelos. Última cartada: perguntar
-    // à API quais existem agora e tentar o melhor deles.
     try {
       const modelos = await listarModelos(chave);
       const novo = modelos.find(({ id }) => !fila.includes(id));
 
       if (novo) {
-        // guarda o catálogo antes de tentar: mesmo que esta tentativa falhe,
-        // as próximas consultas já partem de nomes que existem
         CK.armazenamento.salvarModelosDescobertos(modelos);
         CK.armazenamento.salvarModelo(novo.id);
         return await tentar(novo.id);
       }
     } catch {
-      // Se nem a descoberta funcionar, vale o erro original.
     }
 
     throw ultimoErro;
   };
-
-  /* ==========================================================================
-     TESTE DE CHAVE — usado pelo diálogo de configuração
-     ======================================================================== */
 
   const testarChave = async (chave, modelo) => {
     const controlador = new AbortController();

@@ -1,20 +1,7 @@
-/* ============================================================================
-   ORÁCULO CK — ui.js
-   Tudo que desenha na tela: montagem dos controles a partir do catálogo,
-   formatação da resposta da IA, troca de estados do painel e os efeitos
-   visuais (cursor, tilt 3D, revelação por rolagem, digitação, contadores).
-
-   Nenhuma função daqui conhece a API. Ela só recebe dados e pinta.
-   ========================================================================== */
-
 window.CK = window.CK || {};
 
 CK.ui = (() => {
   "use strict";
-
-  /* ==========================================================================
-     ATALHOS E UTILITÁRIOS
-     ======================================================================== */
 
   const $ = (seletor, contexto = document) => contexto.querySelector(seletor);
   const $$ = (seletor, contexto = document) => [...contexto.querySelectorAll(seletor)];
@@ -24,7 +11,6 @@ CK.ui = (() => {
 
   const limitar = (valor, min, max) => Math.min(max, Math.max(min, valor));
 
-  /** Escapa HTML — obrigatório antes de injetar qualquer texto vindo da IA. */
   const esc = (valor) =>
     String(valor ?? "").replace(/[&<>"']/g, (caractere) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
@@ -38,10 +24,6 @@ CK.ui = (() => {
     if (horas < 24) return `há ${horas} h`;
     return new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short" }).format(carimbo);
   };
-
-  /* ==========================================================================
-     ÍCONES (SVG embutido — nenhum arquivo externo)
-     ======================================================================== */
 
   const ICONES = {
     mira: '<circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="1.6"/>',
@@ -59,10 +41,6 @@ CK.ui = (() => {
   };
 
   const svg = (nome) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONES[nome] || ICONES.mais}</svg>`;
-
-  /* ==========================================================================
-     MONTAGEM DOS CONTROLES
-     ======================================================================== */
 
   const montarJogos = (caixa) => {
     if (!caixa) return;
@@ -126,7 +104,6 @@ CK.ui = (() => {
     trilha.innerHTML = bloco + bloco;
   };
 
-  /** Empilha cópias da logo em Z para dar volume real à marca. */
   const montarMarca3d = (bloco) => {
     if (!bloco) return;
 
@@ -146,7 +123,6 @@ CK.ui = (() => {
     }).join("");
   };
 
-  /** Preenche o seletor de modelos. Sem lista, usa o catálogo em uso. */
   const montarModelos = (select, lista) => {
     if (!select) return;
 
@@ -159,11 +135,6 @@ CK.ui = (() => {
       .join("");
   };
 
-  /* ==========================================================================
-     FORMATAÇÃO DA RESPOSTA
-     Converte o texto do modelo (markdown enxuto) em HTML seguro.
-     ======================================================================== */
-
   const enfatizar = (texto) =>
     esc(texto)
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
@@ -173,7 +144,7 @@ CK.ui = (() => {
     const linhas = String(bruto).split("\n");
     const saida = [];
 
-    let listaAberta = null;   // "ul" | "ol" | null
+    let listaAberta = null;
     let paragrafo = [];
 
     const fecharLista = () => {
@@ -247,10 +218,6 @@ CK.ui = (() => {
 
     return saida.join("");
   };
-
-  /* ==========================================================================
-     PAINEL DE RESPOSTA — máquina de estados
-     ======================================================================== */
 
   const painel = {
     raiz: null,
@@ -347,7 +314,6 @@ CK.ui = (() => {
         corpo.innerHTML = formatarResposta(texto);
         corpo.scrollTop = 0;
 
-        // revela bloco a bloco, para a resposta "chegar" em vez de aparecer
         if (!semMovimento) {
           [...corpo.children].forEach((filho, i) => {
             filho.classList.add("aparece");
@@ -359,10 +325,6 @@ CK.ui = (() => {
       this.trocar("pronto");
     },
   };
-
-  /* ==========================================================================
-     HISTÓRICO
-     ======================================================================== */
 
   const montarHistorico = (caixa, vazio, botaoLimpar, lista) => {
     if (!caixa) return;
@@ -378,10 +340,6 @@ CK.ui = (() => {
     if (botaoLimpar) botaoLimpar.hidden = lista.length === 0;
   };
 
-  /* ==========================================================================
-     TOAST
-     ======================================================================== */
-
   let relogioToast;
 
   const toast = (mensagem) => {
@@ -395,11 +353,6 @@ CK.ui = (() => {
     relogioToast = setTimeout(() => caixa.classList.remove("is-visivel"), 2600);
   };
 
-  /* ==========================================================================
-     EFEITOS VISUAIS
-     ======================================================================== */
-
-  /** Inclina um elemento conforme a posição do ponteiro. */
   const tilt = () => {
     if (!temHover || semMovimento) return;
 
@@ -424,7 +377,6 @@ CK.ui = (() => {
     });
   };
 
-  /** Botões que seguem levemente o ponteiro. */
   const magnetico = () => {
     if (!temHover || semMovimento) return;
 
@@ -442,7 +394,6 @@ CK.ui = (() => {
     });
   };
 
-  /** Parallax 3D: gira um elemento conforme o ponteiro na janela. */
   const parallax = (elemento, maxX, maxY, repousoX = 6, repousoY = -14) => {
     if (!elemento || !temHover || semMovimento) return;
 
@@ -460,7 +411,6 @@ CK.ui = (() => {
     }, { passive: true });
   };
 
-  /** Cursor personalizado com halo que persegue o ponteiro. */
   const cursor = () => {
     const ponto = $("[data-cursor]");
     const halo = $("[data-cursor-halo]");
@@ -497,7 +447,6 @@ CK.ui = (() => {
     });
   };
 
-  /** Revela elementos quando entram na tela. */
   const revelar = () => {
     const alvos = [
       [".metrica", ""],
@@ -538,7 +487,6 @@ CK.ui = (() => {
     elementos.forEach((elemento) => observador.observe(elemento));
   };
 
-  /** Efeito de digitação no hero. */
   const digitar = () => {
     const caixa = $("[data-typed]");
     if (!caixa) return;
@@ -578,7 +526,6 @@ CK.ui = (() => {
     passo();
   };
 
-  /** Contadores animados das métricas. */
   const contadores = () => {
     $$("[data-contador]").forEach((elemento) => {
       const alvo = Number(elemento.dataset.contador) || 0;
@@ -618,7 +565,6 @@ CK.ui = (() => {
     });
   };
 
-  /** Cabeçalho que some ao descer, barra de progresso e link ativo. */
   const cabecalho = () => {
     const topo = $("[data-topo]");
     const nav = $(".topo__nav");
@@ -692,7 +638,6 @@ CK.ui = (() => {
     }
   };
 
-  /** Tela de abertura com barra de carga. */
   const abertura = () => {
     const caixa = $("[data-abertura]");
     if (!caixa) return;
@@ -769,7 +714,6 @@ CK.ui = (() => {
     requestAnimationFrame(avancar);
   };
 
-  /** Liga todos os efeitos de uma vez. */
   const ligarEfeitos = () => {
     cabecalho();
     abertura();

@@ -1,9 +1,3 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — INTERFACE
-   Tela de carga animada, revelação ao rolar, contadores, tilt 3D, cursor,
-   parallax do palco, faixa de aviso e navegação ativa.
-   ========================================================================== */
-
 (() => {
   "use strict";
 
@@ -14,12 +8,6 @@
   const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const temHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const limitar = (v, min, max) => Math.min(Math.max(v, min), max);
-
-  /* ==========================================================================
-     1) TELA DE CARGA
-     O progresso não é falso: acompanha o carregamento real da página e as
-     quatro etapas do boot (XML → parse → cargos → fetch).
-     ====================================================================== */
 
   const carga = $("[data-carga]");
 
@@ -41,7 +29,6 @@
 
     document.body.classList.add("is-travado");
 
-    /* Título letra a letra */
     if (titulo && !semMovimento) {
       const texto = titulo.textContent.trim();
       titulo.innerHTML = [...texto]
@@ -96,7 +83,6 @@
         ultimo = agora;
         const decorrido = agora - INICIO;
 
-        /* Avança em direção ao teto, desacelerando perto dele */
         atual += (teto - atual) * delta * 1.9;
 
         if (decorrido > LIMITE) atual = 100;
@@ -126,10 +112,6 @@
     }
   }
 
-  /* ==========================================================================
-     2) CONTADORES DO HERO
-     ====================================================================== */
-
   const totalPropostas = candidatosData.reduce((soma, c) => soma + c.propostas.length, 0);
 
   const VALORES = {
@@ -150,7 +132,7 @@
 
     const passo = (agora) => {
       const t = limitar((agora - inicio) / DURACAO, 0, 1);
-      /* easeOutExpo */
+
       const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
       el.textContent = String(Math.round(alvo * eased));
       if (t < 1) requestAnimationFrame(passo);
@@ -158,10 +140,6 @@
 
     requestAnimationFrame(passo);
   };
-
-  /* ==========================================================================
-     3) REVELAÇÃO AO ROLAR + disparo dos contadores
-     ====================================================================== */
 
   const observador = new IntersectionObserver((entradas) => {
     entradas.forEach((entrada) => {
@@ -181,7 +159,6 @@
     aplicarTilt();
   });
 
-  /* Contadores disparam quando o bloco entra na tela */
   const blocoNumeros = $(".hero__numeros");
 
   if (blocoNumeros) {
@@ -195,10 +172,6 @@
 
     obsNumeros.observe(blocoNumeros);
   }
-
-  /* ==========================================================================
-     4) TILT 3D NOS CARTÕES
-     ====================================================================== */
 
   const MAX_TILT = 9;
 
@@ -231,10 +204,6 @@
 
   aplicarTilt();
 
-  /* ==========================================================================
-     5) PARALLAX DO PALCO 3D
-     ====================================================================== */
-
   const camera = $("[data-palco-camera]");
 
   if (camera && temHover && !semMovimento) {
@@ -251,10 +220,6 @@
       camera.style.setProperty("--rx", `${-22 + ny * 10}deg`);
     }, { passive: true });
   }
-
-  /* ==========================================================================
-     6) EFEITO DE DIGITAÇÃO
-     ====================================================================== */
 
   const typed = $("[data-typed]");
 
@@ -289,10 +254,6 @@
     ciclo();
   }
 
-  /* ==========================================================================
-     7) FAIXA DE AVISO
-     ====================================================================== */
-
   const faixa = $("[data-faixa]");
 
   if (faixa) {
@@ -310,13 +271,8 @@
       .map((txt) => `<span class="faixa-aviso__item"><i></i>${esc(txt)}</span>`)
       .join("");
 
-    /* Duplicado para o laço da animação não ter emenda visível */
     faixa.innerHTML = bloco + bloco;
   }
-
-  /* ==========================================================================
-     8) CABEÇALHO E NAVEGAÇÃO ATIVA
-     ====================================================================== */
 
   const topo = $("[data-topo]");
 
@@ -342,10 +298,6 @@
 
     secoes.forEach((s) => obsSecao.observe(s));
   }
-
-  /* ==========================================================================
-     9) CURSOR PERSONALIZADO
-     ====================================================================== */
 
   const cursor = $("[data-cursor]");
   const halo = $("[data-cursor-halo]");
@@ -380,10 +332,6 @@
       halo.classList.remove("is-ativo");
     });
   }
-
-  /* ==========================================================================
-     10) BOTÕES MAGNÉTICOS
-     ====================================================================== */
 
   if (temHover && !semMovimento) {
     $$("[data-magnetico]").forEach((el) => {

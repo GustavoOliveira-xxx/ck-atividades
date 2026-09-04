@@ -1,17 +1,3 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — PARTE 1.1 · EXPORTAÇÃO (Blob + URL.createObjectURL)
-   ----------------------------------------------------------------------------
-   Mesmo recurso do código-base: o navegador gera o arquivo "na hora", sem
-   nenhum servidor por trás. Muda o conteúdo — em vez de piadas, o mapa
-   eleitoral de São Paulo.
-
-   Passo 1.3 da atividade, cumprido aqui:
-     · o BOM "﻿" continua no começo do CSV (acentos corretos no Excel);
-     · o cabeçalho virou "Cargo;Poder;Descrição";
-     · a limpeza de dados com replace(/;/g, ",") continua valendo — sem ela,
-       um ponto e vírgula dentro da descrição quebraria a coluna no Excel.
-   ========================================================================== */
-
 (() => {
   "use strict";
 
@@ -19,17 +5,11 @@
   const { cargosData, candidatosData, helpers } = window.CK_ELEICOES;
   const { $ } = helpers;
 
-  /* --------------------------------------------------------------------------
-     Função genérica: recebe um conteúdo de texto e "baixa" como arquivo.
-     -------------------------------------------------------------------- */
   function baixarArquivo(conteudo, nomeArquivo, tipoMime) {
-    /* Cria um Blob (um "arquivo" em memória) com o conteúdo e o tipo informados */
     const blob = new Blob([conteudo], { type: tipoMime });
 
-    /* Cria uma URL temporária apontando para esse Blob */
     const url = URL.createObjectURL(blob);
 
-    /* Cria um link invisível, "clica" nele para iniciar o download e remove */
     const link = document.createElement("a");
     link.href = url;
     link.download = nomeArquivo;
@@ -37,35 +17,20 @@
     link.click();
     document.body.removeChild(link);
 
-    /* Libera a URL temporária da memória */
     URL.revokeObjectURL(url);
   }
 
-  /* --------------------------------------------------------------------------
-     Limpeza de dados para CSV.
-     Troca ";" por "," e remove quebras de linha, para não bagunçar as colunas.
-     -------------------------------------------------------------------- */
   const limpar = (texto) => String(texto ?? "")
     .replace(/;/g, ",")
     .replace(/\r?\n/g, " ")
     .trim();
 
-  /* --------------------------------------------------------------------------
-     Botão 1 — baixa o XML original, exatamente como está na variável xmlTexto
-     -------------------------------------------------------------------- */
   function exportarXML() {
     baixarArquivo(xmlTexto, "eleicoes-sp-2026.xml", "application/xml");
     avisar("XML do mapa eleitoral baixado.");
   }
 
-  /* --------------------------------------------------------------------------
-     Botão 2 — converte os CARGOS lidos do XML para CSV.
-     Cabeçalho exigido no Passo 1.3: Cargo;Poder;Descrição
-     -------------------------------------------------------------------- */
   function exportarCargosParaPlanilha() {
-    /* "﻿" no início é o BOM: garante que acentos (é, ç, ã…) fiquem
-       corretos ao abrir o CSV no Excel.
-       Usamos ";" como separador de colunas, padrão do Excel em pt-BR. */
     let csv = "﻿Cargo;Poder;Descrição\n";
 
     cargosData.forEach((cargo) => {
@@ -76,13 +41,7 @@
     avisar(`Planilha de cargos gerada com ${cargosData.length} linhas.`);
   }
 
-  /* --------------------------------------------------------------------------
-     Botão 3 — extra do grupo: os CANDIDATOS em planilha, com as propostas.
-     Mesma disciplina de limpeza aplicada a todos os campos de texto.
-     -------------------------------------------------------------------- */
   function exportarCandidatosParaPlanilha() {
-    /* O número de propostas varia por candidato, então o cabeçalho é montado
-       a partir do maior caso — assim nenhuma linha fica com coluna sobrando. */
     const maxPropostas = candidatosData.reduce(
       (maior, c) => Math.max(maior, c.propostas.length), 0
     );
@@ -95,15 +54,11 @@
     let csv = `﻿Cargo;Candidato;Partido;Número;Tipo;${colunasPropostas}\n`;
 
     candidatosData.forEach((candidato) => {
-      /* Todas as linhas recebem o mesmo número de colunas: quem tem menos
-         propostas fica com células vazias no fim. */
       const propostas = Array.from(
         { length: maxPropostas },
         (_, i) => limpar(candidato.propostas[i]?.texto || "")
       ).join(";");
 
-      /* Executivo tem programa de governo; Legislativo tem pauta. A planilha
-         carrega essa distinção junto, para o dado não sair ambíguo. */
       const tipo = candidato.tipoPropostas === "programa"
         ? "Programa de governo"
         : "Pautas parlamentares";
@@ -122,9 +77,6 @@
     avisar(`Planilha de candidatos gerada com ${candidatosData.length} linhas.`);
   }
 
-  /* --------------------------------------------------------------------------
-     Recado curto na tela, para o clique não parecer que "não fez nada".
-     -------------------------------------------------------------------- */
   let tempoAviso;
 
   function avisar(mensagem) {
@@ -138,9 +90,6 @@
     tempoAviso = setTimeout(() => alvo.classList.remove("is-visivel"), 4000);
   }
 
-  /* --------------------------------------------------------------------------
-     Liga os botões do HTML às funções de exportação
-     -------------------------------------------------------------------- */
   $("[data-exportar-xml]")?.addEventListener("click", exportarXML);
   $("[data-exportar-csv-cargos]")?.addEventListener("click", exportarCargosParaPlanilha);
   $("[data-exportar-csv-candidatos]")?.addEventListener("click", exportarCandidatosParaPlanilha);
