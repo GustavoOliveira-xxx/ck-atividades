@@ -7,13 +7,11 @@
 <title>MMA — Mixed Martial Arts | CK Originals</title>
 
 <style>
-/* ============================================================
-   CK ORIGINALS — MMA  ·  tema Netflix × ESPN
-   ============================================================ */
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --red:#E50914;        /* netflix red   */
+  --red:#E50914;
   --red-dark:#8B0000;
   --espn:#FF2E2E;
   --gold:#F0C24B;
@@ -33,7 +31,6 @@ body{
   display:grid;place-items:center;
 }
 
-/* ---------- palco 16:9 escalado ---------- */
 #stage-wrap{position:fixed;inset:0;display:grid;place-items:center;perspective:1800px}
 #stage{
   position:absolute;left:0;top:0;width:1600px;height:900px;flex:none;
@@ -42,20 +39,15 @@ body{
   overflow:hidden;transform-style:preserve-3d;
 }
 
-/* ============================================================
-   FUNDO ANIMADO
-   ============================================================ */
 #fx{position:absolute;inset:0;overflow:hidden;z-index:0}
 #embers{position:absolute;inset:0;width:100%;height:100%}
 
-/* brilhos vermelhos pulsantes */
 .glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;mix-blend-mode:screen}
 .glow.a{width:780px;height:780px;left:-220px;top:-260px;background:#E50914;animation:breathe 9s ease-in-out infinite}
 .glow.b{width:620px;height:620px;right:-180px;bottom:-220px;background:#FF3B1F;animation:breathe 11s ease-in-out infinite reverse}
 .glow.c{width:520px;height:520px;left:52%;top:58%;background:#3A0DAF;opacity:.32;animation:breathe 14s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(1) translate(0,0);opacity:.30}50%{transform:scale(1.28) translate(40px,-30px);opacity:.62}}
 
-/* grade em perspectiva (ESPN broadcast) */
 .grid3d{
   position:absolute;left:-50%;right:-50%;bottom:-14%;height:62%;
   background:
@@ -68,7 +60,6 @@ body{
 }
 @keyframes gridrun{to{background-position:0 66px,0 66px}}
 
-/* varredura de luz diagonal */
 .sweep{
   position:absolute;top:-60%;left:-40%;width:38%;height:230%;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.075) 45%,rgba(229,9,20,.16) 55%,transparent);
@@ -76,7 +67,6 @@ body{
 }
 @keyframes sweep{0%{left:-45%}55%,100%{left:118%}}
 
-/* octógono 3D girando (gaiola) */
 .cage3d{
   position:absolute;right:6%;top:50%;width:270px;height:270px;
   transform-style:preserve-3d;transform:translateY(-50%) rotateX(-14deg);
@@ -101,7 +91,6 @@ body{
 .cage3d i:nth-child(7){transform:rotateY(270deg) translateZ(126px)}
 .cage3d i:nth-child(8){transform:rotateY(315deg) translateZ(126px)}
 
-/* granulado + scanlines de TV */
 .noise{position:absolute;inset:0;opacity:.055;pointer-events:none;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
   animation:jitter .6s steps(3) infinite}
@@ -111,9 +100,6 @@ body{
 .vignette{position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(120% 85% at 50% 45%,transparent 40%,rgba(0,0,0,.78) 100%)}
 
-/* ============================================================
-   SLIDES
-   ============================================================ */
 .slide{
   position:absolute;inset:0;z-index:2;
   padding:46px 72px 82px;
@@ -126,7 +112,6 @@ body{
 @keyframes slideInBack{from{opacity:0;transform:translateX(-90px) translateZ(-320px) rotateY(16deg)}
                        to{opacity:1;transform:none}}
 
-/* revelação encadeada */
 .slide.on .rv{animation:rise .62s cubic-bezier(.2,.9,.3,1) both}
 .rv{opacity:0}
 @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
@@ -135,7 +120,6 @@ body{
 .d9{animation-delay:.62s}.d10{animation-delay:.69s}
 .d8{animation-delay:.55s}
 
-/* ---------- cabeçalho de slide ---------- */
 .ep{display:flex;align-items:center;gap:14px;margin-bottom:6px}
 .ep b{
   font:700 13px/1 var(--ui);letter-spacing:.32em;color:var(--red);
@@ -154,7 +138,6 @@ h1 em{font-style:normal;color:var(--red);
 .sub{margin-top:9px;font:400 17.4px/1.45 var(--ui);color:#C9C9D2;max-width:1400px}
 .hr{height:4px;width:132px;margin:12px 0 16px;background:linear-gradient(90deg,var(--red),transparent);border-radius:2px}
 
-/* ---------- cartões ---------- */
 .card{
   position:relative;background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.02));
   border:1px solid var(--line);border-radius:12px;padding:19px 21px;
@@ -200,7 +183,6 @@ h1 em{font-style:normal;color:var(--red);
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
 
-/* ---------- placar / estatística (ESPN score-bug) ---------- */
 .stat{
   background:linear-gradient(180deg,#16161B,#0A0A0D);border:1px solid var(--line);
   border-radius:10px;padding:17px 19px;position:relative;overflow:hidden;
@@ -215,7 +197,6 @@ h1 em{font-style:normal;color:var(--red);
 .stat small{display:block;margin-top:5px;font:600 11.5px/1.35 var(--ui);letter-spacing:.13em;
   text-transform:uppercase;color:#8E8E9A}
 
-/* ---------- linha do tempo 3D ---------- */
 .tl{display:grid;gap:13px;perspective:1000px}
 .tl .it{
   display:grid;grid-template-columns:124px 1fr;gap:16px;align-items:center;
@@ -235,7 +216,6 @@ h1 em{font-style:normal;color:var(--red);
 .tl.compact h4{font-size:14.8px;margin-bottom:2px}
 .tl.compact p{font-size:14px;line-height:1.4}
 
-/* ---------- lista TOP 10 (netflix) ---------- */
 .top{display:grid;grid-template-columns:repeat(2,1fr);gap:13px 28px}
 .top .row{display:flex;align-items:center;gap:16px;padding:10px 14px;border-radius:9px;
   background:linear-gradient(90deg,rgba(255,255,255,.055),transparent);
@@ -246,7 +226,6 @@ h1 em{font-style:normal;color:var(--red);
 .top .tx b{display:block;font:700 15.2px/1.2 var(--ui);letter-spacing:.03em;color:#fff;margin-bottom:3px}
 .top .tx span{font:400 14px/1.45 var(--ui);color:#AEAEB9}
 
-/* ---------- tabela de categorias ---------- */
 table{width:100%;border-collapse:collapse;font:400 14.2px/1.35 var(--ui)}
 th{font:700 11px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:#8A8A96;
   text-align:left;padding:0 8px 9px;border-bottom:1px solid var(--line)}
@@ -257,7 +236,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
   background:rgba(229,9,20,.18);color:#FF8A8A;border:1px solid rgba(229,9,20,.4);text-transform:uppercase}
 .tag.f{background:rgba(240,194,75,.16);color:var(--gold);border-color:rgba(240,194,75,.4)}
 
-/* ---------- faixa de "chips" (artes / estilos) ---------- */
 .strip{margin-top:20px}
 .strip .lbl{font:700 11px/1 var(--ui);letter-spacing:.26em;text-transform:uppercase;color:#8A8A96;margin-bottom:12px}
 .chips{display:flex;flex-wrap:wrap;gap:11px;perspective:900px}
@@ -279,7 +257,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
 .chips.mini .chip span span{display:none}
 .chips.mini .chip svg{width:18px;height:18px}
 
-/* ---------- mini-gráfico de barras ---------- */
 .bars{display:grid;gap:9px;margin-top:4px}
 .bars .b{display:grid;grid-template-columns:150px 1fr 54px;align-items:center;gap:13px}
 .bars .b i{font:600 13.4px/1 var(--ui);font-style:normal;color:#D2D2DA}
@@ -292,7 +269,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
 .bars .b.w .t s{background:linear-gradient(90deg,#fff,#9A9AA6);box-shadow:0 0 16px rgba(255,255,255,.35)}
 @keyframes grow{from{width:0 !important}}
 
-/* ---------- diagrama do octógono ---------- */
 .diag{display:flex;align-items:center;gap:18px}
 .diag svg{flex:none}
 .diag .lg{display:grid;gap:8px;flex:1}
@@ -301,7 +277,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
   background:var(--gold);transform:rotate(45deg)}
 .diag .lg b{color:#fff}
 
-/* ---------- imagens flutuando em 3D ---------- */
 .float{position:absolute;pointer-events:none;filter:drop-shadow(0 30px 45px rgba(0,0,0,.8))}
 .float img{display:block;width:100%;height:auto}
 .pk{will-change:transform}
@@ -310,14 +285,10 @@ tr:hover td{background:rgba(229,9,20,.10)}
 .bob.s{animation-duration:7.5s}
 .bob.f{animation-duration:4.8s}
 
-/* fighter recortado com halo vermelho */
 .fighter{filter:drop-shadow(0 0 26px rgba(229,9,20,.42)) drop-shadow(0 34px 46px rgba(0,0,0,.85));
   -webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent 100%);
           mask-image:linear-gradient(to bottom,#000 82%,transparent 100%)}
 
-/* ============================================================
-   CAPA
-   ============================================================ */
 .cover{padding:0}
 .cover .plate{position:absolute;left:76px;top:186px;width:760px;z-index:5}
 .brand{display:flex;align-items:center;gap:11px;margin-bottom:16px}
@@ -346,9 +317,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
 .btn.s{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.25)}
 .btn svg{width:17px;height:17px;fill:currentColor}
 
-/* ============================================================
-   CRÉDITOS
-   ============================================================ */
 .crew{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
 .mem{position:relative;background:linear-gradient(150deg,rgba(255,255,255,.08),rgba(255,255,255,.015));
   border:1px solid var(--line);border-radius:11px;padding:15px 16px 15px 62px;overflow:hidden;
@@ -366,9 +334,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
   text-transform:uppercase;color:#8B8B97}
 .mem.lead span{color:var(--gold)}
 
-/* ============================================================
-   RODAPÉ / TICKER ESPN + NAVEGAÇÃO
-   ============================================================ */
 .ticker{position:absolute;left:0;right:0;bottom:0;height:34px;z-index:9;
   background:linear-gradient(90deg,var(--red) 0 172px,#0B0B0E 172px);
   border-top:1px solid rgba(255,255,255,.14);display:flex;align-items:center;overflow:hidden}
@@ -395,7 +360,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
   transition:opacity .6s}
 .hint.gone{opacity:0}
 
-/* utilitários */
 .abs{position:absolute}
 .deco{position:absolute;opacity:.09;pointer-events:none;fill:#fff}
 .deco.red{fill:var(--red);opacity:.16}
@@ -410,7 +374,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
 <div id="stage-wrap">
 <div id="stage">
 
-  <!-- ===================== FUNDO ===================== -->
   <div id="fx">
     <div class="glow a"></div><div class="glow b"></div><div class="glow c"></div>
     <canvas id="embers"></canvas>
@@ -421,7 +384,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <div class="scan"></div><div class="noise"></div><div class="vignette"></div>
   </div>
 
-  <!-- ===================== SPRITE SVG ===================== -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 
     <symbol id="i-octagon" viewBox="0 0 100 100">
@@ -502,7 +464,7 @@ tr:hover td{background:rgba(229,9,20,.10)}
     </symbol>
     <symbol id="i-play" viewBox="0 0 100 100"><path d="M18 8l70 42-70 42z"/></symbol>
     <symbol id="i-flag" viewBox="0 0 100 100"><path d="M14 6h8v88h-8z"/><path d="M26 10h64L74 32l16 22H26z"/></symbol>
-    <!-- ícones compactos, legíveis a 22px -->
+
     <symbol id="i-strike" viewBox="0 0 100 100">
       <path d="M50 2l10 23 21-13-8 24 25 3-20 15 20 15-25 3 8 24-21-13-10 23-10-23-21 13 8-24-25-3 20-15-20-15 25-3-8-24 21 13z"/>
     </symbol>
@@ -523,9 +485,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     </symbol>
   </defs></svg>
 
-  <!-- ============================================================
-       S1 — CAPA
-       ============================================================ -->
   <section class="slide cover on" data-t="Abertura">
     <img class="abs" style="right:0;top:0;width:1120px;height:900px;object-fit:cover;opacity:.20;
          -webkit-mask-image:linear-gradient(to left,#000 30%,transparent);mask-image:linear-gradient(to left,#000 30%,transparent)"
@@ -566,9 +525,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <img class="abs" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-img="logo-ufc.png" alt="" style="left:78px;bottom:74px;width:118px;opacity:.85;z-index:5">
   </section>
 
-  <!-- ============================================================
-       S2 — O QUE É
-       ============================================================ -->
   <section class="slide compacto" data-t="O que é MMA">
     <div class="ep rv d1"><b>CAP. 01</b><span>Definição &amp; Anatomia do Esporte</span></div>
     <h1 class="rv d1">O QUE É O <em>MMA</em>?</h1>
@@ -635,9 +591,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <svg class="deco red" style="right:40px;bottom:74px;width:170px;height:170px"><use href="#i-octagon"/></svg>
   </section>
 
-  <!-- ============================================================
-       S3 — ORIGENS
-       ============================================================ -->
   <section class="slide" data-t="Origem">
     <div class="ep rv d1"><b>CAP. 02</b><span>Origem · Das arenas gregas ao Vale-Tudo</span></div>
     <h1 class="rv d1">AS <em>RAÍZES</em> DA LUTA MISTA</h1>
@@ -677,9 +630,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <svg class="deco" style="right:126px;bottom:96px;width:158px;height:158px;opacity:.10"><use href="#i-grapple"/></svg>
   </section>
 
-  <!-- ============================================================
-       S4 — UFC 1
-       ============================================================ -->
   <section class="slide" data-t="UFC 1 — 1993">
     <div class="ep rv d1"><b>CAP. 03</b><span>História · O experimento que virou esporte</span></div>
     <h1 class="rv d1">12/11/1993 — <em>UFC 1</em></h1>
@@ -741,9 +691,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     </div>
   </section>
 
-  <!-- ============================================================
-       S5 — REGULAMENTAÇÃO
-       ============================================================ -->
   <section class="slide" data-t="Da proibição ao esporte global">
     <div class="ep rv d1"><b>CAP. 04</b><span>História · Proibição, regras e explosão global</span></div>
     <h1 class="rv d1">DA <em>PROIBIÇÃO</em> AO ESPORTE GLOBAL</h1>
@@ -782,9 +729,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <div class="float bob" style="right:40px;top:200px;width:180px;opacity:.9"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-img="stopwatch.png" alt=""></div>
   </section>
 
-  <!-- ============================================================
-       S6 — OCTÓGONO E ESTRUTURA
-       ============================================================ -->
   <section class="slide" data-t="O octógono e a estrutura da luta">
     <div class="ep rv d1"><b>CAP. 05</b><span>Regras · Palco, tempo, equipamento e pesos</span></div>
     <h1 class="rv d1">O <em>OCTÓGONO</em> E A ESTRUTURA DA LUTA</h1>
@@ -887,9 +831,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     </div>
   </section>
 
-  <!-- ============================================================
-       S7 — REGRAS
-       ============================================================ -->
   <section class="slide" data-t="Regras: o que pode e o que não pode">
     <div class="ep rv d1"><b>CAP. 06</b><span>Regras · Golpes válidos e faltas</span></div>
     <h1 class="rv d1">O QUE <em>PODE</em> × O QUE <em>NÃO PODE</em></h1>
@@ -956,9 +897,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <svg class="deco red" style="left:1240px;top:96px;width:220px;height:220px;opacity:.10"><use href="#i-octagon"/></svg>
   </section>
 
-  <!-- ============================================================
-       S8 — COMO SE VENCE
-       ============================================================ -->
   <section class="slide" data-t="Como se vence uma luta">
     <div class="ep rv d1"><b>CAP. 07</b><span>Regras · Formas de vitória e pontuação</span></div>
     <h1 class="rv d1">COMO SE <em>VENCE</em> UMA LUTA</h1>
@@ -1027,9 +965,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <svg class="deco red" style="right:52px;top:70px;width:130px;height:130px;opacity:.12"><use href="#i-timer"/></svg>
   </section>
 
-  <!-- ============================================================
-       S9 — OBJETIVOS E CARACTERÍSTICAS
-       ============================================================ -->
   <section class="slide" data-t="Objetivos, características e benefícios">
     <div class="ep rv d1"><b>CAP. 08</b><span>Objetivos · Características · Benefícios · Riscos</span></div>
     <h1 class="rv d1">PARA QUE <em>SERVE</em> O MMA</h1>
@@ -1092,9 +1027,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <div class="float bob" style="right:-20px;bottom:40px;width:220px;opacity:.10;z-index:0"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-img="gloves.png" alt=""></div>
   </section>
 
-  <!-- ============================================================
-       S10 — CURIOSIDADES
-       ============================================================ -->
   <section class="slide" data-t="Curiosidades">
     <div class="ep rv d1"><b>CAP. 09</b><span>Curiosidades · Os 10 fatos mais marcantes</span></div>
     <h1 class="rv d1">TOP 10 <em>CURIOSIDADES</em></h1>
@@ -1133,9 +1065,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     </div>
   </section>
 
-  <!-- ============================================================
-       S11 — IMPORTÂNCIA CULTURAL
-       ============================================================ -->
   <section class="slide" data-t="Importância cultural">
     <div class="ep rv d1"><b>CAP. 10</b><span>Importância cultural e social</span></div>
     <h1 class="rv d1">POR QUE O MMA <em>IMPORTA</em></h1>
@@ -1194,9 +1123,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     </div>
   </section>
 
-  <!-- ============================================================
-       S12 — CRÉDITOS
-       ============================================================ -->
   <section class="slide" data-t="Créditos">
     <img class="abs" style="left:0;top:0;width:100%;height:100%;object-fit:cover;opacity:.14;
          -webkit-mask-image:radial-gradient(70% 60% at 50% 45%,#000,transparent);mask-image:radial-gradient(70% 60% at 50% 45%,#000,transparent)"
@@ -1246,7 +1172,6 @@ tr:hover td{background:rgba(229,9,20,.10)}
     <img class="abs" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-img="logo-ufc.png" alt="" style="right:74px;top:64px;width:108px;opacity:.55">
   </section>
 
-  <!-- ===================== HUD ===================== -->
   <div class="hud"><span class="num" id="num">01<s>/12</s></span></div>
   <div class="dots" id="dots"></div>
   <div class="bar"><i id="prog"></i></div>
@@ -1265,7 +1190,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
 (function(){
   "use strict";
 
-  /* ---------- escala do palco ---------- */
   var stage = document.getElementById('stage');
   var wrap  = document.getElementById('stage-wrap');
   var escalaAtual = -1;
@@ -1307,7 +1231,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
   if(document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   fit();
 
-  /* ---------- slides ---------- */
   var slides = [].slice.call(document.querySelectorAll('.slide'));
   var n = slides.length, cur = 0;
   var dots = document.getElementById('dots');
@@ -1329,7 +1252,7 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
     cur = i;
     var s = slides[cur];
     s.classList.remove('back');
-    void s.offsetWidth;                    // reinicia as animações
+    void s.offsetWidth;
     s.classList.add('on'); if(back) s.classList.add('back');
     dotEls.forEach(function(d,k){ d.classList.toggle('on', k === cur); });
     num.innerHTML = String(cur+1).padStart(2,'0') + '<s>/' + String(n).padStart(2,'0') + '</s>';
@@ -1339,7 +1262,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
   function next(){ go(cur+1, false); }
   function prev(){ go(cur-1, true); }
 
-  /* ---------- tela cheia ---------- */
   function estaEmTelaCheia(){
     return document.fullscreenElement || document.webkitFullscreenElement ||
            document.msFullscreenElement || null;
@@ -1392,7 +1314,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
   cur = -1;
   go((start >= 1 && start <= n) ? start-1 : 0, false);
 
-  /* ---------- parallax 3D com o mouse ---------- */
   var pk = [].slice.call(document.querySelectorAll('.pk'));
   var tX = 0, tY = 0, cX = 0, cY = 0;
   addEventListener('mousemove', function(e){
@@ -1411,7 +1332,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
     requestAnimationFrame(loop);
   })();
 
-  /* ---------- brasas / partículas ---------- */
   var cv = document.getElementById('embers'), ctx = cv.getContext('2d');
   var P = [], W = 1600, H = 900;
   cv.width = W; cv.height = H;
@@ -1423,7 +1343,7 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
       v: Math.random()*0.85 + 0.28,
       s: Math.random()*0.7 - 0.35,
       a: Math.random()*0.55 + 0.18,
-      h: Math.random() < .78 ? 6 : 42          // vermelho ou dourado
+      h: Math.random() < .78 ? 6 : 42
     };
   }
   for(var i=0;i<105;i++) P.push(spawn(true));
@@ -1443,7 +1363,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
     requestAnimationFrame(draw);
   })();
 
-  /* ---------- auditoria de layout (?audit=1) ---------- */
   if(location.search.indexOf('audit') >= 0){
     setTimeout(function(){
       var sr = stage.getBoundingClientRect(), k = sr.width / 1600, rep = [];
@@ -1472,7 +1391,6 @@ for(var _e of document.querySelectorAll('[data-img]')) _e.src=window.__IMG[_e.da
     }, 400);
   }
 
-  /* ---------- ticker ESPN ---------- */
   var facts = [
     'UFC 1 · 12 NOV 1993 · DENVER, COLORADO',
     'ROYCE GRACIE VENCEU 3 LUTAS EM UMA ÚNICA NOITE',

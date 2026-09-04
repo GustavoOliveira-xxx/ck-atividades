@@ -1,12 +1,3 @@
-/* ============================================================================
-   ORÁCULO CK — cena.js
-   Fundo animado em <canvas>: um campo de fluxo que arrasta faíscas verdes e
-   runas que sobem lentamente, reagindo ao ponteiro do usuário.
-
-   Roda em requestAnimationFrame, pausa quando a aba perde o foco e some por
-   completo quando o sistema pede movimento reduzido.
-   ========================================================================== */
-
 window.CK = window.CK || {};
 
 CK.cena = (() => {
@@ -30,7 +21,6 @@ CK.cena = (() => {
     let tempo = 0;
     let animando = true;
 
-    /* ---------- campo de fluxo: dá a direção de cada faísca ---------- */
     const campo = (x, y, t) => {
       const a = Math.sin(x * 0.0015 + t) + Math.cos(y * 0.0018 - t * 0.85);
       const b = Math.sin((x + y) * 0.001 + t * 1.35);
@@ -59,7 +49,6 @@ CK.cena = (() => {
       angulo: Math.random() * Math.PI,
     });
 
-    /* ---------- dimensionamento sensível ao devicePixelRatio ---------- */
     const dimensionar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       largura = window.innerWidth;
@@ -76,20 +65,17 @@ CK.cena = (() => {
       runas = Array.from({ length: quantasRunas }, () => nascerRuna(true));
     };
 
-    /* ---------- quadro ---------- */
     const desenhar = () => {
       if (!animando) return;
 
       tempo += 0.0016;
 
-      // rastro: apaga o quadro anterior aos poucos em vez de limpar tudo
       contexto.globalCompositeOperation = "destination-out";
       contexto.fillStyle = "rgba(0, 0, 0, 0.06)";
       contexto.fillRect(0, 0, largura, altura);
 
       contexto.globalCompositeOperation = "lighter";
 
-      // runas ao fundo
       for (let i = 0; i < runas.length; i += 1) {
         const runa = runas[i];
 
@@ -112,7 +98,6 @@ CK.cena = (() => {
         contexto.restore();
       }
 
-      // faíscas do campo de fluxo
       for (let i = 0; i < faiscas.length; i += 1) {
         const faisca = faiscas[i];
         const anterior = { x: faisca.x, y: faisca.y };
@@ -121,7 +106,6 @@ CK.cena = (() => {
         faisca.x += Math.cos(angulo) * faisca.velocidade;
         faisca.y += Math.sin(angulo) * faisca.velocidade;
 
-        // o ponteiro empurra as faíscas para longe
         const dx = faisca.x - ponteiro.x;
         const dy = faisca.y - ponteiro.y;
         const distancia = Math.hypot(dx, dy);
@@ -161,7 +145,6 @@ CK.cena = (() => {
     dimensionar();
     requestAnimationFrame(desenhar);
 
-    /* ---------- eventos ---------- */
     let ajuste;
     window.addEventListener("resize", () => {
       clearTimeout(ajuste);

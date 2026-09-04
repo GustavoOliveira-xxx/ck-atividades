@@ -68,13 +68,6 @@
 
   const grade = $("[data-grade]");
 
-  /* ---------------------------------------------------------------------
-     Recursos de uma atividade
-     Cada cartão pode oferecer vários arquivos — a aplicação, a apresentação
-     e o documento, por exemplo. Atividades antigas, que só têm `href`,
-     continuam funcionando: viram um recurso único.
-     ------------------------------------------------------------------- */
-
   const ICONE_RECURSO = {
     app: '<path d="M3 5h18v14H3z"/><path d="M3 9h18"/><circle cx="6" cy="7" r=".6"/>',
     slides: '<rect x="3" y="4" width="18" height="12" rx="1.6"/><path d="M12 16v4M8 20h8"/>',
@@ -427,8 +420,6 @@
     $("[data-vitrine-proxima]")?.addEventListener("click", () => girarPara(1));
   }
 
-  /* Extrusão por fatias: cada marca é a mesma imagem repetida em vários
-     translateZ, o que dá volume real ao girar. Vale para as duas logos. */
   const MARCAS = {
     origem: {
       src: "assets/logo-ck.png",
@@ -495,8 +486,6 @@
     const eclipse = $("[data-abertura-eclipse]", abertura);
     const CIRCUNFERENCIA = 2 * Math.PI * 54;
 
-    /* O eclipse acompanha o progresso: a marca remasterizada entra pela
-       direita e cobre a original conforme a barra enche. */
     const moverEclipse = (progresso) => {
       if (eclipse) eclipse.style.setProperty("--eclipse", progresso.toFixed(3));
     };

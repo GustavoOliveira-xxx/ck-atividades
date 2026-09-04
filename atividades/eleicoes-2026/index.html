@@ -22,8 +22,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Carrega as fontes sem bloquear a renderização: se o Google estiver fora
-       do ar ou bloqueado, a página abre na hora com as fontes de sistema. -->
+
   <link rel="stylesheet" media="print" onload="this.media='all'"
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <noscript>
@@ -39,16 +38,12 @@
 
 <body>
 
-  <!-- ==================================================================
-       CARGA — loader animado da aplicação
-       ================================================================== -->
   <div class="carga" data-carga aria-hidden="true">
     <span class="carga__cortina carga__cortina--esq"></span>
     <span class="carga__cortina carga__cortina--dir"></span>
 
     <div class="carga__nucleo">
 
-      <!-- Urna 3D que se monta durante o carregamento -->
       <div class="carga__urna" data-carga-urna>
         <span class="carga__urna-face carga__urna-face--frente">
           <img src="assets/logo-ck-remaster.png" alt="" decoding="async">
@@ -83,9 +78,6 @@
     </div>
   </div>
 
-  <!-- ==================================================================
-       CENÁRIO DE FUNDO
-       ================================================================== -->
   <div class="cena" aria-hidden="true">
     <canvas class="cena__particulas" data-particulas></canvas>
     <span class="cena__aurora"></span>
@@ -101,9 +93,6 @@
 
   <a class="pular" href="#inicio">Pular para o conteúdo</a>
 
-  <!-- ==================================================================
-       CABEÇALHO
-       ================================================================== -->
   <header class="topo" data-topo>
     <a class="topo__marca" href="../../index.html" aria-label="Voltar ao Acervo CK">
       <span class="selo-duo selo-duo--mini" aria-hidden="true">
@@ -138,9 +127,6 @@
 
   <main>
 
-    <!-- ================================================================
-         HERO
-         ================================================================ -->
     <section id="inicio" class="hero">
       <div class="hero__grade">
 
@@ -201,9 +187,6 @@
           </dl>
         </div>
 
-        <!-- ============================================================
-             PALCO 3D — urna holográfica sobre o mapa de SP
-             ============================================================ -->
         <div class="palco" data-palco>
           <div class="palco__camera" data-palco-camera>
 
@@ -211,16 +194,8 @@
             <span class="palco__anel palco__anel--b"></span>
             <span class="palco__anel palco__anel--c"></span>
 
-            <!-- ========================================================
-                 URNA ELETRÔNICA 3D — o objeto principal da cena.
-                 Corpo em caixa, painel inclinado e teclado numérico, todos
-                 montados com transforms 3D. O js/urna.js "vota" nela em laço:
-                 digita o número de um candidato de verdade (lido do XML),
-                 acende as teclas, mostra a ficha e fecha com FIM.
-                 ======================================================== -->
             <div class="urna3d" data-urna3d>
 
-              <!-- Corpo -->
               <div class="urna3d__corpo">
                 <span class="urna3d__f urna3d__f--frente"></span>
                 <span class="urna3d__f urna3d__f--tras"></span>
@@ -230,7 +205,6 @@
                 <span class="urna3d__f urna3d__f--base"></span>
               </div>
 
-              <!-- Painel inclinado com a tela do eleitor -->
               <div class="urna3d__dobra">
                 <div class="urna3d__painel">
                   <div class="urna3d__tela">
@@ -265,7 +239,6 @@
                 </div>
               </div>
 
-              <!-- Teclado numérico, deitado na frente do topo -->
               <div class="urna3d__mesa">
                 <div class="urna3d__teclado" data-urna-teclado>
                   <span class="urna3d__tecla" data-tecla="1">1</span>
@@ -290,7 +263,6 @@
               <span class="urna3d__sombra" aria-hidden="true"></span>
             </div>
 
-            <!-- Mapa de SP flutuando como holograma -->
             <div class="mapa-holo" data-mapa>
               <svg viewBox="0 0 400 260" role="img" aria-label="Silhueta estilizada do estado de São Paulo">
                 <defs>
@@ -331,16 +303,10 @@
       </a>
     </section>
 
-    <!-- ================================================================
-         AVISO ACADÊMICO
-         ================================================================ -->
     <div class="faixa-aviso" role="note">
       <div class="faixa-aviso__trilha" data-faixa></div>
     </div>
 
-    <!-- ================================================================
-         PARTE 1 — CARGOS (XML)
-         ================================================================ -->
     <section id="cargos" class="secao">
       <header class="secao__cabeca">
         <p class="secao__indice">Parte 1 — XML local</p>
@@ -405,9 +371,6 @@
       </div>
     </section>
 
-    <!-- ================================================================
-         PAINEL XML + PIPELINE
-         ================================================================ -->
     <section id="xml" class="secao">
       <header class="secao__cabeca">
         <p class="secao__indice">Parte 1 — Por dentro</p>
@@ -473,11 +436,6 @@
         </li>
       </ol>
 
-      <!-- ================================================================
-           CUBO DE DADOS CK — objeto 3D arrastável. Cada face é uma etapa do
-           caminho que o dado percorre na atividade, e a sexta traz a marca do
-           grupo. Arraste para girar; solte e ele volta a girar sozinho.
-           ================================================================ -->
       <div class="cubo-bloco">
         <div class="cubo-palco" data-cubo>
           <div class="cubo" data-cubo-corpo>
@@ -543,9 +501,6 @@
       </div>
     </section>
 
-    <!-- ================================================================
-         PARTE 2 — CANDIDATOS (fetch + JSON)
-         ================================================================ -->
     <section id="candidatos" class="secao">
       <header class="secao__cabeca">
         <p class="secao__indice">Parte 2 — fetch + JSON</p>
@@ -594,9 +549,6 @@
       </p>
     </section>
 
-    <!-- ================================================================
-         BASTIDORES
-         ================================================================ -->
     <section id="bastidores" class="secao">
       <header class="secao__cabeca">
         <p class="secao__indice">Bastidores</p>
@@ -732,7 +684,6 @@
       </nav>
     </div>
 
-    <!-- Assinatura do grupo, em relevo 3D -->
     <div class="assinatura" data-assinatura>
       <div class="assinatura__placa">
         <span class="assinatura__brilho" aria-hidden="true"></span>
@@ -764,11 +715,6 @@
     </div>
   </footer>
 
-  <!-- defer em todos: script síncrono espera qualquer CSS externo pendente
-       terminar de carregar. Sem isto, se a folha de fontes do Google demorar
-       ou estiver bloqueada (rede da escola, apresentação offline), a página
-       inteira fica presa em readyState "loading" e nada roda. Com defer os
-       scripts saem do caminho do parser e a ordem entre eles é mantida. -->
   <script src="js/dados-xml.js" defer></script>
   <script src="js/xml.js" defer></script>
   <script src="js/exportar.js" defer></script>

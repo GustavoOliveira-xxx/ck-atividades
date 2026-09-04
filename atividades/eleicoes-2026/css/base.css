@@ -1,21 +1,12 @@
 @charset "UTF-8";
 
-/* ============================================================================
-   CK ELEIÇÕES 2026 — BASE
-   Paleta puxada da logo remasterizada da CK: jade, menta e luz sobre obsidiana.
-   Os vermelhos e azuis institucionais aparecem só nos selos de poder, como
-   pede o Passo 1.2 da atividade.
-   ========================================================================== */
-
 :root {
-  /* Fundos */
   --bg-0: #04100c;
   --bg-1: #061510;
   --bg-2: #081d16;
   --bg-3: #0b271d;
   --bg-4: #103326;
 
-  /* Jade / menta — identidade da logo remaster */
   --jade-900: #04241a;
   --jade-800: #06382a;
   --jade-700: #0a5540;
@@ -34,20 +25,17 @@
   --menta-glow-forte: rgba(56, 255, 180, .72);
   --ciano-glow: rgba(50, 215, 230, .38);
 
-  /* Herança da marca original — usada no selo duplo e nos detalhes */
   --roxo-500: #9333c4;
   --roxo-400: #a855f7;
   --roxo-300: #c084fc;
   --ouro-400: #fec800;
   --roxo-glow: rgba(147, 51, 196, .5);
 
-  /* Poderes institucionais (Passo 1.2) */
   --executivo: #e74c3c;
   --executivo-suave: rgba(231, 76, 60, .16);
   --legislativo: #3498db;
   --legislativo-suave: rgba(52, 152, 219, .16);
 
-  /* Texto */
   --txt-0: #f2fff8;
   --txt-1: #cfe8dd;
   --txt-2: #93b3a7;
@@ -116,9 +104,7 @@ body.is-travado {
 
 img {
   max-width: 100%;
-  /* Sem height:auto, uma imagem com só a largura no CSS herda a altura do
-     atributo height do HTML e estica — foi o que aconteceu com a logo da
-     assinatura, que virou 988px dentro de uma moldura de 92px. */
+
   height: auto;
   display: block;
 }
@@ -170,7 +156,6 @@ strong {
   color: var(--bg-0);
 }
 
-/* Barra de rolagem ------------------------------------------------------- */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--jade-600) transparent;
@@ -195,7 +180,6 @@ strong {
   background: var(--menta-400);
 }
 
-/* Acessibilidade --------------------------------------------------------- */
 .pular {
   position: fixed;
   top: -100px;
@@ -226,7 +210,6 @@ strong {
   color: transparent;
 }
 
-/* Cursor personalizado --------------------------------------------------- */
 .cursor {
   position: fixed;
   top: 0;

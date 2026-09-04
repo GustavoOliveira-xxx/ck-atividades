@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-/* ============================================================================
-   CK ELEIÇÕES 2026 — COMPONENTES
-   ========================================================================== */
-
-/* ==========================================================================
-   SELO DUPLO — as duas logos da CK em uma lente partida
-   Não é o "duas imagens lado a lado" do site institucional: aqui as marcas
-   dividem UMA moldura, cortadas na diagonal por uma fenda de luz.
-   ========================================================================== */
-
 .selo-duo {
   --lado: 56px;
   position: relative;
@@ -48,8 +38,6 @@
   object-fit: contain;
 }
 
-/* As duas marcas aparecem INTEIRAS e se alternam em fade, com o mesmo
-   tempo de tela para cada: ciclo de 9s, 4,5s para uma e 4,5s para a outra. */
 .selo-duo__face--origem {
   filter: drop-shadow(0 0 9px var(--roxo-glow));
   animation: selo-fade-origem 9s var(--ease) infinite;
@@ -60,7 +48,6 @@
   animation: selo-fade-futuro 9s var(--ease) infinite;
 }
 
-/* A fenda: o fio de luz na diagonal que varre a moldura a cada troca */
 .selo-duo__fenda {
   position: absolute;
   top: 50%;
@@ -89,15 +76,10 @@ a:hover .selo-duo,
     0 0 30px rgba(37, 240, 162, .34);
 }
 
-/* No hover a troca acelera */
 a:hover .selo-duo__face,
 a:hover .selo-duo__fenda {
   animation-duration: 3.6s;
 }
-
-/* ==========================================================================
-   BOTÕES
-   ========================================================================== */
 
 .btn {
   position: relative;
@@ -157,10 +139,6 @@ a:hover .selo-duo__fenda {
   transform: none !important;
 }
 
-/* ==========================================================================
-   PALCO 3D — urna holográfica sobre o mapa de SP
-   ========================================================================== */
-
 .palco {
   position: relative;
   perspective: 1150px;
@@ -181,7 +159,6 @@ a:hover .selo-duo__fenda {
   transition: transform .6s var(--ease-out);
 }
 
-/* Anéis orbitais ---------------------------------------------------------- */
 .palco__anel {
   position: absolute;
   border-radius: 50%;
@@ -211,20 +188,12 @@ a:hover .selo-duo__fenda {
   animation: anel-gira 12s linear infinite;
 }
 
-/* ==========================================================================
-   URNA ELETRÔNICA 3D
-   Montada como uma caixa (padrão de cubo CSS: cada face posicionada a partir
-   do centro), com um painel inclinado preso à borda de trás do topo e um
-   teclado deitado na frente. Nada de imagem: é tudo transform 3D.
-   O js/urna.js anima uma votação de verdade em laço.
-   ========================================================================== */
-
 .urna3d {
-  --l: clamp(190px, 18vw, 258px);   /* largura do corpo    */
-  --a: clamp(46px, 4.4vw, 62px);    /* altura do corpo     */
-  --p: clamp(126px, 12vw, 172px);   /* profundidade        */
-  --pl: clamp(186px, 17.6vw, 252px);/* largura do painel   */
-  --pa: clamp(158px, 15vw, 216px);  /* altura do painel    */
+  --l: clamp(190px, 18vw, 258px);
+  --a: clamp(46px, 4.4vw, 62px);
+  --p: clamp(126px, 12vw, 172px);
+  --pl: clamp(186px, 17.6vw, 252px);
+  --pa: clamp(158px, 15vw, 216px);
 
   position: relative;
   z-index: 5;
@@ -235,7 +204,6 @@ a:hover .selo-duo__fenda {
   animation: urna-balanca 16s ease-in-out infinite;
 }
 
-/* --- Corpo -------------------------------------------------------------- */
 .urna3d__corpo {
   position: absolute;
   left: 0;
@@ -250,8 +218,7 @@ a:hover .selo-duo__fenda {
   border: 1px solid rgba(37, 240, 162, .34);
   background: linear-gradient(158deg, rgba(19, 58, 44, .98), rgba(5, 20, 15, .99));
   box-shadow: inset 0 0 26px rgba(0, 0, 0, .62);
-  /* Sem isto, as faces de trás aparecem através das da frente e a urna
-     fica com aspecto de caixa aberta. */
+
   backface-visibility: hidden;
 }
 
@@ -270,7 +237,6 @@ a:hover .selo-duo__fenda {
   box-shadow: inset 0 0 26px rgba(0, 0, 0, .5), 0 0 30px rgba(37, 240, 162, .2);
 }
 
-/* Faixa de luz na frente do corpo — o "respiro" da máquina */
 .urna3d__f--frente::after {
   content: "";
   position: absolute;
@@ -283,7 +249,6 @@ a:hover .selo-duo__fenda {
   animation: urna-respira 3.6s ease-in-out infinite;
 }
 
-/* Grelha de ventilação, para a frente não ser uma parede lisa */
 .urna3d__f--frente::before {
   content: "";
   position: absolute;
@@ -335,9 +300,6 @@ a:hover .selo-duo__fenda {
   background: rgba(3, 12, 9, .99);
 }
 
-/* --- Painel inclinado --------------------------------------------------- */
-/* A dobra é um ponto sem tamanho na borda de trás do topo: o painel nasce
-   dela e se inclina para trás, como a tela de uma urna de verdade. */
 .urna3d__dobra {
   position: absolute;
   left: 0;
@@ -373,7 +335,6 @@ a:hover .selo-duo__fenda {
   transform: translateZ(-4px);
 }
 
-/* --- Tela --------------------------------------------------------------- */
 .urna3d__tela {
   position: relative;
   width: 100%;
@@ -391,8 +352,7 @@ a:hover .selo-duo__fenda {
     inset 0 0 26px rgba(37, 240, 162, .2),
     0 0 30px rgba(37, 240, 162, .28);
   font-family: var(--fonte-mono);
-  /* Tamanho-base da tela: todo texto do painel é medido em em a partir
-     daqui, então a tela inteira escala junto com a urna. */
+
   font-size: clamp(9px, .86vw, 12.5px);
   transform: translateZ(2px);
 }
@@ -440,7 +400,6 @@ a:hover .selo-duo__fenda {
   color: var(--txt-3);
 }
 
-/* Os dígitos do número entram um a um, como na urna real */
 .urna3d__digitos {
   display: flex;
   gap: 2px;
@@ -525,7 +484,6 @@ a:hover .selo-duo__fenda {
   animation: pisca 1s steps(2) infinite;
 }
 
-/* O "FIM" que fecha o voto, ocupando a tela inteira */
 .urna3d__fim {
   position: absolute;
   inset: 0;
@@ -558,9 +516,6 @@ a:hover .selo-duo__fenda {
   animation: varre 3.6s linear infinite;
 }
 
-/* --- Teclado ------------------------------------------------------------ */
-/* A mesa é outro ponto sem tamanho: fica no topo do corpo, deitada, e
-   empurrada para a frente. O teclado desenha normalmente dentro dela. */
 .urna3d__mesa {
   position: absolute;
   left: 0;
@@ -632,7 +587,6 @@ a:hover .selo-duo__fenda {
   color: #04231a;
 }
 
-/* Estado aceso, disparado pelo js/urna.js */
 .urna3d__tecla.is-apertada {
   transform: translateZ(-3px) scale(.94);
   background: var(--menta-400);
@@ -645,7 +599,6 @@ a:hover .selo-duo__fenda {
   box-shadow: 0 0 18px rgba(88, 255, 184, .9), 0 0 34px rgba(88, 255, 184, .5);
 }
 
-/* Sombra projetada da máquina no plinto */
 .urna3d__sombra {
   position: absolute;
   left: calc(var(--l) / -2 * 1.1);
@@ -659,7 +612,6 @@ a:hover .selo-duo__fenda {
   transform: translateY(calc(var(--a) / 2 + 2px)) rotateX(-90deg);
 }
 
-/* Mapa holográfico de SP -------------------------------------------------- */
 .mapa-holo {
   position: absolute;
   z-index: 2;
@@ -699,7 +651,6 @@ a:hover .selo-duo__fenda {
   letter-spacing: .12em;
 }
 
-/* Cone de luz do projetor */
 .palco__cone {
   position: absolute;
   z-index: 1;
@@ -713,7 +664,6 @@ a:hover .selo-duo__fenda {
   animation: cone-pulsa 4.5s ease-in-out infinite;
 }
 
-/* Plinto — o peso da composição */
 .palco__plinto {
   position: absolute;
   bottom: 9%;
@@ -765,10 +715,6 @@ a:hover .selo-duo__fenda {
 .faisca--3 { bottom: 26%; left: 20%; animation-delay: 2.4s; }
 .faisca--4 { top: 60%; right: 18%; animation-delay: 3.6s; background: var(--luz); }
 
-/* ==========================================================================
-   FAIXA DE AVISO
-   ========================================================================== */
-
 .faixa-aviso {
   position: relative;
   overflow: hidden;
@@ -808,10 +754,6 @@ a:hover .selo-duo__fenda {
 .faixa-aviso:hover .faixa-aviso__trilha {
   animation-play-state: paused;
 }
-
-/* ==========================================================================
-   BADGES DE PODER (Passo 1.2)
-   ========================================================================== */
 
 .badge {
   display: inline-flex;
@@ -870,17 +812,12 @@ a:hover .selo-duo__fenda {
   color: var(--txt-3);
 }
 
-/* ==========================================================================
-   CARTÕES DE CARGO (Parte 1)
-   ========================================================================== */
-
 .grade-cargos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 1.25rem;
 }
 
-/* Com 5 cargos, três colunas fecham em 3 + 2 — mais equilibrado que 4 + 1 */
 @media (min-width: 1000px) {
   .grade-cargos {
     grid-template-columns: repeat(3, 1fr);
@@ -1031,10 +968,6 @@ a:hover .selo-duo__fenda {
   color: var(--luz);
 }
 
-/* ==========================================================================
-   EXPORTAÇÃO
-   ========================================================================== */
-
 .exportacao {
   display: grid;
   gap: 1.5rem;
@@ -1079,10 +1012,6 @@ a:hover .selo-duo__fenda {
   opacity: 1;
   transform: none;
 }
-
-/* ==========================================================================
-   PIPELINE DO DOMPARSER
-   ========================================================================== */
 
 .pipeline {
   display: grid;
@@ -1158,10 +1087,6 @@ a:hover .selo-duo__fenda {
   color: #03150f;
   border-color: transparent;
 }
-
-/* ==========================================================================
-   VISOR DO XML
-   ========================================================================== */
 
 .visor-xml {
   border: 1px solid var(--borda);
@@ -1247,10 +1172,6 @@ a:hover .selo-duo__fenda {
 .xml-tag  { color: var(--menta-400); }
 .xml-attr { color: var(--ciano-300); }
 .xml-val  { color: #ffd98a; }
-
-/* ==========================================================================
-   CONSULTA (Parte 2)
-   ========================================================================== */
 
 .consulta {
   display: flex;
@@ -1375,10 +1296,6 @@ a:hover .selo-duo__fenda {
 .consulta__meta strong {
   color: var(--menta-300);
 }
-
-/* ==========================================================================
-   CARDS DE CANDIDATO — 3D com virada
-   ========================================================================== */
 
 .grade-candidatos {
   display: grid;
@@ -1599,8 +1516,6 @@ a:hover .selo-duo__fenda {
   border-bottom: 1px solid var(--borda);
 }
 
-/* Rótulo que separa programa de governo (Executivo) de pauta parlamentar
-   (Legislativo). Sem isso, uma pauta de deputado pareceria promessa. */
 .candidato__rotulo-propostas {
   font-family: var(--fonte-mono);
   font-size: .62rem;
@@ -1621,7 +1536,6 @@ a:hover .selo-duo__fenda {
   color: var(--txt-3);
 }
 
-/* Selo discreto nos números que ainda faltam confirmar no TSE */
 .candidato__conferir {
   padding: .16rem .5rem;
   border-radius: 999px;
@@ -1644,8 +1558,7 @@ a:hover .selo-duo__fenda {
   align-content: start;
   list-style: none;
   padding-right: .35rem;
-  /* Esmaece a última linha quando ainda há proposta abaixo, para o corte
-     não parecer texto faltando. */
+
   mask-image: linear-gradient(180deg, #000 calc(100% - 26px), transparent);
   scrollbar-width: thin;
 }
@@ -1676,7 +1589,6 @@ a:hover .selo-duo__fenda {
   color: var(--txt-3);
 }
 
-/* Esqueleto de carregamento ---------------------------------------------- */
 .candidato-esqueleto {
   aspect-ratio: 3 / 4.6;
   display: flex;
@@ -1714,7 +1626,6 @@ a:hover .selo-duo__fenda {
   animation: brilho-corre 1.5s ease-in-out infinite;
 }
 
-/* Erro da API ------------------------------------------------------------- */
 .api-erro {
   grid-column: 1 / -1;
   display: flex;
@@ -1753,10 +1664,6 @@ a:hover .selo-duo__fenda {
   color: var(--menta-300);
   border-bottom: 1px solid rgba(37, 240, 162, .35);
 }
-
-/* ==========================================================================
-   MATRIZ DE ADAPTAÇÃO
-   ========================================================================== */
 
 .matriz {
   border: 1px solid var(--borda);
@@ -1806,10 +1713,6 @@ a:hover .selo-duo__fenda {
   color: var(--menta-200);
   font-weight: 600;
 }
-
-/* ==========================================================================
-   CRÉDITOS
-   ========================================================================== */
 
 .creditos {
   display: grid;
@@ -1896,10 +1799,6 @@ a:hover .selo-duo__fenda {
   color: var(--txt-1);
 }
 
-/* ==========================================================================
-   RESPONSIVO
-   ========================================================================== */
-
 @media (min-width: 760px) {
   .exportacao {
     grid-template-columns: 1fr auto;
@@ -1940,10 +1839,6 @@ a:hover .selo-duo__fenda {
     font-weight: 400;
   }
 }
-
-/* ==========================================================================
-   CUBO DE DADOS — objeto 3D arrastável com as seis etapas do dado
-   ========================================================================== */
 
 .cubo-bloco {
   display: grid;
@@ -2030,7 +1925,6 @@ a:hover .selo-duo__fenda {
   color: var(--txt-3);
 }
 
-/* A face da marca: fundo mais claro e a logo em destaque */
 .cubo__face--base {
   gap: .45rem;
   padding: .6rem;
@@ -2040,8 +1934,6 @@ a:hover .selo-duo__fenda {
   border-color: rgba(37, 240, 162, .6);
 }
 
-/* Altura, não largura: como grid item, a logo era espremida pela linha.
-   Fixando a altura e deixando a largura livre, ela mantém a proporção. */
 .cubo__face--base img {
   width: auto;
   height: 56%;
@@ -2049,7 +1941,6 @@ a:hover .selo-duo__fenda {
   filter: drop-shadow(0 0 12px var(--menta-glow-forte));
 }
 
-/* Posicionamento das seis faces a partir do centro */
 .cubo__face--frente { transform: translateZ(calc(var(--lado) / 2)); }
 .cubo__face--tras   { transform: rotateY(180deg) translateZ(calc(var(--lado) / 2)); }
 .cubo__face--dir    { transform: rotateY(90deg)  translateZ(calc(var(--lado) / 2)); }
@@ -2057,7 +1948,6 @@ a:hover .selo-duo__fenda {
 .cubo__face--topo   { transform: rotateX(90deg)  translateZ(calc(var(--lado) / 2)); }
 .cubo__face--base   { transform: rotateX(-90deg) translateZ(calc(var(--lado) / 2)); }
 
-/* A face virada para a frente ganha um realce sutil */
 .cubo[data-face-ativa="xml"] .cubo__face--frente,
 .cubo[data-face-ativa="parser"] .cubo__face--dir,
 .cubo[data-face-ativa="json"] .cubo__face--tras,
@@ -2135,10 +2025,6 @@ a:hover .selo-duo__fenda {
   color: var(--menta-200);
 }
 
-/* ==========================================================================
-   ASSINATURA DO GRUPO — placa em relevo no rodapé
-   ========================================================================== */
-
 .assinatura {
   perspective: 1000px;
   margin-bottom: 2rem;
@@ -2172,7 +2058,6 @@ a:hover .selo-duo__fenda {
     inset 0 1px 0 rgba(255, 255, 255, .16);
 }
 
-/* Varredura de luz que atravessa a placa */
 .assinatura__brilho {
   position: absolute;
   inset: 0;

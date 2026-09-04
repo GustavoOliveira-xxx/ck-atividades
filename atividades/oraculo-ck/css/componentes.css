@@ -1,15 +1,5 @@
 @charset "UTF-8";
 
-/* ============================================================================
-   ORÁCULO CK — componentes.css
-   Peças reutilizáveis da interface: botões, cartões, painéis, estados,
-   o orbe 3D do Oráculo e a marca em camadas.
-   ========================================================================== */
-
-/* ============================================================================
-   BOTÕES
-   ========================================================================== */
-
 .btn {
   --btn-bg: var(--grad-marca);
   position: relative;
@@ -104,7 +94,6 @@
   pointer-events: none;
 }
 
-/* botão principal da consulta, com barra de carga interna */
 .btn--consultar {
   --btn-bg: var(--grad-mista);
   flex: 1 1 auto;
@@ -153,10 +142,6 @@
   background: rgba(255, 90, 110, .18);
   border-color: var(--erro);
 }
-
-/* ============================================================================
-   NAV TOGGLE + SELO DA CHAVE
-   ========================================================================== */
 
 .nav-toggle {
   display: none;
@@ -255,10 +240,6 @@
   border-color: rgba(255, 176, 58, .3);
 }
 
-/* ============================================================================
-   MÉTRICAS DO HERO
-   ========================================================================== */
-
 .metrica {
   padding: 1rem 1.15rem;
   border-radius: var(--r-md);
@@ -295,10 +276,6 @@
   color: transparent;
 }
 
-/* ============================================================================
-   ORBE 3D DO ORÁCULO
-   ========================================================================== */
-
 .oraculo {
   --tam: clamp(230px, 30vw, 340px);
   position: relative;
@@ -319,7 +296,6 @@
   transition: transform .5s var(--ease-out);
 }
 
-/* anéis orbitais em 3D real */
 .oraculo__anel {
   position: absolute;
   inset: 6%;
@@ -349,7 +325,6 @@
   animation: gira-z 26s linear infinite;
 }
 
-/* núcleo esférico */
 .oraculo__nucleo {
   position: relative;
   width: 46%;
@@ -385,7 +360,6 @@
   opacity: .7;
 }
 
-/* satélites em órbita */
 .oraculo__orbita {
   position: absolute;
   inset: 4%;
@@ -419,7 +393,6 @@
   box-shadow: 0 0 18px var(--lima-glow);
 }
 
-/* runas flutuantes */
 .oraculo__runas {
   position: absolute;
   inset: 0;
@@ -455,7 +428,6 @@
   filter: blur(9px);
 }
 
-/* estados do orbe */
 .oraculo[data-estado="carregando"] .oraculo__nucleo {
   animation-duration: .9s;
   box-shadow: 0 0 96px var(--neon-glow-forte), inset -14px -18px 40px rgba(0, 0, 0, .55),
@@ -491,10 +463,6 @@
 .oraculo[data-estado="pronto"] .oraculo__nucleo {
   animation: brota .8s var(--ease-mola);
 }
-
-/* ============================================================================
-   MARCA EM CAMADAS 3D
-   ========================================================================== */
 
 .marca3d {
   position: absolute;
@@ -545,10 +513,6 @@
   animation: respira 6s ease-in-out infinite;
 }
 
-/* ============================================================================
-   FORMULÁRIO DE CONSULTA
-   ========================================================================== */
-
 .consulta {
   display: grid;
   gap: 1.35rem;
@@ -592,7 +556,6 @@
   color: var(--neon-400);
 }
 
-/* ---------- cartões de jogo ---------- */
 .jogos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 118px), 1fr));
@@ -713,7 +676,6 @@
   box-shadow: 0 0 0 3px rgba(53, 255, 160, .16);
 }
 
-/* ---------- chips ---------- */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -753,7 +715,6 @@
   height: 14px;
 }
 
-/* ---------- níveis ---------- */
 .niveis {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -783,7 +744,6 @@
   box-shadow: 0 6px 18px rgba(0, 160, 105, .3);
 }
 
-/* ---------- textarea ---------- */
 .caixa-texto {
   position: relative;
 }
@@ -829,7 +789,6 @@
   color: var(--alerta);
 }
 
-/* ---------- sugestões ---------- */
 .sugestoes {
   display: flex;
   flex-wrap: wrap;
@@ -869,10 +828,6 @@
 .consulta__aviso b {
   color: var(--alerta);
 }
-
-/* ============================================================================
-   PAINEL DE RESPOSTA
-   ========================================================================== */
 
 .resposta {
   position: relative;
@@ -966,7 +921,6 @@
   color: var(--neon-400);
 }
 
-/* ---------- estados ---------- */
 .estado {
   padding: clamp(1.5rem, 3vw, 2.25rem);
   display: grid;
@@ -1043,7 +997,6 @@
   margin-top: .4rem;
 }
 
-/* ---------- carregando ---------- */
 .carga {
   position: relative;
   width: 92px;
@@ -1137,7 +1090,6 @@
   animation-delay: .36s;
 }
 
-/* ---------- resposta pronta ---------- */
 .estado--pronto {
   min-height: 400px;
   align-content: start;
@@ -1298,10 +1250,6 @@
   color: var(--texto-3);
 }
 
-/* ============================================================================
-   HISTÓRICO
-   ========================================================================== */
-
 .historico__item {
   position: relative;
   display: grid;
@@ -1359,10 +1307,6 @@
   color: var(--texto-3);
   font-size: .9rem;
 }
-
-/* ============================================================================
-   FLUXO DE ARQUITETURA
-   ========================================================================== */
 
 .fluxo__bloco {
   position: relative;
@@ -1463,10 +1407,6 @@
   color: var(--lima-400);
 }
 
-/* ============================================================================
-   EQUIPE
-   ========================================================================== */
-
 .membro {
   position: relative;
   display: grid;
@@ -1529,10 +1469,6 @@
   color: var(--neon-400);
 }
 
-/* ============================================================================
-   TICKER
-   ========================================================================== */
-
 .ticker {
   position: relative;
   overflow: hidden;
@@ -1561,10 +1497,6 @@
   color: var(--neon-500);
   font-style: normal;
 }
-
-/* ============================================================================
-   DIÁLOGO
-   ========================================================================== */
 
 .dlg {
   width: min(480px, calc(100% - 2rem));
@@ -1714,10 +1646,6 @@
   background: rgba(255, 176, 58, .05);
 }
 
-/* ============================================================================
-   TOAST
-   ========================================================================== */
-
 .aviso-toast {
   position: fixed;
   left: 50%;
@@ -1742,10 +1670,6 @@
   transform: translate(-50%, 0);
   opacity: 1;
 }
-
-/* ============================================================================
-   CURSOR PERSONALIZADO
-   ========================================================================== */
 
 .cursor {
   position: fixed;
@@ -1795,10 +1719,6 @@ body.cursor-toque .cursor--halo {
   border-color: var(--neon-500);
 }
 
-/* ============================================================================
-   BARRA DE PROGRESSO DE ROLAGEM
-   ========================================================================== */
-
 .scroll-progress {
   position: fixed;
   left: 0;
@@ -1809,10 +1729,6 @@ body.cursor-toque .cursor--halo {
   background: var(--grad-mista);
   box-shadow: 0 0 14px var(--neon-glow-forte);
 }
-
-/* ============================================================================
-   ABERTURA
-   ========================================================================== */
 
 .abertura {
   position: fixed;
@@ -1941,10 +1857,6 @@ body.cursor-toque .cursor--halo {
   color: var(--texto-3);
 }
 
-/* ============================================================================
-   AJUSTES RESPONSIVOS DOS COMPONENTES
-   ========================================================================== */
-
 @media (max-width: 860px) {
   .marca3d {
     width: 38%;
@@ -1977,7 +1889,6 @@ body.cursor-toque .cursor--halo {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 104px), 1fr));
   }
 
-  /* chips mais enxutos para caberem dois por linha no celular */
   .chip {
     padding: .45rem .7rem;
     font-size: .75rem;

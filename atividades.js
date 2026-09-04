@@ -1,30 +1,3 @@
-/* ============================================================================
-   ACERVO CK — catálogo de atividades
-   ----------------------------------------------------------------------------
-   Para publicar uma atividade nova, acrescente um objeto a esta lista.
-   Cartões, filtros, contadores, ticker e vitrine 3D leem daqui.
-
-   Campos:
-     id         identificador curto e único
-     titulo     nome da atividade
-     subtitulo  linha de apoio (opcional)
-     disciplina matéria — vira um filtro automaticamente
-     sigla      2 a 3 letras exibidas no selo do cartão
-     tipo       formato da entrega
-     data       AAAA-MM-DD
-     turma      turma e curso
-     resumo     parágrafo curto de descrição
-     destaques  lista de números/fatos (opcional)
-     tags       palavras-chave usadas na busca (opcional)
-     cor        cor de acento do cartão (hex)
-     href       link principal — é o que a vitrine 3D abre
-     recursos   lista de arquivos da atividade (opcional). Cada item:
-                  { rotulo, href, tipo, icone, baixar }
-                  icone: "app" | "slides" | "doc" | "codigo" | "link"
-                  baixar: true força download em vez de abrir
-     status     "pronta" | "andamento" | "apresentada"
-   ========================================================================== */
-
 window.ACERVO_CK = [
   {
     id: "eleicoes-2026",
@@ -63,12 +36,6 @@ window.ACERVO_CK = [
         href: "atividades/eleicoes-2026/index.html",
         tipo: "Interface web",
         icone: "app",
-      },
-      {
-        rotulo: "Documentação",
-        href: "atividades/eleicoes-2026/README.md",
-        tipo: "README do projeto",
-        icone: "doc",
       },
       {
         rotulo: "A variável xmlTexto",

@@ -1,21 +1,12 @@
 @charset "UTF-8";
 
-/* ============================================================================
-   ORÁCULO CK — base.css
-   Tokens de design, reset e tipografia.
-   Paleta extraída da logo remaster da Conscious Knowledge:
-   verde neon do cajado, jade e teal da armadura, menta das legendas.
-   ========================================================================== */
-
 :root {
-  /* ---------- fundos ---------- */
   --void-0: #010604;
   --void-1: #030d09;
   --void-2: #05140f;
   --void-3: #081d16;
   --void-4: #0c281f;
 
-  /* ---------- verdes da marca ---------- */
   --neon-500: #35ffa0;
   --neon-400: #6dffbb;
   --neon-300: #a6ffd4;
@@ -38,26 +29,22 @@
   --erro: #ff5a6e;
   --ok: #35ffa0;
 
-  /* ---------- texto ---------- */
   --texto-0: #f2fffa;
   --texto-1: #cfe8de;
   --texto-2: #93b3a8;
   --texto-3: #5d7a71;
 
-  /* ---------- superfícies ---------- */
   --borda: rgba(140, 255, 210, .1);
   --borda-forte: rgba(53, 255, 160, .34);
   --vidro: rgba(6, 20, 15, .68);
   --vidro-alto: rgba(11, 33, 26, .82);
 
-  /* ---------- gradientes ---------- */
   --grad-marca: linear-gradient(120deg, var(--jade-700) 0%, var(--jade-500) 44%, var(--neon-500) 100%);
   --grad-mista: linear-gradient(115deg, var(--teal-600) 0%, var(--neon-500) 52%, var(--lima-400) 122%);
   --grad-linha: linear-gradient(90deg, transparent, var(--neon-500), var(--lima-400), transparent);
   --grad-vidro: linear-gradient(158deg, rgba(200, 255, 235, .06), rgba(200, 255, 235, 0) 58%);
   --grad-texto: linear-gradient(102deg, var(--mint-100) 4%, var(--neon-400) 42%, var(--teal-400) 76%, var(--lima-400) 104%);
 
-  /* ---------- forma ---------- */
   --r-sm: 12px;
   --r-md: 18px;
   --r-lg: 26px;
@@ -67,26 +54,19 @@
   --sombra-funda: 0 32px 90px rgba(0, 0, 0, .74);
   --sombra-neon: 0 0 0 1px rgba(53, 255, 160, .18), 0 18px 54px rgba(0, 60, 40, .55);
 
-  /* ---------- tipografia ---------- */
   --f-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --f-mono: "JetBrains Mono", "Consolas", ui-monospace, monospace;
 
-  /* ---------- métrica ---------- */
   --topo-h: 76px;
   --secao-py: clamp(4.5rem, 9vw, 7.5rem);
   --largura: min(1220px, calc(100% - 2.5rem));
 
-  /* ---------- movimento ---------- */
   --ease: cubic-bezier(.22, 1, .36, 1);
   --ease-out: cubic-bezier(.16, 1, .3, 1);
   --ease-mola: cubic-bezier(.34, 1.56, .64, 1);
   --t: .4s var(--ease);
 }
-
-/* ============================================================================
-   RESET
-   ========================================================================== */
 
 *,
 *::before,
@@ -103,9 +83,6 @@ html {
   overflow-x: hidden;
 }
 
-/* O atributo `hidden` precisa vencer qualquer `display` declarado depois —
-   sem isto, um `.estado { display: grid }` deixaria os quatro estados do
-   painel visíveis ao mesmo tempo. */
 [hidden] {
   display: none !important;
 }
@@ -187,7 +164,6 @@ kbd {
   border-radius: 6px;
 }
 
-/* barra de rolagem */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -206,10 +182,6 @@ kbd {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(var(--jade-500), var(--neon-500));
 }
-
-/* ============================================================================
-   TIPOGRAFIA
-   ========================================================================== */
 
 h1,
 h2,
@@ -258,10 +230,6 @@ em {
   color: var(--neon-400);
   font-style: italic;
 }
-
-/* ============================================================================
-   ACESSÓRIOS GLOBAIS
-   ========================================================================== */
 
 .pular {
   position: fixed;

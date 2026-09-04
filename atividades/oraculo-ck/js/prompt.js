@@ -1,20 +1,8 @@
-/* ============================================================================
-   ORÁCULO CK — prompt.js
-   Transforma as escolhas do usuário (jogo, tipo de conselho, nível e pergunta)
-   no texto que será enviado ao modelo de IA.
-
-   Manter isso separado da camada de rede é de propósito: dá para ajustar a
-   "personalidade" e o formato da resposta sem tocar em uma linha de fetch.
-   ========================================================================== */
-
 window.CK = window.CK || {};
 
 CK.prompt = (() => {
   "use strict";
 
-  /* ------------------------------------------------------------------------
-     Instrução de sistema — define quem o modelo é e como deve responder.
-     ---------------------------------------------------------------------- */
   const montarInstrucao = () => [
     "Você é o Oráculo CK, assistente de jogos mobile do grupo Conscious Knowledge.",
     "Responda SEMPRE em português do Brasil, com tom direto, prático e amigável.",
@@ -34,9 +22,6 @@ CK.prompt = (() => {
     "- Limite a resposta a mais ou menos 300 palavras.",
   ].join("\n");
 
-  /* ------------------------------------------------------------------------
-     Prompt do usuário — junta o contexto escolhido na interface à pergunta.
-     ---------------------------------------------------------------------- */
   const montarPergunta = ({ jogo, tipo, nivel, pergunta }) => {
     const { rotulo: rotuloTipo, foco } = tipo;
     const { rotulo: rotuloNivel, descricao } = nivel;
@@ -50,15 +35,9 @@ CK.prompt = (() => {
     ].join("\n");
   };
 
-  /* ------------------------------------------------------------------------
-     Resumo legível da consulta — usado no histórico e no painel de resposta.
-     ---------------------------------------------------------------------- */
   const descrever = ({ jogo, tipo, nivel }) =>
     `${jogo} · ${tipo.rotulo} · ${nivel.rotulo}`;
 
-  /* ------------------------------------------------------------------------
-     Validação dos campos antes de gastar uma requisição.
-     ---------------------------------------------------------------------- */
   const validar = ({ jogo, pergunta }) => {
     if (!jogo) {
       return { valido: false, motivo: "Escolha um jogo antes de consultar." };

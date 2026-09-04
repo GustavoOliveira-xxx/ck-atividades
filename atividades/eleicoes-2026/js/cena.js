@@ -1,9 +1,3 @@
-/* ============================================================================
-   CK ELEIÇÕES 2026 — CENÁRIO
-   Campo de partículas em canvas: pontos que sobem devagar e se ligam por
-   linhas quando estão perto. Serve de fundo vivo, sem pesar na página.
-   ========================================================================== */
-
 (() => {
   "use strict";
 
@@ -36,7 +30,6 @@
     canvas.height = Math.floor(altura * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    /* Densidade proporcional à área, com teto para telas grandes */
     const quantidade = Math.min(Math.round((largura * altura) / 17000), 110);
 
     pontos = Array.from({ length: quantidade }, () => ({
@@ -59,7 +52,6 @@
       p.x += p.vx;
       p.y += p.vy;
 
-      /* Sopro suave do ponteiro: os pontos se afastam do cursor */
       const dx = p.x - ponteiro.x;
       const dy = p.y - ponteiro.y;
       const dist = Math.hypot(dx, dy);
@@ -70,7 +62,6 @@
         p.y += (dy / dist) * forca;
       }
 
-      /* Reciclagem nas bordas */
       if (p.y < -12) {
         p.y = altura + 12;
         p.x = Math.random() * largura;
@@ -83,7 +74,6 @@
       ctx.fillStyle = `rgba(${p.cor}, ${p.alfa})`;
       ctx.fill();
 
-      /* Linhas entre vizinhos próximos */
       for (let j = i + 1; j < pontos.length; j += 1) {
         const q = pontos[j];
         const lx = p.x - q.x;
@@ -104,7 +94,6 @@
     if (visivel) animacao = requestAnimationFrame(desenhar);
   };
 
-  /* Pausa quando a aba sai de foco — economiza bateria */
   document.addEventListener("visibilitychange", () => {
     visivel = !document.hidden;
     cancelAnimationFrame(animacao);

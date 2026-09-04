@@ -26,8 +26,6 @@
   --verde: #1fd18f;
   --vermelho: #ff4d5e;
 
-  /* Segunda marca — a logo remasterizada traz a energia menta/ciano.
-     Convive com o roxo e o ouro; não substitui nenhum dos dois. */
   --menta-500: #12a878;
   --menta-400: #25f0a2;
   --menta-300: #6ff5c0;
@@ -345,8 +343,6 @@ code {
   transition: stroke-dashoffset .35s var(--ease-out), stroke .5s var(--ease);
 }
 
-/* Eclipse de carga: a marca remasterizada cruza a original enquanto carrega.
-   O deslocamento é controlado por --eclipse (0 → 1), escrito pelo script.js. */
 .abertura__eclipse {
   --eclipse: 0;
   position: relative;
@@ -586,10 +582,6 @@ body>header.is-hidden {
   gap: .85rem;
 }
 
-/* --- Selo duplo ---------------------------------------------------------
-   As duas marcas dividem UMA moldura, cortadas na diagonal por uma fenda
-   de luz: a de origem ocupa o triângulo superior-esquerdo, a remasterizada
-   o inferior-direito. Uma marca só, com duas almas. */
 .selo-duo {
   --lado: 46px;
   position: relative;
@@ -628,9 +620,6 @@ body>header.is-hidden {
   object-fit: contain;
 }
 
-/* No tamanho do cabeçalho, o corte diagonal escondia metade de cada marca.
-   Agora cada uma aparece INTEIRA e elas se alternam em fade, com o mesmo
-   tempo de tela para as duas: ciclo de 9s, 4,5s para cada. */
 .selo-duo__face--origem {
   filter: drop-shadow(0 0 9px var(--purple-glow));
   animation: selo-fade-origem 9s var(--ease) infinite;
@@ -641,8 +630,6 @@ body>header.is-hidden {
   animation: selo-fade-futuro 9s var(--ease) infinite;
 }
 
-/* A fenda: o fio de luz na diagonal que varre a moldura a cada troca,
-   como se estivesse revelando a marca seguinte. */
 .selo-duo__fenda {
   position: absolute;
   top: 50%;
@@ -672,7 +659,6 @@ body>header.is-hidden {
     0 0 30px rgba(37, 240, 162, .3);
 }
 
-/* No hover, a troca acelera: dá a sensação de que a marca responde ao mouse */
 .logo-container a:hover .selo-duo__face,
 .footer-marca:hover .selo-duo__face,
 .logo-container a:hover .selo-duo__fenda,
@@ -924,7 +910,6 @@ main>section>header {
   transition: transform .5s var(--ease-out);
 }
 
-/* --- O sistema: gira de verdade, levando as duas marcas na órbita -------- */
 .duo3d__sistema {
   position: absolute;
   inset: 0;
@@ -942,7 +927,6 @@ main>section>header {
   transform-style: preserve-3d;
 }
 
-/* Cada braço fica num lado do eixo; ao girar, um passa atrás do outro */
 .duo3d__braco--origem {
   transform: rotateY(0deg) translateZ(var(--raio));
 }
@@ -951,9 +935,6 @@ main>section>header {
   transform: rotateY(180deg) translateZ(var(--raio));
 }
 
-/* A contra-rotação mantém as logos sempre de frente para quem olha,
-   enquanto a POSIÇÃO delas continua orbitando. Mesma duração e mesmo
-   linear do sistema: as duas animações andam sempre em sincronia. */
 .duo3d__contra {
   position: relative;
   display: grid;
@@ -969,7 +950,6 @@ main>section>header {
   animation: duo-contra-futuro 24s linear infinite;
 }
 
-/* --- Os astros: cada logo extrudada em fatias, para ter volume real ------ */
 .duo3d__astro {
   position: relative;
   transform-style: preserve-3d;
@@ -1013,7 +993,6 @@ main>section>header {
     drop-shadow(0 0 12px var(--ciano-glow));
 }
 
-/* --- A ponte de plasma: o que liga as duas identidades ------------------ */
 .duo3d__ponte {
   position: absolute;
   z-index: 2;
@@ -1045,7 +1024,6 @@ main>section>header {
   animation: duo-nucleo 3.2s ease-in-out infinite;
 }
 
-/* --- Anéis: um por marca, mais o dourado herdado ------------------------ */
 .duo3d__anel {
   --ax: 74deg;
   --ay: 0deg;
@@ -1080,7 +1058,6 @@ main>section>header {
   animation: anel-gira 29s linear infinite;
 }
 
-/* --- O peso: plinto, poço de luz e halo --------------------------------- */
 .duo3d__plinto {
   position: absolute;
   bottom: 13%;
@@ -1100,7 +1077,6 @@ main>section>header {
   animation: base-respira 7s ease-in-out infinite;
 }
 
-/* Segundo disco, menor e mais brilhante: dá espessura ao plinto */
 .duo3d__plinto::after {
   content: "";
   position: absolute;
@@ -1629,10 +1605,6 @@ main>section>header {
   color: var(--acento);
   opacity: .7;
 }
-
-/* ---------- recursos da atividade ----------
-   Uma atividade pode entregar vários arquivos: a aplicação, a apresentação
-   e o documento. Cada um vira uma linha clicável dentro do próprio cartão. */
 
 .ficha__recursos {
   display: grid;
@@ -2359,10 +2331,6 @@ body>footer {
   }
 }
 
-/* --- Selo duplo: fade em laço entre as duas marcas ----------------------
-   Cada marca fica 4,5s na tela e sai por fade + leve escala/rotação.
-   As duas animações são espelhadas, então o laço nunca deixa a moldura
-   vazia nem mostra as duas ao mesmo tempo por muito tempo. */
 @keyframes selo-fade-origem {
   0%,  42%  { opacity: 1; transform: scale(1) rotate(0deg); }
   50%, 92%  { opacity: 0; transform: scale(.86) rotate(-7deg); }
@@ -2375,7 +2343,6 @@ body>footer {
   100%      { opacity: 0; transform: scale(.86) rotate(7deg); }
 }
 
-/* A fenda acende e varre exatamente nos dois momentos de troca */
 @keyframes selo-fenda {
   0%,  38%  { opacity: .28; transform: translateY(-50%) rotate(-45deg) scaleX(1); }
   46%       { opacity: 1;   transform: translateY(-50%) rotate(-45deg) scaleX(1.3); }
@@ -2384,10 +2351,6 @@ body>footer {
   100%      { opacity: .28; transform: translateY(-50%) rotate(-45deg) scaleX(1); }
 }
 
-/* --- Sistema binário das duas marcas ------------------------------------
-   O sistema gira e cada marca contra-gira na MESMA duração e no mesmo
-   linear: elas continuam de frente para quem olha, mas a posição orbita
-   de verdade — uma passa atrás da outra a cada meia volta. */
 @keyframes duo-orbita {
   from { transform: rotateY(0deg); }
   to   { transform: rotateY(360deg); }
