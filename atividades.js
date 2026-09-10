@@ -1,5 +1,40 @@
 window.ACERVO_CK = [
   {
+    id: "deteck",
+    titulo: "DeteCK — Detecte antes que aconteça",
+    subtitulo: "Segurança digital explicada antes do clique",
+    disciplina: "Projeto Integrador",
+    sigla: "PI",
+    tipo: "Apresentação interativa em HTML",
+    data: "2026-09-10",
+    turma: "2º C — M-Tec Informática para Internet",
+    resumo:
+      "Apresentação conceitual sobre uma plataforma de apoio à segurança digital para pessoas comuns. " +
+      "O DeteCK recebe uma mensagem, link ou imagem suspeita, destaca indícios de risco em linguagem " +
+      "simples e recomenda verificações seguras antes que o usuário clique, responda ou forneça dados.",
+    destaques: [
+      "10 slides navegáveis",
+      "Exemplos fictícios explicados",
+      "Navegação por teclado e toque",
+      "Visual 3D no tema original CK",
+    ],
+    tags: [
+      "Projeto", "Segurança Digital", "Prevenção", "HTML",
+      "JavaScript", "3D", "Responsivo", "Apresentação",
+    ],
+    cor: "#ffdc45",
+    href: "atividades/deteck/apresentacao-deteck.html",
+    recursos: [
+      {
+        rotulo: "Abrir apresentação",
+        href: "atividades/deteck/apresentacao-deteck.html",
+        tipo: "10 slides",
+        icone: "slides",
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "eleicoes-2026",
     titulo: "CK Eleições 2026",
     subtitulo: "Sistema de Transparência Eleitoral — São Paulo",
