@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Apresentação do DeteCK, proposta da Conscious Knowledge para apoiar decisões mais seguras diante de mensagens, links e imagens suspeitas.">
+  <meta name="author" content="Conscious Knowledge">
+  <meta name="theme-color" content="#050307">
+  <title>DeteCK — Detecte antes que aconteça</title>
+  <link rel="icon" type="image/png" href="../../assets/logo-ck.png">
+  <style>
+    :root {
+      --bg: #050307;
+      --surface: #0d0714;
+      --surface-2: #160b24;
+      --ink: #fffdf7;
+      --muted: #c8bfd2;
+      --purple: #aa34ff;
+      --purple-deep: #5b1495;
+      --gold: #ffdc45;
+      --cyan: #3fe8ff;
+      --mint: #58ffc2;
+      --red: #ff4d72;
+      --line: rgba(255, 255, 255, 0.14);
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, a { font: inherit; }
+
+    button:focus-visible, a:focus-visible {
+      outline: 4px solid var(--cyan);
+      outline-offset: 5px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 1000;
+      color: #050307;
+      background: var(--gold);
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    .skip-link:focus { top: 16px; }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 42%, rgba(170, 52, 255, .18), transparent 34%),
+        radial-gradient(circle at 24% 88%, rgba(63, 232, 255, .09), transparent 30%),
+        #020104;
+    }
+
+    #stage {
+      position: absolute;
+      width: 1600px;
+      height: 900px;
+      transform-origin: 0 0;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(170,52,255,.12), transparent 52%),
+        var(--bg);
+      background-size: 64px 64px, 64px 64px, auto, auto;
+      perspective: 1500px;
+      isolation: isolate;
+    }
+
+    #stage::before,
+    #stage::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #stage::before {
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.24), transparent 25%, transparent 75%, rgba(0,0,0,.24));
+    }
+
+    #stage::after {
+      left: 0;
+      right: 0;
+      height: 2px;
+      top: 16%;
+      opacity: .3;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      animation: scan 8s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { transform: translateY(-180px); opacity: 0; }
+      12% { opacity: .35; }
+      88% { opacity: .2; }
+      100% { transform: translateY(780px); opacity: 0; }
+    }
+
+    .ambient {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient i {
+      position: absolute;
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 22px 7px rgba(255,220,69,.32);
+      animation: drift 7s ease-in-out infinite alternate;
+    }
+
+    .ambient i:nth-child(1) { left: 8%; top: 23%; animation-delay: -2s; }
+    .ambient i:nth-child(2) { left: 90%; top: 18%; background: var(--purple); animation-delay: -5s; }
+    .ambient i:nth-child(3) { left: 84%; top: 76%; background: var(--cyan); animation-delay: -1s; }
+    .ambient i:nth-child(4) { left: 34%; top: 84%; width: 4px; height: 4px; animation-delay: -4s; }
+
+    @keyframes drift {
+      to { transform: translate3d(18px, -22px, 0) scale(1.35); opacity: .45; }
+    }
+
+    .brand {
+      position: absolute;
+      z-index: 40;
+      left: 54px;
+      top: 34px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(170,52,255,.35));
+    }
+
+    .brand strong { color: var(--ink); display: block; letter-spacing: .08em; }
+    .brand small { display: block; font-size: 9px; margin-top: 3px; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      padding: 112px 96px 110px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(7%, 0, -180px) rotateY(-8deg);
+      transform-origin: 70% 50%;
+      transition: opacity .5s var(--ease), transform .75s var(--ease), visibility .75s;
+    }
+
+    .slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0) rotateY(0);
+      z-index: 4;
+    }
+
+    .slide.is-before {
+      transform: translate3d(-7%, 0, -180px) rotateY(8deg);
+    }
+
+    .slide-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2 {
+      font-family: "Arial Black", Impact, ui-sans-serif, system-ui, sans-serif;
+      letter-spacing: -.045em;
+      line-height: .98;
+    }
+
+    h2 {
+      margin-bottom: 28px;
+      font-size: 66px;
+      max-width: 1120px;
+    }
+
+    h2 em, h1 em { color: var(--gold); font-style: normal; }
+
+    .lede {
+      color: var(--muted);
+      max-width: 980px;
+      font-size: 24px;
+      line-height: 1.45;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 11px;
+      border: 1px solid currentColor;
+      color: var(--gold);
+      font: 800 13px/1.1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: 5px;
+    }
+
+    .label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      background: currentColor;
+      border-radius: 50%;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    .glass {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+      box-shadow: 0 26px 60px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.1);
+      backdrop-filter: blur(12px);
+    }
+
+    .tilt {
+      --rx: 0deg;
+      --ry: 0deg;
+      transform: rotateX(var(--rx)) rotateY(var(--ry));
+      transform-style: preserve-3d;
+      transition: transform .22s ease-out;
+    }
+
+    .tilt > * { transform: translateZ(18px); }
+
+    .section-number {
+      position: absolute;
+      right: 0;
+      top: -14px;
+      font: 900 96px/1 "Arial Black", Impact, sans-serif;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.15);
+      letter-spacing: -.06em;
+    }
+
+    /* 01 — CAPA */
+    .cover { padding-top: 100px; }
+
+    .cover-copy {
+      position: relative;
+      z-index: 3;
+      width: 720px;
+      padding-top: 74px;
+    }
+
+    .cover h1 {
+      margin: 14px 0 18px;
+      font-size: 148px;
+      text-shadow: 0 14px 60px rgba(0,0,0,.7);
+    }
+
+    .cover h1 span {
+      color: var(--purple);
+      -webkit-text-stroke: 2px var(--gold);
+      text-shadow: 8px 8px 0 #210734, 0 0 32px rgba(170,52,255,.55);
+    }
+
+    .cover-slogan {
+      margin: 0;
+      color: var(--ink);
+      font-size: 42px;
+      font-weight: 750;
+      letter-spacing: -.025em;
+    }
+
+    .cover-by {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .cover-art {
+      position: absolute;
+      z-index: 2;
+      width: 765px;
+      height: 820px;
+      right: -48px;
+      top: -80px;
+      object-fit: contain;
+      transform: translateZ(50px) rotateY(-7deg) rotateZ(1deg);
+      filter: drop-shadow(0 35px 45px rgba(0,0,0,.75)) drop-shadow(0 0 28px rgba(170,52,255,.22));
+      animation: heroFloat 5.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroFloat {
+      to { transform: translate3d(0,-12px,70px) rotateY(-4deg) rotateZ(-.5deg); }
+    }
+
+    .cover-orbit {
+      position: absolute;
+      right: 72px;
+      top: 30px;
+      width: 600px;
+      height: 600px;
+      border: 1px solid rgba(255,220,69,.3);
+      border-radius: 50%;
+      box-shadow: 0 0 90px rgba(170,52,255,.18), inset 0 0 70px rgba(170,52,255,.12);
+      transform: rotateX(66deg) rotateZ(18deg);
+    }
+
+    .cover-orbit::before,
+    .cover-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      inset: 70px;
+      border: 2px dashed rgba(63,232,255,.22);
+    }
+
+    .cover-orbit::after { inset: 150px; border-style: solid; border-color: rgba(170,52,255,.3); }
+
+    .team-strip {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      bottom: 8px;
+      width: 860px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px 24px;
+      padding: 20px 24px;
+      border-left: 4px solid var(--gold);
+      background: linear-gradient(90deg, rgba(255,220,69,.08), transparent);
+    }
+
+    .team-strip span { color: #eee7f4; font-size: 16px; line-height: 1.28; font-weight: 650; }
+    .team-strip b { color: var(--gold); }
+
+    /* 02 — PROBLEMA */
+    .problem-layout {
+      display: grid;
+      grid-template-columns: 660px 1fr;
+      gap: 84px;
+      align-items: center;
+      height: calc(100% - 126px);
+    }
+
+    .message-card {
+      position: relative;
+      padding: 30px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,77,114,.42);
+      background: linear-gradient(155deg, #1a0d20, #0b0710 70%);
+      box-shadow: 0 44px 90px rgba(0,0,0,.52), 0 0 50px rgba(255,77,114,.08);
+      transform: rotateY(7deg) rotateX(2deg);
+    }
+
+    .message-head { display: flex; align-items: center; gap: 15px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .message-avatar { width: 50px; height: 50px; display: grid; place-items: center; color: #0a0610; background: var(--gold); font-weight: 950; border-radius: 15px; }
+    .message-head strong { display: block; font-size: 20px; }
+    .message-head small { color: var(--muted); font-size: 14px; }
+    .message-time { margin-left: auto; color: var(--muted); }
+    .message-card .simulation { position: absolute; top: -18px; right: 18px; color: #08030b; background: var(--red); border: none; }
+    .message-body { padding: 26px 0 6px; font-size: 24px; line-height: 1.48; color: #f8f1fb; }
+    .message-body strong { color: var(--red); }
+    .fake-link { margin: 20px 0; padding: 16px 18px; border: 1px dashed var(--gold); color: var(--gold); background: rgba(255,220,69,.05); border-radius: 8px; font: 700 16px/1.35 ui-monospace, Consolas, monospace; word-break: break-all; }
+    .message-note { color: var(--muted); font-size: 15px; }
+
+    .signal-list { display: grid; gap: 18px; }
+    .signal {
+      position: relative;
+      padding: 18px 18px 18px 70px;
+      border-bottom: 1px solid var(--line);
+    }
+    .signal b { position: absolute; left: 0; top: 18px; width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid currentColor; color: var(--gold); font: 900 17px/1 ui-monospace, monospace; transform: rotate(8deg); }
+    .signal h3 { margin-bottom: 4px; font-size: 23px; }
+    .signal p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.36; }
+    .problem-takeaway { margin-top: 20px; color: var(--ink); font-size: 24px; font-weight: 750; }
+
+    /* 03 — DIFICULDADE */
+    .pressure-scene {
+      position: relative;
+      height: 530px;
+      margin-top: 6px;
+      transform-style: preserve-3d;
+    }
+
+    .decision-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 260px;
+      height: 260px;
+      margin: -130px 0 0 -130px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 25%, rgba(255,255,255,.18), transparent 20%), linear-gradient(145deg, #3e1260, #11051c);
+      box-shadow: 0 0 0 28px rgba(170,52,255,.06), 0 0 0 58px rgba(170,52,255,.03), 0 34px 80px #000;
+      transform: translateZ(90px);
+      animation: pulseCore 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseCore { 50% { box-shadow: 0 0 0 35px rgba(170,52,255,.08), 0 0 0 78px rgba(170,52,255,.025), 0 34px 80px #000; } }
+
+    .decision-core div { text-align: center; }
+    .decision-core strong { display: block; font: 900 42px/1 "Arial Black", Impact, sans-serif; }
+    .decision-core span { display: block; color: var(--gold); margin-top: 10px; font-size: 17px; text-transform: uppercase; letter-spacing: .13em; }
+
+    .pressure-node {
+      position: absolute;
+      width: 390px;
+      min-height: 146px;
+      padding: 24px 26px;
+      border-left: 4px solid var(--purple);
+      background: linear-gradient(100deg, rgba(170,52,255,.14), rgba(255,255,255,.025));
+    }
+    .pressure-node h3 { font-size: 24px; margin-bottom: 8px; }
+    .pressure-node p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.38; }
+    .pressure-node:nth-child(2) { left: 40px; top: 20px; transform: rotateY(8deg) translateZ(20px); }
+    .pressure-node:nth-child(3) { right: 30px; top: 20px; border-color: var(--red); transform: rotateY(-8deg) translateZ(20px); }
+    .pressure-node:nth-child(4) { left: 40px; bottom: 10px; border-color: var(--cyan); transform: rotateY(8deg) translateZ(20px); }
+    .pressure-node:nth-child(5) { right: 30px; bottom: 10px; border-color: var(--gold); transform: rotateY(-8deg) translateZ(20px); }
+    .pressure-line { position: absolute; inset: 92px 220px; border: 1px dashed rgba(255,255,255,.13); border-radius: 50%; transform: rotate(-9deg); }
+
+    /* 04 — PROPOSTA */
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+      perspective: 1200px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 255px;
+      padding: 34px 24px 24px;
+      border-top: 4px solid var(--purple);
+      background: linear-gradient(160deg, rgba(170,52,255,.15), rgba(255,255,255,.025));
+      transform: rotateX(3deg) rotateY(-3deg);
+      transform-style: preserve-3d;
+      box-shadow: 20px 24px 0 rgba(38,12,56,.42);
+    }
+    .flow-step:nth-child(2) { border-color: var(--cyan); transform: translateY(22px) rotateX(3deg); }
+    .flow-step:nth-child(3) { border-color: var(--gold); transform: rotateX(3deg); }
+    .flow-step:nth-child(4) { border-color: var(--mint); transform: translateY(22px) rotateX(3deg) rotateY(3deg); }
+    .flow-step .step-no { color: rgba(255,255,255,.13); font: 900 72px/1 "Arial Black", Impact, sans-serif; position: absolute; right: 18px; top: 10px; }
+    .flow-step h3 { position: relative; margin: 64px 0 12px; font-size: 31px; }
+    .flow-step p { position: relative; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.42; }
+
+    .ck-logic {
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 34px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .ck-logic strong { color: var(--ink); font-size: 22px; }
+    .ck-logic i { width: 52px; height: 1px; background: linear-gradient(90deg, var(--purple), var(--gold)); }
+
+    /* 05 — ANÁLISE */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 310px 1fr 390px;
+      gap: 54px;
+      align-items: center;
+      height: 500px;
+      margin-top: 6px;
+    }
+    .input-stack { display: grid; gap: 15px; }
+    .input-card { position: relative; padding: 21px 20px 21px 66px; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, rgba(255,255,255,.05), transparent); }
+    .input-card b { position: absolute; left: 16px; top: 17px; color: var(--cyan); font: 900 25px/1 ui-monospace, monospace; }
+    .input-card strong { display: block; font-size: 21px; }
+    .input-card span { color: var(--muted); font-size: 15px; }
+    .input-card.future { opacity: .58; border-style: dashed; }
+    .input-card.future::after { content: "FUTURO"; position: absolute; right: 10px; top: 10px; color: var(--gold); font: 800 10px/1 ui-monospace, monospace; letter-spacing: .12em; }
+
+    .engine {
+      position: relative;
+      height: 450px;
+      transform-style: preserve-3d;
+    }
+    .engine-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 220px;
+      height: 220px;
+      margin: -110px 0 0 -110px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gold);
+      background: linear-gradient(145deg, rgba(255,220,69,.19), rgba(170,52,255,.24)), #100719;
+      box-shadow: 26px 30px 0 #190a29, 0 0 64px rgba(170,52,255,.28);
+      transform: rotateX(58deg) rotateZ(45deg) translateZ(25px);
+      animation: engineTurn 8s ease-in-out infinite alternate;
+    }
+    .engine-core strong { transform: rotateZ(-45deg) rotateX(-58deg); font: 900 28px/1 "Arial Black", Impact, sans-serif; text-align: center; }
+    @keyframes engineTurn { to { transform: rotateX(58deg) rotateZ(52deg) translateZ(42px); } }
+    .engine-ring { position: absolute; left: 50%; top: 50%; width: 400px; height: 220px; margin: -110px 0 0 -200px; border: 1px dashed rgba(63,232,255,.35); border-radius: 50%; transform: rotate(-10deg); }
+    .engine-tag { position: absolute; padding: 8px 12px; color: var(--ink); background: #12091b; border: 1px solid var(--line); font: 750 14px/1 ui-monospace, monospace; }
+    .engine-tag:nth-of-type(1) { left: 18px; top: 48px; }
+    .engine-tag:nth-of-type(2) { right: 8px; top: 70px; color: var(--red); }
+    .engine-tag:nth-of-type(3) { left: 8px; bottom: 68px; color: var(--cyan); }
+    .engine-tag:nth-of-type(4) { right: 8px; bottom: 48px; color: var(--gold); }
+    .engine-tag:nth-of-type(5) { left: 50%; top: 10px; transform: translateX(-50%); color: var(--mint); }
+    .engine-tag:nth-of-type(6) { left: 50%; bottom: 12px; transform: translateX(-50%); }
+
+    .output-card { padding: 30px 30px 28px; border: 1px solid rgba(88,255,194,.36); background: linear-gradient(145deg, rgba(88,255,194,.09), rgba(255,255,255,.025)); box-shadow: 20px 24px 0 rgba(5,39,31,.35); }
+    .output-card h3 { margin: 22px 0 14px; font-size: 29px; }
+    .output-card p { color: var(--muted); font-size: 18px; line-height: 1.43; }
+    .output-card strong { color: var(--mint); }
+    .output-foot { padding-top: 18px; border-top: 1px solid var(--line); color: var(--ink) !important; font-weight: 750; }
+
+    /* 06 — DIAGNÓSTICO */
+    .risk-scale { display: grid; grid-template-columns: repeat(3,1fr); gap: 26px; margin: 20px 0 34px; }
+    .risk { position: relative; min-height: 130px; padding: 24px 24px 20px 96px; border-top: 3px solid currentColor; background: rgba(255,255,255,.035); color: var(--mint); }
+    .risk:nth-child(2) { color: var(--gold); }
+    .risk:nth-child(3) { color: var(--red); }
+    .risk-icon { position: absolute; left: 24px; top: 28px; width: 48px; height: 48px; display: grid; place-items: center; border: 2px solid currentColor; border-radius: 50%; font-size: 22px; font-weight: 950; }
+    .risk h3 { margin-bottom: 7px; color: var(--ink); font-size: 24px; }
+    .risk p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.35; }
+    .compare { display: grid; grid-template-columns: .72fr 1.28fr; gap: 28px; }
+    .answer { position: relative; min-height: 232px; padding: 28px 30px; border: 1px solid var(--line); }
+    .answer h3 { margin: 14px 0 16px; font-size: 30px; }
+    .answer p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.42; }
+    .answer.bad { opacity: .68; background: rgba(255,77,114,.05); }
+    .answer.good { border-color: rgba(63,232,255,.35); background: linear-gradient(120deg, rgba(63,232,255,.08), rgba(170,52,255,.06)); }
+    .answer.good h3 { color: var(--cyan); }
+    .disclaimer { margin-top: 24px; padding: 14px 20px; border-left: 4px solid var(--gold); color: #fff4c2; background: rgba(255,220,69,.075); font-size: 18px; font-weight: 750; }
+
+    /* 07 — VERIFICAÇÃO */
+    .check-path { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 50px; }
+    .check-path::before { content: ""; position: absolute; left: 9%; right: 9%; top: 94px; height: 2px; background: linear-gradient(90deg, var(--red), var(--gold), var(--cyan), var(--mint)); opacity: .5; }
+    .check-step { position: relative; min-height: 184px; padding: 22px 22px 20px; background: #0b0710; border: 1px solid var(--line); transform-style: preserve-3d; }
+    .check-step:nth-child(even) { transform: translateY(24px); }
+    .check-step .no { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 28px; color: #08040b; background: var(--gold); font: 950 18px/1 ui-monospace, monospace; transform: rotate(6deg) translateZ(14px); box-shadow: 8px 8px 0 #4d3510; }
+    .check-step h3 { margin-bottom: 8px; font-size: 21px; line-height: 1.15; }
+    .check-step p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.35; }
+    .check-step.final { grid-column: 3 / span 2; min-height: 184px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 22px; border-color: rgba(88,255,194,.42); background: linear-gradient(90deg, rgba(88,255,194,.1), rgba(170,52,255,.07)); }
+    .check-step.final .no { margin: 0; background: var(--mint); box-shadow: 8px 8px 0 #114a39; }
+
+    /* 08 — EXEMPLO */
+    .case-grid { display: grid; grid-template-columns: 1.02fr .95fr 1.03fr; gap: 28px; margin-top: 40px; align-items: stretch; }
+    .case-panel { position: relative; min-height: 410px; padding: 28px; border: 1px solid var(--line); background: rgba(255,255,255,.035); }
+    .case-panel::after { content: ""; position: absolute; right: -21px; top: 50%; width: 40px; height: 2px; background: var(--gold); z-index: 3; }
+    .case-panel:last-child::after { display: none; }
+    .case-panel h3 { margin: 20px 0 18px; font-size: 29px; }
+    .case-message { margin-top: 36px; padding: 24px; border-radius: 18px 18px 4px 18px; color: #1a0d20; background: #f3edf7; font-size: 22px; line-height: 1.46; box-shadow: 14px 16px 0 rgba(170,52,255,.22); }
+    .case-message strong { color: #af1744; }
+    .found { display: grid; gap: 17px; margin-top: 12px; }
+    .found div { padding: 15px 16px; border-left: 4px solid var(--red); background: rgba(255,77,114,.07); }
+    .found b { display: block; color: var(--red); font-size: 18px; }
+    .found span { color: var(--muted); font-size: 15px; }
+    .decision { margin-top: 28px; padding: 24px; border: 1px solid rgba(88,255,194,.32); color: var(--ink); background: rgba(88,255,194,.07); }
+    .decision strong { display: block; color: var(--mint); font-size: 25px; margin-bottom: 10px; }
+    .decision p { color: var(--muted); font-size: 17px; line-height: 1.44; }
+    .decision small { color: #fff; font-size: 14px; font-weight: 700; }
+    .case-limit { margin-top: 23px; color: var(--muted); font-size: 17px; text-align: center; }
+
+    /* 09 — LABORATÓRIO */
+    .lab-grid { display: grid; grid-template-columns: 1.25fr .8fr .75fr; gap: 28px; margin-top: 34px; }
+    .lab-zone { min-height: 440px; padding: 28px; border-top: 4px solid var(--purple); background: linear-gradient(145deg, rgba(170,52,255,.1), rgba(255,255,255,.025)); }
+    .lab-zone:nth-child(2) { border-color: var(--red); }
+    .lab-zone:nth-child(3) { border-color: var(--cyan); }
+    .lab-zone h3 { margin: 18px 0 10px; font-size: 29px; }
+    .lab-zone > p { color: var(--muted); font-size: 17px; line-height: 1.42; }
+    .lab-question { margin-top: 28px; padding: 22px; border: 1px solid var(--line); background: #08050d; }
+    .lab-question small { color: var(--gold); font-weight: 850; text-transform: uppercase; letter-spacing: .1em; }
+    .lab-question p { margin: 12px 0 0; font-size: 21px; line-height: 1.35; }
+    .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+    .chips span { padding: 7px 9px; color: var(--cyan); border: 1px solid rgba(63,232,255,.28); font: 700 12px/1 ui-monospace, monospace; }
+    .clean-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 14px; }
+    .clean-list li { position: relative; padding-left: 22px; color: var(--muted); font-size: 16px; line-height: 1.36; }
+    .clean-list li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; background: currentColor; transform: rotate(45deg); }
+    .limits .clean-list li::before { color: var(--red); }
+    .future-list strong { display: block; color: var(--ink); font-size: 18px; margin-bottom: 3px; }
+    .future-list span { color: var(--muted); font-size: 14px; }
+    .privacy-note { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); color: #ffe8ee !important; font-size: 14px !important; }
+
+    /* 10 — ENCERRAMENTO */
+    .thanks { display: grid; grid-template-columns: 1fr 520px; align-items: center; gap: 70px; }
+    .thanks h1 { margin: 0; font-size: 142px; }
+    .thanks-line { width: 240px; height: 7px; margin: 30px 0; background: linear-gradient(90deg, var(--gold), var(--purple)); }
+    .thanks-sub { color: var(--muted); font-size: 29px; }
+    .thanks-sub strong { color: var(--ink); }
+    .thanks-logo { width: 470px; height: 590px; object-fit: contain; filter: drop-shadow(0 35px 46px rgba(0,0,0,.7)) drop-shadow(0 0 26px rgba(170,52,255,.3)); transform: rotateY(-9deg) translateZ(30px); animation: heroFloat 5.6s ease-in-out infinite alternate; }
+    .thanks-team { position: absolute; left: 0; right: 0; bottom: 10px; display: grid; grid-template-columns: repeat(3,1fr); gap: 10px 28px; padding-top: 20px; border-top: 1px solid var(--line); color: #e8e0ed; font-size: 16px; }
+    .archive-link { display: inline-flex; margin-top: 20px; color: var(--gold); text-decoration: none; font-weight: 800; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+
+    /* CONTROLES */
+    .progress {
+      position: absolute;
+      z-index: 50;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: rgba(255,255,255,.07);
+    }
+    .progress span { display: block; width: 10%; height: 100%; background: linear-gradient(90deg, var(--purple), var(--gold)); box-shadow: 0 0 14px rgba(255,220,69,.4); transition: width .55s var(--ease); }
+
+    .toolbar {
+      position: absolute;
+      z-index: 60;
+      right: 46px;
+      bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      background: rgba(6,3,9,.78);
+      backdrop-filter: blur(16px);
+    }
+    .toolbar button { width: 46px; height: 42px; display: grid; place-items: center; border: 0; color: var(--ink); background: transparent; cursor: pointer; font-size: 22px; }
+    .toolbar button:hover { color: #050307; background: var(--gold); }
+    .toolbar .counter { min-width: 84px; text-align: center; font: 900 17px/1 ui-monospace, Consolas, monospace; }
+    .toolbar .counter span { color: var(--gold); }
+
+    .rail {
+      position: absolute;
+      z-index: 55;
+      right: 45px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      gap: 10px;
+    }
+    .rail button { position: relative; width: 34px; height: 12px; border: 0; background: transparent; cursor: pointer; }
+    .rail button::before { content: ""; position: absolute; right: 0; top: 5px; width: 12px; height: 2px; background: rgba(255,255,255,.28); transition: .25s ease; }
+    .rail button:hover::before, .rail button.is-active::before { width: 32px; background: var(--gold); box-shadow: 0 0 9px rgba(255,220,69,.5); }
+
+    .slide-status {
+      position: absolute;
+      z-index: 50;
+      left: 56px;
+      bottom: 48px;
+      color: var(--muted);
+      font: 750 13px/1 ui-monospace, Consolas, monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .slide-status b { color: var(--ink); margin-left: 9px; }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0,0,0,0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    @media (max-width: 720px), (max-height: 500px) and (orientation: portrait) {
+      html, body, #viewport { overflow: hidden; }
+      #stage { width: 100%; height: 100%; transform: none !important; background-size: 36px 36px; perspective: none; }
+      .brand { left: 20px; top: 18px; font-size: 10px; }
+      .brand img { width: 40px; height: 40px; }
+      .brand small { display: none; }
+      .slide { padding: 78px 24px 100px; overflow-y: auto; transform: translateX(9%); }
+      .slide.is-active { transform: none; }
+      .slide.is-before { transform: translateX(-9%); }
+      .slide-inner { height: auto; min-height: calc(100svh - 178px); }
+      .section-number { display: none; }
+      .kicker { font-size: 12px; }
+      h2 { font-size: clamp(34px, 10vw, 48px); margin-bottom: 18px; }
+      .lede { font-size: 17px; line-height: 1.42; }
+      .cover { padding-top: 72px; }
+      .cover-copy { width: 100%; padding-top: 20px; }
+      .cover h1 { font-size: clamp(72px, 23vw, 110px); }
+      .cover-slogan { font-size: 27px; }
+      .cover-by { font-size: 13px; }
+      .cover-art { position: relative; width: 100%; height: 48vh; right: auto; top: auto; margin: -8px 0 -30px; transform: none; }
+      .cover-orbit { display: none; }
+      .team-strip { position: relative; width: 100%; left: auto; bottom: auto; grid-template-columns: 1fr 1fr; gap: 8px 14px; padding: 16px; }
+      .team-strip span { font-size: 13px; }
+      .problem-layout, .analysis-grid, .case-grid, .lab-grid, .thanks { grid-template-columns: 1fr; height: auto; gap: 24px; }
+      .message-card { transform: none; padding: 22px; }
+      .message-body { font-size: 19px; }
+      .signal-list { gap: 8px; }
+      .signal { padding-left: 58px; }
+      .pressure-scene { height: auto; display: grid; gap: 14px; margin-top: 30px; }
+      .decision-core, .pressure-node { position: relative; inset: auto !important; margin: 0; width: 100%; height: auto; min-height: 118px; transform: none !important; border-radius: 0; }
+      .decision-core { order: -1; }
+      .pressure-line { display: none; }
+      .flow { grid-template-columns: 1fr; margin-top: 28px; }
+      .flow-step, .flow-step:nth-child(n) { min-height: 160px; transform: none; box-shadow: 9px 10px 0 rgba(38,12,56,.42); }
+      .flow-step h3 { margin-top: 40px; }
+      .ck-logic { flex-wrap: wrap; gap: 12px; margin-top: 34px; font-size: 14px; }
+      .analysis-grid { margin-top: 24px; }
+      .engine { height: 360px; }
+      .output-card { margin-bottom: 18px; }
+      .risk-scale, .compare, .check-path { grid-template-columns: 1fr; }
+      .risk { min-height: 110px; }
+      .answer { min-height: auto; }
+      .check-path::before, .case-panel::after { display: none; }
+      .check-step:nth-child(even), .check-step.final { transform: none; grid-column: auto; margin-top: 0; }
+      .case-panel, .lab-zone { min-height: auto; }
+      .thanks { text-align: center; }
+      .thanks h1 { font-size: clamp(74px, 22vw, 122px); }
+      .thanks-line { margin-left: auto; margin-right: auto; }
+      .thanks-sub { font-size: 22px; }
+      .thanks-logo { width: min(100%, 360px); height: 390px; justify-self: center; transform: none; }
+      .thanks-team { position: relative; grid-template-columns: 1fr 1fr; font-size: 13px; }
+      .rail { display: none; }
+      .slide-status { left: 18px; bottom: 28px; max-width: 42vw; font-size: 9px; }
+      .toolbar { right: 14px; bottom: 14px; }
+      .toolbar button { width: 42px; height: 40px; }
+      .toolbar .counter { min-width: 66px; font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#slide-1">Ir para a apresentação</a>
+  <div id="viewport">
+    <main id="stage" aria-label="Apresentação DeteCK">
+      <div class="ambient" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+      <div class="brand" aria-label="Conscious Knowledge">
+        <img src="../../assets/logo-ck.png" alt="Logo original da Conscious Knowledge" width="720" height="1080">
+        <span><strong>Conscious Knowledge</strong><small>Segurança que começa pelo entendimento</small></span>
+      </div>
+
+      <section class="slide cover is-active" id="slide-1" data-title="Capa" aria-label="Slide 1 de 10, Capa" aria-hidden="false">
+        <div class="slide-inner">
+          <div class="cover-copy">
+            <span class="label">Segurança digital acessível</span>
+            <h1>Dete<span>CK</span></h1>
+            <p class="cover-slogan">Detecte antes que aconteça.</p>
+            <p class="cover-by">by Conscious Knowledge</p>
+          </div>
+          <div class="cover-orbit" aria-hidden="true"></div>
+          <img class="cover-art" src="assets/deteck-hero.png" alt="Arte do DeteCK com personagem da CK analisando sinais de uma ameaça digital" width="2048" height="2048">
+          <div class="team-strip" aria-label="Integrantes do grupo">
+            <span><b>É</b> Éric Estrela Vieira</span>
+            <span><b>G</b> Gabriel Heanna dos Reis</span>
+            <span><b>G</b> Gustavo Oliveira dos Santos</span>
+            <span><b>P</b> Paulo Henrique de Lima Silva</span>
+            <span><b>P</b> Pedro Alcantara dos Santos Fialho</span>
+            <span><b>T</b> Thiago Wilson Vieira Serbino</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-2" data-title="O problema" aria-label="Slide 2 de 10, O problema" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">02</span>
+          <p class="kicker">O problema</p>
+          <h2>Mensagens convincentes <em>demais</em></h2>
+          <div class="problem-layout">
+            <article class="message-card tilt" data-tilt aria-label="Exemplo fictício de mensagem suspeita">
+              <span class="label simulation">Simulação</span>
+              <div class="message-head">
+                <div class="message-avatar" aria-hidden="true">C</div>
+                <div><strong>Central da Conta</strong><small>suporte@conta-alerta.example</small></div>
+                <span class="message-time">agora</span>
+              </div>
+              <div class="message-body">
+                Detectamos uma tentativa de acesso. Sua conta será <strong>bloqueada hoje</strong> se você não confirmar seus dados.
+                <div class="fake-link">conta-segura.example/confirmar-agora</div>
+                <span class="message-note">Não clique. O endereço é fictício e aparece apenas para demonstração.</span>
+              </div>
+            </article>
+
+            <div>
+              <div class="signal-list">
+                <div class="signal"><b>01</b><h3>Urgência artificial</h3><p>A mensagem reduz o tempo para pensar.</p></div>
+                <div class="signal"><b>02</b><h3>Pedido sensível</h3><p>A ação envolve dados que merecem proteção.</p></div>
+                <div class="signal"><b>03</b><h3>Endereço estranho</h3><p>O domínio, endereço principal do site, não confirma a origem.</p></div>
+                <div class="signal"><b>04</b><h3>Remetente difícil de verificar</h3><p>Nome conhecido e endereço real não combinam.</p></div>
+              </div>
+              <p class="problem-takeaway">Muitas ameaças parecem normais no primeiro olhar.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-3" data-title="A decisão sob pressão" aria-label="Slide 3 de 10, Por que o usuário tem dificuldade" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">03</span>
+          <p class="kicker">Por que é difícil</p>
+          <h2>A decisão acontece sob <em>pressão</em></h2>
+          <p class="lede">A dúvida aparece antes de existir uma resposta clara. Nesse intervalo, quatro forças disputam a atenção do usuário.</p>
+          <div class="pressure-scene">
+            <div class="pressure-line" aria-hidden="true"></div>
+            <div class="decision-core"><div><strong>DECIDIR?</strong><span>antes do clique</span></div></div>
+            <article class="pressure-node"><h3>Linguagem conhecida</h3><p>A mensagem imita bancos, lojas, escolas ou pessoas próximas.</p></article>
+            <article class="pressure-node"><h3>Urgência e ameaça</h3><p>O medo de perder a conta ou uma oportunidade encurta a reflexão.</p></article>
+            <article class="pressure-node"><h3>Poucos sinais visíveis</h3><p>O usuário não sabe quais detalhes do remetente e do endereço verificar.</p></article>
+            <article class="pressure-node"><h3>Dúvida sem orientação</h3><p>Mesmo com desconfiança, falta um próximo passo seguro e simples.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-4" data-title="A proposta" aria-label="Slide 4 de 10, A proposta do DeteCK" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">04</span>
+          <p class="kicker">A proposta</p>
+          <h2>Clareza entre a dúvida e a ação</h2>
+          <div class="flow" aria-label="Fluxo do DeteCK em quatro etapas">
+            <article class="flow-step"><span class="step-no">01</span><h3>Analisar</h3><p>Recebe texto, link ou imagem suspeita sem pedir senha nem código.</p></article>
+            <article class="flow-step"><span class="step-no">02</span><h3>Entender</h3><p>Destaca os sinais que merecem atenção e explica cada motivo.</p></article>
+            <article class="flow-step"><span class="step-no">03</span><h3>Decidir</h3><p>Recomenda a próxima ação segura, com prioridade para canais oficiais.</p></article>
+            <article class="flow-step"><span class="step-no">04</span><h3>Aprender</h3><p>Ensina o raciocínio para que o usuário reconheça sinais no futuro.</p></article>
+          </div>
+          <div class="ck-logic" aria-label="Coerência entre produtos da CK">
+            <strong>FinCK</strong><span>preço antes da compra</span><i></i>
+            <strong>DynamiCK</strong><span>erro antes do próximo passo</span><i></i>
+            <strong>DeteCK</strong><span>ameaça antes da confiança</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-5" data-title="Como funciona" aria-label="Slide 5 de 10, Como a análise funciona" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">05</span>
+          <p class="kicker">Como funciona</p>
+          <h2>Entrada, sinais e diagnóstico explicado</h2>
+          <div class="analysis-grid">
+            <div class="input-stack" aria-label="Entradas aceitas">
+              <div class="input-card"><b>T</b><strong>Texto</strong><span>Mensagem copiada</span></div>
+              <div class="input-card"><b>L</b><strong>Link</strong><span>Endereço recebido</span></div>
+              <div class="input-card"><b>I</b><strong>Imagem</strong><span>Captura de tela</span></div>
+              <div class="input-card future"><b>Q</b><strong>QR Code</strong><span>Evolução planejada</span></div>
+            </div>
+
+            <div class="engine" aria-label="Sinais observados pelo DeteCK">
+              <div class="engine-ring" aria-hidden="true"></div>
+              <div class="engine-core"><strong>DETE<br>CK</strong></div>
+              <span class="engine-tag">remetente</span>
+              <span class="engine-tag">urgência</span>
+              <span class="engine-tag">domínio</span>
+              <span class="engine-tag">pedido sensível</span>
+              <span class="engine-tag">contexto</span>
+              <span class="engine-tag">ação solicitada</span>
+            </div>
+
+            <article class="output-card">
+              <span class="label">Saída</span>
+              <h3>Diagnóstico explicado</h3>
+              <p>O DeteCK apresenta um nível de atenção, mostra os sinais encontrados e indica como confirmar a origem.</p>
+              <p class="output-foot"><strong>Resultado:</strong> apoio à decisão, nunca uma sentença definitiva.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-6" data-title="Diagnóstico e diferencial" aria-label="Slide 6 de 10, Diagnóstico e diferencial" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">06</span>
+          <p class="kicker">Diagnóstico e diferencial</p>
+          <h2>O nível de risco sempre vem com um motivo</h2>
+          <div class="risk-scale" aria-label="Escala de risco do DeteCK">
+            <article class="risk"><span class="risk-icon" aria-hidden="true">✓</span><h3>Risco baixo</h3><p>Poucos sinais de alerta. Ainda assim, confirme pedidos sensíveis.</p></article>
+            <article class="risk"><span class="risk-icon" aria-hidden="true">!</span><h3>Atenção</h3><p>Há elementos inconsistentes que exigem verificação adicional.</p></article>
+            <article class="risk"><span class="risk-icon" aria-hidden="true">×</span><h3>Risco elevado</h3><p>Vários indícios recomendam interromper a ação e confirmar a origem.</p></article>
+          </div>
+          <div class="compare">
+            <article class="answer bad"><span class="label">Resposta vaga</span><h3>“É golpe.”</h3><p>Não mostra o raciocínio e não ensina o usuário a verificar a próxima mensagem.</p></article>
+            <article class="answer good"><span class="label">Resposta DeteCK</span><h3>Atenção: três sinais encontrados</h3><p>A mensagem cria urgência, solicita um dado sensível e usa um endereço não confirmado. Não clique. Abra o canal oficial manualmente e verifique o pedido.</p></article>
+          </div>
+          <p class="disclaimer">Nenhuma análise garante que um conteúdo é 100% seguro.</p>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-7" data-title="Antes de agir" aria-label="Slide 7 de 10, O que verificar antes de agir" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">07</span>
+          <p class="kicker">Autonomia do usuário</p>
+          <h2>O que verificar antes de agir</h2>
+          <p class="lede">Uma sequência segura troca a reação imediata por passos simples e reversíveis.</p>
+          <div class="check-path" aria-label="Sete verificações antes de agir">
+            <article class="check-step"><span class="no">01</span><h3>Pare antes do clique</h3><p>Urgência pede mais atenção, não mais velocidade.</p></article>
+            <article class="check-step"><span class="no">02</span><h3>Confira o remetente</h3><p>Compare o nome exibido com o endereço completo.</p></article>
+            <article class="check-step"><span class="no">03</span><h3>Observe o domínio</h3><p>Leia o endereço principal do site sem abrir o link.</p></article>
+            <article class="check-step"><span class="no">04</span><h3>Proteja dados sensíveis</h3><p>Não informe senha, código, documento ou dado bancário.</p></article>
+            <article class="check-step"><span class="no">05</span><h3>Abra o canal oficial</h3><p>Digite o endereço conhecido ou use o aplicativo oficial.</p></article>
+            <article class="check-step"><span class="no">06</span><h3>Confirme por outro canal</h3><p>Fale com a pessoa ou instituição por um contato já conhecido.</p></article>
+            <article class="check-step final"><span class="no">07</span><div><h3>Denuncie ou bloqueie quando necessário</h3><p>Depois de confirmar o risco, use as ferramentas da plataforma.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-8" data-title="Exemplo completo" aria-label="Slide 8 de 10, Exemplo completo" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">08</span>
+          <p class="kicker">Simulação completa</p>
+          <h2>Ameaça, sinais e decisão segura</h2>
+          <div class="case-grid">
+            <article class="case-panel">
+              <span class="label">1 · Entrada fictícia</span>
+              <h3>Mensagem recebida</h3>
+              <div class="case-message">“Sua conta será <strong>bloqueada hoje</strong>. Confirme agora pelo link.”</div>
+            </article>
+            <article class="case-panel">
+              <span class="label">2 · Sinais</span>
+              <h3>O que chamou atenção</h3>
+              <div class="found">
+                <div><b>Urgência</b><span>“hoje” reduz o tempo de avaliação</span></div>
+                <div><b>Ameaça</b><span>o bloqueio provoca medo de perda</span></div>
+                <div><b>Link não confirmado</b><span>a origem não aparece de forma confiável</span></div>
+              </div>
+            </article>
+            <article class="case-panel">
+              <span class="label">3 · Recomendação</span>
+              <h3>Próxima ação</h3>
+              <div class="decision">
+                <strong>Não clique.</strong>
+                <p>Acesse manualmente o aplicativo ou site oficial. Procure o aviso dentro do canal conhecido antes de responder.</p>
+                <small>O endereço recebido não precisa ser aberto para ser verificado.</small>
+              </div>
+            </article>
+          </div>
+          <p class="case-limit">O DeteCK identifica indícios. Ele não prova sozinho que a mensagem é um golpe.</p>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-9" data-title="Laboratório e limites" aria-label="Slide 9 de 10, Laboratório, limites e evolução" aria-hidden="true">
+        <div class="slide-inner">
+          <span class="section-number" aria-hidden="true">09</span>
+          <p class="kicker">Aprendizado e responsabilidade</p>
+          <h2>Laboratório, limites e evolução</h2>
+          <div class="lab-grid">
+            <article class="lab-zone">
+              <span class="label">Laboratório</span>
+              <h3>Aprender com situações simuladas</h3>
+              <p>O usuário investiga uma mensagem e recebe uma explicação para cada escolha.</p>
+              <div class="lab-question">
+                <small>Desafio fictício</small>
+                <p>Qual detalhe merece ser verificado primeiro?</p>
+                <div class="chips"><span>remetente</span><span>domínio</span><span>link</span><span>senha</span><span>urgência</span><span>inconsistência</span></div>
+              </div>
+            </article>
+            <article class="lab-zone limits">
+              <span class="label">Limites</span>
+              <h3>O produto pode errar</h3>
+              <ul class="clean-list">
+                <li>Não garante segurança.</li>
+                <li>Não pede senhas ou códigos.</li>
+                <li>Não substitui canais oficiais.</li>
+                <li>Explica indícios, sem culpar a vítima.</li>
+              </ul>
+              <p class="privacy-note">Um histórico futuro reuniria dados sensíveis e exigiria proteção e consentimento.</p>
+            </article>
+            <article class="lab-zone">
+              <span class="label">Próximos passos</span>
+              <h3>Evolução planejada</h3>
+              <ul class="clean-list future-list">
+                <li><strong>Leitura de QR Code</strong><span>como recurso futuro</span></li>
+                <li><strong>Modo para escolas</strong><span>com situações por faixa de aprendizado</span></li>
+                <li><strong>Biblioteca de exemplos</strong><span>com padrões explicados</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide thanks" id="slide-10" data-title="Obrigado" aria-label="Slide 10 de 10, Obrigado" aria-hidden="true">
+        <div class="slide-inner thanks">
+          <div>
+            <p class="kicker">Conscious Knowledge</p>
+            <h1>Obrigado.</h1>
+            <div class="thanks-line" aria-hidden="true"></div>
+            <p class="thanks-sub"><strong>DeteCK</strong> — antes de clicar, entenda.</p>
+            <a class="archive-link" href="../../index.html" target="_blank" rel="noopener">Abrir o Acervo CK</a>
+          </div>
+          <img class="thanks-logo" src="../../assets/logo-ck.png" alt="Logo original da Conscious Knowledge" width="720" height="1080">
+          <div class="thanks-team" aria-label="Integrantes do grupo">
+            <span>Éric Estrela Vieira</span><span>Gabriel Heanna dos Reis</span><span>Gustavo Oliveira dos Santos</span>
+            <span>Paulo Henrique de Lima Silva</span><span>Pedro Alcantara dos Santos Fialho</span><span>Thiago Wilson Vieira Serbino</span>
+          </div>
+        </div>
+      </section>
+
+      <nav class="rail" id="rail" aria-label="Ir para um slide"></nav>
+      <div class="slide-status" aria-hidden="true">DeteCK <b id="status-title">Capa</b></div>
+      <div class="toolbar" aria-label="Controles da apresentação">
+        <button type="button" id="previous" aria-label="Slide anterior" title="Slide anterior">←</button>
+        <div class="counter" aria-live="polite"><span id="current">01</span> / 10</div>
+        <button type="button" id="next" aria-label="Próximo slide" title="Próximo slide">→</button>
+        <button type="button" id="fullscreen" aria-label="Alternar tela cheia" title="Tela cheia">⛶</button>
+      </div>
+      <p class="sr-only" id="live" aria-live="polite">Slide 1 de 10, Capa</p>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var viewport = document.getElementById('viewport');
+      var stage = document.getElementById('stage');
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+      var rail = document.getElementById('rail');
+      var current = document.getElementById('current');
+      var progress = document.getElementById('progress-bar');
+      var statusTitle = document.getElementById('status-title');
+      var live = document.getElementById('live');
+      var index = 0;
+      var touchStartX = 0;
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function fitStage() {
+        if (window.innerWidth <= 720 || (window.innerHeight <= 500 && window.innerHeight > window.innerWidth)) {
+          stage.style.transform = 'none';
+          return;
+        }
+        var w = viewport.clientWidth;
+        var h = viewport.clientHeight;
+        var scale = Math.min(w / 1600, h / 900);
+        var x = (w - 1600 * scale) / 2;
+        var y = (h - 900 * scale) / 2;
+        stage.style.transform = 'translate(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px) scale(' + scale.toFixed(4) + ')';
+      }
+
+      slides.forEach(function (slide, slideIndex) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.setAttribute('aria-label', 'Ir para o slide ' + (slideIndex + 1) + ': ' + slide.dataset.title);
+        button.title = slide.dataset.title;
+        button.addEventListener('click', function () { goTo(slideIndex); });
+        rail.appendChild(button);
+      });
+
+      var railButtons = Array.prototype.slice.call(rail.querySelectorAll('button'));
+
+      function goTo(nextIndex, updateHash) {
+        nextIndex = Math.max(0, Math.min(slides.length - 1, nextIndex));
+        index = nextIndex;
+        slides.forEach(function (slide, slideIndex) {
+          var active = slideIndex === index;
+          slide.classList.toggle('is-active', active);
+          slide.classList.toggle('is-before', slideIndex < index);
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+          if (active) slide.scrollTop = 0;
+        });
+        railButtons.forEach(function (button, buttonIndex) {
+          button.classList.toggle('is-active', buttonIndex === index);
+          if (buttonIndex === index) button.setAttribute('aria-current', 'step');
+          else button.removeAttribute('aria-current');
+        });
+        current.textContent = String(index + 1).padStart(2, '0');
+        progress.style.width = ((index + 1) / slides.length * 100) + '%';
+        statusTitle.textContent = slides[index].dataset.title;
+        live.textContent = 'Slide ' + (index + 1) + ' de ' + slides.length + ', ' + slides[index].dataset.title;
+        document.title = slides[index].dataset.title + ' — DeteCK';
+        if (updateHash !== false) {
+          try { history.replaceState(null, '', '#' + (index + 1)); } catch (error) { location.hash = String(index + 1); }
+        }
+      }
+
+      function toggleFullscreen() {
+        var active = document.fullscreenElement || document.webkitFullscreenElement;
+        var request = stage.requestFullscreen || stage.webkitRequestFullscreen;
+        var exit = document.exitFullscreen || document.webkitExitFullscreen;
+        if (active && exit) exit.call(document);
+        else if (request) {
+          var promise = request.call(stage);
+          if (promise && promise.catch) promise.catch(function () {});
+        }
+      }
+
+      document.getElementById('previous').addEventListener('click', function () { goTo(index - 1); });
+      document.getElementById('next').addEventListener('click', function () { goTo(index + 1); });
+      document.getElementById('fullscreen').addEventListener('click', toggleFullscreen);
+
+      window.addEventListener('keydown', function (event) {
+        var key = event.key;
+        var handled = true;
+        if (key === 'ArrowRight' || key === 'PageDown' || key === ' ') goTo(index + 1);
+        else if (key === 'ArrowLeft' || key === 'PageUp') goTo(index - 1);
+        else if (key === 'Home') goTo(0);
+        else if (key === 'End') goTo(slides.length - 1);
+        else if (key === 'f' || key === 'F') toggleFullscreen();
+        else if (/^[1-9]$/.test(key)) goTo(parseInt(key, 10) - 1);
+        else if (key === '0') goTo(9);
+        else handled = false;
+        if (handled) event.preventDefault();
+      });
+
+      stage.addEventListener('touchstart', function (event) {
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+
+      stage.addEventListener('touchend', function (event) {
+        var distance = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(distance) > 55) goTo(index + (distance < 0 ? 1 : -1));
+      }, { passive: true });
+
+      if (!reducedMotion) {
+        Array.prototype.slice.call(document.querySelectorAll('[data-tilt]')).forEach(function (element) {
+          element.addEventListener('pointermove', function (event) {
+            var rect = element.getBoundingClientRect();
+            var x = (event.clientX - rect.left) / rect.width - .5;
+            var y = (event.clientY - rect.top) / rect.height - .5;
+            element.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+            element.style.setProperty('--rx', (-y * 7).toFixed(2) + 'deg');
+          });
+          element.addEventListener('pointerleave', function () {
+            element.style.setProperty('--ry', '0deg');
+            element.style.setProperty('--rx', '0deg');
+          });
+        });
+      }
+
+      window.addEventListener('resize', fitStage);
+      window.addEventListener('orientationchange', fitStage);
+      document.addEventListener('fullscreenchange', fitStage);
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', fitStage);
+
+      var requested = parseInt(location.hash.replace('#', ''), 10);
+      goTo(requested >= 1 && requested <= slides.length ? requested - 1 : 0, false);
+      fitStage();
+    }());
+  </script>
+</body>
+</html>
