@@ -1,69 +1,40 @@
 window.ACERVO_CK = [
   {
-    id: "hackathon-etec-2026-fase-2",
-    titulo: "Hackathon Etec 2026 - Fase 2",
-    subtitulo: "DeteCK — pitch de 3 minutos",
+    id: "hackathon-etec-2026",
+    titulo: "Hackathon",
+    subtitulo: "DeteCK · Hackathon Etec 2026",
     disciplina: "Projeto Integrador",
     sigla: "PI",
-    tipo: "Pitch interativo em HTML",
+    tipo: "Duas apresentações interativas em HTML",
     data: "2026-09-10",
     turma: "2º C — M-Tec Informática para Internet",
     resumo:
-      "Versão condensada do DeteCK para a segunda fase do Hackathon Etec 2026. " +
-      "Em sete telas e até três minutos, apresenta o problema, o público, a solução, " +
-      "o funcionamento, um exemplo simulado, o diferencial e o impacto esperado.",
+      "Projeto DeteCK desenvolvido pelo grupo CK para o Hackathon Etec 2026. " +
+      "O card reúne a apresentação conceitual completa da Fase 1 e o pitch de três minutos " +
+      "da Fase 2, com problema, público, solução, funcionamento, diferencial e impacto esperado.",
     destaques: [
-      "7 telas · até 3 minutos",
-      "Exemplo simulado completo",
-      "Cronômetro integrado",
-      "Navegação por teclado e toque",
+      "Fase 1 · 10 slides",
+      "Fase 2 · 7 telas em 3 minutos",
+      "Cronômetro integrado na Fase 2",
+      "Visual 3D no tema original CK",
     ],
     tags: [
       "Projeto", "Hackathon", "Segurança Digital", "Pitch",
       "HTML", "JavaScript", "3D", "Responsivo", "Apresentação",
     ],
-    cor: "#58ffc2",
+    cor: "#ffdc45",
     href: "atividades/deteck/apresentacao-deteck-fase-2.html",
     recursos: [
       {
-        rotulo: "Abrir apresentação",
-        href: "atividades/deteck/apresentacao-deteck-fase-2.html",
-        tipo: "7 telas · 3 minutos",
+        rotulo: "Fase 1",
+        href: "atividades/deteck/apresentacao-deteck.html",
+        tipo: "Apresentação completa · 10 slides",
         icone: "slides",
       },
-    ],
-    status: "pronta",
-  },
-  {
-    id: "hackathon-etec-2026-fase-1",
-    titulo: "Hackathon Etec 2026 - Fase 1",
-    subtitulo: "DeteCK — Detecte antes que aconteça",
-    disciplina: "Projeto Integrador",
-    sigla: "PI",
-    tipo: "Apresentação interativa em HTML",
-    data: "2026-09-10",
-    turma: "2º C — M-Tec Informática para Internet",
-    resumo:
-      "Apresentação conceitual completa do DeteCK, uma plataforma de apoio à segurança digital " +
-      "que destaca indícios de risco em mensagens, links e imagens e recomenda verificações " +
-      "seguras antes que o usuário clique, responda ou forneça dados.",
-    destaques: [
-      "10 slides navegáveis",
-      "Exemplos fictícios explicados",
-      "Navegação por teclado e toque",
-      "Visual 3D no tema original CK",
-    ],
-    tags: [
-      "Projeto", "Hackathon", "Segurança Digital", "Prevenção", "HTML",
-      "JavaScript", "3D", "Responsivo", "Apresentação",
-    ],
-    cor: "#ffdc45",
-    href: "atividades/deteck/apresentacao-deteck.html",
-    recursos: [
       {
-        rotulo: "Abrir apresentação",
-        href: "atividades/deteck/apresentacao-deteck.html",
-        tipo: "10 slides",
+        rotulo: "Fase 2",
+        href: "atividades/deteck/apresentacao-deteck-fase-2.html",
+        tipo: "Pitch · 7 telas · 3 minutos",
         icone: "slides",
       },
     ],
