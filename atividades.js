@@ -1,17 +1,52 @@
 window.ACERVO_CK = [
   {
-    id: "deteck",
-    titulo: "DeteCK — Detecte antes que aconteça",
-    subtitulo: "Segurança digital explicada antes do clique",
+    id: "hackathon-etec-2026-fase-2",
+    titulo: "Hackathon Etec 2026 - Fase 2",
+    subtitulo: "DeteCK — pitch de 3 minutos",
+    disciplina: "Projeto Integrador",
+    sigla: "PI",
+    tipo: "Pitch interativo em HTML",
+    data: "2026-09-10",
+    turma: "2º C — M-Tec Informática para Internet",
+    resumo:
+      "Versão condensada do DeteCK para a segunda fase do Hackathon Etec 2026. " +
+      "Em sete telas e até três minutos, apresenta o problema, o público, a solução, " +
+      "o funcionamento, um exemplo simulado, o diferencial e o impacto esperado.",
+    destaques: [
+      "7 telas · até 3 minutos",
+      "Exemplo simulado completo",
+      "Cronômetro integrado",
+      "Navegação por teclado e toque",
+    ],
+    tags: [
+      "Projeto", "Hackathon", "Segurança Digital", "Pitch",
+      "HTML", "JavaScript", "3D", "Responsivo", "Apresentação",
+    ],
+    cor: "#58ffc2",
+    href: "atividades/deteck/apresentacao-deteck-fase-2.html",
+    recursos: [
+      {
+        rotulo: "Abrir apresentação",
+        href: "atividades/deteck/apresentacao-deteck-fase-2.html",
+        tipo: "7 telas · 3 minutos",
+        icone: "slides",
+      },
+    ],
+    status: "pronta",
+  },
+  {
+    id: "hackathon-etec-2026-fase-1",
+    titulo: "Hackathon Etec 2026 - Fase 1",
+    subtitulo: "DeteCK — Detecte antes que aconteça",
     disciplina: "Projeto Integrador",
     sigla: "PI",
     tipo: "Apresentação interativa em HTML",
     data: "2026-09-10",
     turma: "2º C — M-Tec Informática para Internet",
     resumo:
-      "Apresentação conceitual sobre uma plataforma de apoio à segurança digital para pessoas comuns. " +
-      "O DeteCK recebe uma mensagem, link ou imagem suspeita, destaca indícios de risco em linguagem " +
-      "simples e recomenda verificações seguras antes que o usuário clique, responda ou forneça dados.",
+      "Apresentação conceitual completa do DeteCK, uma plataforma de apoio à segurança digital " +
+      "que destaca indícios de risco em mensagens, links e imagens e recomenda verificações " +
+      "seguras antes que o usuário clique, responda ou forneça dados.",
     destaques: [
       "10 slides navegáveis",
       "Exemplos fictícios explicados",
@@ -19,7 +54,7 @@ window.ACERVO_CK = [
       "Visual 3D no tema original CK",
     ],
     tags: [
-      "Projeto", "Segurança Digital", "Prevenção", "HTML",
+      "Projeto", "Hackathon", "Segurança Digital", "Prevenção", "HTML",
       "JavaScript", "3D", "Responsivo", "Apresentação",
     ],
     cor: "#ffdc45",
