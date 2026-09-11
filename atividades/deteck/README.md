@@ -1,14 +1,16 @@
-# DeteCK — Detecte antes que aconteça
+# DeteCK — Hackathon Etec 2026
 
-Apresentação conceitual da Conscious Knowledge sobre apoio à segurança digital para pessoas comuns. O DeteCK identifica indícios em mensagens, links e imagens suspeitas, explica os sinais em linguagem simples e orienta uma verificação segura antes de qualquer ação.
+Projeto da Conscious Knowledge sobre apoio à segurança digital para pessoas comuns. O DeteCK identifica indícios em mensagens, links e imagens suspeitas, explica os sinais em linguagem simples e orienta uma verificação segura antes de qualquer ação.
 
 ## Abrir
 
-[Abrir a apresentação](./apresentacao-deteck.html)
+- [Hackathon Etec 2026 - Fase 2 — apresentação de 3 minutos](./apresentacao-deteck-fase-2.html)
+- [Hackathon Etec 2026 - Fase 1 — apresentação completa](./apresentacao-deteck.html)
+- [Roteiro cronometrado da Fase 2](./ROTEIRO-FASE-2.md)
 
 ## Tecnologia
 
-HTML, CSS e JavaScript puro, sem backend ou dependências externas obrigatórias. A navegação funciona por botões, teclado e gesto horizontal em telas sensíveis ao toque.
+HTML, CSS e JavaScript puro, sem backend ou dependências externas obrigatórias. A navegação funciona por botões, teclado e gesto horizontal em telas sensíveis ao toque. A apresentação da Fase 2 também inclui um cronômetro de três minutos.
 
 ## Observações
 
