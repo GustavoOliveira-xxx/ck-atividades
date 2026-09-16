@@ -1,5 +1,46 @@
 window.ACERVO_CK = [
   {
+    id: "hackathon-etec-2026",
+    titulo: "Hackathon",
+    subtitulo: "DeteCK · Hackathon Etec 2026",
+    disciplina: "Projeto Integrador",
+    sigla: "PI",
+    tipo: "Duas apresentações interativas em HTML",
+    data: "2026-09-10",
+    turma: "2º C — M-Tec Informática para Internet",
+    resumo:
+      "Projeto DeteCK desenvolvido pelo grupo CK para o Hackathon Etec 2026. " +
+      "O card reúne a apresentação conceitual completa da Fase 1 e o pitch de três minutos " +
+      "da Fase 2, com problema, público, solução, funcionamento, diferencial e impacto esperado.",
+    destaques: [
+      "Fase 1 · 10 slides",
+      "Fase 2 · 7 telas em 3 minutos",
+      "Cronômetro integrado na Fase 2",
+      "Visual 3D no tema original CK",
+    ],
+    tags: [
+      "Projeto", "Hackathon", "Segurança Digital", "Pitch",
+      "HTML", "JavaScript", "3D", "Responsivo", "Apresentação",
+    ],
+    cor: "#ffdc45",
+    href: "atividades/deteck/apresentacao-deteck-fase-2.html",
+    recursos: [
+      {
+        rotulo: "Fase 1",
+        href: "atividades/deteck/apresentacao-deteck.html",
+        tipo: "Apresentação completa · 10 slides",
+        icone: "slides",
+      },
+      {
+        rotulo: "Fase 2",
+        href: "atividades/deteck/apresentacao-deteck-fase-2.html",
+        tipo: "Pitch · 7 telas · 3 minutos",
+        icone: "slides",
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "eleicoes-2026",
     titulo: "CK Eleições 2026",
     subtitulo: "Sistema de Transparência Eleitoral — São Paulo",
