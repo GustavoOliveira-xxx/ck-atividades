@@ -1,5 +1,5 @@
 {
-  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Os campos perfil e propostas são resumos editoriais do grupo a partir de pautas públicas — o retorno real do TSE não traz esses campos. Fonte real: https://divulgacandcontas.tse.jus.br",
   "dadosGerais": {
     "ano": 2026,
     "uf": "SP",
@@ -21,7 +21,35 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/guilherme-derrite.png",
       "vice": "—",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Policial militar de carreira e deputado federal, foi secretário da Segurança Pública de São Paulo.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Segurança",
+          "texto": "Fortalecimento da segurança pública."
+        },
+        {
+          "eixo": "Crime organizado",
+          "texto": "Combate ao crime organizado."
+        },
+        {
+          "eixo": "Legislação",
+          "texto": "Endurecimento das políticas de combate à criminalidade."
+        },
+        {
+          "eixo": "Forças policiais",
+          "texto": "Valorização das forças policiais."
+        },
+        {
+          "eixo": "Integração",
+          "texto": "Ampliação da integração entre forças de segurança."
+        },
+        {
+          "eixo": "Estados",
+          "texto": "Defesa de políticas de segurança alinhadas ao governo estadual de São Paulo."
+        }
+      ]
     },
     {
       "id": "5-002",
@@ -32,7 +60,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/marina-silva.png",
       "vice": "—",
-      "coligacao": "Federação PSOL REDE"
+      "coligacao": "Federação PSOL REDE",
+      "perfil": "Ambientalista nascida no Acre, ex-senadora e ministra do Meio Ambiente em diferentes governos.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Meio ambiente",
+          "texto": "Proteção ambiental e combate ao desmatamento."
+        },
+        {
+          "eixo": "Desenvolvimento",
+          "texto": "Desenvolvimento sustentável."
+        },
+        {
+          "eixo": "Clima",
+          "texto": "Transição para uma economia de baixo carbono."
+        },
+        {
+          "eixo": "Biomas",
+          "texto": "Preservação da Amazônia e dos biomas brasileiros."
+        },
+        {
+          "eixo": "Clima",
+          "texto": "Fortalecimento de políticas climáticas."
+        },
+        {
+          "eixo": "Economia verde",
+          "texto": "Desenvolvimento econômico associado à sustentabilidade."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Defesa de políticas sociais e de redução das desigualdades."
+        }
+      ]
     },
     {
       "id": "5-003",
@@ -43,7 +103,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/simone-tebet.png",
       "vice": "—",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Advogada e ex-senadora por Mato Grosso do Sul, foi ministra do Planejamento e Orçamento.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Mulheres",
+          "texto": "Combate à violência contra as mulheres."
+        },
+        {
+          "eixo": "Mulheres",
+          "texto": "Fortalecimento das políticas de proteção às mulheres."
+        },
+        {
+          "eixo": "Educação",
+          "texto": "Defesa da educação e dos serviços públicos."
+        },
+        {
+          "eixo": "Economia",
+          "texto": "Desenvolvimento econômico com responsabilidade fiscal."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Combate à desigualdade social."
+        },
+        {
+          "eixo": "Instituições",
+          "texto": "Fortalecimento das instituições e da democracia."
+        },
+        {
+          "eixo": "Proteção social",
+          "texto": "Ampliação das políticas de proteção social."
+        }
+      ]
     }
   ]
 }

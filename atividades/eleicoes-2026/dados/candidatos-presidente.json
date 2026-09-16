@@ -1,5 +1,5 @@
 {
-  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Os campos perfil e propostas são resumos editoriais do grupo a partir de pautas públicas — o retorno real do TSE não traz esses campos. Fonte real: https://divulgacandcontas.tse.jus.br",
   "dadosGerais": {
     "ano": 2026,
     "uf": "SP",
@@ -21,7 +21,35 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/luis-inacio-lula.png",
       "vice": "Geraldo Alckmin",
-      "coligacao": "Federação Brasil da Esperança (PT/PC do B/PV)"
+      "coligacao": "Federação Brasil da Esperança (PT/PC do B/PV)",
+      "perfil": "Ex-metalúrgico e sindicalista, presidente da República em três mandatos. Construiu sua trajetória política a partir do ABC paulista.",
+      "tipoPropostas": "programa",
+      "propostas": [
+        {
+          "eixo": "Social",
+          "texto": "Manter e ampliar políticas de redução da pobreza e desigualdade."
+        },
+        {
+          "eixo": "Serviços públicos",
+          "texto": "Investir em saúde e educação públicas."
+        },
+        {
+          "eixo": "Trabalho",
+          "texto": "Buscar redução da jornada de trabalho para 40 horas semanais e o fim da escala 6x1, sem redução salarial."
+        },
+        {
+          "eixo": "Infraestrutura",
+          "texto": "Fortalecer investimentos em infraestrutura e indústria."
+        },
+        {
+          "eixo": "Energia",
+          "texto": "Ampliar políticas de transição energética e exploração de recursos estratégicos."
+        },
+        {
+          "eixo": "Tecnologia",
+          "texto": "Criar uma plataforma pública nacional de empregabilidade utilizando inteligência artificial."
+        }
+      ]
     },
     {
       "id": "1-002",
@@ -32,7 +60,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/flavio-bolsonaro.png",
       "vice": "A definir em coligação",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Senador pelo Rio de Janeiro, com atuação parlamentar concentrada em segurança pública e pautas conservadoras.",
+      "tipoPropostas": "programa",
+      "propostas": [
+        {
+          "eixo": "Segurança",
+          "texto": "Endurecer o combate ao crime organizado e aumentar a capacidade do sistema penitenciário."
+        },
+        {
+          "eixo": "Segurança",
+          "texto": "Criar cinco novos presídios federais de segurança máxima."
+        },
+        {
+          "eixo": "Gestão",
+          "texto": "Criar um Ministério da Segurança Pública para ampliar a coordenação das forças policiais."
+        },
+        {
+          "eixo": "Estado",
+          "texto": "Reduzir despesas e ministérios do governo federal."
+        },
+        {
+          "eixo": "Fiscal",
+          "texto": "Substituir o atual arcabouço fiscal por um novo teto de gastos."
+        },
+        {
+          "eixo": "Tributos",
+          "texto": "Reduzir impostos sobre combustíveis."
+        },
+        {
+          "eixo": "Trabalho",
+          "texto": "Propor mudanças na legislação trabalhista permitindo maior flexibilidade na jornada."
+        }
+      ]
     },
     {
       "id": "1-003",
@@ -43,7 +103,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/ronaldo-caiado.png",
       "vice": "A definir em coligação",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Médico e governador de Goiás, com trajetória ligada ao setor agropecuário e à administração estadual.",
+      "tipoPropostas": "programa",
+      "propostas": [
+        {
+          "eixo": "Instituições",
+          "texto": "Encerrar a possibilidade de reeleição para cargos do Executivo."
+        },
+        {
+          "eixo": "Fiscal",
+          "texto": "Promover ajuste fiscal e maior controle das contas públicas."
+        },
+        {
+          "eixo": "Segurança",
+          "texto": "Combater o crime organizado e endurecer penas para crimes graves."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Manter programas de transferência de renda, com maior controle contra fraudes."
+        },
+        {
+          "eixo": "Infraestrutura",
+          "texto": "Investir em infraestrutura e ampliar concessões e parcerias com o setor privado."
+        },
+        {
+          "eixo": "Energia",
+          "texto": "Incentivar biocombustíveis e veículos híbridos/flex."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Ampliar investimentos em saúde, educação, moradia e inclusão produtiva."
+        }
+      ]
     }
   ]
 }

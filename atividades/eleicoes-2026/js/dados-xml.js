@@ -1,22 +1,21 @@
 const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
-<eleicoes_sp ano="2026" uf="SP" atualizado="2026-09-11">
-  <cargos>
-    <cargo titulo="Presidente" poder="Executivo" ambito="Federal" vagas="1" mandato="4 anos" icone="planalto">
-      <descricao>Chefe do poder executivo federal e chefe de Estado. Comanda a administração pública da União, sanciona ou veta leis aprovadas pelo Congresso, edita medidas provisórias e representa o Brasil nas relações internacionais.</descricao>
-    </cargo>
-    <cargo titulo="Governador" poder="Executivo" ambito="Estadual" vagas="1" mandato="4 anos" icone="bandeirantes">
-      <descricao>Chefe do poder executivo estadual. Administra São Paulo, o estado mais populoso do país, respondendo por segurança pública, saúde, educação básica estadual, transporte metropolitano e pela execução do orçamento paulista.</descricao>
-    </cargo>
-    <cargo titulo="Senador" poder="Legislativo" ambito="Federal" vagas="2" mandato="8 anos" icone="senado">
-      <descricao>Representa o estado de São Paulo no Senado Federal. Vota leis complementares, aprova autoridades e ministros de tribunais superiores, julga autoridades em crimes de responsabilidade e revisa a legislação vinda da Câmara.</descricao>
-    </cargo>
-    <cargo titulo="Deputado Federal" poder="Legislativo" ambito="Federal" vagas="70" mandato="4 anos" icone="camara">
-      <descricao>Representa a população paulista na Câmara dos Deputados. Propõe e vota projetos de lei federais, fiscaliza o Executivo, aprova o orçamento da União e participa das comissões temáticas permanentes.</descricao>
-    </cargo>
-    <cargo titulo="Deputado Estadual" poder="Legislativo" ambito="Estadual" vagas="94" mandato="4 anos" icone="alesp">
-      <descricao>Atua na Assembleia Legislativa de São Paulo (ALESP). Elabora leis estaduais, fiscaliza o governo do estado, aprova o orçamento paulista e responde diretamente pelas demandas dos 645 municípios de São Paulo.</descricao>
-    </cargo>
-  </cargos>
+<cargos_sp ano="2026" uf="SP" atualizado="2026-09-11">
+
+  <cargo titulo="Presidente" poder="Executivo" ambito="Federal" vagas="1" mandato="4 anos" icone="planalto">
+    <descricao>Chefe do poder executivo federal e chefe de Estado. Comanda a administração pública da União, sanciona ou veta leis aprovadas pelo Congresso, edita medidas provisórias e representa o Brasil nas relações internacionais.</descricao>
+  </cargo>
+  <cargo titulo="Governador" poder="Executivo" ambito="Estadual" vagas="1" mandato="4 anos" icone="bandeirantes">
+    <descricao>Chefe do poder executivo estadual. Administra São Paulo, o estado mais populoso do país, respondendo por segurança pública, saúde, educação básica estadual, transporte metropolitano e pela execução do orçamento paulista.</descricao>
+  </cargo>
+  <cargo titulo="Senador" poder="Legislativo" ambito="Federal" vagas="2" mandato="8 anos" icone="senado">
+    <descricao>Representa o estado de São Paulo no Senado Federal. Vota leis complementares, aprova autoridades e ministros de tribunais superiores, julga autoridades em crimes de responsabilidade e revisa a legislação vinda da Câmara.</descricao>
+  </cargo>
+  <cargo titulo="Deputado Federal" poder="Legislativo" ambito="Federal" vagas="70" mandato="4 anos" icone="camara">
+    <descricao>Representa a população paulista na Câmara dos Deputados. Propõe e vota projetos de lei federais, fiscaliza o Executivo, aprova o orçamento da União e participa das comissões temáticas permanentes.</descricao>
+  </cargo>
+  <cargo titulo="Deputado Estadual" poder="Legislativo" ambito="Estadual" vagas="94" mandato="4 anos" icone="alesp">
+    <descricao>Atua na Assembleia Legislativa de São Paulo (ALESP). Elabora leis estaduais, fiscaliza o governo do estado, aprova o orçamento paulista e responde diretamente pelas demandas dos 645 municípios de São Paulo.</descricao>
+  </cargo>
 
   <candidatos>
 
@@ -243,7 +242,7 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
     </candidato>
 
   </candidatos>
-</eleicoes_sp>
+</cargos_sp>
 `;
 
 const CLASSE_PODER = {
