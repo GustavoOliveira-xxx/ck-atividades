@@ -867,8 +867,6 @@
   border-color: var(--borda-forte);
 }
 
-/* ---------- modo demonstração: o painel inteiro muda de cor ---------- */
-
 .resposta[data-modo="demo"][data-estado="pronto"] {
   border-color: rgba(255, 176, 58, .38);
   box-shadow: 0 0 0 1px rgba(255, 176, 58, .16), 0 24px 60px rgba(70, 45, 0, .3);

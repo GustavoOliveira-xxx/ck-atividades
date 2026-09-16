@@ -361,8 +361,6 @@ CK.api = (() => {
 
     const receita = RECEITAS[tipo.id] ?? RECEITAS.iniciante;
 
-    // A primeira linha vai junto no texto — e não só na interface — para que
-    // uma resposta copiada e colada em outro lugar continue identificada.
     const linhas = [
       "**Resposta de demonstração — a IA não foi consultada.**",
       "",

@@ -77,8 +77,7 @@ body{font-family:var(--ui);color:var(--ink-0);-webkit-font-smoothing:antialiased
 .canto{position:absolute;width:38px;height:38px;border:2px solid var(--linha-2);opacity:.5;z-index:3;
   animation:respirar 5.5s ease-in-out infinite}
 .canto.tr{animation-delay:.4s}.canto.bl{animation-delay:.8s}.canto.br{animation-delay:1.2s}
-/* só opacidade: um box-shadow desenharia a caixa toda e a cantoneira
-   deixaria de parecer um 'L' para virar um quadrado */
+
 @keyframes respirar{0%,100%{opacity:.3}50%{opacity:.75}}
 .canto.tl{left:20px;top:20px;border-right:0;border-bottom:0}
 .canto.tr{right:20px;top:20px;border-left:0;border-bottom:0}
@@ -198,7 +197,7 @@ h1 em{font-style:normal;
 }
 .placa::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;
   background:var(--neon);box-shadow:0 0 10px var(--neon)}
-/* risco no chanfro inferior esquerdo — assina a peça sem pedir atenção */
+
 .placa::after{content:"";position:absolute;left:-1px;bottom:14px;width:20px;height:1px;
   background:var(--linha-2);transform:rotate(-45deg);transform-origin:left center;opacity:.7}
 .placa.roxa::before{background:var(--serie-2);box-shadow:0 0 10px var(--serie-2)}
@@ -237,8 +236,7 @@ h1 em{font-style:normal;
   clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
   font:400 16.4px/1.5 var(--ui);color:var(--mint)}
 .nota::before{content:"◆";position:absolute;left:16px;top:13px;color:var(--neon);font-size:13px}
-/* o <b> solto no meio da frase é ênfase; só o ÚLTIMO é a assinatura da nota.
-   Sem essa distinção, um "node_modules" no meio do texto virava etiqueta. */
+
 .nota b{color:var(--mint);font-weight:700}
 .nota b:last-child{display:block;margin-top:7px;font:700 10px/1 var(--ui);letter-spacing:.2em;
   text-transform:uppercase;color:var(--ink-3)}
