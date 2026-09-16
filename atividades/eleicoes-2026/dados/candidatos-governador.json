@@ -1,5 +1,5 @@
 {
-  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Os campos perfil e propostas são resumos editoriais do grupo a partir de pautas públicas — o retorno real do TSE não traz esses campos. Fonte real: https://divulgacandcontas.tse.jus.br",
   "dadosGerais": {
     "ano": 2026,
     "uf": "SP",
@@ -21,7 +21,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/tarcisio-de-freitas.png",
       "vice": "A definir em coligação",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Engenheiro militar e ex-ministro da Infraestrutura, governador de São Paulo com agenda centrada em obras e concessões.",
+      "tipoPropostas": "programa",
+      "propostas": [
+        {
+          "eixo": "Infraestrutura",
+          "texto": "Continuar investimentos em infraestrutura, rodovias e obras públicas."
+        },
+        {
+          "eixo": "Concessões",
+          "texto": "Ampliar concessões e parcerias público-privadas."
+        },
+        {
+          "eixo": "Segurança",
+          "texto": "Expandir ações de segurança pública e combate ao crime organizado."
+        },
+        {
+          "eixo": "Tecnologia",
+          "texto": "Utilizar tecnologia e integração de dados na segurança."
+        },
+        {
+          "eixo": "Educação",
+          "texto": "Ampliar a rede de escolas com modelo cívico-militar/militar."
+        },
+        {
+          "eixo": "Infraestrutura",
+          "texto": "Continuar projetos de recuperação e modernização da infraestrutura paulista."
+        },
+        {
+          "eixo": "Segurança urbana",
+          "texto": "Desenvolver ações de combate à Cracolândia e políticas de segurança urbana."
+        }
+      ]
     },
     {
       "id": "3-002",
@@ -32,7 +64,43 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/fernando-haddad.png",
       "vice": "A definir em coligação",
-      "coligacao": "Federação Brasil da Esperança"
+      "coligacao": "Federação Brasil da Esperança",
+      "perfil": "Professor universitário, ex-ministro da Educação, ex-prefeito de São Paulo e ex-ministro da Fazenda.",
+      "tipoPropostas": "programa",
+      "propostas": [
+        {
+          "eixo": "Segurança",
+          "texto": "Priorizar segurança pública com foco em prevenção e integração das forças policiais."
+        },
+        {
+          "eixo": "Segurança",
+          "texto": "Ampliar câmeras corporais com gravação contínua."
+        },
+        {
+          "eixo": "Segurança",
+          "texto": "Criar iniciativas de combate a golpes e recuperação de celulares roubados."
+        },
+        {
+          "eixo": "Educação",
+          "texto": "Investir em educação pública e valorização dos profissionais da área."
+        },
+        {
+          "eixo": "Saúde",
+          "texto": "Ampliar investimentos em saúde."
+        },
+        {
+          "eixo": "Concessões",
+          "texto": "Rever políticas de privatização e concessões consideradas estratégicas."
+        },
+        {
+          "eixo": "Mobilidade",
+          "texto": "Buscar redução de custos para a população, incluindo críticas ao modelo de pedágios."
+        },
+        {
+          "eixo": "Interior",
+          "texto": "Levar investimentos e desenvolvimento econômico para o interior do estado."
+        }
+      ]
     },
     {
       "id": "3-003",
@@ -43,7 +111,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/vera-lucia.png",
       "vice": "Candidatura própria",
-      "coligacao": "PSTU"
+      "coligacao": "PSTU",
+      "perfil": "Operária e dirigente sindical, candidata histórica do PSTU com atuação em pautas trabalhistas e antirracistas.",
+      "tipoPropostas": "programa",
+      "propostas": [
+        {
+          "eixo": "Serviços públicos",
+          "texto": "Priorizar investimentos públicos em saúde e educação."
+        },
+        {
+          "eixo": "Servidores",
+          "texto": "Defender valorização salarial e melhores condições de trabalho para servidores."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Ampliar políticas sociais e combate à desigualdade."
+        },
+        {
+          "eixo": "Estado",
+          "texto": "Defender serviços públicos sob controle estatal."
+        },
+        {
+          "eixo": "Moradia",
+          "texto": "Propor medidas voltadas à moradia popular."
+        },
+        {
+          "eixo": "Trabalho",
+          "texto": "Ampliar direitos trabalhistas e políticas de proteção aos trabalhadores."
+        },
+        {
+          "eixo": "Privatizações",
+          "texto": "Combater privatizações de serviços públicos."
+        }
+      ]
     }
   ]
 }

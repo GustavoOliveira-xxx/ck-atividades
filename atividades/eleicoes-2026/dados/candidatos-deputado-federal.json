@@ -1,5 +1,5 @@
 {
-  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Os campos perfil e propostas são resumos editoriais do grupo a partir de pautas públicas — o retorno real do TSE não traz esses campos. Fonte real: https://divulgacandcontas.tse.jus.br",
   "dadosGerais": {
     "ano": 2026,
     "uf": "SP",
@@ -21,7 +21,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/guilherme-boulos.png",
       "vice": "—",
-      "coligacao": "Federação PSOL REDE"
+      "coligacao": "Federação PSOL REDE",
+      "perfil": "Psicólogo e coordenador de movimento de moradia, deputado federal por São Paulo.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Moradia",
+          "texto": "Defesa da moradia popular e políticas habitacionais."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Combate à desigualdade social."
+        },
+        {
+          "eixo": "Serviços públicos",
+          "texto": "Ampliação de investimentos em saúde e educação públicas."
+        },
+        {
+          "eixo": "Trabalho",
+          "texto": "Defesa dos direitos dos trabalhadores."
+        },
+        {
+          "eixo": "Programas sociais",
+          "texto": "Fortalecimento de programas sociais."
+        },
+        {
+          "eixo": "Trabalho",
+          "texto": "Combate à pobreza e à precarização do trabalho."
+        },
+        {
+          "eixo": "Cidades",
+          "texto": "Defesa de políticas urbanas voltadas à população de baixa renda."
+        }
+      ]
     },
     {
       "id": "6-002",
@@ -32,7 +64,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/tabata-amaral.png",
       "vice": "—",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Cientista política e física de formação, deputada federal por São Paulo com atuação centrada em educação.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Educação",
+          "texto": "Educação pública de qualidade."
+        },
+        {
+          "eixo": "Juventude",
+          "texto": "Ampliação de oportunidades educacionais para jovens."
+        },
+        {
+          "eixo": "Ciência",
+          "texto": "Investimentos em ciência, tecnologia e inovação."
+        },
+        {
+          "eixo": "Primeira infância",
+          "texto": "Políticas de primeira infância."
+        },
+        {
+          "eixo": "Gestão",
+          "texto": "Melhoria da gestão pública baseada em evidências."
+        },
+        {
+          "eixo": "Social",
+          "texto": "Defesa de políticas sociais e redução das desigualdades."
+        },
+        {
+          "eixo": "Legislativo",
+          "texto": "Atuação legislativa em saúde, educação e desenvolvimento social."
+        }
+      ]
     },
     {
       "id": "6-003",
@@ -43,7 +107,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/major-mecca.png",
       "vice": "—",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Oficial da Polícia Militar de São Paulo, com atuação parlamentar voltada à segurança pública.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Segurança",
+          "texto": "Fortalecimento da segurança pública."
+        },
+        {
+          "eixo": "Forças policiais",
+          "texto": "Valorização das forças policiais."
+        },
+        {
+          "eixo": "Crime organizado",
+          "texto": "Combate ao crime organizado."
+        },
+        {
+          "eixo": "Legislação",
+          "texto": "Defesa de maior rigor contra criminosos."
+        },
+        {
+          "eixo": "Agentes públicos",
+          "texto": "Apoio a políticas de segurança para agentes públicos."
+        },
+        {
+          "eixo": "Costumes",
+          "texto": "Defesa de pautas conservadoras."
+        },
+        {
+          "eixo": "Estrutura",
+          "texto": "Fortalecimento da estrutura das forças de segurança."
+        }
+      ]
     }
   ]
 }

@@ -1,7 +1,8 @@
 (() => {
   "use strict";
 
-  const { candidatosData, helpers } = window.CK_ELEICOES;
+  const { helpers } = window.CK_ELEICOES;
+  const { COR_PARTIDO } = window.CK_XML;
   const { $, esc, slug } = helpers;
 
   const ORIGEM_DADOS = "dados";
@@ -28,7 +29,16 @@
     const arquivo = ARQUIVO_POR_CARGO[cargo];
     if (!arquivo) throw new Error(`Cargo sem recorte mapeado: ${cargo}`);
 
-    const resposta = await fetch(`${ORIGEM_DADOS}/${arquivo}`, { cache: "no-cache" });
+    const parametros = new URLSearchParams({
+      ano: "2026",
+      uf: "SP",
+      cargo,
+    });
+
+    const resposta = await fetch(
+      `${ORIGEM_DADOS}/${arquivo}?${parametros}`,
+      { cache: "no-cache" }
+    );
 
     if (!resposta.ok) {
       throw new Error(`A consulta respondeu ${resposta.status} (${resposta.statusText}).`);
@@ -44,16 +54,8 @@
     return dados;
   }
 
-  const arquivoDaFoto = (caminho) => String(caminho).split("/").pop();
-
-  const casarComXML = (registro) => candidatosData.find((c) =>
-    arquivoDaFoto(c.foto) === arquivoDaFoto(registro.foto)
-  );
-
-  const cartaoCandidato = (registro, i) => {
-    const doXML = casarComXML(registro) || {};
-    const cor = doXML.cor || "#25f0a2";
-    const propostas = doXML.propostas || [];
+  const conteudoCandidato = (registro) => {
+    const propostas = Array.isArray(registro.propostas) ? registro.propostas : [];
 
     const listaPropostas = propostas.length
       ? propostas.map((p) => `
@@ -63,7 +65,7 @@
           </li>`).join("")
       : '<li><p>Propostas não informadas neste recorte.</p></li>';
 
-    const ehPrograma = doXML.tipoPropostas === "programa";
+    const ehPrograma = registro.tipoPropostas === "programa";
 
     const rotuloPropostas = ehPrograma
       ? "Propostas de campanha"
@@ -76,12 +78,10 @@
     const selo = (texto) =>
       `<span class="candidato__conferir" title="Confirmar no DivulgaCandContas do TSE">${texto}</span>`;
 
-    const avisoNumero = doXML.conferir === "numero" ? selo("nº a conferir") : "";
-    const avisoPautas = doXML.conferir === "pautas" ? selo("a catalogar") : "";
+    const avisoNumero = registro.conferir === "numero" ? selo("nº a conferir") : "";
+    const avisoPautas = registro.conferir === "pautas" ? selo("a catalogar") : "";
 
     return `
-    <article class="candidato" style="--cor-partido:${esc(cor)};--atraso:${i * 110}ms"
-             data-candidato="${esc(slug(registro.nomeUrna))}" data-revelar>
       <div class="candidato__moldura">
 
         <div class="candidato__face candidato__face--frente">
@@ -117,7 +117,7 @@
 
         <div class="candidato__face candidato__face--verso">
           <p class="candidato__verso-nome">${esc(registro.nomeUrna)}</p>
-          <p class="candidato__perfil">${esc(doXML.perfil || "")}</p>
+          <p class="candidato__perfil">${esc(registro.perfil || "")}</p>
 
           <p class="candidato__rotulo-propostas">
             ${esc(rotuloPropostas)} ${avisoPautas}
@@ -138,8 +138,29 @@
           </button>
         </div>
 
-      </div>
-    </article>`;
+      </div>`;
+  };
+
+  const montarCandidato = (registro, i) => {
+    const item = document.createElement("article");
+
+    item.className = "candidato";
+    item.dataset.revelar = "";
+    item.dataset.candidato = slug(registro.nomeUrna);
+    item.style.setProperty("--cor-partido", COR_PARTIDO[registro.siglaPartido] || "#25f0a2");
+    item.style.setProperty("--atraso", `${i * 110}ms`);
+
+    item.innerHTML = conteudoCandidato(registro);
+
+    return item;
+  };
+
+  const desenharCandidatos = (candidatos) => {
+    areaResultado.innerHTML = "";
+
+    const pilha = document.createDocumentFragment();
+    candidatos.forEach((registro, i) => pilha.appendChild(montarCandidato(registro, i)));
+    areaResultado.appendChild(pilha);
   };
 
   const esqueletos = (quantidade = 3) => Array.from({ length: quantidade }, (_, i) => `
@@ -170,7 +191,7 @@
 
       await new Promise((resolve) => setTimeout(resolve, 420));
 
-      areaResultado.innerHTML = candidatos.map(cartaoCandidato).join("");
+      desenharCandidatos(candidatos);
 
       if (areaMeta) {
         areaMeta.innerHTML = `

@@ -1,5 +1,5 @@
 {
-  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Fonte real: https://divulgacandcontas.tse.jus.br",
+  "_aviso": "ARQUIVO DE SIMULAÇÃO ACADÊMICA. Reproduz o FORMATO da resposta do sistema DivulgaCandContas do TSE para o exercício de fetch + JSON da atividade. Não é um retorno oficial do TSE. Os campos perfil e propostas são resumos editoriais do grupo a partir de pautas públicas — o retorno real do TSE não traz esses campos. Fonte real: https://divulgacandcontas.tse.jus.br",
   "dadosGerais": {
     "ano": 2026,
     "uf": "SP",
@@ -21,7 +21,35 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/bruna-furlan.png",
       "vice": "—",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Advogada e ex-deputada federal por São Paulo, com base eleitoral em Barueri e região.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Social",
+          "texto": "Defesa de políticas sociais."
+        },
+        {
+          "eixo": "Saúde",
+          "texto": "Apoio a iniciativas voltadas à saúde."
+        },
+        {
+          "eixo": "Educação",
+          "texto": "Defesa de melhorias na educação."
+        },
+        {
+          "eixo": "Municípios",
+          "texto": "Fortalecimento de políticas públicas municipais e estaduais."
+        },
+        {
+          "eixo": "Desenvolvimento",
+          "texto": "Apoio a projetos de desenvolvimento regional."
+        },
+        {
+          "eixo": "Municípios",
+          "texto": "Atuação em pautas relacionadas à população e aos municípios paulistas."
+        }
+      ]
     },
     {
       "id": "7-002",
@@ -32,7 +60,39 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/carlos-giannazi.png",
       "vice": "—",
-      "coligacao": "Federação PSOL REDE"
+      "coligacao": "Federação PSOL REDE",
+      "perfil": "Professor da rede pública e deputado estadual, com longa atuação na defesa da educação paulista.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "Educação",
+          "texto": "Defesa da educação pública."
+        },
+        {
+          "eixo": "Servidores",
+          "texto": "Valorização dos professores e servidores públicos."
+        },
+        {
+          "eixo": "Aposentados",
+          "texto": "Defesa dos direitos dos aposentados."
+        },
+        {
+          "eixo": "Servidores",
+          "texto": "Melhoria das condições de trabalho dos servidores."
+        },
+        {
+          "eixo": "Servidores",
+          "texto": "Defesa do pagamento retroativo relacionado aos períodos congelados dos servidores."
+        },
+        {
+          "eixo": "Servidores",
+          "texto": "Restabelecimento das faltas abonadas para servidores estaduais."
+        },
+        {
+          "eixo": "Privatizações",
+          "texto": "Combate às políticas de privatização de serviços públicos."
+        }
+      ]
     },
     {
       "id": "7-003",
@@ -43,7 +103,16 @@
       "situacao": "Deferido",
       "foto": "assets/candidatos/caio-aoqui.png",
       "vice": "—",
-      "coligacao": "Coligação em formação"
+      "coligacao": "Coligação em formação",
+      "perfil": "Administrador, candidato a deputado estadual por São Paulo com candidatura deferida.",
+      "tipoPropostas": "pautas",
+      "propostas": [
+        {
+          "eixo": "A catalogar",
+          "texto": "Pautas ainda não levantadas pelo grupo. Consulte a candidatura no DivulgaCandContas do TSE antes da apresentação."
+        }
+      ],
+      "conferir": "pautas"
     }
   ]
 }

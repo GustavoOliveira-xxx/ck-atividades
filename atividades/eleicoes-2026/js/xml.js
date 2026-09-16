@@ -26,7 +26,7 @@
   }
 
   const lerCargos = () => {
-    const cargos = xmlDoc.querySelectorAll("cargos > cargo");
+    const cargos = xmlDoc.querySelectorAll("cargos_sp > cargo");
 
     cargos.forEach((cargo) => {
       const titulo = cargo.getAttribute("titulo");
@@ -90,9 +90,7 @@
     alesp: '<path d="M3 20h18M6 20V8h12v12"/><path d="M9 20v-5h6v5"/><path d="M6 8l6-5 6 5"/>',
   };
 
-  const cartaoCargo = (cargo, i) => `
-    <article class="cargo-card" data-tilt data-poder="${esc(cargo.poder)}"
-             style="--atraso:${i * 90}ms" data-revelar>
+  const conteudoCargo = (cargo) => `
       <span class="cargo-card__brilho" aria-hidden="true"></span>
 
       <header class="cargo-card__topo">
@@ -115,13 +113,31 @@
           Ver candidatos
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
-      </footer>
-    </article>`;
+      </footer>`;
+
+  const montarCargo = (cargo, i) => {
+    const item = document.createElement("article");
+
+    item.className = "cargo-card";
+    item.dataset.tilt = "";
+    item.dataset.revelar = "";
+    item.dataset.poder = cargo.poder;
+    item.style.setProperty("--atraso", `${i * 90}ms`);
+
+    item.innerHTML = conteudoCargo(cargo);
+
+    return item;
+  };
 
   const desenharCargos = () => {
     const grade = $("[data-grade-cargos]");
     if (!grade) return;
-    grade.innerHTML = cargosData.map(cartaoCargo).join("");
+
+    grade.innerHTML = "";
+
+    const pilha = document.createDocumentFragment();
+    cargosData.forEach((cargo, i) => pilha.appendChild(montarCargo(cargo, i)));
+    grade.appendChild(pilha);
   };
 
   const destacarXML = (txt) => esc(txt)

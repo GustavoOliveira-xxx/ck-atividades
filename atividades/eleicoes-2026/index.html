@@ -506,9 +506,11 @@
         <p class="secao__indice">Parte 2 — fetch + JSON</p>
         <h2>Quem está na <span class="gradiente">disputa</span></h2>
         <p class="secao__sub">
-          Escolha um cargo: o JavaScript dispara um <code>fetch</code>, espera a resposta com
-          <code>await</code>, lê <code>dados.candidatos</code> e monta os cards.
-          Clique em um card para virá-lo e ver as propostas — que vêm do XML da Parte 1.
+          Escolha um cargo: o JavaScript monta a URL com <code>URLSearchParams</code>, dispara
+          um <code>fetch</code>, espera a resposta com <code>await</code>, lê
+          <code>dados.candidatos</code> e monta os cards com
+          <code>createElement</code> + <code>appendChild</code>. Clique em um card para
+          virá-lo e ver as propostas — nome, partido e propostas saem todos do JSON.
         </p>
       </header>
 
@@ -543,7 +545,10 @@
       <p class="nota-fonte">
         Recortes locais em <code>dados/*.json</code>, no mesmo formato do retorno do sistema
         <strong>DivulgaCandContas</strong> do TSE — a abordagem de <em>mock</em> indicada na aula para
-        contornar o CORS. Fonte oficial:
+        contornar o CORS. O cargo escolhido no <code>&lt;select&gt;</code> viaja na URL
+        (<code>?ano=2026&amp;uf=SP&amp;cargo=…</code>). Os campos <code>perfil</code> e
+        <code>propostas</code> são acréscimo nosso: o retorno real do TSE não traz proposta.
+        Fonte oficial:
         <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">
           divulgacandcontas.tse.jus.br</a>.
       </p>
