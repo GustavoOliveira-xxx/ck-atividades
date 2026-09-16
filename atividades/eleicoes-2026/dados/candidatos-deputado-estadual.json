@@ -104,12 +104,12 @@
       "foto": "assets/candidatos/caio-aoqui.png",
       "vice": "—",
       "coligacao": "Coligação em formação",
-      "perfil": "Administrador, candidato a deputado estadual por São Paulo com candidatura deferida.",
+      "perfil": "Administrador nascido em Tupã (SP), com ensino superior completo, candidato a deputado estadual por São Paulo.",
       "tipoPropostas": "pautas",
       "propostas": [
         {
           "eixo": "A catalogar",
-          "texto": "Pautas ainda não levantadas pelo grupo. Consulte a candidatura no DivulgaCandContas do TSE antes da apresentação."
+          "texto": "Pautas de campanha não localizadas nas fontes consultadas. Os dados de registro conferem no TSE; o programa não foi divulgado até o fechamento desta página."
         }
       ],
       "conferir": "pautas"

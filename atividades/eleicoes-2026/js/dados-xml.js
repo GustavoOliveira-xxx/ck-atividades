@@ -235,9 +235,9 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
     <candidato cargo="Deputado Estadual" partido="PSD" numero="55300" foto="caio-aoqui" conferir="pautas">
       <nome>Caio Aoqui</nome>
       <partido sigla="PSD">Partido Social Democrático</partido>
-      <perfil>Administrador, candidato a deputado estadual por São Paulo com candidatura deferida.</perfil>
+      <perfil>Administrador nascido em Tupã (SP), com ensino superior completo, candidato a deputado estadual por São Paulo.</perfil>
       <propostas tipo="pautas">
-        <proposta eixo="A catalogar">Pautas ainda não levantadas pelo grupo. Consulte a candidatura no DivulgaCandContas do TSE antes da apresentação.</proposta>
+        <proposta eixo="A catalogar">Pautas de campanha não localizadas nas fontes consultadas. Os dados de registro conferem no TSE; o programa não foi divulgado até o fechamento desta página.</proposta>
       </propostas>
     </candidato>
 
