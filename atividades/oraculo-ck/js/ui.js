@@ -295,10 +295,6 @@ CK.ui = (() => {
       const corpo = $("[data-resposta-corpo]", this.raiz);
       const faixa = $("[data-faixa-demo]", this.raiz);
 
-      // O painel inteiro muda de cor no modo demonstração. Confundir uma
-      // resposta local com uma resposta da IA é o pior mal-entendido possível
-      // neste projeto — então a distinção não pode depender de ler a letra
-      // miúda dos chips de meta.
       this.raiz.dataset.modo = modo;
       if (faixa) faixa.hidden = modo !== "demo";
 
@@ -332,8 +328,6 @@ CK.ui = (() => {
 
       this.trocar("pronto");
 
-      // trocar() escreve "respondido"; no modo demonstração a etiqueta precisa
-      // dizer outra coisa, senão o painel afirma algo que não aconteceu.
       const marcador = $("[data-resposta-estado]", this.raiz);
       if (marcador && modo === "demo") marcador.textContent = "demonstração";
     },
