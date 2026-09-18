@@ -1,5 +1,60 @@
 window.ACERVO_CK = [
   {
+    id: "classicismo",
+    titulo: "Classicismo",
+    subtitulo: "Movimento literário do Renascimento",
+    disciplina: "Língua Portuguesa",
+    sigla: "LP",
+    tipo: "Apresentação interativa em HTML",
+    data: "2026-09-25",
+    turma: "2º C — M-Tec Informática para Internet",
+    resumo:
+      "Apresentação de onze slides sobre o Classicismo: o que foi o movimento, o contexto " +
+      "histórico, o início em Portugal com Sá de Miranda em 1527, as dez características, os " +
+      "quatro autores centrais, Camões, Os Lusíadas, a mistura entre cristianismo e mitologia, " +
+      "curiosidades e conclusão. Cada slide tem uma interação própria — fichas que viram, linha " +
+      "do tempo, contador das dez sílabas do decassílabo, explorador dos dez cantos, balança da " +
+      "religiosidade, sorteio de curiosidades e um quiz de seis perguntas. Arquivo único, com " +
+      "as imagens embutidas: abre offline, em qualquer navegador.",
+    destaques: [
+      "11 slides · 6 integrantes",
+      "10 interações diferentes",
+      "Quiz de 6 perguntas",
+      "Os 10 cantos de Os Lusíadas",
+      "Contador do verso decassílabo",
+      "Funciona offline",
+    ],
+    tags: [
+      "Seminário", "Literatura", "Classicismo", "Renascimento", "Camões",
+      "Os Lusíadas", "HTML", "JavaScript", "3D", "Interativo", "Apresentação",
+    ],
+    cor: "#b3862a",
+    href: "atividades/classicismo/apresentacao-classicismo.html",
+    recursos: [
+      {
+        rotulo: "Abrir apresentação",
+        href: "atividades/classicismo/apresentacao-classicismo.html",
+        tipo: "11 slides interativos",
+        icone: "slides",
+      },
+      {
+        rotulo: "Roteiro da equipe",
+        href: "atividades/classicismo/ROTEIRO-APRESENTACAO.md",
+        tipo: "Divisão das falas entre os 6 integrantes",
+        icone: "doc",
+        baixar: true,
+      },
+      {
+        rotulo: "Pacote de entrega",
+        href: "atividades/classicismo/entrega-classicismo-ck.zip",
+        tipo: "ZIP · apresentação, PDF, roteiro e imagens",
+        icone: "doc",
+        baixar: true,
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "hackathon-etec-2026",
     titulo: "Hackathon",
     subtitulo: "DeteCK · Hackathon Etec 2026",
