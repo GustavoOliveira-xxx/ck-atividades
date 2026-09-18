@@ -25,33 +25,43 @@ COMO ABRIR
 
 1. Clique duas vezes em apresentacao-classicismo.html
 2. Aperte F para tela cheia
-3. Use as setas <- e -> (ou a barra de espaco) para passar os slides
+3. Use as setas <- e -> (ou a barra de espaco) para passar os folios
+
+A apresentacao e montada como uma carta nautica do seculo XVI: velino, tinta
+ferro-galica, ouro e lacre. As onze telas sao chamadas de FOLIOS e viram como
+pagina de livro. A caravela na regua de baixo mostra onde voce esta.
 
 Teclas:
-  ->  ou espaco   proximo slide
-  <-              slide anterior
-  I               indice dos 11 slides (ESC fecha)
+  ->  ou espaco   proximo folio
+  <-              folio anterior
+  S               sumario dos 11 folios (ESC fecha)
   F               tela cheia
-  Home / End      primeiro / ultimo slide
+  Home / End      primeiro / ultimo folio
+  Shift + <- ->   gira o astrolabio (no folio VIII)
 
-Clicar nos elementos interativos (fichas, pastilhas, cantos, balanca, quiz)
-NAO passa o slide. Pode clicar a vontade durante a fala.
+Clicar ou arrastar as pecas interativas (medalhoes, rosa dos ventos,
+astrolabio, carrossel, balanca, lacre, quiz) NAO passa o folio. Pode mexer a
+vontade durante a fala.
 
 -------------------------------------------------------------------------------
-AS INTERACOES, SLIDE A SLIDE
+AS INTERACOES, FOLIO A FOLIO
 -------------------------------------------------------------------------------
 
-  1  Capa            campo para escrever o nome do(a) professor(a)
-  2  O que foi       4 fichas que viram
-  3  Contexto        painel que alterna Renascimento / Idade Media
-  4  Portugal        contador das 10 silabas do verso decassilabo
-  5  Caracteristicas 10 pastilhas com explicacao e exemplo
-  6  Autores         4 fichas que viram, com retrato e obra
-  7  Camoes          abas: a vida, a lirica, a epica
-  8  Os Lusiadas     explorador dos 10 cantos
-  9  Religiosidade   balanca entre cristianismo e mitologia
- 10  Curiosidades    sorteio das 5 curiosidades
- 11  Conclusao       quiz de 6 perguntas com placar
+  I     Frontispicio    campo para escrever o nome do(a) professor(a)
+  II    O que foi       4 medalhoes em ouro que trocam o painel
+  III   Contexto        cortina que se arrasta: Renascimento / Idade Media
+  IV    Portugal        contador das 10 silabas do verso decassilabo
+  V     Caracteristicas rosa dos ventos de 10 pontas, com agulha que aponta
+  VI    Autores         carrossel 3D arrastavel com os 4 autores
+  VII   Camoes          fitas marcadoras: a vida, a lirica, a epica
+  VIII  Os Lusiadas     astrolabio giratorio com os 10 cantos
+  IX    Religiosidade   balanca de ouro que inclina de verdade
+  X     Curiosidades    carta lacrada: o selo se rompe e revela
+  XI    Conclusao       quiz de 6 perguntas com placar
+
+Itens em 3D e movimento: esfera armilar (folios I e IV), rosa dos ventos com
+agulha, astrolabio, carrossel em perspectiva, balanca articulada, selo de
+lacre, linhas de rumo da carta, mare de tinta e po de ouro.
 
 -------------------------------------------------------------------------------
 ONDE ISSO FICA PUBLICADO

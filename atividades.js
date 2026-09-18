@@ -9,24 +9,27 @@ window.ACERVO_CK = [
     data: "2026-09-25",
     turma: "2º C — M-Tec Informática para Internet",
     resumo:
-      "Apresentação de onze slides sobre o Classicismo: o que foi o movimento, o contexto " +
-      "histórico, o início em Portugal com Sá de Miranda em 1527, as dez características, os " +
-      "quatro autores centrais, Camões, Os Lusíadas, a mistura entre cristianismo e mitologia, " +
-      "curiosidades e conclusão. Cada slide tem uma interação própria — fichas que viram, linha " +
-      "do tempo, contador das dez sílabas do decassílabo, explorador dos dez cantos, balança da " +
-      "religiosidade, sorteio de curiosidades e um quiz de seis perguntas. Arquivo único, com " +
-      "as imagens embutidas: abre offline, em qualquer navegador.",
+      "Onze fólios sobre o Classicismo, montados como uma carta náutica do século XVI: velino, " +
+      "tinta ferro-gálica, ouro e lacre, com as páginas virando como as de um livro. O conteúdo " +
+      "vai do que foi o movimento ao início em Portugal com Sá de Miranda em 1527, passando pelas " +
+      "dez características, pelos quatro autores centrais, por Camões, por Os Lusíadas e pela " +
+      "mistura entre cristianismo e mitologia. Cada fólio tem um instrumento próprio: esfera " +
+      "armilar, rosa dos ventos de dez pontas com agulha, astrolábio giratório dos dez cantos, " +
+      "carrossel 3D dos autores, cortina que se arrasta entre a Idade Média e o Renascimento, " +
+      "balança que inclina, carta lacrada e um quiz de seis perguntas. Arquivo único, com as " +
+      "imagens embutidas: abre offline, em qualquer navegador, a 60 quadros por segundo.",
     destaques: [
-      "11 slides · 6 integrantes",
-      "10 interações diferentes",
-      "Quiz de 6 perguntas",
-      "Os 10 cantos de Os Lusíadas",
-      "Contador do verso decassílabo",
-      "Funciona offline",
+      "11 fólios · 6 integrantes",
+      "11 interações diferentes",
+      "Esfera armilar e astrolábio",
+      "Rosa dos ventos de 10 pontas",
+      "Carrossel 3D arrastável",
+      "60 fps · funciona offline",
     ],
     tags: [
       "Seminário", "Literatura", "Classicismo", "Renascimento", "Camões",
-      "Os Lusíadas", "HTML", "JavaScript", "3D", "Interativo", "Apresentação",
+      "Os Lusíadas", "Carta náutica", "HTML", "JavaScript", "3D", "Interativo",
+      "Apresentação",
     ],
     cor: "#b3862a",
     href: "atividades/classicismo/apresentacao-classicismo.html",
@@ -34,13 +37,13 @@ window.ACERVO_CK = [
       {
         rotulo: "Abrir apresentação",
         href: "atividades/classicismo/apresentacao-classicismo.html",
-        tipo: "11 slides interativos",
+        tipo: "11 fólios interativos",
         icone: "slides",
       },
       {
         rotulo: "Roteiro da equipe",
         href: "atividades/classicismo/ROTEIRO-APRESENTACAO.md",
-        tipo: "Divisão das falas entre os 6 integrantes",
+        tipo: "Divisão dos fólios entre os 6 integrantes",
         icone: "doc",
         baixar: true,
       },
