@@ -24,6 +24,10 @@ ouro e lacre. As onze telas são chamadas de **fólios**, e cada uma vira como p
 > **Importante:** clicar em qualquer peça interativa (medalhões, rosa dos ventos, astrolábio,
 > carrossel, balança, lacre, quiz) **não** avança o fólio. Pode clicar e arrastar à vontade.
 
+**No celular** a página se reorganiza sozinha: cada fólio vira uma coluna que rola, com o texto
+em tamanho de leitura e os botões fixos no rodapé. Serve para estudar a matéria no ônibus —
+para apresentar, use o computador da sala em tela cheia.
+
 Antes de começar, preencha o nome do(a) professor(a) no fólio I: clique na linha pontilhada e
 digite. O nome fica salvo no navegador.
 
