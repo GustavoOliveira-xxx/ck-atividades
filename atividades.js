@@ -16,14 +16,18 @@ window.ACERVO_CK = [
       "mistura entre cristianismo e mitologia. Cada fólio tem um instrumento próprio: esfera " +
       "armilar, rosa dos ventos de dez pontas com agulha, astrolábio giratório dos dez cantos, " +
       "carrossel 3D dos autores, cortina que se arrasta entre a Idade Média e o Renascimento, " +
-      "balança que inclina, carta lacrada e um quiz de seis perguntas. Arquivo único, com as " +
-      "imagens embutidas: abre offline, em qualquer navegador, a 60 quadros por segundo.",
+      "balança que inclina, carta lacrada e um quiz de seis perguntas. Oito fólios têm foto de " +
+      "fundo em sépia sobre o velino, que entra derivando a cada virada de página. No celular a " +
+      "apresentação se reorganiza em coluna, com texto em tamanho de leitura. Arquivo único, com " +
+      "as imagens embutidas: abre offline, em qualquer navegador, a 60 quadros por segundo.",
     destaques: [
       "11 fólios · 6 integrantes",
       "11 interações diferentes",
       "Esfera armilar e astrolábio",
       "Rosa dos ventos de 10 pontas",
       "Carrossel 3D arrastável",
+      "Fotos de fundo em sépia",
+      "Lê bem no celular",
       "60 fps · funciona offline",
     ],
     tags: [

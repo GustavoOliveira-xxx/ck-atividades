@@ -43,6 +43,12 @@ Clicar ou arrastar as pecas interativas (medalhoes, rosa dos ventos,
 astrolabio, carrossel, balanca, lacre, quiz) NAO passa o folio. Pode mexer a
 vontade durante a fala.
 
+NO CELULAR
+A mesma pagina se reorganiza sozinha: o folio vira uma coluna que rola, com
+texto em tamanho de leitura, e os botoes de navegacao ficam fixos no rodape.
+Para trocar de folio, use as setas do rodape ou deslize o dedo na horizontal
+(o deslize vertical rola a pagina).
+
 -------------------------------------------------------------------------------
 AS INTERACOES, FOLIO A FOLIO
 -------------------------------------------------------------------------------
@@ -62,6 +68,10 @@ AS INTERACOES, FOLIO A FOLIO
 Itens em 3D e movimento: esfera armilar (folios I e IV), rosa dos ventos com
 agulha, astrolabio, carrossel em perspectiva, balanca articulada, selo de
 lacre, linhas de rumo da carta, mare de tinta e po de ouro.
+
+Oito folios tem foto de fundo, em tom sepia sobre o velino: colunas gregas,
+afresco renascentista, mapa das navegacoes e Mosteiro dos Jeronimos. A foto
+entra derivando quando o folio aparece e depois assenta.
 
 -------------------------------------------------------------------------------
 ONDE ISSO FICA PUBLICADO
