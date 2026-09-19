@@ -16,15 +16,16 @@ window.ACERVO_CK = [
       "mistura entre cristianismo e mitologia e pelas curiosidades. Tudo fica à vista no fólio: " +
       "quem apresenta fala, não clica. O movimento está na decoração — esfera armilar girando, " +
       "rosa dos ventos, astrolábio dos dez cantos, balança que oscila, caravela cruzando a maré, " +
-      "pó de ouro e fotos de fundo em sépia que entram derivando a cada virada. No celular a " +
-      "apresentação se reorganiza em coluna, com texto em tamanho de leitura. Arquivo único, com " +
-      "as imagens embutidas: abre offline, em qualquer navegador, a 60 quadros por segundo.",
+      "pó de ouro e fotos de fundo em sépia que entram derivando a cada virada. A composição é a " +
+      "mesma em toda tela: no celular em pé a carta gira um quarto de volta e ocupa o aparelho " +
+      "inteiro, sem reorganizar nada. Arquivo único, com as imagens embutidas: abre offline, em " +
+      "qualquer navegador, a 60 quadros por segundo.",
     destaques: [
       "11 fólios · 6 integrantes",
       "Conteúdo todo à vista",
       "Esfera armilar e astrolábio",
-      "Fotos de fundo em sépia",
-      "Lê bem no celular",
+      "Retratos dos quatro autores",
+      "Mesma carta no PC e no celular",
       "60 fps · funciona offline",
     ],
     tags: [
