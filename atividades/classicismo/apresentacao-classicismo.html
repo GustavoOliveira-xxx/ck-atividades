@@ -246,151 +246,6 @@ h1 .cap{font-size:1.24em;color:var(--ouro);text-shadow:0 2px 0 rgba(255,255,255,
 .ix{cursor:pointer;-webkit-user-select:none;user-select:none}
 .ix:focus-visible{outline:3px solid var(--lacre);outline-offset:3px}
 
-/* medalhão circular (slide 2) */
-.medalhao{
-  width:100%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;
-  padding:16px;position:relative;
-  background:radial-gradient(70% 70% at 36% 28%,#fffaec,#e7d5ad 62%,#cfb684);
-  border:2px solid rgba(168,121,28,.6);
-  box-shadow:0 12px 24px rgba(60,44,20,.22),inset 0 0 0 6px rgba(255,255,255,.34),
-             inset 0 0 0 7px rgba(168,121,28,.28);
-  transition:transform .32s ease,box-shadow .32s ease;will-change:transform;
-}
-.medalhao:hover{transform:translate3d(0,-6px,0) scale(1.03)}
-.medalhao.on{background:radial-gradient(70% 70% at 36% 28%,#3a4a72,#1e2a44 64%,#121a2c);
-  border-color:var(--ouro-2);transform:translate3d(0,-6px,0) scale(1.05);
-  box-shadow:0 22px 42px rgba(20,28,46,.4),inset 0 0 0 6px rgba(255,255,255,.1),inset 0 0 0 7px rgba(214,170,70,.5)}
-.medalhao svg{width:40px;height:40px;fill:var(--ouro);transition:fill .3s}
-.medalhao.on svg{fill:var(--ouro-3)}
-.medalhao b{display:block;margin-top:8px;font:700 15.4px/1.22 var(--serif);color:var(--tinta);letter-spacing:.02em}
-.medalhao.on b{color:#f5ead0}
-.medalhao i{display:block;margin-top:4px;font:600 10px/1.25 var(--ui);letter-spacing:.17em;
-  text-transform:uppercase;color:var(--tinta-3);font-style:normal}
-.medalhao.on i{color:var(--ouro-2)}
-
-/* cortina arrastável (slide 3) */
-.cortina{position:relative;overflow:hidden;border:1px solid var(--linha);
-  box-shadow:0 16px 30px rgba(60,44,20,.22);touch-action:none}
-.cortina .lado{position:absolute;inset:0;padding:20px 24px}
-.cortina .depois{background:linear-gradient(160deg,#f7efdb,#e6d5b0)}
-.cortina .antes{background:linear-gradient(160deg,#2b2436,#171320);color:#e6dcc6;
-  clip-path:inset(0 0 0 var(--corte,50%))}
-.cortina h4{font:700 19px/1.2 var(--serif);margin-bottom:8px;letter-spacing:.02em}
-.cortina .depois h4{color:var(--lacre)}
-.cortina .antes h4{color:var(--ouro-3)}
-.cortina p{font:400 16.8px/1.48 var(--serif)}
-.cortina .depois p{color:var(--tinta-2)}
-.cortina .antes p{color:#cdc2a8}
-.cortina .marca-lado{position:absolute;bottom:12px;font:600 10.5px/1 var(--ui);
-  letter-spacing:.2em;text-transform:uppercase}
-.cortina .depois .marca-lado{left:24px;color:var(--tinta-3)}
-.cortina .antes .marca-lado{right:24px;color:#9c917a}
-.cortina .pega{position:absolute;top:0;bottom:0;left:var(--corte,50%);width:3px;z-index:4;
-  background:linear-gradient(180deg,transparent,var(--ouro-2) 12%,var(--ouro-2) 88%,transparent);
-  cursor:ew-resize}
-.cortina .pega::after{content:"⇄";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
-  background:radial-gradient(60% 60% at 36% 28%,#f6e3b0,#c79a34 58%,#8a6318);
-  border:2px solid rgba(255,255,255,.55);box-shadow:0 8px 18px rgba(60,44,20,.4);
-  font:700 19px/1 var(--ui);color:#3a2a06}
-
-/* rosa dos ventos de 10 pontas (slide 5) */
-.rosa{position:relative;width:560px;height:560px;flex:none}
-.rosa .disco{position:absolute;inset:84px;border-radius:50%;
-  background:radial-gradient(60% 60% at 40% 32%,#fffaec,#ecdcb8 58%,#d3bb90);
-  border:2px solid rgba(168,121,28,.55);
-  box-shadow:0 18px 34px rgba(60,44,20,.24),inset 0 0 0 10px rgba(255,255,255,.28),
-             inset 0 0 0 11px rgba(168,121,28,.22)}
-.rosa .agulha{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;
-  transition:transform .55s cubic-bezier(.3,1.2,.4,1)}
-.rosa .agulha svg{width:100%;height:100%}
-.rosa .ponta{
-  position:absolute;left:50%;top:50%;width:150px;margin-left:-75px;margin-top:-15px;
-  transform-origin:75px 15px;
-}
-.rosa .ponta span{
-  display:block;padding:7px 10px;text-align:center;
-  font:700 12.6px/1.2 var(--ui);letter-spacing:.02em;color:var(--tinta-2);
-  background:linear-gradient(160deg,rgba(255,252,243,.96),rgba(233,217,184,.9));
-  border:1px solid var(--linha);cursor:pointer;
-  transition:background .25s,color .25s,border-color .25s,transform .25s;
-}
-.rosa .ponta span:hover{border-color:var(--ouro);transform:scale(1.06)}
-.rosa .ponta.on span{background:linear-gradient(160deg,#b8433a,#7e1f1e);color:#fdf1e2;
-  border-color:#5e1513;transform:scale(1.1);box-shadow:0 8px 18px rgba(110,25,22,.36)}
-
-/* carrossel 3D dos autores (slide 6) */
-.carrossel{position:relative;height:430px;perspective:1400px;touch-action:none}
-.anel{position:absolute;left:50%;top:0;width:306px;height:100%;margin-left:-153px;
-  transform-style:preserve-3d}
-.carta-a{
-  position:absolute;inset:0;overflow:hidden;will-change:transform;
-  transition:transform .5s cubic-bezier(.26,.9,.3,1),opacity .5s ease;
-  background:linear-gradient(170deg,#fffaec,#e6d5b0);
-  border:1px solid var(--linha);
-  box-shadow:0 22px 44px rgba(60,44,20,.3),inset 0 0 0 5px rgba(255,255,255,.34),
-             inset 0 0 0 6px rgba(168,121,28,.28);
-}
-.carta-a.solto{transition:none}
-.carta-a img{width:100%;height:224px;object-fit:cover;filter:sepia(.18) contrast(1.04)}
-.carta-a .semfoto{height:224px;display:grid;place-items:center;
-  background:radial-gradient(70% 70% at 50% 34%,#f6eedb,#d9c79d)}
-.carta-a .semfoto svg{width:88px;height:88px;fill:rgba(142,35,34,.7)}
-.carta-a .txt{padding:13px 17px}
-.carta-a .txt > b{display:block;font:700 20px/1.18 var(--serif);color:var(--tinta)}
-.carta-a .txt > i{display:block;margin-top:4px;font:600 10.6px/1.3 var(--ui);letter-spacing:.17em;
-  text-transform:uppercase;color:var(--lacre);font-style:normal}
-.carta-a .txt p{margin-top:7px;font:400 15.6px/1.42 var(--serif);color:var(--tinta-2)}
-.carta-a .txt p b{font-weight:700;color:var(--tinta)}
-.carta-a .txt > s{display:block;margin-top:7px;text-decoration:none;font:italic 400 15px/1.4 var(--serif);color:var(--tinta-3)}
-
-/* fitas marcadoras (slide 7) */
-.fitas{display:flex;gap:0}
-.fita{
-  position:relative;padding:12px 22px 14px;border:1px solid var(--linha);border-bottom:0;
-  background:linear-gradient(180deg,rgba(255,252,243,.92),rgba(226,211,178,.86));
-  font:700 16px/1 var(--serif);color:var(--tinta-2);cursor:pointer;
-  transition:background .25s,color .25s,transform .25s;
-}
-.fita+.fita{margin-left:-1px}
-.fita:hover{transform:translate3d(0,-3px,0)}
-.fita.on{background:linear-gradient(180deg,#2c3a5e,#1e2a44);color:var(--ouro-3);
-  border-color:rgba(168,121,28,.6);transform:translate3d(0,-4px,0)}
-.fita.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:#1e2a44}
-
-/* astrolábio dos cantos (slide 8) */
-.astro{position:relative;width:404px;height:404px;flex:none;touch-action:none}
-.astro .aro{position:absolute;inset:0;border-radius:50%;
-  background:radial-gradient(58% 58% at 38% 30%,#fdf4de,#e3d0a6 56%,#c9ad7c);
-  border:3px solid rgba(168,121,28,.7);
-  box-shadow:0 20px 38px rgba(60,44,20,.28),inset 0 0 0 9px rgba(255,255,255,.26),
-             inset 0 0 0 10px rgba(168,121,28,.26);cursor:grab}
-.astro .aro:active{cursor:grabbing}
-.astro .roda{position:absolute;inset:0}
-.astro .canto{
-  position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;
-  transform-origin:29px 29px;
-}
-.astro .canto b{
-  display:grid;place-items:center;width:58px;height:58px;border-radius:50%;
-  font:700 19px/1 var(--serif);color:var(--tinta-2);
-  background:linear-gradient(160deg,rgba(255,252,243,.96),rgba(228,214,182,.92));
-  border:1px solid var(--linha);cursor:pointer;transition:background .25s,color .25s,transform .25s;
-}
-.astro .canto b:hover{border-color:var(--ouro);transform:scale(1.1)}
-.astro .canto.on b{background:linear-gradient(160deg,#b8433a,#7e1f1e);color:var(--ouro-3);
-  border-color:#5e1513;box-shadow:0 8px 16px rgba(110,25,22,.4)}
-.astro .miolo{position:absolute;left:50%;top:50%;width:146px;height:146px;margin:-73px 0 0 -73px;
-  border-radius:50%;display:grid;place-items:center;text-align:center;
-  background:radial-gradient(60% 60% at 38% 30%,#2f3d63,#161f34);
-  border:2px solid rgba(168,121,28,.6);box-shadow:0 8px 18px rgba(20,28,46,.4)}
-.astro .miolo u{display:block;text-decoration:none;font:700 38px/1 var(--serif);color:var(--ouro-3)}
-.astro .miolo small{display:block;margin-top:3px;font:600 9.5px/1.2 var(--ui);letter-spacing:.18em;
-  text-transform:uppercase;color:#98a2bb}
-.astro .seta{position:absolute;left:50%;top:-13px;margin-left:-11px;width:22px;height:22px;z-index:3;
-  background:var(--lacre);clip-path:polygon(50% 100%,0 0,100% 0);
-  filter:drop-shadow(0 3px 4px rgba(60,20,18,.5))}
-
 /* balança que inclina de verdade (slide 9) */
 .balanca{position:relative;height:168px;width:300px;margin:0 auto}
 .balanca .pe{position:absolute;left:50%;bottom:0;width:132px;height:13px;margin-left:-66px;
@@ -435,46 +290,158 @@ h1 .cap{font-size:1.24em;color:var(--ouro);text-shadow:0 2px 0 rgba(255,255,255,
 .coluna-fe li::before{content:"❧";position:absolute;left:0;top:-1px;font-size:12px;color:var(--ouro)}
 .coluna-fe li b{color:var(--tinta)}
 
-/* carta lacrada (slide 10) */
-.carta-lacre{position:relative;min-height:302px;padding:26px 32px;overflow:hidden;
-  background:linear-gradient(160deg,#fffaec,#e7d7b2);
-  border:1px solid var(--linha);
-  box-shadow:0 20px 38px rgba(60,44,20,.24),inset 0 0 0 5px rgba(255,255,255,.3),
-             inset 0 0 0 6px rgba(168,121,28,.24)}
-.carta-lacre .dobra{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(30,42,68,.14)}
-.carta-lacre .selo-area{position:absolute;inset:0;display:grid;place-items:center;z-index:3;
-  transition:opacity .45s ease}
-.carta-lacre.aberta .selo-area{opacity:0;pointer-events:none}
-.carta-lacre .selo-area .lacre{transition:transform .5s cubic-bezier(.4,1.4,.5,1)}
-.carta-lacre.aberta .selo-area .lacre{transform:scale(.3) rotate(-38deg)}
-.carta-lacre .conteudo{position:relative;z-index:2;opacity:0;transform:translate3d(0,14px,0);
-  transition:opacity .4s .18s ease,transform .4s .18s ease;text-align:center}
-.carta-lacre.aberta .conteudo{opacity:1;transform:none}
-.carta-lacre .conteudo .n{width:52px;height:52px;margin:0 auto 12px;border-radius:50%;display:grid;
-  place-items:center;font:700 23px/1 var(--serif);color:#fdf2e0;
-  background:linear-gradient(140deg,#b8433a,#7e1f1e)}
-.carta-lacre .conteudo p{font:400 22px/1.5 var(--serif);color:var(--tinta)}
-.carta-lacre .conteudo p b{color:var(--lacre)}
-.carta-lacre .conteudo .nota{margin-top:11px;font:italic 400 17px/1.44 var(--serif);color:var(--tinta-3)}
 
-/* botões de pergaminho */
-.bt{
-  display:inline-flex;align-items:center;gap:9px;padding:11px 19px;cursor:pointer;
-  background:linear-gradient(170deg,rgba(255,252,243,.96),rgba(230,214,180,.92));
-  border:1px solid var(--linha);font:700 15.4px/1 var(--serif);color:var(--tinta-2);
-  transition:transform .25s ease,background .25s,color .25s,border-color .25s;
+/* ---------- emblema circular no alto do cartão ---------- */
+.emb{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;margin:0 auto 11px;
+  background:radial-gradient(70% 70% at 36% 28%,#fffaec,#e7d5ad 62%,#cfb684);
+  border:2px solid rgba(168,121,28,.6);
+  box-shadow:0 10px 20px rgba(60,44,20,.22),inset 0 0 0 5px rgba(255,255,255,.34),
+             inset 0 0 0 6px rgba(168,121,28,.28)}
+.emb svg{width:34px;height:34px;fill:var(--ouro)}
+.emb.lac{background:radial-gradient(70% 70% at 36% 28%,#c4463c,#8e2322 62%,#5e1513);
+  border-color:rgba(242,220,158,.55)}
+.emb.lac svg{fill:#f8e6d6}
+.emb.tin{background:radial-gradient(70% 70% at 36% 28%,#3a4a72,#1e2a44 64%,#121a2c);
+  border-color:rgba(214,170,70,.6)}
+.emb.tin svg{fill:var(--ouro-3)}
+.emb.num{font:700 30px/1 var(--serif);color:#fff8ea;
+  background:radial-gradient(70% 70% at 36% 28%,#c4463c,#8e2322 62%,#5e1513)}
+.ficha.centro{text-align:center}
+.ficha.centro h3{justify-content:center;margin-bottom:7px}
+.ficha .sub-t{display:block;margin:-3px 0 8px;font:600 10.5px/1.3 var(--ui);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--lacre)}
+
+/* ---------- comparação lado a lado ---------- */
+.compara{display:grid;gap:11px}
+.compara .lado{padding:14px 18px;border:1px solid var(--linha);position:relative}
+.compara .depois{background:linear-gradient(160deg,rgba(255,250,236,.95),rgba(236,220,184,.9))}
+.compara .antes{background:linear-gradient(160deg,#2b2436,#171320);color:#e6dcc6;
+  border-color:rgba(168,121,28,.4)}
+.compara h4{font:700 17px/1.2 var(--serif);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.compara .depois h4{color:var(--lacre)}
+.compara .antes h4{color:var(--ouro-3)}
+.compara h4 svg{width:20px;height:20px;fill:currentColor}
+.compara p{font:400 16.2px/1.44 var(--serif)}
+.compara .depois p{color:var(--tinta-2)}
+.compara .antes p{color:#cdc2a8}
+.compara .seta-meio{display:grid;place-items:center;height:26px;position:relative}
+.compara .seta-meio::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(168,121,28,.6),transparent)}
+.compara .seta-meio span{position:relative;padding:3px 12px;background:var(--vel);
+  font:700 10px/1 var(--ui);letter-spacing:.24em;text-transform:uppercase;color:var(--tinta-3)}
+
+/* ---------- lista dos cantos ---------- */
+.cantos-lista{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,auto);
+  grid-auto-flow:column;gap:7px 22px;list-style:none}
+.cantos-lista li{display:grid;grid-template-columns:42px 1fr;gap:9px;align-items:baseline;
+  font:400 16.2px/1.4 var(--serif);color:var(--tinta-2);
+  padding-bottom:6px;border-bottom:1px dotted rgba(30,42,68,.2)}
+.cantos-lista li b{font:700 17.4px/1.2 var(--serif);color:var(--lacre);text-align:right}
+
+/* ---------- instrumentos: agora só decoração ---------- */
+.rosa-deco{position:relative;width:100%;aspect-ratio:1;max-width:330px;margin:0 auto}
+.rosa-deco .disco{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(60% 60% at 40% 32%,#fffaec,#ecdcb8 58%,#d3bb90);
+  border:2px solid rgba(168,121,28,.55);
+  box-shadow:0 18px 34px rgba(60,44,20,.24),inset 0 0 0 10px rgba(255,255,255,.28),
+             inset 0 0 0 11px rgba(168,121,28,.22)}
+.rosa-deco .giro{position:absolute;inset:0;animation:girar 120s linear infinite}
+.rosa-deco .agulha{position:absolute;left:50%;top:50%;width:56%;height:56%;
+  margin:-28% 0 0 -28%;animation:aponta 26s ease-in-out infinite}
+@keyframes aponta{
+  0%{transform:rotate(-8deg)}25%{transform:rotate(104deg)}
+  50%{transform:rotate(190deg)}75%{transform:rotate(292deg)}100%{transform:rotate(352deg)}
 }
-.bt svg{width:18px;height:18px;fill:var(--ouro);flex:none;transition:fill .25s}
-.bt:hover{transform:translate3d(0,-3px,0);border-color:var(--ouro)}
-.bt.on,.bt:active{background:linear-gradient(170deg,#2c3a5e,#1e2a44);color:var(--ouro-3);border-color:#1e2a44}
-.bt.on svg{fill:var(--ouro-3)}
-.bt.mini{padding:8px 13px;font-size:14px}
+
+.astro-fixo{position:relative;width:404px;height:404px;flex:none}
+.astro-fixo .aro{position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(58% 58% at 38% 30%,#fdf4de,#e3d0a6 56%,#c9ad7c);
+  border:3px solid rgba(168,121,28,.7);
+  box-shadow:0 20px 38px rgba(60,44,20,.28),inset 0 0 0 9px rgba(255,255,255,.26),
+             inset 0 0 0 10px rgba(168,121,28,.26)}
+.astro-fixo .roda{position:absolute;inset:0;animation:girar 150s linear infinite}
+.astro-fixo .canto{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;
+  transform-origin:27px 27px}
+.astro-fixo .canto span{display:block;width:54px;height:54px}
+.astro-fixo .canto b{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;
+  font:700 18px/1 var(--serif);color:var(--tinta-2);
+  background:linear-gradient(160deg,rgba(255,252,243,.96),rgba(228,214,182,.92));
+  border:1px solid var(--linha)}
+.slide.on .astro-fixo .canto b{animation:girar-inv 150s linear infinite}
+@keyframes girar-inv{to{transform:rotate(-360deg)}}
+.astro-fixo .miolo{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;
+  border-radius:50%;display:grid;place-items:center;text-align:center;
+  background:radial-gradient(60% 60% at 38% 30%,#2f3d63,#161f34);
+  border:2px solid rgba(168,121,28,.6);box-shadow:0 8px 18px rgba(20,28,46,.4)}
+.astro-fixo .miolo u{display:block;text-decoration:none;font:700 34px/1.05 var(--serif);color:var(--ouro-3)}
+.astro-fixo .miolo small{display:block;margin-top:4px;font:600 9.5px/1.3 var(--ui);letter-spacing:.16em;
+  text-transform:uppercase;color:#98a2bb}
+
+/* ---------- cartão de autor ---------- */
+.autor{position:relative;overflow:hidden;background:linear-gradient(170deg,#fffaec,#e9d9b6);
+  border:1px solid var(--linha);
+  box-shadow:0 16px 30px rgba(60,44,20,.24),inset 0 0 0 5px rgba(255,255,255,.3),
+             inset 0 0 0 6px rgba(168,121,28,.24);
+  transition:transform .35s ease;will-change:transform}
+.autor:hover{transform:translate3d(0,-5px,0)}
+.autor .alto{position:relative;height:214px;overflow:hidden}
+.autor .alto img{position:absolute;left:-7%;top:-7%;width:114%;height:114%;object-fit:cover}
+.slide.on .autor .alto img{animation:respira-foto 30s ease-in-out infinite alternate}
+.autor .semfoto{height:214px;display:grid;place-items:center;
+  background:radial-gradient(70% 70% at 50% 34%,#f6eedb,#d9c79d)}
+.autor .semfoto svg{width:84px;height:84px;fill:rgba(142,35,34,.7)}
+.autor .txt{padding:13px 17px 15px}
+.autor .txt > b{display:block;font:700 20px/1.18 var(--serif);color:var(--tinta)}
+.autor .txt > i{display:block;margin-top:4px;font:600 10.6px/1.3 var(--ui);letter-spacing:.17em;
+  text-transform:uppercase;color:var(--lacre);font-style:normal}
+.autor .txt > s{display:block;margin-top:4px;text-decoration:none;font:italic 400 14.6px/1.4 var(--serif);
+  color:var(--tinta-3)}
+.autor .txt p{margin-top:8px;font:400 16px/1.44 var(--serif);color:var(--tinta-2)}
+.autor .txt p b{color:var(--tinta)}
+
+/* ---------- balança: oscila devagar, como decoração ---------- */
+.slide.on .balanca .viga{animation:oscila 11s ease-in-out infinite}
+.slide.on .balanca .prato,.slide.on .balanca .carga{animation:oscila-inv 11s ease-in-out infinite}
+@keyframes oscila{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes oscila-inv{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
+
+/* ---------- caravela cruzando a maré ---------- */
+.nau-passeio{position:absolute;bottom:92px;left:0;width:56px;height:56px;z-index:1;opacity:.42;
+  pointer-events:none}
+.nau-passeio svg{width:100%;height:100%;fill:var(--lacre)}
+.slide.on .nau-passeio{animation:navega 78s linear infinite}
+@keyframes navega{
+  from{transform:translate3d(-90px,0,0) rotate(-3deg)}
+  50%{transform:translate3d(800px,-6px,0) rotate(3deg)}
+  to{transform:translate3d(1690px,0,0) rotate(-3deg)}
+}
+
+/* ---------- selo que carimba na entrada ---------- */
+.slide.on .lacre{animation:carimba 1.1s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes carimba{
+  from{opacity:0;transform:scale(1.9) rotate(-16deg)}
+  60%{opacity:1}
+  to{opacity:1;transform:scale(1) rotate(0)}
+}
+
+/* selo de tema — etiqueta, não botão */
+.selo-tema{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;
+  background:linear-gradient(170deg,rgba(255,252,243,.94),rgba(232,218,186,.9));
+  border:1px solid var(--linha);font:700 15px/1 var(--serif);color:var(--tinta-2);
+  box-shadow:0 6px 14px rgba(60,44,20,.14)}
+.selo-tema svg{width:18px;height:18px;fill:var(--ouro);flex:none}
 
 /* verso decassílabo */
 .verso{display:flex;flex-wrap:wrap;gap:3px;align-items:baseline;
   font:italic 400 27px/1.62 var(--serif);color:#f3e7cd}
-.verso s{text-decoration:none;position:relative;padding:2px 3px;transition:background .25s,color .25s}
-.verso s.mar{background:linear-gradient(180deg,rgba(214,170,70,.4),rgba(168,121,28,.22));
+.verso s{text-decoration:none;position:relative;padding:2px 3px;
+  background:linear-gradient(180deg,rgba(214,170,70,.4),rgba(168,121,28,.22));
+  box-shadow:inset 0 -2px 0 var(--ouro-2);color:#fff}
+.verso s::after{content:attr(data-n);position:absolute;left:50%;top:-17px;transform:translateX(-50%);
+  font:700 10.5px/1 var(--ui);color:var(--ouro-3);font-style:normal}
+.verso s.fim{background:none;box-shadow:none;color:#cdbb95}
+.verso s.fim::after{content:""}
+.verso s.velha{background:linear-gradient(180deg,rgba(214,170,70,.4),rgba(168,121,28,.22));
   box-shadow:inset 0 -2px 0 var(--ouro-2);color:#fff}
 .verso s.mar::after{content:attr(data-n);position:absolute;left:50%;top:-17px;transform:translateX(-50%);
   font:700 10.5px/1 var(--ui);color:var(--ouro-3);font-style:normal}
@@ -645,28 +612,6 @@ img{-webkit-user-drag:none;user-select:none}
 .sumario li i{flex:1;border-bottom:1.5px dotted rgba(30,42,68,.35);margin:0 4px}
 .sumario li u{text-decoration:none;font:600 11px/1 var(--ui);letter-spacing:.14em;color:var(--tinta-3)}
 
-/* quiz */
-.quiz .perg{font:700 19.6px/1.36 var(--serif);color:#fdf3e2;margin-bottom:12px;min-height:54px}
-.quiz .perg s{text-decoration:none;display:block;margin-bottom:6px;color:var(--ouro-3);
-  font:700 11.5px/1 var(--ui);letter-spacing:.22em;text-transform:uppercase}
-.quiz .ops{display:grid;gap:7px}
-.quiz .op{padding:11px 15px;cursor:pointer;text-align:left;
-  font:400 16.6px/1.34 var(--serif);color:#e8dcc2;
-  background:rgba(255,248,234,.07);border:1px solid rgba(168,121,28,.32);
-  transition:background .2s,border-color .2s,transform .2s}
-.quiz .op:hover{background:rgba(255,248,234,.16);border-color:var(--ouro-2);transform:translate3d(5px,0,0)}
-.quiz .op.certa{background:linear-gradient(90deg,rgba(39,94,66,.8),rgba(39,94,66,.3));
-  border-color:#5cbd8b;color:#e8fff2}
-.quiz .op.errada{background:linear-gradient(90deg,rgba(142,35,34,.8),rgba(142,35,34,.3));
-  border-color:#d9736c;color:#ffeceb}
-.quiz .placar{margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;
-  font:600 11.5px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:#a9b2c6}
-.quiz .placar u{text-decoration:none;color:var(--ouro-3);font:700 21px/1 var(--serif)}
-.quiz .refazer{padding:8px 14px;cursor:pointer;border:1px solid rgba(168,121,28,.5);
-  background:rgba(255,248,234,.08);color:#ecdfc4;font:700 10.5px/1 var(--ui);letter-spacing:.16em;
-  text-transform:uppercase;transition:background .2s,color .2s}
-.quiz .refazer:hover{background:var(--ouro);color:#20170a}
-
 /* medidor de quadros (?fps) */
 #fps{position:fixed;right:12px;top:12px;z-index:90;font:600 12px/1.4 Consolas,monospace;
   background:rgba(16,22,36,.86);color:#8ef0b0;padding:7px 11px;display:none}
@@ -731,9 +676,8 @@ body.leve .astro-deco{animation:none}
   .cifra u{font-size:30px}
   .cifra small{font-size:10.5px}
   .legenda{font-size:11px;letter-spacing:.12em}
+  .selo-tema{font-size:13.4px;padding:7px 11px}
   .verso{font-size:20px;line-height:1.75}
-  .quiz .perg{font-size:17.4px;min-height:auto}
-  .quiz .op{font-size:15.6px;padding:10px 13px}
 
   /* capa */
   .capa{padding:18px 16px 30px}
@@ -752,31 +696,27 @@ body.leve .astro-deco{animation:none}
   /* a rosa e o astrolábio encolhem de verdade (largura e raio), em vez de
      serem só reduzidos por transform — senão continuavam ocupando 560 px de
      leiaute e empurravam a página inteira para fora da tela */
-  .rosa{width:min(92vw,338px);height:min(92vw,338px);--rr:114px;margin:0 auto;display:block}
-  .rosa .disco{inset:48px}
-  .rosa .agulha{width:96px;height:96px;margin:-48px 0 0 -48px}
-  .rosa .ponta{width:122px;margin-left:-61px;transform-origin:61px 15px}
-  .rosa .ponta span{font-size:10.6px;padding:5px 7px}
-  .astro{width:min(88vw,324px);height:min(88vw,324px)}
-  .astro .canto{width:46px;height:46px;margin:-23px 0 0 -23px;transform-origin:23px 23px}
-  .astro .canto b{width:46px;height:46px;font-size:15px}
-  .astro .miolo{width:112px;height:112px;margin:-56px 0 0 -56px}
-  .astro .miolo u{font-size:30px}
-  .carrossel{height:376px}
-  .anel{width:min(74vw,282px);margin-left:calc(min(74vw,282px) / -2)}
-  .carta-a img,.carta-a .semfoto{height:186px}
-  .cortina{height:290px}
-  .cortina .lado{padding:15px 17px}
-  .cortina h4{font-size:17px}
-  .cortina p{font-size:15.6px}
+  .rosa-deco{max-width:min(78vw,280px)}
+  .astro-fixo{width:min(84vw,306px);height:min(84vw,306px)}
+  .astro-fixo .canto{width:44px;height:44px;margin:-22px 0 0 -22px;transform-origin:22px 22px}
+  .astro-fixo .canto span,.astro-fixo .canto b{width:44px;height:44px}
+  .astro-fixo .canto b{font-size:14px}
+  .astro-fixo .miolo{width:112px;height:112px;margin:-56px 0 0 -56px}
+  .astro-fixo .miolo u{font-size:25px}
+  .cantos-lista{grid-template-columns:1fr;grid-auto-flow:row;gap:6px}
+  .cantos-lista li{font-size:15.4px}
+  .autor .alto,.autor .semfoto{height:180px}
+  .emb{width:60px;height:60px}
+  .emb svg{width:28px;height:28px}
+  .emb.num{font-size:24px}
+  .nau-passeio{display:none}
+  .compara .lado{padding:12px 15px}
+  .compara h4{font-size:16px}
+  .compara p{font-size:15.4px}
   .balanca{transform:scale(.86);margin-bottom:-14px}
   .retrato{height:220px !important}
-  .fitas{flex-wrap:wrap}
-  .fita{padding:10px 15px;font-size:14.6px}
   .tempo .it{grid-template-columns:76px 1fr;padding:10px 12px;gap:11px}
   .tempo .ano{font-size:24px}
-  .carta-lacre{min-height:268px;padding:20px 18px}
-  .carta-lacre .conteudo p{font-size:18px}
 
   /* fundo fotográfico: mais presente e mais leve de ler */
   .fundo::after{content:"";position:absolute;inset:0;
@@ -809,7 +749,8 @@ body.leve .astro-deco{animation:none}
 }
 
 @media (prefers-reduced-motion: reduce){
-  .mare svg,.astro-deco,.po i,.fundo img,.retrato img,.solta img{animation:none !important}
+  .mare svg,.astro-deco,.po i,.fundo img,.retrato img,.rosa-deco .giro,.rosa-deco .agulha,
+  .astro-fixo .roda,.astro-fixo .canto b,.balanca .viga,.balanca .prato,.balanca .carga,.nau-passeio{animation:none !important}
   .slide.on,.slide.on .rv,.slide.on::before,.titulao{animation-duration:.01ms !important}
   .po{display:none}
 }
@@ -837,7 +778,7 @@ body.leve .astro-deco{animation:none}
         <stop offset="0" stop-color="#f6e3b0"/><stop offset=".6" stop-color="#c79a34"/>
         <stop offset="1" stop-color="#8a6318"/></radialGradient></defs>
     </svg>
-    <div class="po" aria-hidden="true"><i style="left:7%;--h:3px;--d:26s;--a:0s;--t:0.90"></i><i style="left:15%;--h:4px;--d:34s;--a:-6s;--t:0.70"></i><i style="left:23%;--h:2px;--d:22s;--a:-13s;--t:1.00"></i><i style="left:31%;--h:5px;--d:30s;--a:-3s;--t:0.60"></i><i style="left:44%;--h:3px;--d:27s;--a:-18s;--t:0.85"></i><i style="left:52%;--h:4px;--d:36s;--a:-9s;--t:0.75"></i><i style="left:61%;--h:2px;--d:24s;--a:-21s;--t:1.00"></i><i style="left:69%;--h:5px;--d:31s;--a:-15s;--t:0.65"></i><i style="left:78%;--h:3px;--d:28s;--a:-4s;--t:0.90"></i><i style="left:86%;--h:4px;--d:33s;--a:-24s;--t:0.70"></i><i style="left:93%;--h:2px;--d:25s;--a:-11s;--t:1.00"></i><i style="left:38%;--h:4px;--d:29s;--a:-28s;--t:0.80"></i></div>
+    <div class="po" aria-hidden="true"><i style="left:7%;--h:3px;--d:26s;--a:0;--t:0.90"></i><i style="left:15%;--h:4px;--d:34s;--a:-6s;--t:0.70"></i><i style="left:23%;--h:2px;--d:22s;--a:-13s;--t:1.00"></i><i style="left:31%;--h:5px;--d:30s;--a:-3s;--t:0.60"></i><i style="left:44%;--h:3px;--d:27s;--a:-18s;--t:0.85"></i><i style="left:52%;--h:4px;--d:36s;--a:-9s;--t:0.75"></i><i style="left:61%;--h:2px;--d:24s;--a:-21s;--t:1.00"></i><i style="left:69%;--h:5px;--d:31s;--a:-15s;--t:0.65"></i><i style="left:78%;--h:3px;--d:28s;--a:-4s;--t:0.90"></i><i style="left:86%;--h:4px;--d:33s;--a:-24s;--t:0.70"></i><i style="left:93%;--h:2px;--d:25s;--a:-11s;--t:1.00"></i><i style="left:38%;--h:4px;--d:29s;--a:-28s;--t:0.80"></i></div>
   </div>
 
   <div class="borda-carta"></div>
@@ -883,12 +824,12 @@ body.leve .astro-deco{animation:none}
     <symbol id="i-gente" viewBox="0 0 100 100"><path d="M50 10a16 16 0 100 32 16 16 0 000-32zM20 92c0-17 13-30 30-30s30 13 30 30z"/></symbol>
     <symbol id="i-fogo" viewBox="0 0 100 100"><path d="M52 4c4 18-8 24-16 34-9 11-12 21-12 28 0 16 12 30 26 30s26-14 26-30c0-14-8-24-16-32 2 10-2 16-6 16-6 0-8-8-4-18 3-9 4-20 2-28z"/></symbol>
     <symbol id="i-compasso" viewBox="0 0 100 100"><path d="M50 6a9 9 0 00-5 17L20 88h11l19-50 19 50h11L55 23A9 9 0 0050 6z"/></symbol>
+    <symbol id="i-igreja" viewBox="0 0 100 100"><path d="M46 4h8v12h10v8H54v14l30 20v34H58V70H42v22H16V58l30-20V24H36v-8h10z"/></symbol>
   </defs></svg>
 
-<!-- ======================= I · CAPA ======================= -->
+<!-- ======================= I · FRONTISPÍCIO ======================= -->
 <section class="slide capa on" data-t="Capa" data-f="Frontispício">
   <div class="fundo direita" aria-hidden="true"><img data-img="fundo-colunas.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
-
 
   <svg class="astro-deco" viewBox="0 0 100 100" aria-hidden="true"
        style="right:120px;top:126px;width:544px;height:544px;opacity:.26">
@@ -936,11 +877,10 @@ body.leve .astro-deco{animation:none}
 
     <p class="legenda rv d5" style="margin-top:16px">
       Professor(a):
-      <b class="ix" id="prof" contenteditable="true" spellcheck="false"
+      <b id="prof" contenteditable="true" spellcheck="false"
          title="Clique para escrever o nome do(a) professor(a)"
          style="border-bottom:2px dotted var(--ouro);padding:0 24px 2px;display:inline-block;
                 min-width:230px;text-transform:none;letter-spacing:.02em;font-size:14.5px;color:var(--tinta)"></b>
-      <span style="text-transform:none;letter-spacing:0;font-style:italic;opacity:.75">— clique para preencher</span>
     </p>
   </div>
 
@@ -950,16 +890,13 @@ body.leve .astro-deco{animation:none}
 <!-- ======================= II · O QUE FOI ======================= -->
 <section class="slide" data-t="O que foi o Classicismo" data-f="O movimento">
   <div class="fundo direita" aria-hidden="true"><img data-img="fundo-renascimento.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
-  <div class="solta par b2" data-dep="16" style="right:36px;bottom:74px;width:224px;z-index:0;opacity:.5">
-    <img class="marmo" data-img="augusto-prima-estatua.png" alt=""
-         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-  </div>
+  <span class="nau-passeio" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#i-caravela"/></svg></span>
 
   <div class="folio-topo rv d1"><b>Fólio II</b><span>definição do movimento</span><i></i></div>
   <h1 class="rv d1">O que foi o <em>Classicismo</em>?</h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <p class="corpo rv d2" style="max-width:1090px">
+  <p class="corpo rv d2" style="max-width:1180px">
     <span class="capitular">O</span>
     Classicismo foi um <b>movimento artístico e literário</b> que surgiu na Europa durante o
     <b>Renascimento</b>, principalmente no <b>século XVI</b>. Seu objetivo era recuperar os valores e
@@ -967,35 +904,47 @@ body.leve .astro-deco{animation:none}
     mudou a forma de enxergar o mundo, dando maior destaque ao <b>ser humano</b> e à <b>razão</b>.
   </p>
 
-  <div class="grade g4 rv d3" id="medalhoes" style="margin-top:16px;max-width:1160px;gap:24px;clear:both">
-    <button class="medalhao ix on" data-med="0">
-      <span><svg><use href="#i-sol"/></svg><b>Renascimento</b><i>onde nasceu</i></span>
-    </button>
-    <button class="medalhao ix" data-med="1">
-      <span><svg><use href="#i-coluna"/></svg><b>Voltar aos clássicos</b><i>o objetivo</i></span>
-    </button>
-    <button class="medalhao ix" data-med="2">
-      <span><svg><use href="#i-balanca"/></svg><b>Equilíbrio e razão</b><i>os valores</i></span>
-    </button>
-    <button class="medalhao ix" data-med="3">
-      <span><svg><use href="#i-gente"/></svg><b>O humano no centro</b><i>a virada</i></span>
-    </button>
+  <div class="grade g4 rv d3" style="margin-top:18px;gap:18px;clear:both">
+    <div class="ficha centro">
+      <span class="emb"><svg><use href="#i-sol"/></svg></span>
+      <h3>Renascimento</h3><span class="sub-t">onde nasceu</span>
+      <p>Nasceu na <b>Itália</b> e se espalhou pela Europa no século XVI. O Renascimento tirou a arte
+        do molde medieval; o Classicismo foi a <b>forma literária</b> que essa virada assumiu.</p>
+    </div>
+    <div class="ficha centro">
+      <span class="emb"><svg><use href="#i-coluna"/></svg></span>
+      <h3>Voltar aos clássicos</h3><span class="sub-t">o objetivo</span>
+      <p>Recuperar os modelos da <b>Grécia e de Roma</b>: a mitologia, as formas e os autores tidos
+        como perfeitos — Homero e Virgílio na épica, Horácio e Petrarca na lírica.</p>
+    </div>
+    <div class="ficha centro">
+      <span class="emb"><svg><use href="#i-balanca"/></svg></span>
+      <h3>Equilíbrio e razão</h3><span class="sub-t">os valores</span>
+      <p>Nada de excesso, nada de descontrole na forma: <b>verso medido, estrofe contada,
+        vocabulário escolhido</b>. A emoção existe, mas organizada pela razão.</p>
+    </div>
+    <div class="ficha centro">
+      <span class="emb"><svg><use href="#i-gente"/></svg></span>
+      <h3>O humano no centro</h3><span class="sub-t">a virada</span>
+      <p>É o <b>antropocentrismo</b> substituindo o teocentrismo medieval. Colocar o homem no centro
+        não significou abandonar a fé — é o que mostra o fólio IX.</p>
+    </div>
   </div>
 
-  <div class="tinta-p rv d5" id="p-med" style="margin-top:20px;max-width:1160px;min-height:150px">
-    <h4 id="med-t">Renascimento</h4>
-    <p id="med-p">Nasceu na <b>Itália</b> e se espalhou pela Europa no <b>século XVI</b>, dentro do
-      movimento que reviveu as artes e o pensamento antigos.</p>
-    <p class="nota" id="med-n">O Renascimento tirou a arte do molde medieval; o Classicismo foi a forma
-      literária que essa virada assumiu.</p>
+  <div class="ficha lac rv d5" style="margin-top:18px;max-width:1290px;padding:15px 22px">
+    <h3><svg><use href="#i-livro"/></svg>De onde vem a palavra</h3>
+    <p>Clássico vem do latim <b>classicus</b>: o autor “de primeira classe”, aquele que servia de
+      modelo nas escolas de Roma. Chamar o período de <b>Classicismo</b> é dizer, em uma palavra,
+      que ele escolheu os antigos como régua — e mediu toda a sua produção por ela.</p>
   </div>
 </section>
 
 <!-- ======================= III · CONTEXTO ======================= -->
 <section class="slide" data-t="Contexto histórico" data-f="O mundo em volta">
   <div class="fundo baixo lento" aria-hidden="true"><img data-img="fundo-mapa.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
+
   <svg class="astro-deco inv" viewBox="0 0 100 100" aria-hidden="true"
-       style="left:-120px;bottom:-110px;width:420px;height:420px;opacity:.2">
+       style="left:-130px;bottom:-120px;width:420px;height:420px;opacity:.18">
     <g fill="none" stroke="#8e2322" stroke-width=".6">
       <circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="38"/>
       <path d="M50 1v98M1 50h98M22 22l56 56M78 22 22 78"/>
@@ -1006,14 +955,14 @@ body.leve .astro-deco{animation:none}
   <h1 class="rv d1">Contexto <em>histórico</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <p class="corpo rv d2" style="max-width:1120px">
+  <p class="corpo rv d2" style="max-width:1220px">
     <span class="capitular ouro">S</span>
     eis forças atuaram ao mesmo tempo na Europa das <b>grandes transformações</b> — e todas elas
-    chegaram à literatura. Arraste a alça da direita para comparar o mundo medieval com o que veio depois.
+    chegaram à literatura, mudando o que se escrevia e como se escrevia.
   </p>
 
-  <div class="grade rv d3" style="grid-template-columns:1.38fr 1fr;gap:22px;margin-top:14px;align-items:start;clear:both">
-    <div class="grade g3" style="gap:13px">
+  <div class="grade rv d3" style="grid-template-columns:1.44fr 1fr;gap:24px;margin-top:16px;align-items:start;clear:both">
+    <div class="grade g3" style="gap:14px">
       <div class="ficha"><h3><svg><use href="#i-sol"/></svg>Renascimento</h3>
         <p>Arte, ciência e filosofia voltam a olhar para a Antiguidade — e o movimento cresce por toda a Europa.</p></div>
       <div class="ficha"><h3><svg><use href="#i-compasso"/></svg>Ciência e razão</h3>
@@ -1028,26 +977,19 @@ body.leve .astro-deco{animation:none}
         <p>Textos antigos são recuperados, traduzidos e imitados: nasce o modelo clássico.</p></div>
     </div>
 
-    <div>
-      <div class="cortina ix" id="cortina" style="height:252px">
-        <div class="lado depois">
-          <h4>Renascimento · séc. XVI</h4>
-          <p>O <b>ser humano</b> é a medida: vale investigar, navegar, medir e escrever sobre o amor
-            humano. A fé continua — mas divide o palco com a razão.</p>
-          <span class="marca-lado">depois</span>
-        </div>
-        <div class="lado antes">
-          <h4>Idade Média · antes</h4>
-          <p><b>Deus</b> é a medida de tudo: o mundo se explica pela fé, o saber fica nos mosteiros e a
-            arte serve à Igreja. A pessoa vale pelo lugar que ocupa na ordem divina.</p>
-          <span class="marca-lado">antes</span>
-        </div>
-        <div class="pega" id="pega-cortina" role="slider" tabindex="0"
-             aria-label="Comparar Idade Média e Renascimento" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
+    <div class="compara">
+      <div class="lado antes">
+        <h4><svg><use href="#i-igreja"/></svg>Idade Média · antes</h4>
+        <p><b>Deus</b> é a medida de tudo: o mundo se explica pela fé, o saber fica nos mosteiros e a
+          arte serve à Igreja. A pessoa vale pelo lugar que ocupa na ordem divina.</p>
       </div>
-      <p class="legenda" style="margin-top:12px">Arraste a <b>alça dourada</b> — ou use as setas do teclado com ela em foco.</p>
-
-      <figure class="retrato" style="height:180px;margin-top:14px">
+      <div class="seta-meio"><span>a virada</span></div>
+      <div class="lado depois">
+        <h4><svg><use href="#i-gente"/></svg>Renascimento · séc. XVI</h4>
+        <p>O <b>ser humano</b> é a medida: vale investigar, navegar, medir e escrever sobre o amor
+          humano. A fé continua — mas divide o palco com a razão.</p>
+      </div>
+      <figure class="retrato" style="height:174px;margin-top:3px">
         <img data-img="mapa-grandes-navegacoes.jpg" alt="Mapa das grandes navegações"
              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
         <figcaption>As rotas que mudaram o mundo — e a literatura</figcaption>
@@ -1058,19 +1000,19 @@ body.leve .astro-deco{animation:none}
 
 <!-- ======================= IV · PORTUGAL ======================= -->
 <section class="slide" data-t="O Classicismo em Portugal" data-f="1527">
-
   <div class="folio-topo rv d1"><b>Fólio IV</b><span>a data de fundação</span><i></i></div>
   <h1 class="rv d1">O Classicismo em <em>Portugal</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:250px 1fr;gap:24px;margin-top:6px;align-items:start">
+  <div class="grade rv d2" style="grid-template-columns:252px 1fr;gap:26px;margin-top:6px;align-items:start">
     <div>
-      <figure class="retrato" style="height:306px">
+      <figure class="retrato" style="height:318px">
         <img data-img="sa-de-miranda.jpg" alt="Retrato de Sá de Miranda"
              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
         <figcaption>Sá de Miranda · o introdutor</figcaption>
       </figure>
-      <div class="cifra" style="margin-top:13px;text-align:center"><u>1527</u><small>o ano de partida</small></div>
+      <div class="cifra" style="margin-top:13px;text-align:center">
+        <u data-conta>1527</u><small>o ano de partida</small></div>
     </div>
 
     <div>
@@ -1078,7 +1020,7 @@ body.leve .astro-deco{animation:none}
         Em Portugal, o Classicismo teve início em <b>1527</b>. O marco foi o <b>retorno de Sá de Miranda</b>
         ao país, depois de uma viagem pela Itália: ele trouxe as formas do Renascimento italiano — o
         <b>soneto</b> e o <b>verso decassílabo</b>. O movimento se desenvolveu durante o período das
-        <b>grandes navegações</b>.
+        <b>grandes navegações</b> e terminou com a morte de Camões.
       </p>
 
       <div class="tempo" style="margin-top:14px;max-width:1010px">
@@ -1099,22 +1041,22 @@ body.leve .astro-deco{animation:none}
   </div>
 
   <div class="grade rv d4" style="grid-template-columns:1fr 520px;gap:20px;margin-top:16px;align-items:center">
-    <div class="tinta-p ix" id="p-verso" tabindex="0" role="button" style="padding:15px 22px"
-         aria-label="Contar as sílabas poéticas do verso">
-      <h4 style="margin-bottom:7px">O verso decassílabo — clique para escandir</h4>
-      <div class="verso" id="verso">
+    <div class="tinta-p" style="padding:15px 22px">
+      <h4 style="margin-bottom:9px">O verso decassílabo, escandido</h4>
+      <div class="verso">
         <s data-n="1">A</s><s data-n="2">mor </s><s data-n="3">é </s><s data-n="4">fo</s><s data-n="5">go </s><s data-n="6">que ar</s><s data-n="7">de </s><s data-n="8">sem </s><s data-n="9">se </s><s data-n="10">ver</s>
       </div>
-      <p class="nota" id="verso-leg" style="margin-top:7px">
-        Luís de Camões, no molde que Sá de Miranda trouxe da Itália. Clique para marcar as
-        <b style="color:var(--ouro-3)">dez sílabas poéticas</b>.</p>
+      <p class="nota" style="margin-top:9px">
+        Dez sílabas poéticas — é o <b style="color:var(--ouro-3)">decassílabo</b> que Sá de Miranda
+        trouxe da Itália. Repare em <b style="color:var(--ouro-3)">“que ar”</b>: duas vogais que se
+        juntam numa sílaba só. O verso é de Camões.</p>
     </div>
 
     <div class="grade g4" style="gap:10px">
-      <div class="cifra" style="padding:13px 14px"><u class="o">14</u><small>versos do soneto</small></div>
-      <div class="cifra" style="padding:13px 14px"><u class="o">10</u><small>sílabas por verso</small></div>
-      <div class="cifra" style="padding:13px 14px"><u class="t">4</u><small>estrofes: 2+2</small></div>
-      <div class="cifra" style="padding:13px 14px"><u class="t">53</u><small>anos de movimento</small></div>
+      <div class="cifra" style="padding:13px 14px"><u class="o" data-conta>14</u><small>versos do soneto</small></div>
+      <div class="cifra" style="padding:13px 14px"><u class="o" data-conta>10</u><small>sílabas por verso</small></div>
+      <div class="cifra" style="padding:13px 14px"><u class="t" data-conta>4</u><small>estrofes: 2+2</small></div>
+      <div class="cifra" style="padding:13px 14px"><u class="t" data-conta>53</u><small>anos de movimento</small></div>
     </div>
   </div>
 </section>
@@ -1124,40 +1066,55 @@ body.leve .astro-deco{animation:none}
   <h1 class="rv d1">Principais <em>características</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:576px 1fr;gap:20px;margin-top:-4px;align-items:center">
-    <div class="rosa" id="rosa">
-      <div class="disco"></div>
-      <div class="agulha" id="agulha"><svg viewBox="0 0 100 100"><use href="#i-agulha"/></svg></div>
-      <div class="ponta" data-car="0" style="transform:rotate(0deg) translateY(calc(var(--rr,196px) * -1)) rotate(0deg)"><span class="ix">Razão</span></div>
-      <div class="ponta" data-car="1" style="transform:rotate(36deg) translateY(calc(var(--rr,196px) * -1)) rotate(-36deg)"><span class="ix">Equilíbrio</span></div>
-      <div class="ponta" data-car="2" style="transform:rotate(72deg) translateY(calc(var(--rr,196px) * -1)) rotate(-72deg)"><span class="ix">Perfeição</span></div>
-      <div class="ponta" data-car="3" style="transform:rotate(108deg) translateY(calc(var(--rr,196px) * -1)) rotate(-108deg)"><span class="ix">Greco-romano</span></div>
-      <div class="ponta" data-car="4" style="transform:rotate(144deg) translateY(calc(var(--rr,196px) * -1)) rotate(-144deg)"><span class="ix">Antropocentrismo</span></div>
-      <div class="ponta" data-car="5" style="transform:rotate(180deg) translateY(calc(var(--rr,196px) * -1)) rotate(-180deg)"><span class="ix">Universalismo</span></div>
-      <div class="ponta" data-car="6" style="transform:rotate(216deg) translateY(calc(var(--rr,196px) * -1)) rotate(-216deg)"><span class="ix">Mitologia</span></div>
-      <div class="ponta" data-car="7" style="transform:rotate(252deg) translateY(calc(var(--rr,196px) * -1)) rotate(-252deg)"><span class="ix">Linguagem formal</span></div>
-      <div class="ponta" data-car="8" style="transform:rotate(288deg) translateY(calc(var(--rr,196px) * -1)) rotate(-288deg)"><span class="ix">Beleza</span></div>
-      <div class="ponta" data-car="9" style="transform:rotate(324deg) translateY(calc(var(--rr,196px) * -1)) rotate(-324deg)"><span class="ix">Soneto</span></div>
+  <div class="grade rv d2" style="grid-template-columns:1fr 310px;gap:26px;margin-top:4px;align-items:start">
+    <div>
+      <p class="corpo" style="margin-bottom:14px">
+        São <b>dez marcas</b> que aparecem juntas nos textos do período — a bússola pela qual se
+        reconhece, em poucas linhas, que um texto é classicista.
+      </p>
+
+      <div class="grade g5" style="gap:12px">
+        <div class="ficha"><h3><svg><use href="#i-compasso"/></svg>Razão</h3>
+          <p>A emoção existe, mas quem organiza o poema é a inteligência.</p></div>
+        <div class="ficha"><h3><svg><use href="#i-balanca"/></svg>Equilíbrio</h3>
+          <p>Estrofes simétricas e versos da mesma medida: nada em excesso.</p></div>
+        <div class="ficha"><h3><svg><use href="#i-estrela"/></svg>Perfeição</h3>
+          <p>O texto é reescrito até não sobrar defeito — não se publica rascunho.</p></div>
+        <div class="ficha"><h3><svg><use href="#i-coluna"/></svg>Greco-romano</h3>
+          <p>Formas, personagens e temas vêm da Antiguidade clássica.</p></div>
+        <div class="ficha"><h3><svg><use href="#i-gente"/></svg>Antropocentrismo</h3>
+          <p>O ser humano no centro: seus feitos, seus sentimentos, sua razão.</p></div>
+        <div class="ficha lac"><h3><svg><use href="#i-mapa"/></svg>Universalismo</h3>
+          <p>Vale o que serve a todos, em qualquer época: amor, tempo, glória.</p></div>
+        <div class="ficha lac"><h3><svg><use href="#i-tridente"/></svg>Mitologia</h3>
+          <p>Vénus, Baco e Júpiter como personagens e como símbolos.</p></div>
+        <div class="ficha lac"><h3><svg><use href="#i-pena"/></svg>Linguagem formal</h3>
+          <p>Vocabulário culto e inversões à maneira do latim.</p></div>
+        <div class="ficha lac"><h3><svg><use href="#i-sol"/></svg>Beleza</h3>
+          <p>Beleza como harmonia e medida, no corpo humano e no verso.</p></div>
+        <div class="ficha lac"><h3><svg><use href="#i-lira"/></svg>Soneto</h3>
+          <p>Catorze decassílabos em dois quartetos e dois tercetos.</p></div>
+      </div>
     </div>
 
     <div>
-      <p class="corpo" style="margin-bottom:14px">
-        São <b>dez marcas</b> que aparecem juntas nos textos do período. Gire a rosa dos ventos:
-        clique em qualquer ponta e a agulha aponta para ela.
-      </p>
-
-      <div class="tinta-p" id="p-carac" style="min-height:236px">
-        <h4 id="carac-t">Valorização da razão</h4>
-        <p id="carac-p">A emoção não some, mas passa a ser <b>organizada pela inteligência</b>: o poeta
-          pensa o poema antes de senti-lo. Medida, clareza e controle valem mais do que o impulso.</p>
-        <p class="nota" id="carac-ex">Exemplo: em Camões, até a dor amorosa vira raciocínio —
-          “Amor é fogo que arde sem se ver” abre um soneto inteiro de definições.</p>
+      <div class="rosa-deco" aria-hidden="true">
+        <div class="disco"></div>
+        <div class="giro"><svg viewBox="0 0 100 100" style="position:absolute;inset:0">
+          <g fill="none" stroke="rgba(168,121,28,.55)" stroke-width=".8">
+            <circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="31"/>
+            <path d="M50 4v92M4 50h92M18 18l64 64M82 18 18 82"/>
+          </g>
+          <path d="M50 8 55 45 92 50 55 55 50 92 45 55 8 50 45 45z" fill="rgba(168,121,28,.32)"/>
+        </svg></div>
+        <div class="agulha"><svg viewBox="0 0 100 100"><use href="#i-agulha"/></svg></div>
       </div>
 
-      <div class="grade g3" style="gap:11px;margin-top:14px">
-        <div class="cifra" style="padding:12px 14px"><u class="o"><span id="carac-n">I</span></u><small>ponta em foco</small></div>
-        <div class="cifra" style="padding:12px 14px"><u class="t">10</u><small>marcas do período</small></div>
-        <div class="cifra" style="padding:12px 14px"><u class="t">14</u><small>versos do soneto</small></div>
+      <div class="tinta-p" style="margin-top:16px">
+        <h4>Um exemplo de leitura</h4>
+        <p>“Amor é fogo que arde sem se ver” abre um soneto inteiro de <b>definições</b>: a dor
+          amorosa exposta como raciocínio, dentro de catorze decassílabos.</p>
+        <p class="nota">Razão, equilíbrio e soneto na mesma linha — as três marcas juntas.</p>
       </div>
     </div>
   </div>
@@ -1166,81 +1123,64 @@ body.leve .astro-deco{animation:none}
 <!-- ======================= VI · AUTORES ======================= -->
 <section class="slide" data-t="Principais autores" data-f="Quem escreveu">
   <div class="fundo direita inv" aria-hidden="true"><img data-img="fundo-colunas.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
+
   <div class="folio-topo rv d1"><b>Fólio VI</b><span>quem escreveu o período</span><i></i></div>
   <h1 class="rv d1">Principais <em>autores</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:1fr 470px;gap:30px;margin-top:2px;align-items:start">
-    <div class="carrossel ix" id="carrossel">
-      <div class="anel" id="anel">
-        <article class="carta-a" data-aut="0">
-          <img data-img="retrato-luis-camoes.jpg" alt="Retrato de Luís de Camões"
-               src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="object-position:50% 20%">
-          <div class="txt"><b>Luís de Camões</b><i>o maior representante</i>
-            <p>Lírica e épica. Escreveu <b>Os Lusíadas</b>, ponto mais alto do período.</p>
-            <s>c. 1524 — 1580</s></div>
-        </article>
-        <article class="carta-a" data-aut="1">
-          <img data-img="sa-de-miranda.jpg" alt="Retrato de Sá de Miranda"
-               src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="object-position:50% 16%">
-          <div class="txt"><b>Sá de Miranda</b><i>o introdutor</i>
-            <p>Trouxe da Itália o <b>soneto</b> e o <b>decassílabo</b>, em 1527.</p>
-            <s>c. 1481 — 1558</s></div>
-        </article>
-        <article class="carta-a" data-aut="2">
-          <div class="semfoto"><svg><use href="#i-teatro"/></svg></div>
-          <div class="txt"><b>António Ferreira</b><i>o dramaturgo</i>
-            <p>Autor da tragédia <b>Castro</b>, sobre Inês de Castro, no molde grego.</p>
-            <s>1528 — 1569</s></div>
-        </article>
-        <article class="carta-a" data-aut="3">
-          <div class="semfoto"><svg><use href="#i-livro"/></svg></div>
-          <div class="txt"><b>Bernardim Ribeiro</b><i>a transição</i>
-            <p>Escreveu <b>Menina e Moça</b>, novela de amor e saudade, e éclogas.</p>
-            <s>c. 1482 — 1552</s></div>
-        </article>
-      </div>
-    </div>
+  <p class="corpo rv d2" style="max-width:1200px">
+    O Classicismo português teve <b>quatro nomes centrais</b> — um que introduziu as formas, um que
+    as levou ao ponto mais alto, e dois que abriram caminho no teatro e na novela.
+  </p>
 
-    <div>
-      <p class="corpo" style="font-size:18.6px">
-        O Classicismo português teve <b>quatro nomes centrais</b>. Arraste o carrossel — ou use os
-        botões — para trazer cada autor à frente.
-      </p>
+  <div class="grade g4 rv d3" style="margin-top:16px;gap:17px">
+    <article class="autor">
+      <div class="alto"><img data-img="retrato-luis-camoes.jpg" alt="Retrato de Luís de Camões"
+           src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
+      <div class="txt"><b>Luís de Camões</b><i>o maior representante</i><s>c. 1524 — 1580</s>
+        <p>Escreveu <b>lírica</b> — sonetos, canções e redondilhas — e a <b>épica</b> de
+          <i>Os Lusíadas</i>, de 1572, o ponto mais alto do período.</p></div>
+    </article>
 
-      <div class="tinta-p" id="p-aut" style="margin-top:14px;min-height:214px">
-        <h4 id="aut-t">Luís de Camões</h4>
-        <p id="aut-p">Considerado o <b>maior representante do Classicismo em Portugal</b>. Escreveu
-          lírica — sonetos, canções e redondilhas — e a épica de <i>Os Lusíadas</i>, de 1572.</p>
-        <p class="nota" id="aut-n">Viveu em Lisboa, na Índia e em Macau; perdeu o olho direito em
-          combate, em Ceuta. Morreu pobre, em 1580.</p>
-      </div>
+    <article class="autor">
+      <div class="alto"><img data-img="sa-de-miranda.jpg" alt="Retrato de Sá de Miranda"
+           src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
+      <div class="txt"><b>Sá de Miranda</b><i>o introdutor</i><s>c. 1481 — 1558</s>
+        <p>Trouxe da Itália, em <b>1527</b>, o soneto, o decassílabo, a canção e a écloga. Sem a
+          viagem dele, o movimento começaria bem mais tarde.</p></div>
+    </article>
 
-      <div style="display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap">
-        <button class="bt mini ix" id="aut-ant" aria-label="Autor anterior">◀</button>
-        <button class="bt mini ix" id="aut-pro" aria-label="Próximo autor">▶</button>
-        <span class="legenda" style="margin-left:6px">autor <b id="aut-n-idx">1</b> de 4</span>
-      </div>
-    </div>
+    <article class="autor">
+      <div class="semfoto"><svg><use href="#i-teatro"/></svg></div>
+      <div class="txt"><b>António Ferreira</b><i>o dramaturgo</i><s>1528 — 1569</s>
+        <p>Autor da tragédia <b>Castro</b>, sobre Inês de Castro, no molde grego. Defendia escrever
+          <b>em português</b>, e não em castelhano.</p></div>
+    </article>
+
+    <article class="autor">
+      <div class="semfoto"><svg><use href="#i-livro"/></svg></div>
+      <div class="txt"><b>Bernardim Ribeiro</b><i>a transição</i><s>c. 1482 — 1552</s>
+        <p>Escreveu <b>Menina e Moça</b>, novela de amor e saudade. Está entre o fim da poesia
+          medieval e o começo do gosto clássico.</p></div>
+    </article>
   </div>
 
-  <div class="grade g3 rv d5" style="margin-top:18px;gap:14px">
+  <div class="grade g3 rv d5" style="margin-top:17px;gap:15px">
     <div class="ficha"><h3><svg><use href="#i-lira"/></svg>O soneto</h3>
-      <p>Catorze versos decassílabos, trazidos da Itália por <b>Sá de Miranda</b> e levados ao
-        auge por Camões.</p></div>
+      <p>Catorze versos decassílabos: a forma preferida do período, que nunca mais saiu da poesia
+        em língua portuguesa.</p></div>
     <div class="ficha lac"><h3><svg><use href="#i-teatro"/></svg>A tragédia</h3>
-      <p><b>António Ferreira</b> escreve <i>Castro</i> no molde grego: coro, unidade de ação e
-        desfecho inevitável.</p></div>
+      <p>Coro, unidade de ação e desfecho inevitável — o teatro grego relido em português.</p></div>
     <div class="ficha"><h3><svg><use href="#i-livro"/></svg>A novela</h3>
-      <p><b>Bernardim Ribeiro</b> abre caminho com <i>Menina e Moça</i>, entre a saudade medieval
-        e o gosto novo.</p></div>
+      <p>A prosa sentimental abre espaço para a subjetividade antes da grande epopeia.</p></div>
   </div>
 </section>
 
 <!-- ======================= VII · CAMÕES ======================= -->
 <section class="slide" data-t="Luís de Camões" data-f="O autor central">
   <div class="fundo direita" aria-hidden="true"><img data-img="fundo-mosteiro.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
-  <div class="solta par b2" data-dep="20" style="right:38px;bottom:52px;width:244px;z-index:1;opacity:.95">
+
+  <div class="solta par b2" data-dep="20" style="right:38px;bottom:44px;width:238px;z-index:1;opacity:.95">
     <img class="marmo" data-img="busto-luis.png" alt="Busto de Luís de Camões"
          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
   </div>
@@ -1249,54 +1189,49 @@ body.leve .astro-deco{animation:none}
   <h1 class="rv d1">Luís de <em>Camões</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:252px 1fr 288px;gap:22px;margin-top:2px;align-items:start">
+  <div class="grade rv d2" style="grid-template-columns:246px 1fr;gap:24px;margin-top:4px;align-items:start">
     <div>
-      <figure class="retrato" style="height:344px">
+      <figure class="retrato" style="height:330px">
         <img data-img="retrato-luis-camoes.jpg" alt="Retrato de Luís de Camões"
              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
         <figcaption>Luís Vaz de Camões · c. 1524—1580</figcaption>
       </figure>
-      <div class="cifra" style="margin-top:12px"><u class="o">10 jun</u><small>Dia de Portugal e de Camões</small></div>
+      <div class="grade g2" style="gap:11px;margin-top:12px">
+        <div class="cifra"><u data-conta>1572</u><small>publica Os Lusíadas</small></div>
+        <div class="cifra"><u class="o" data-conta>17</u><small>anos no Oriente</small></div>
+      </div>
     </div>
 
     <div>
-      <div class="fitas" id="cam-fitas">
-        <button class="fita ix on" data-aba="0">A vida</button>
-        <button class="fita ix" data-aba="1">A lírica</button>
-        <button class="fita ix" data-aba="2">A épica</button>
-      </div>
-      <div class="tinta-p" id="p-cam" style="min-height:232px">
-        <h4 id="cam-t">A vida</h4>
-        <p id="cam-p">Luís de Camões foi o <b>principal autor do Classicismo português</b>. Estudou em
-          Coimbra, viveu na corte de Lisboa, serviu como soldado em <b>Ceuta</b> — onde perdeu o olho
-          direito — e passou quase <b>17 anos no Oriente</b>, entre a Índia, Moçambique e Macau.
-          Voltou pobre a Portugal e morreu em 1580.</p>
-      </div>
-
-      <p class="legenda" style="margin-top:15px">Temas que atravessam a obra</p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">
-        <span class="bt mini" style="cursor:default"><svg><use href="#i-fogo"/></svg>Amor</span>
-        <span class="bt mini" style="cursor:default"><svg><use href="#i-gente"/></svg>Conflitos humanos</span>
-        <span class="bt mini" style="cursor:default"><svg><use href="#i-ampulheta"/></svg>Passagem do tempo</span>
-        <span class="bt mini" style="cursor:default"><svg><use href="#i-estrela"/></svg>Destino</span>
-        <span class="bt mini" style="cursor:default"><svg><use href="#i-coroa"/></svg>Feitos portugueses</span>
-        <span class="bt mini" style="cursor:default"><svg><use href="#i-rosa"/></svg>Viagens e descobertas</span>
+      <div class="grade g3" style="gap:15px">
+        <div class="ficha"><h3><svg><use href="#i-gente"/></svg>A vida</h3>
+          <p>Estudou em Coimbra e viveu na corte de Lisboa. Soldado em <b>Ceuta</b>, onde perdeu o
+            olho direito, passou quase <b>17 anos no Oriente</b> — Índia, Moçambique e Macau.
+            Voltou pobre a Portugal e morreu em 1580.</p></div>
+        <div class="ficha lac"><h3><svg><use href="#i-lira"/></svg>A lírica</h3>
+          <p>Sonetos, canções, odes e redondilhas, sobre o amor, o tempo e o <b>desconcerto do
+            mundo</b> — mérito e sorte nunca andam juntos. Reunida em 1595, nas <i>Rimas</i>.</p></div>
+        <div class="ficha"><h3><svg><use href="#i-caravela"/></svg>A épica</h3>
+          <p><b>Os Lusíadas</b>, de 1572: dez cantos e 8.816 versos decassílabos em oitava-rima.
+            Narra a viagem de Vasco da Gama às Índias e, dentro dela, conta a história inteira de
+            Portugal.</p></div>
       </div>
 
-      <div class="ficha" style="margin-top:15px;padding:14px 19px">
-        <p style="font:italic 400 18px/1.48 var(--serif);color:var(--tinta)">
+      <p class="legenda rv d4" style="margin-top:14px">Temas que atravessam a obra</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:7px">
+        <span class="selo-tema"><svg><use href="#i-fogo"/></svg>Amor</span>
+        <span class="selo-tema"><svg><use href="#i-gente"/></svg>Conflitos humanos</span>
+        <span class="selo-tema"><svg><use href="#i-ampulheta"/></svg>Passagem do tempo</span>
+        <span class="selo-tema"><svg><use href="#i-estrela"/></svg>Destino</span>
+        <span class="selo-tema"><svg><use href="#i-coroa"/></svg>Feitos portugueses</span>
+        <span class="selo-tema"><svg><use href="#i-rosa"/></svg>Viagens e descobertas</span>
+      </div>
+
+      <div class="ficha rv d5" style="margin-top:13px;padding:13px 20px;max-width:960px">
+        <p style="font:italic 400 18.4px/1.46 var(--serif);color:var(--tinta)">
           “Mudam-se os tempos, mudam-se as vontades, / muda-se o ser, muda-se a confiança;
           / todo o mundo é composto de mudança, / tomando sempre novas qualidades.”</p>
         <p class="legenda" style="margin-top:7px">Luís de Camões · soneto sobre a passagem do tempo</p>
-      </div>
-    </div>
-
-    <div class="grade" style="gap:11px">
-      <div class="cifra"><u>1572</u><small>publica Os Lusíadas</small></div>
-      <div class="cifra"><u class="o">17</u><small>anos vividos no Oriente</small></div>
-      <div class="ficha lac" style="padding:13px 16px">
-        <h3 style="font-size:15.4px"><svg><use href="#i-livro"/></svg>Obra maior</h3>
-        <p><b>Os Lusíadas</b> — a epopeia que coroa o período e abre o próximo fólio.</p>
       </div>
     </div>
   </div>
@@ -1305,59 +1240,63 @@ body.leve .astro-deco{animation:none}
 <!-- ======================= VIII · OS LUSÍADAS ======================= -->
 <section class="slide" data-t="Os Lusíadas" data-f="A epopeia">
   <div class="fundo baixo" aria-hidden="true"><img data-img="fundo-mapa.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
-
-  <div class="solta par b3" data-dep="18" style="right:34px;top:126px;width:222px;z-index:1">
-    <img data-img="os-lusiadas.png" alt="Edição antiga de Os Lusíadas"
-         src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
-  </div>
+  <span class="nau-passeio" style="bottom:120px;animation-duration:96s" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><use href="#i-caravela"/></svg></span>
 
   <div class="folio-topo rv d1"><b>Fólio VIII</b><span>a epopeia portuguesa</span><i></i></div>
   <h1 class="rv d1">Os <em>Lusíadas</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:424px 1fr;gap:26px;margin-top:2px;align-items:start">
-    <div class="astro ix" id="astro">
-      <div class="seta"></div>
-      <div class="aro"></div>
-      <div class="roda" id="roda"></div>
-      <div class="miolo"><u id="canto-num">I</u><small>canto</small></div>
+  <div class="grade rv d2" style="grid-template-columns:376px 1fr;gap:26px;margin-top:2px;align-items:start">
+    <div>
+      <div class="astro-fixo" style="width:376px;height:376px" aria-hidden="true">
+        <div class="aro"></div>
+        <div class="roda" id="roda"></div>
+        <div class="miolo"><u>X</u><small>cantos</small></div>
+      </div>
+      <div class="ficha" style="margin-top:14px;padding:13px 18px">
+        <p style="font:italic 400 17.4px/1.46 var(--serif);color:var(--tinta)">
+          “As armas e os barões assinalados / que da ocidental praia lusitana / por mares nunca de
+          antes navegados / passaram ainda além da Taprobana…”</p>
+        <p class="legenda" style="margin-top:6px">Primeira estrofe do Canto I</p>
+      </div>
     </div>
 
     <div>
-      <p class="corpo" style="max-width:820px;font-size:18.6px">
-        Publicada em <b>1572</b>, a obra narra a <b>viagem de Vasco da Gama às Índias</b> e valoriza as
-        conquistas marítimas portuguesas. Gire o astrolábio para ler cada um dos dez cantos.
+      <p class="corpo" style="max-width:940px">
+        Publicada em <b>1572</b>, a obra narra a <b>viagem de Vasco da Gama às Índias</b> e valoriza
+        as conquistas marítimas portuguesas. Mistura história, mitologia greco-romana e referências
+        religiosas, e é considerada uma das obras mais importantes da literatura portuguesa.
       </p>
 
-      <div class="grade g4" style="gap:11px;margin-top:14px;max-width:820px">
-        <div class="cifra" style="padding:12px 15px"><u>10</u><small>cantos</small></div>
-        <div class="cifra" style="padding:12px 15px"><u class="o">8.816</u><small>versos</small></div>
-        <div class="cifra" style="padding:12px 15px"><u class="o">1.102</u><small>estrofes</small></div>
-        <div class="cifra" style="padding:12px 15px"><u class="t">8</u><small>versos por estrofe</small></div>
+      <div class="grade g4" style="gap:12px;margin-top:14px;max-width:940px">
+        <div class="cifra" style="padding:12px 15px"><u data-conta>10</u><small>cantos</small></div>
+        <div class="cifra" style="padding:12px 15px"><u class="o" data-conta>8.816</u><small>versos</small></div>
+        <div class="cifra" style="padding:12px 15px"><u class="o" data-conta>1.102</u><small>estrofes</small></div>
+        <div class="cifra" style="padding:12px 15px"><u class="t" data-conta>8</u><small>versos por estrofe</small></div>
       </div>
 
-      <div class="tinta-p" id="p-canto" style="margin-top:14px;max-width:820px;min-height:206px">
-        <h4 id="canto-t">Canto I · A partida e o Olimpo</h4>
-        <p id="canto-p">Proposição, invocação e dedicatória abrem o poema. Os deuses se reúnem no
-          <b>Olimpo</b> para decidir o destino da armada: <b>Vénus</b> e <b>Marte</b> protegem os
-          portugueses, <b>Baco</b> quer impedi-los. A frota chega a Moçambique.</p>
-      </div>
-
-      <p class="legenda" style="margin-top:12px">Arraste o aro, clique num número ou use <b>Shift + ← →</b>.</p>
-
-      <div class="ficha" style="margin-top:14px;padding:14px 19px;max-width:820px">
-        <p style="font:italic 400 19px/1.5 var(--serif);color:var(--tinta)">
-          “As armas e os barões assinalados / que da ocidental praia lusitana / por mares nunca de
-          antes navegados / passaram ainda além da Taprobana…”</p>
-        <p class="legenda" style="margin-top:7px">Os Lusíadas · primeira estrofe do Canto I</p>
-      </div>
+      <p class="legenda" style="margin-top:16px">Os dez cantos, um a um</p>
+      <ul class="cantos-lista" style="margin-top:9px;max-width:940px">
+        <li><b>I</b><span>Os deuses decidem no Olimpo o destino da armada; chegada a Moçambique.</span></li>
+        <li><b>II</b><span>Ciladas em Mombaça; Vénus salva a frota, que aporta em Melinde.</span></li>
+        <li><b>III</b><span>O Gama conta a história de Portugal; o episódio de Inês de Castro.</span></li>
+        <li><b>IV</b><span>O sonho de D. Manuel, a partida de Belém e o Velho do Restelo.</span></li>
+        <li><b>V</b><span>A travessia: o fogo de Santelmo, o escorbuto e o gigante Adamastor.</span></li>
+        <li><b>VI</b><span>Baco convoca os deuses do mar: tempestade e chegada a Calicute.</span></li>
+        <li><b>VII</b><span>A Índia descrita; o encontro com o Samorim e com o Catual.</span></li>
+        <li><b>VIII</b><span>As bandeiras explicadas, as intrigas mouras e a prisão do Gama.</span></li>
+        <li><b>IX</b><span>A Ilha dos Amores, prêmio de Vénus aos navegantes.</span></li>
+        <li><b>X</b><span>A profecia do império e a máquina do mundo; o regresso a Portugal.</span></li>
+      </ul>
     </div>
   </div>
 </section>
 <!-- ======================= IX · RELIGIOSIDADE ======================= -->
 <section class="slide" data-t="Religiosidade no Classicismo" data-f="Fé e mitologia">
   <div class="fundo baixo" aria-hidden="true"><img data-img="fundo-renascimento-b.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
-  <div class="solta par b3" data-dep="18" style="left:70px;bottom:14px;width:196px;z-index:1;opacity:.85">
+
+  <div class="solta par b3" data-dep="18" style="left:56px;bottom:10px;width:188px;z-index:1;opacity:.82">
     <img class="marmo" data-img="deus-greco-romano.png" alt="Estátua de deus greco-romano com tridente"
          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
   </div>
@@ -1366,16 +1305,16 @@ body.leve .astro-deco{animation:none}
   <h1 class="rv d1">Religiosidade no <em>Classicismo</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <p class="corpo rv d2" style="max-width:1180px">
+  <p class="corpo rv d2" style="max-width:1220px">
     <span class="capitular">M</span>
     esmo com a valorização da razão e do ser humano, a <b>religião continuava muito presente</b> na
     sociedade. Por isso as obras classicistas apresentam uma <b>mistura</b> entre o cristianismo e a
     mitologia greco-romana — e essa mistura aparece claramente em <b>Os Lusíadas</b>.
   </p>
 
-  <div class="grade rv d3" style="grid-template-columns:1fr 312px 1fr;gap:16px;margin-top:14px;
-              max-width:1250px;align-items:center;clear:both">
-    <div class="coluna-fe cris pesa" id="col-cris">
+  <div class="grade rv d3" style="grid-template-columns:1fr 300px 1fr;gap:18px;margin-top:14px;
+              max-width:1290px;align-items:center;clear:both">
+    <div class="coluna-fe cris">
       <h4><svg><use href="#i-cruz"/></svg>Cristianismo</h4>
       <ul>
         <li><b>Fé em Deus</b> como verdade do mundo e destino final das pessoas.</li>
@@ -1386,7 +1325,7 @@ body.leve .astro-deco{animation:none}
     </div>
 
     <div style="text-align:center">
-      <div class="balanca" id="balanca" style="--inc:-7deg">
+      <div class="balanca" aria-hidden="true">
         <span class="pe"></span><span class="mastro"></span>
         <div class="viga">
           <span class="fiel"></span>
@@ -1396,11 +1335,10 @@ body.leve .astro-deco{animation:none}
           <span class="carga d"><svg style="fill:#a8791c"><use href="#i-tridente"/></svg></span>
         </div>
       </div>
-      <button class="bt ix" id="bt-balanca" style="margin-top:6px">
-        <svg><use href="#i-balanca"/></svg>Inclinar a balança</button>
+      <p class="legenda" style="margin-top:4px">os dois pratos, o tempo todo</p>
     </div>
 
-    <div class="coluna-fe mito" id="col-mito">
+    <div class="coluna-fe mito">
       <h4><svg><use href="#i-tridente"/></svg>Mitologia greco-romana</h4>
       <ul>
         <li><b>Vénus</b> protege os portugueses; <b>Baco</b> tenta impedi-los.</li>
@@ -1411,107 +1349,109 @@ body.leve .astro-deco{animation:none}
     </div>
   </div>
 
-  <div class="tinta-p rv d5" id="p-relig" style="margin-top:16px;max-width:1250px;min-height:104px">
-    <h4 id="relig-t">Como isso convive no mesmo livro?</h4>
-    <p id="relig-p">O próprio Camões resolve a contradição dentro do poema: no <b>Canto X</b>, os deuses
-      antigos são chamados de <b>“fingimentos”</b> — invenções da poesia para representar as forças que
-      movem os homens. A fé é a verdade; a mitologia é a linguagem literária herdada dos clássicos.</p>
+  <div class="grade rv d5" style="grid-template-columns:1fr 1fr;gap:18px;margin-top:16px;max-width:1290px">
+    <div class="tinta-p">
+      <h4>Como isso convive no mesmo livro?</h4>
+      <p>No <b>Canto X</b>, o próprio Camões chama os deuses antigos de <b>“fingimentos”</b> —
+        invenções da poesia para representar as forças que movem os homens. A fé é a verdade; a
+        mitologia é a linguagem literária herdada dos clássicos.</p>
+    </div>
+    <div class="tinta-p">
+      <h4>Quem move a história do poema?</h4>
+      <p>Na <b>ação</b>, quem empurra ou atrapalha a viagem são os deuses antigos. O cristianismo
+        aparece no <b>propósito</b> e nos valores dos portugueses; a mitologia, na trama. Os dois
+        planos correm juntos do primeiro ao último canto.</p>
+    </div>
   </div>
 </section>
 
 <!-- ======================= X · CURIOSIDADES ======================= -->
 <section class="slide" data-t="Curiosidades" data-f="Cinco achados">
   <div class="fundo direita lento" aria-hidden="true"><img data-img="fundo-colunas.jpg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></div>
-  <svg class="astro-deco" viewBox="0 0 100 100" aria-hidden="true"
-       style="left:-90px;top:200px;width:360px;height:360px;opacity:.16">
-    <g fill="none" stroke="#a8791c" stroke-width=".7">
-      <circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="36"/>
-      <path d="M50 1v98M1 50h98M22 22l56 56M78 22 22 78"/>
-    </g>
-  </svg>
 
   <div class="folio-topo rv d1"><b>Fólio X</b><span>cinco coisas que quase ninguém sabe</span><i></i></div>
   <h1 class="rv d1"><em>Curiosidades</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:1fr 452px;gap:26px;margin-top:8px;align-items:start">
-    <div>
-      <div class="carta-lacre ix" id="carta-lacre" style="min-height:336px" tabindex="0" role="button"
-           aria-label="Romper o lacre e revelar uma curiosidade">
-        <span class="dobra"></span>
-        <div class="conteudo">
-          <span class="n" id="curio-n">1</span>
-          <p id="curio-txt">—</p>
-          <p class="nota" id="curio-extra"></p>
-        </div>
-        <div class="selo-area">
-          <div style="text-align:center">
-            <div class="lacre" style="margin:0 auto">CK</div>
-            <p class="legenda" style="margin-top:14px">Clique para romper o lacre</p>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap">
-        <button class="bt ix" id="bt-curio"><svg><use href="#i-estrela"/></svg>Sortear curiosidade</button>
-        <div style="display:flex;gap:6px" id="curio-nums"></div>
-        <span class="legenda" style="margin-left:auto">reveladas <b id="curio-placar">0</b> de 5</span>
-      </div>
-
-      <div class="ficha lac" style="margin-top:16px;padding:15px 19px">
-        <h3><svg><use href="#i-pena"/></svg>Por que ele ficou</h3>
-        <p>Camões fixou em verso um vocabulário e uma sintaxe que a língua portuguesa ainda usa.
-          É por isso que o idioma é chamado, até hoje, de <b>“a língua de Camões”</b>.</p>
-      </div>
+  <div class="grade rv d2" style="grid-template-columns:1fr 372px;gap:26px;margin-top:6px;align-items:start">
+    <div class="grade g2" style="gap:15px">
+      <div class="ficha"><h3><span class="emb num" style="width:40px;height:40px;font-size:19px;margin:0">1</span>De onde vem o nome</h3>
+        <p>“Classicismo” vem da valorização dos autores considerados <b>clássicos</b> da Grécia e de
+          Roma. No período, clássico queria dizer <b>modelo a ser imitado</b> — não “antigo”.</p></div>
+      <div class="ficha lac"><h3><span class="emb num" style="width:40px;height:40px;font-size:19px;margin:0">2</span>Uma vida de viagens</h3>
+        <p>Camões perdeu o olho direito lutando em <b>Ceuta</b> e chegou a naufragar no rio Mekong,
+          salvando a nado o manuscrito de <i>Os Lusíadas</i>.</p></div>
+      <div class="ficha"><h3><span class="emb num" style="width:40px;height:40px;font-size:19px;margin:0">3</span>O mar como assunto</h3>
+        <p>Sem as <b>grandes navegações</b> não existiria o assunto de <i>Os Lusíadas</i>: o mar não
+          é cenário, é personagem do poema.</p></div>
+      <div class="ficha lac"><h3><span class="emb num" style="width:40px;height:40px;font-size:19px;margin:0">4</span>A forma que ficou</h3>
+        <p>O <b>soneto</b> chegou da Itália com Sá de Miranda, em 1527, e nunca mais saiu da poesia
+          em língua portuguesa.</p></div>
+      <div class="ficha" style="grid-column:span 2"><h3><span class="emb num" style="width:40px;height:40px;font-size:19px;margin:0">5</span>10 de junho</h3>
+        <p>Camões é tão importante que o dia de sua morte, <b>10 de junho</b>, é o Dia de Portugal —
+          oficialmente, “Dia de Portugal, de Camões e das Comunidades Portuguesas”. É por ele que o
+          idioma é chamado, até hoje, de <b>“a língua de Camões”</b>.</p></div>
     </div>
 
     <div>
-      <figure class="retrato" style="height:346px">
+      <figure class="retrato" style="height:330px">
         <img data-img="mosteiro-dos-jeronimos.jpg" alt="Mosteiro dos Jerónimos, em Lisboa"
              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
         <figcaption>Mosteiro dos Jerónimos · Lisboa — onde está o túmulo de Camões</figcaption>
       </figure>
-      <div class="grade g2" style="gap:11px;margin-top:14px">
+      <div class="grade g2" style="gap:12px;margin-top:14px">
         <div class="cifra"><u class="o">10/06</u><small>Dia de Portugal</small></div>
-        <div class="cifra"><u class="t">1580</u><small>morte de Camões</small></div>
+        <div class="cifra"><u class="t" data-conta>1580</u><small>morte de Camões</small></div>
       </div>
+      <div class="lacre" style="margin:18px auto 0">CK</div>
     </div>
   </div>
 </section>
 
 <!-- ======================= XI · CONCLUSÃO ======================= -->
 <section class="slide" data-t="Conclusão" data-f="Fecho">
-  <div class="solta par" data-dep="12" style="left:-26px;bottom:52px;width:212px;z-index:0;opacity:.18">
+  <div class="solta par b2" data-dep="12" style="left:-24px;bottom:56px;width:206px;z-index:0;opacity:.2">
     <img data-img="os-lusiadas.png" alt=""
          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
   </div>
+  <span class="nau-passeio" style="bottom:78px;animation-duration:88s;animation-direction:reverse" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><use href="#i-caravela"/></svg></span>
 
   <div class="folio-topo rv d1"><b>Fólio XI</b><span>fechamento da apresentação</span><i></i></div>
   <h1 class="rv d1"><em>Conclusão</em></h1>
   <svg class="laco rv d1" viewBox="0 0 250 15" style="--dl:300"><path d="M4 9H88c8 0 8-6 16-6s8 9 16 9 8-9 16-9 8 6 16 6h74"/></svg>
 
-  <div class="grade rv d2" style="grid-template-columns:1fr 516px;gap:26px;margin-top:4px;align-items:start">
+  <p class="corpo rv d2" style="max-width:1290px">
+    <span class="capitular ouro">O</span>
+    Classicismo foi um movimento importante para a literatura e para a cultura europeia:
+    representou uma <b>retomada dos valores da Antiguidade</b>, valorizando a razão, o equilíbrio e
+    o ser humano. Em Portugal, ganhou destaque através de <b>Luís de Camões</b>.
+  </p>
+
+  <div class="grade g3 rv d3" style="margin-top:14px;gap:16px;clear:both;max-width:1290px">
+    <div class="ficha centro">
+      <span class="emb"><svg><use href="#i-coluna"/></svg></span>
+      <h3>A retomada</h3>
+      <p>Os modelos da Grécia e de Roma voltam a ser o padrão de beleza, de forma e de pensamento.</p>
+    </div>
+    <div class="ficha centro lac">
+      <span class="emb lac"><svg><use href="#i-coroa"/></svg></span>
+      <h3>Em Portugal</h3>
+      <p>O movimento ganhou destaque através de <b>Luís de Camões</b>, principalmente com
+        <b>Os Lusíadas</b>, de 1572.</p>
+    </div>
+    <div class="ficha centro">
+      <span class="emb"><svg><use href="#i-pena"/></svg></span>
+      <h3>A herança</h3>
+      <p>Consolidou novas formas — o soneto entre elas — e influenciou a literatura portuguesa
+        que veio depois.</p>
+    </div>
+  </div>
+
+  <div class="grade rv d5" style="grid-template-columns:1fr 430px;gap:24px;margin-top:13px;align-items:start;max-width:1290px">
     <div>
-      <p class="corpo">
-        <span class="capitular ouro">O</span>
-        Classicismo foi um movimento importante para a literatura e para a cultura europeia.
-        Representou uma <b>retomada dos valores da Antiguidade</b>, valorizando a razão, o equilíbrio
-        e o ser humano.
-      </p>
-
-      <div class="grade g3" style="gap:13px;margin-top:14px;clear:both">
-        <div class="ficha"><h3><svg><use href="#i-coluna"/></svg>A retomada</h3>
-          <p>Os modelos da Grécia e de Roma voltam a ser o padrão de beleza, forma e pensamento.</p></div>
-        <div class="ficha lac"><h3><svg><use href="#i-coroa"/></svg>Em Portugal</h3>
-          <p>O movimento ganhou destaque através de <b>Luís de Camões</b>, principalmente com
-            <b>Os Lusíadas</b>.</p></div>
-        <div class="ficha"><h3><svg><use href="#i-pena"/></svg>A herança</h3>
-          <p>Deixou grande influência na literatura portuguesa e consolidou novas formas de
-            expressão artística — o soneto entre elas.</p></div>
-      </div>
-
-      <p class="legenda" style="margin-top:18px">Grupo CK · Conscious Knowledge</p>
-      <div class="equipe" style="margin-top:8px">
+      <p class="legenda">Grupo CK · Conscious Knowledge</p>
+      <div class="equipe" style="margin-top:8px;gap:9px">
         <div class="pessoa lid"><span class="av">G</span><b>Gustavo Oliveira dos Santos</b><span>Fólios I e II</span></div>
         <div class="pessoa"><span class="av">É</span><b>Éric Estrela Vieira</b><span>Fólios III e IV</span></div>
         <div class="pessoa"><span class="av">G</span><b>Gabriel Heanna dos Reis</b><span>Fólios V e VI</span></div>
@@ -1522,20 +1462,19 @@ body.leve .astro-deco{animation:none}
     </div>
 
     <div>
-      <div class="tinta-p quiz" id="quiz" style="min-height:326px">
-        <div class="perg" id="quiz-perg"><s>Pergunta 1 de 6</s>—</div>
-        <div class="ops" id="quiz-ops"></div>
-        <div class="placar">
-          <span>acertos <u id="quiz-placar">0</u> / 6</span>
-          <button class="refazer ix" id="quiz-refazer">recomeçar</button>
-        </div>
+      <div class="tinta-p">
+        <h4>Para levar deste fólio</h4>
+        <p><b>Século XVI</b>, Europa · <b>1527</b> em Portugal, com Sá de Miranda ·
+          <b>1572</b>, <i>Os Lusíadas</i> · <b>1580</b>, a morte de Camões fecha o período.</p>
+        <p class="nota">Razão, equilíbrio e o ser humano no centro, dentro de formas herdadas
+          da Antiguidade.</p>
       </div>
 
-      <div class="ficha" style="display:flex;align-items:center;gap:16px;margin-top:18px;padding:14px 18px">
-        <img data-img="logo-ck.png" alt="Logo do Grupo CK" style="width:62px;height:auto;flex:none"
+      <div class="ficha" style="display:flex;align-items:center;gap:16px;margin-top:16px;padding:13px 18px">
+        <img data-img="logo-ck.png" alt="Logo do Grupo CK" style="width:58px;height:auto;flex:none"
              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
         <div>
-          <b style="display:block;font:700 17.4px/1.2 var(--serif);color:var(--tinta)">Feito pelo Grupo CK</b>
+          <b style="display:block;font:700 17px/1.2 var(--serif);color:var(--tinta)">Feito pelo Grupo CK</b>
           <span class="legenda" style="display:block;margin-top:5px">
             Língua Portuguesa · 2º C — M-Tec Informática para Internet · ETEC Taboão da Serra · 2026</span>
         </div>
@@ -1616,9 +1555,7 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
     if(rodando) requestAnimationFrame(quadro);
   }
 
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden) acordar();
-  });
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) acordar(); });
 
   /* ---- medidor de quadros e modo leve automático ---- */
   var somaDt = 0, nDt = 0, desde = performance.now(), leve = false;
@@ -1717,21 +1654,15 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
         os mesmos aros em CSS 3D custavam metade do orçamento de cada quadro.
      ===================================================================== */
   var ESFERAS = {
-    0: {x:1208, y:398, r:186, op:1},
-    3: {x:1421, y:235, r:105, op:.55}
+    0: {x:1208, y:398, r:186, op:1}
   };
 
-  /* --- esfera armilar em SVG: vetorial (nítida em qualquer tela) e
-         redesenhada a ~20 quadros por segundo, que basta de sobra para
-         uma volta a cada 28 segundos --- */
   var montarEsfera = (function(){
     var svg = document.getElementById('armilar');
     var gTras = document.getElementById('ar-tras');
     var gFrente = document.getElementById('ar-frente');
     var eclT = document.getElementById('ar-ecl-t');
     var eclF = document.getElementById('ar-ecl-f');
-    var eixo = document.getElementById('ar-eixo');
-    var globo = document.getElementById('ar-globo');
 
     var TOMBO = -0.30, cosT = Math.cos(TOMBO), sinT = Math.sin(TOMBO);
     var ec = 23.5 * Math.PI / 180;
@@ -1758,25 +1689,18 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
         var x2 = x * cosG + z * sinG, z2 = -x * sinG + z * cosG;
         var y2 = y * cosT - z2 * sinT, z3 = y * sinT + z2 * cosT;
         var ponto = x2.toFixed(1) + ' ' + y2.toFixed(1);
-        if(z3 >= 0){
-          frente += (antes === 1 ? 'L' : 'M') + ponto;
-          antes = 1;
-        } else {
-          tras += (antes === 0 ? 'L' : 'M') + ponto;
-          antes = 0;
-        }
+        if(z3 >= 0){ frente += (antes === 1 ? 'L' : 'M') + ponto; antes = 1; }
+        else       { tras   += (antes === 0 ? 'L' : 'M') + ponto; antes = 0; }
       }
       return [frente, tras];
     }
 
-    var visivel = false;
     function desenhar(giro){
       var f = '', t = '';
       for(var i = 0; i < AROS.length; i++){
         var d = tracos(AROS[i], giro);
         f += d[0]; t += d[1];
       }
-      gFrente.setAttribute('d', '');
       gFrente.innerHTML = '<path d="' + f + '"/>';
       gTras.innerHTML = '<path d="' + t + '"/>';
       var e = tracos(ECLIPTICA, giro);
@@ -1785,32 +1709,30 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
     }
 
     var slot = document.getElementById('slot-armilar');
-    var casa = svg.parentNode;
 
     return function(indice){
       var e = ESFERAS[indice];
-      if(!e){ svg.style.display = 'none'; visivel = false; return null; }
+      if(!e){ svg.style.display = 'none'; return null; }
       if(celular()){
-        /* no celular a esfera entra no fluxo da capa, centrada */
         if(indice === 0 && slot){
           if(svg.parentNode !== slot) slot.appendChild(svg);
           svg.style.cssText = 'position:static;display:block;width:100%;height:auto;overflow:visible';
-        } else {
-          svg.style.display = 'none'; visivel = false; return null;
-        }
+        } else { svg.style.display = 'none'; return null; }
       } else {
-        if(svg.parentNode !== casa) casa.appendChild(svg);
+        /* dentro do próprio fólio, com z-index negativo: fica na frente da foto
+           de fundo e atrás do texto */
+        var folha = document.querySelectorAll('.slide')[indice];
+        if(svg.parentNode !== folha) folha.appendChild(svg);
         var lado = e.r * 2.2;
-        svg.style.cssText = 'position:absolute;overflow:visible;display:block;pointer-events:none;left:' +
+        svg.style.cssText = 'position:absolute;overflow:visible;display:block;pointer-events:none;z-index:-1;left:' +
           (e.x - lado / 2) + 'px;top:' + (e.y - lado / 2) + 'px;width:' + lado + 'px;height:' + lado +
           'px;opacity:' + e.op;
       }
-      visivel = true;
       return desenhar;
     };
   })();
 
-  (function giro(){
+  (function giroEsfera(){
     var desenhar = null, giro = .6, acum = 999;
     var trocar = montarEsfera;
     montarEsfera = function(i){ desenhar = trocar(i); acum = 999; };
@@ -1839,13 +1761,12 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
       el.style.transform = 'translate3d(' + (-curX * d).toFixed(1) + 'px,' +
                            (-curY * d * .5).toFixed(1) + 'px,0)';
     }
-    if(Math.abs(alvoX - curX) < .002 && Math.abs(alvoY - curY) < .002){
-      correndo = false; return false;
-    }
+    if(Math.abs(alvoX - curX) < .002 && Math.abs(alvoY - curY) < .002){ correndo = false; return false; }
     return true;
   }
   if(!menosMovimento && pecas.length){
     addEventListener('pointermove', function(e){
+      if(celular()) return;
       alvoX = (e.clientX / innerWidth - .5) * 2;
       alvoY = (e.clientY / innerHeight - .5) * 2;
       if(!correndo){ correndo = true; juntar(laçoParalaxe); }
@@ -1853,7 +1774,40 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
   }
 
   /* =====================================================================
-     6. NAVEGAÇÃO ENTRE FÓLIOS
+     6. ASTROLÁBIO DECORATIVO — os dez cantos gravados no aro
+     ===================================================================== */
+  (function astrolabio(){
+    var roda = document.getElementById('roda');
+    if(!roda) return;
+    var ROMANOS = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+    var caixa = roda.parentNode;
+
+    function montar(){
+      var raio = Math.round((caixa.clientWidth || 376) * .385);
+      roda.innerHTML = '';
+      for(var i = 0; i < 10; i++){
+        var d = document.createElement('div');
+        d.className = 'canto';
+        d.style.transform = 'rotate(' + (i * 36) + 'deg) translateY(-' + raio + 'px)';
+        /* o aro gira, mas o algarismo fica em pé: a casca desfaz a inclinação
+           fixa da posição e a animação inversa desfaz o giro do aro */
+        var casca = document.createElement('span');
+        casca.style.transform = 'rotate(' + (-i * 36) + 'deg)';
+        var b = document.createElement('b');
+        b.textContent = ROMANOS[i];
+        casca.appendChild(b);
+        d.appendChild(casca);
+        roda.appendChild(d);
+      }
+    }
+    montar();
+    addEventListener('resize', (function(){
+      var t; return function(){ clearTimeout(t); t = setTimeout(montar, 200); };
+    })());
+  })();
+
+  /* =====================================================================
+     7. NAVEGAÇÃO ENTRE FÓLIOS
      ===================================================================== */
   var folhas = [].slice.call(document.querySelectorAll('.slide'));
   var n = folhas.length, atual = 0;
@@ -1880,6 +1834,28 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
   var pontos = [].slice.call(marcas.children);
   var itensSum = [].slice.call(listaSum.children);
 
+  /* ---- números que sobem ao entrar no fólio (decoração, não interação) ---- */
+  function contar(folha){
+    if(menosMovimento) return;
+    var alvos = [].slice.call(folha.querySelectorAll('[data-conta]'));
+    if(!alvos.length) return;
+    alvos.forEach(function(el){
+      var texto = el.dataset.valor || el.textContent.trim();
+      el.dataset.valor = texto;
+      var fim = parseInt(texto.replace(/\D/g, ''), 10);
+      if(!fim || fim > 100000) return;
+      var t0 = 0, dur = 900;
+      juntar(function(dt){
+        t0 += dt;
+        var k = Math.min(1, t0 / dur);
+        var suave = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(fim * suave).toLocaleString('pt-BR');
+        if(k >= 1){ el.textContent = texto; return false; }
+        return true;
+      });
+    });
+  }
+
   function ir(i, tras){
     if(i < 0 || i > n - 1 || i === atual) return;
     tras = (typeof tras === 'boolean') ? tras : (i < atual);
@@ -1898,6 +1874,7 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
     folioT.textContent = s.dataset.f || '';
     nau.style.transform = 'translate3d(' + (atual / (n - 1) * 1456).toFixed(1) + 'px,0,0)';
     montarEsfera(atual);
+    contar(s);
     if(celular()) scrollTo(0, 0);
     try{ history.replaceState(null, '', '#' + (atual + 1)); }catch(e){}
   }
@@ -1933,9 +1910,6 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
     var k = e.key;
     if(k === 'Escape'){ fecharSumario(); return; }
     if(sumario.classList.contains('on') && k !== 's' && k !== 'S') return;
-    if(e.shiftKey && atual === 7 && (k === 'ArrowRight' || k === 'ArrowLeft')){
-      e.preventDefault(); girarCanto(k === 'ArrowRight' ? 1 : -1); esconderDica(); return;
-    }
     if(k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter'){ e.preventDefault(); proximo(); }
     else if(k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace'){ e.preventDefault(); anterior(); }
     else if(k === 'Home'){ ir(0, true); }
@@ -1945,36 +1919,9 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
     esconderDica();
   });
 
-  var arrastou = false;
-
-  /* Arrasto sem setPointerCapture: a captura redireciona o clique seguinte
-     para o contêiner e os botões de dentro deixam de receber o evento.
-     Escutar na janela resolve isso e ainda sobrevive ao ponteiro sair da área. */
-  function arrastavel(alvo, aoComecar, aoMover, aoSoltar){
-    alvo.addEventListener('pointerdown', function(e){
-      if(e.button) return;
-      /* sem isto, arrastar em cima de uma imagem dispara o arraste nativo do
-         navegador e o resto dos eventos de ponteiro nunca chega */
-      e.preventDefault();
-      arrastou = false;
-      aoComecar(e);
-      function mover(ev){ aoMover(ev); }
-      function soltar(ev){
-        removeEventListener('pointermove', mover);
-        removeEventListener('pointerup', soltar);
-        removeEventListener('pointercancel', soltar);
-        aoSoltar(ev);
-        setTimeout(function(){ arrastou = false; }, 80);
-      }
-      addEventListener('pointermove', mover);
-      addEventListener('pointerup', soltar);
-      addEventListener('pointercancel', soltar);
-    });
-  }
-
   addEventListener('click', function(e){
-    if(sumario.classList.contains('on') || arrastou || celular()) return;
-    if(e.target.closest('.ix, .leme, .marcas, .sumario, [contenteditable]')) return;
+    if(sumario.classList.contains('on') || celular()) return;
+    if(e.target.closest('.leme, .marcas, .sumario, [contenteditable]')) return;
     esconderDica();
     (e.clientX < innerWidth * .26) ? anterior() : proximo();
   });
@@ -1994,8 +1941,8 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
     toqueX = e.touches[0].clientX; toqueY = e.touches[0].clientY;
   }, {passive:true});
   addEventListener('touchend', function(e){
-    if(sumario.classList.contains('on') || arrastou) return;
-    if(e.target.closest && e.target.closest('.ix, .leme, .marcas, [contenteditable]')) return;
+    if(sumario.classList.contains('on')) return;
+    if(e.target.closest && e.target.closest('.leme, .marcas, [contenteditable]')) return;
     var dx = e.changedTouches[0].clientX - toqueX;
     var dy = e.changedTouches[0].clientY - toqueY;
     /* horizontal de verdade: senão o dedo estava só rolando a página */
@@ -2003,528 +1950,6 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
       (dx < 0) ? proximo() : anterior(); esconderDica();
     }
   }, {passive:true});
-
-  /* =====================================================================
-     7. FÓLIO II — medalhões
-     ===================================================================== */
-  var MEDAL = [
-    ['Renascimento',
-     'Nasceu na <b>Itália</b> e se espalhou pela Europa no <b>século XVI</b>, dentro do movimento que reviveu as artes e o pensamento antigos.',
-     'O Renascimento tirou a arte do molde medieval; o Classicismo foi a forma literária que essa virada assumiu.'],
-    ['Voltar aos clássicos',
-     'O objetivo era <b>recuperar os modelos da Grécia e de Roma</b> — a mitologia, as formas e os autores tidos como perfeitos.',
-     'Homero e Virgílio na épica; Horácio e Petrarca na lírica. Imitar os antigos era sinal de excelência, não falta de ideias.'],
-    ['Equilíbrio e razão',
-     'Valorizavam-se <b>equilíbrio, razão, harmonia e perfeição</b>: nada de excesso, nada de descontrole na forma.',
-     'Verso medido, estrofe contada, vocabulário escolhido. A emoção existe — mas organizada pela razão.'],
-    ['O humano no centro',
-     'O período deu <b>maior destaque ao ser humano e à razão</b> — é o <b>antropocentrismo</b> substituindo o teocentrismo medieval.',
-     'Colocar o homem no centro não significou abandonar a fé — e é exatamente isso que o fólio IX mostra.']
-  ];
-  ligarLista('#medalhoes [data-med]', 'med', MEDAL, 'p-med', ['med-t','med-p','med-n'], 'medalhao');
-
-  /* =====================================================================
-     8. FÓLIO III — cortina arrastável
-     ===================================================================== */
-  (function cortina(){
-    var box = document.getElementById('cortina');
-    var pega = document.getElementById('pega-cortina');
-    var pct = 50, puxando = false;
-
-    function por(p){
-      pct = Math.max(4, Math.min(96, p));
-      box.style.setProperty('--corte', pct + '%');
-      pega.setAttribute('aria-valuenow', Math.round(pct));
-    }
-    por(50);
-
-    function deEvento(e){
-      var r = box.getBoundingClientRect();
-      por((e.clientX - r.left) / r.width * 100);
-    }
-    arrastavel(box,
-      function(e){ puxando = true; pega.focus(); deEvento(e); },
-      function(e){ if(puxando){ arrastou = true; deEvento(e); } },
-      function(){ puxando = false; });
-    pega.addEventListener('keydown', function(e){
-      if(e.key === 'ArrowLeft'){ e.preventDefault(); e.stopPropagation(); por(pct - 5); }
-      if(e.key === 'ArrowRight'){ e.preventDefault(); e.stopPropagation(); por(pct + 5); }
-    });
-  })();
-
-  /* =====================================================================
-     9. FÓLIO IV — escandir o decassílabo
-     ===================================================================== */
-  (function decassilabo(){
-    var alvo = document.getElementById('p-verso');
-    var silabas = [].slice.call(document.querySelectorAll('#verso s'));
-    var leg = document.getElementById('verso-leg');
-    var marcado = false, i = 0, contando = false;
-    var inicial = leg.innerHTML;
-
-    function passo(){
-      contando = true; i = 0;
-      var acum = 0;
-      juntar(function(dt){
-        acum += dt;
-        while(i < silabas.length && acum > i * 170){
-          silabas[i].classList.add('mar'); i++;
-        }
-        if(i >= silabas.length){
-          contando = false; marcado = true;
-          leg.innerHTML = '<b style="color:var(--ouro-3)">Dez sílabas poéticas</b> — decassílabo. ' +
-            'Repare em <b style="color:var(--ouro-3)">“que ar”</b>: duas vogais que se juntam numa ' +
-            'sílaba só. Clique de novo para limpar.';
-          return false;
-        }
-        return true;
-      });
-    }
-    function alternar(e){
-      if(e) e.stopPropagation();
-      if(marcado || contando){
-        silabas.forEach(function(s){ s.classList.remove('mar'); });
-        marcado = false; contando = false; leg.innerHTML = inicial;
-        return;
-      }
-      passo();
-    }
-    alvo.addEventListener('click', alternar);
-    alvo.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); alternar(e); }
-    });
-  })();
-
-  /* =====================================================================
-     10. FÓLIO V — rosa dos ventos
-     ===================================================================== */
-  var CARAC = [
-    ['Valorização da razão',
-     'A emoção não some, mas passa a ser <b>organizada pela inteligência</b>: o poeta pensa o poema antes de senti-lo. Medida, clareza e controle valem mais do que o impulso.',
-     'Exemplo: em Camões, até a dor amorosa vira raciocínio — “Amor é fogo que arde sem se ver” abre um soneto inteiro de definições.'],
-    ['Equilíbrio e harmonia',
-     'Nada em excesso. Estrofes simétricas, versos da mesma medida, ideias distribuídas com proporção: <b>a forma sustenta o conteúdo</b>.',
-     'Exemplo: o soneto divide o raciocínio em dois quartetos (a ideia) e dois tercetos (a conclusão).'],
-    ['Busca pela perfeição',
-     'O texto é reescrito até não sobrar defeito. O autor clássico <b>não publica rascunho</b>: imita os modelos antigos até alcançá-los.',
-     'Exemplo: Camões constrói Os Lusíadas seguindo, verso a verso, o molde da Eneida de Virgílio.'],
-    ['Influência da cultura greco-romana',
-     'Formas, personagens, deuses e temas vêm da Antiguidade. <b>Imitar os clássicos era sinal de excelência</b>, não falta de criatividade.',
-     'Exemplo: a epopeia, o soneto e a écloga são moldes herdados de gregos, romanos e italianos.'],
-    ['Antropocentrismo',
-     'O <b>ser humano no centro</b>: seus sentimentos, suas conquistas e sua capacidade de entender o mundo pela razão.',
-     'Exemplo: em Os Lusíadas quem atravessa o mar são homens de carne e osso — os deuses apenas discutem o que eles fazem.'],
-    ['Universalismo',
-     'Interessa o que vale <b>para todos, em qualquer época</b>: o amor, a morte, o tempo, a glória. O caso particular do poeta pesa menos que a lei geral.',
-     'Exemplo: o soneto do amor não conta um namoro específico — define o que o amor é para qualquer pessoa.'],
-    ['Uso da mitologia',
-     'Vénus, Baco, Júpiter, Netuno e as ninfas aparecem <b>como personagens e como símbolos</b> das forças que movem os homens.',
-     'Exemplo: em Os Lusíadas, Baco é o obstáculo de toda a viagem e Vénus, a proteção constante.'],
-    ['Linguagem formal e organizada',
-     'Vocabulário culto, sintaxe trabalhada e <b>inversões à maneira do latim</b>. Nada de gíria, nada de improviso.',
-     'Exemplo: “As armas e os barões assinalados” abre o poema com a ordem invertida, como se escrevia em latim.'],
-    ['Valorização da beleza',
-     'Beleza entendida como <b>harmonia e medida</b> — no corpo humano, na natureza e no próprio verso.',
-     'Exemplo: a mulher amada é descrita como proporção perfeita, quase uma escultura clássica.'],
-    ['Presença frequente de sonetos',
-     'Catorze versos decassílabos em dois quartetos e dois tercetos: <b>a forma preferida do período</b>, trazida da Itália.',
-     'Exemplo: Camões deixou mais de 200 sonetos — vários deles entre os mais conhecidos da língua portuguesa.']
-  ];
-  (function rosa(){
-    var pontas = [].slice.call(document.querySelectorAll('#rosa .ponta'));
-    var agulha = document.getElementById('agulha');
-    var painel = document.getElementById('p-carac');
-    function por(i){
-      pontas.forEach(function(p, k){ p.classList.toggle('on', k === i); });
-      agulha.style.transform = 'rotate(' + (i * 36) + 'deg)';
-      document.getElementById('carac-t').textContent = CARAC[i][0];
-      document.getElementById('carac-p').innerHTML = CARAC[i][1];
-      document.getElementById('carac-ex').innerHTML = CARAC[i][2];
-      document.getElementById('carac-n').textContent = ROMANOS[i];
-      repintar(painel);
-    }
-    pontas.forEach(function(p, i){
-      p.querySelector('span').addEventListener('click', function(e){ e.stopPropagation(); por(i); });
-    });
-    por(0);
-  })();
-
-  /* =====================================================================
-     11. FÓLIO VI — carrossel 3D arrastável
-     ===================================================================== */
-  var AUT = [
-    ['Luís de Camões',
-     'Considerado o <b>maior representante do Classicismo em Portugal</b>. Escreveu lírica — sonetos, canções e redondilhas — e a épica de <i>Os Lusíadas</i>, de 1572.',
-     'Viveu em Lisboa, na Índia e em Macau; perdeu o olho direito em combate, em Ceuta. Morreu pobre, em 1580.'],
-    ['Sá de Miranda',
-     'Responsável por <b>introduzir as novas formas poéticas</b> no país, em 1527: o soneto, o decassílabo, a canção e a écloga.',
-     'Sem a viagem dele à Itália, o Classicismo português começaria bem mais tarde.'],
-    ['António Ferreira',
-     'Conhecido principalmente por suas <b>obras dramáticas</b>. Escreveu a tragédia <i>Castro</i>, sobre Inês de Castro, no molde do teatro grego.',
-     'Defendia que se escrevesse em português, e não em castelhano — posição rara na época. Reuniu a lírica nos Poemas Lusitanos.'],
-    ['Bernardim Ribeiro',
-     'Autor relacionado à <b>transição para a literatura renascentista</b>. Escreveu <i>Menina e Moça</i>, novela de amor e saudade, e éclogas pastoris.',
-     'Está entre o fim da poesia medieval palaciana e o começo do gosto clássico.']
-  ];
-  (function carrossel(){
-    var caixa = document.getElementById('carrossel');
-    var anel = document.getElementById('anel');
-    var cartas = [].slice.call(anel.children);
-    var painel = document.getElementById('p-aut');
-    var total = cartas.length, indice = 0, fracao = 0;
-
-    /* Coverflow: as quatro fichas ficam sempre à vista, a da frente reta e as
-       vizinhas viradas. Um anel de quatro a 90° deixaria as laterais de perfil,
-       invisíveis — daí o leque. */
-    function vao(){ return Math.max(120, Math.min(246, caixa.clientWidth * .27)); }
-    function aplicar(){
-      var pos = indice + fracao, passoX = vao();
-      for(var i = 0; i < total; i++){
-        var d = i - pos;
-        while(d > total / 2) d -= total;
-        while(d < -total / 2) d += total;
-        var m = Math.abs(d);
-        cartas[i].style.transform =
-          'translate3d(' + (d * passoX).toFixed(1) + 'px,' + (m * 18).toFixed(1) + 'px,' +
-          (-m * 240).toFixed(1) + 'px) rotateY(' + (-d * 42).toFixed(1) + 'deg) scale(' +
-          (1 - m * .13).toFixed(3) + ')';
-        cartas[i].style.zIndex = 20 - Math.round(m * 10);
-        /* no celular não há largura para o leque: fica só a carta da frente */
-        cartas[i].style.opacity = celular() ? (m > .55 ? 0 : 1)
-                                            : (m > 1.7 ? 0 : (1 - m * .3).toFixed(2));
-      }
-    }
-    function mostrar(i){
-      indice = ((i % cartas.length) + cartas.length) % cartas.length;
-      document.getElementById('aut-t').textContent = AUT[indice][0];
-      document.getElementById('aut-p').innerHTML = AUT[indice][1];
-      document.getElementById('aut-n').innerHTML = AUT[indice][2];
-      document.getElementById('aut-n-idx').textContent = indice + 1;
-      repintar(painel);
-    }
-    function para(i){
-      indice = ((i % total) + total) % total;
-      fracao = 0; aplicar(); mostrar(indice);
-    }
-    para(0);
-
-    document.getElementById('aut-ant').addEventListener('click', function(e){ e.stopPropagation(); para(indice - 1); });
-    document.getElementById('aut-pro').addEventListener('click', function(e){ e.stopPropagation(); para(indice + 1); });
-
-    var x0 = 0;
-    arrastavel(caixa,
-      function(e){
-        x0 = e.clientX;
-        for(var i = 0; i < total; i++) cartas[i].classList.add('solto');
-      },
-      function(e){
-        var d = e.clientX - x0;
-        if(Math.abs(d) > 4) arrastou = true;
-        fracao = -d / vao(); aplicar();
-      },
-      function(){
-        for(var i = 0; i < total; i++) cartas[i].classList.remove('solto');
-        para(Math.round(indice + fracao));
-      });
-  })();
-
-  /* =====================================================================
-     12. FÓLIO VII — fitas marcadoras
-     ===================================================================== */
-  var ABAS = [
-    ['A vida',
-     'Luís de Camões foi o <b>principal autor do Classicismo português</b>. Estudou em Coimbra, viveu na corte de Lisboa, serviu como soldado em <b>Ceuta</b> — onde perdeu o olho direito — e passou quase <b>17 anos no Oriente</b>, entre a Índia, Moçambique e Macau. Voltou pobre a Portugal e morreu em 1580.'],
-    ['A lírica',
-     'Escreveu <b>sonetos, canções, odes, elegias e redondilhas</b>. Os assuntos são o amor, a passagem do tempo, o destino e o chamado <b>desconcerto do mundo</b> — a ideia de que o mérito e a sorte nunca andam juntos. Boa parte desses poemas só foi publicada depois da morte dele, em 1595, no livro <i>Rimas</i>.'],
-    ['A épica',
-     '<b>Os Lusíadas</b> (1572): dez cantos, 1.102 estrofes e 8.816 versos decassílabos em oitava-rima. O poema narra a <b>viagem de Vasco da Gama às Índias</b> e, dentro dela, conta a história inteira de Portugal.']
-  ];
-  ligarLista('#cam-fitas [data-aba]', 'aba', ABAS, 'p-cam', ['cam-t','cam-p'], 'fita');
-
-  /* =====================================================================
-     13. FÓLIO VIII — astrolábio dos dez cantos
-     ===================================================================== */
-  var CANTOS = [
-    ['Canto I · A partida e o Olimpo',
-     'Proposição, invocação e dedicatória abrem o poema. Os deuses se reúnem no <b>Olimpo</b> para decidir o destino da armada: <b>Vénus</b> e <b>Marte</b> protegem os portugueses, <b>Baco</b> quer impedi-los. A frota chega a Moçambique.'],
-    ['Canto II · As ciladas de Mombaça',
-     'Os mouros armam duas ciladas, incentivados por Baco. <b>Vénus e as ninfas</b> impedem que as naus entrem no porto de Mombaça. A armada chega a <b>Melinde</b>, onde é bem recebida pelo rei.'],
-    ['Canto III · A história de Portugal',
-     'A pedido do rei de Melinde, <b>Vasco da Gama conta a história de Portugal</b>, de Luso até D. Manuel. É aqui que aparece o episódio mais famoso do poema: <b>Inês de Castro</b>, morta por razão de Estado.'],
-    ['Canto IV · O Velho do Restelo',
-     'A narrativa chega a D. Manuel e ao sonho que autoriza a viagem. Na partida de Belém, um ancião — <b>o Velho do Restelo</b> — critica a ambição e o custo humano das navegações.'],
-    ['Canto V · O Adamastor',
-     'A viagem propriamente dita: o fogo de Santelmo, o escorbuto e, no Cabo das Tormentas, o gigante <b>Adamastor</b>, que amaldiçoa os portugueses que ousarem repetir aquela travessia.'],
-    ['Canto VI · A tempestade',
-     'Já no Índico, <b>Baco convoca os deuses do mar</b> e provoca uma tempestade para afundar a frota. Vénus e as ninfas acalmam os ventos. A armada chega enfim a <b>Calicute</b>, na Índia.'],
-    ['Canto VII · A chegada à Índia',
-     'Descrição da Índia e de seus povos. O Gama desembarca e é recebido pelo <b>Samorim</b> e pelo <b>Catual</b>, o governador — que quer entender de onde vem aquela gente.'],
-    ['Canto VIII · As intrigas',
-     'Paulo da Gama explica ao Catual as figuras pintadas nas bandeiras, contando de novo a história portuguesa. Os mouros conspiram, e <b>Vasco da Gama é retido</b> até conseguir negociar a saída.'],
-    ['Canto IX · A Ilha dos Amores',
-     'De volta ao mar, os navegantes encontram a <b>Ilha dos Amores</b>, criada por Vénus como prêmio. É a recompensa simbólica pelo esforço — e uma das passagens mais líricas do poema.'],
-    ['Canto X · A máquina do mundo',
-     'No banquete da ilha, uma ninfa <b>profetiza o futuro do império português</b>. Tétis mostra ao Gama a <b>máquina do mundo</b>, e o poema termina com o regresso a Portugal e um apelo ao rei.']
-  ];
-  var girarCanto;
-  (function astrolabio(){
-    var caixa = document.getElementById('astro');
-    var roda = document.getElementById('roda');
-    var painel = document.getElementById('p-canto');
-    var passo = 36, raio = 162, giro = 0, indice = 0, alvoGiro = 0, animando = false;
-    var botoes = [];
-
-    /* o raio sai da largura do próprio aro: no celular ele encolhe junto */
-    function medirRaio(){
-      raio = Math.round((caixa.clientWidth || 404) * .40);
-      for(var k = 0; k < botoes.length; k++){
-        botoes[k].style.transform = 'rotate(' + (k * passo) + 'deg) translateY(-' + raio + 'px)';
-      }
-    }
-
-    for(var i = 0; i < 10; i++){
-      var d = document.createElement('div');
-      d.className = 'canto';
-      d.style.transform = 'rotate(' + (i * passo) + 'deg) translateY(-' + raio + 'px)';
-      var b = document.createElement('b');
-      b.textContent = ROMANOS[i];
-      b.dataset.canto = i;
-      d.appendChild(b);
-      roda.appendChild(d);
-      botoes.push(d);
-    }
-
-    function endireitar(){
-      for(var k = 0; k < 10; k++){
-        botoes[k].firstChild.style.transform = 'rotate(' + (-giro - k * passo) + 'deg)';
-      }
-    }
-    function aplicar(){
-      roda.style.transform = 'rotate(' + giro + 'deg)';
-      endireitar();
-    }
-    function texto(i){
-      document.getElementById('canto-num').textContent = ROMANOS[i];
-      document.getElementById('canto-t').textContent = CANTOS[i][0];
-      document.getElementById('canto-p').innerHTML = CANTOS[i][1];
-      botoes.forEach(function(b, k){ b.classList.toggle('on', k === i); });
-      repintar(painel);
-    }
-    function para(i, semAnimar){
-      indice = ((i % 10) + 10) % 10;
-      texto(indice);
-      var destino = -indice * passo;
-      while(destino - giro > 180) destino -= 360;
-      while(destino - giro < -180) destino += 360;
-      if(semAnimar){ giro = destino; aplicar(); return; }
-      alvoGiro = destino;
-      if(animando) return;
-      animando = true;
-      juntar(function(dt){
-        var d = alvoGiro - giro;
-        giro += d * Math.min(1, dt / 120) * 1.6;
-        if(Math.abs(alvoGiro - giro) < .12){ giro = alvoGiro; aplicar(); animando = false; return false; }
-        aplicar();
-        return true;
-      });
-    }
-    girarCanto = function(passoDir){ para(indice + passoDir); };
-    medirRaio();
-    para(0, true);
-    addEventListener('resize', (function(){
-      var t;
-      return function(){ clearTimeout(t); t = setTimeout(medirRaio, 180); };
-    })());
-
-    roda.addEventListener('click', function(e){
-      var b = e.target.closest('b[data-canto]');
-      if(!b || arrastou) return;
-      e.stopPropagation();
-      para(+b.dataset.canto);
-    });
-
-    var a0 = 0, g0 = 0;
-    function angulo(e){
-      var r = caixa.getBoundingClientRect();
-      return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI;
-    }
-    arrastavel(caixa,
-      function(e){ a0 = angulo(e); g0 = giro; },
-      function(e){
-        var d = angulo(e) - a0;
-        if(d > 180) d -= 360; if(d < -180) d += 360;
-        if(Math.abs(d) > 3) arrastou = true;
-        giro = g0 + d; aplicar();
-      },
-      function(){ if(arrastou) para(Math.round(-giro / passo)); });
-  })();
-
-  /* =====================================================================
-     14. FÓLIO IX — a balança
-     ===================================================================== */
-  (function balanca(){
-    var bal = document.getElementById('balanca');
-    var cris = document.getElementById('col-cris');
-    var mito = document.getElementById('col-mito');
-    var painel = document.getElementById('p-relig');
-    var ladoCris = true;
-    var TEXTO = {
-      cris: ['Como isso convive no mesmo livro?',
-        'O próprio Camões resolve a contradição dentro do poema: no <b>Canto X</b>, os deuses antigos são chamados de <b>“fingimentos”</b> — invenções da poesia para representar as forças que movem os homens. A fé é a verdade; a mitologia é a linguagem literária herdada dos clássicos.'],
-      mito: ['Quem move a história do poema?',
-        'Na <b>ação</b> de Os Lusíadas, quem empurra ou atrapalha a viagem são os <b>deuses antigos</b>: Vénus e Marte de um lado, Baco de outro. O cristianismo aparece no <b>propósito</b> e nos valores dos portugueses; a mitologia, na trama. Os dois planos correm juntos do primeiro ao último canto.']
-    };
-    document.getElementById('bt-balanca').addEventListener('click', function(e){
-      e.stopPropagation();
-      ladoCris = !ladoCris;
-      bal.style.setProperty('--inc', (ladoCris ? -7 : 7) + 'deg');
-      cris.classList.toggle('pesa', ladoCris);
-      mito.classList.toggle('pesa', !ladoCris);
-      var d = TEXTO[ladoCris ? 'cris' : 'mito'];
-      document.getElementById('relig-t').textContent = d[0];
-      document.getElementById('relig-p').innerHTML = d[1];
-      repintar(painel);
-    });
-  })();
-
-  /* =====================================================================
-     15. FÓLIO X — carta lacrada
-     ===================================================================== */
-  var CURIOS = [
-    ['O nome “Classicismo” vem da valorização dos autores considerados <b>clássicos</b> da Grécia e de Roma.',
-     'Clássico, no período, queria dizer “modelo a ser imitado” — e não simplesmente “antigo”.'],
-    ['Camões teve uma vida marcada por <b>viagens e experiências militares</b>.',
-     'Perdeu o olho direito lutando em Ceuta e chegou a naufragar no rio Mekong, salvando o manuscrito de Os Lusíadas.'],
-    ['A literatura do período foi muito influenciada pelas <b>grandes navegações</b>.',
-     'Sem as viagens portuguesas não existiria o assunto de Os Lusíadas: o mar é personagem do poema.'],
-    ['O <b>soneto</b> tornou-se uma das formas poéticas mais importantes da época.',
-     'Chegou da Itália com Sá de Miranda, em 1527, e nunca mais saiu da poesia em língua portuguesa.'],
-    ['Camões é tão importante que o dia de sua morte, <b>10 de junho</b>, é celebrado como o Dia de Portugal.',
-     'A data oficial é “Dia de Portugal, de Camões e das Comunidades Portuguesas”.']
-  ];
-  (function lacrada(){
-    var carta = document.getElementById('carta-lacre');
-    var nums = document.getElementById('curio-nums');
-    var vistas = {}, atualC = -1;
-    var botoes = [];
-
-    CURIOS.forEach(function(_, i){
-      var b = document.createElement('button');
-      b.className = 'bt mini ix';
-      b.style.padding = '7px 12px';
-      b.textContent = i + 1;
-      b.addEventListener('click', function(e){ e.stopPropagation(); revelar(i); });
-      nums.appendChild(b);
-      botoes.push(b);
-    });
-
-    function pintar(i){
-      atualC = i; vistas[i] = true;
-      document.getElementById('curio-n').textContent = i + 1;
-      document.getElementById('curio-txt').innerHTML = CURIOS[i][0];
-      document.getElementById('curio-extra').innerHTML = CURIOS[i][1];
-      document.getElementById('curio-placar').textContent = Object.keys(vistas).length;
-      botoes.forEach(function(b, k){ b.classList.toggle('on', k === i); });
-      carta.classList.add('aberta');
-    }
-    function revelar(i){
-      if(i === atualC && carta.classList.contains('aberta')){
-        carta.classList.remove('aberta'); atualC = -1;
-        botoes.forEach(function(b){ b.classList.remove('on'); });
-        return;
-      }
-      if(carta.classList.contains('aberta')){
-        carta.classList.remove('aberta');
-        setTimeout(function(){ pintar(i); }, 300);
-      } else pintar(i);
-    }
-    function sortear(){
-      var faltam = CURIOS.map(function(_, i){ return i; }).filter(function(i){ return !vistas[i]; });
-      revelar(faltam.length ? faltam[Math.floor(Math.random() * faltam.length)]
-                            : Math.floor(Math.random() * CURIOS.length));
-    }
-    document.getElementById('bt-curio').addEventListener('click', function(e){ e.stopPropagation(); sortear(); });
-    carta.addEventListener('click', function(e){ e.stopPropagation(); (atualC < 0) ? sortear() : revelar(atualC); });
-    carta.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); (atualC < 0) ? sortear() : revelar(atualC); }
-    });
-  })();
-
-  /* =====================================================================
-     16. FÓLIO XI — quiz
-     ===================================================================== */
-  (function quiz(){
-    var Q = [
-      ['Em que século o Classicismo se desenvolveu na Europa?', ['Século XIV','Século XVI','Século XIX'], 1],
-      ['Qual acontecimento marca o início do Classicismo em Portugal?',
-       ['A publicação de Os Lusíadas','A morte de Camões','O retorno de Sá de Miranda da Itália, em 1527'], 2],
-      ['Qual é a obra mais importante de Luís de Camões?', ['Os Lusíadas','Menina e Moça','Castro'], 0],
-      ['Quantos cantos tem Os Lusíadas?', ['Cinco','Dez','Catorze'], 1],
-      ['O que o antropocentrismo coloca no centro?', ['A Igreja','A natureza','O ser humano e a razão'], 2],
-      ['Que data é celebrada como Dia de Portugal e de Camões?', ['10 de junho','25 de abril','1º de dezembro'], 0]
-    ];
-    var perg = document.getElementById('quiz-perg');
-    var ops = document.getElementById('quiz-ops');
-    var placar = document.getElementById('quiz-placar');
-    var i = 0, acertos = 0, travado = false;
-
-    function desenhar(){
-      if(i >= Q.length){
-        perg.innerHTML = '<s>Fim do quiz</s>' + (
-          acertos === Q.length ? 'Seis de seis. O conteúdo está dominado.' :
-          acertos >= 4 ? 'Boa! ' + acertos + ' de 6 — falta pouco para o placar cheio.' :
-          'Você acertou ' + acertos + ' de 6. Vale voltar aos fólios II, IV e VIII.');
-        ops.innerHTML = '';
-        return;
-      }
-      var q = Q[i];
-      perg.innerHTML = '<s>Pergunta ' + (i + 1) + ' de ' + Q.length + '</s>' + q[0];
-      ops.innerHTML = '';
-      q[1].forEach(function(txt, k){
-        var b = document.createElement('button');
-        b.className = 'op ix';
-        b.textContent = txt;
-        b.addEventListener('click', function(e){
-          e.stopPropagation();
-          if(travado) return;
-          travado = true;
-          ops.children[q[2]].classList.add('certa');
-          if(k !== q[2]) b.classList.add('errada'); else acertos++;
-          placar.textContent = acertos;
-          setTimeout(function(){ i++; travado = false; desenhar(); }, 1150);
-        });
-        ops.appendChild(b);
-      });
-    }
-    document.getElementById('quiz-refazer').addEventListener('click', function(e){
-      e.stopPropagation(); i = 0; acertos = 0; travado = false; placar.textContent = '0'; desenhar();
-    });
-    desenhar();
-  })();
-
-  /* =====================================================================
-     17. UTILITÁRIOS
-     ===================================================================== */
-  function repintar(el){
-    el.classList.remove('troca'); void el.offsetWidth; el.classList.add('troca');
-  }
-  function ligarLista(sel, chave, dados, idPainel, ids, classeOn){
-    var botoes = [].slice.call(document.querySelectorAll(sel));
-    var painel = document.getElementById(idPainel);
-    botoes.forEach(function(b){
-      b.addEventListener('click', function(e){
-        e.stopPropagation();
-        var d = dados[+b.dataset[chave]];
-        botoes.forEach(function(o){ o.classList.toggle('on', o === b); });
-        ids.forEach(function(id, k){
-          var el = document.getElementById(id);
-          if(!el || d[k] === undefined) return;
-          if(k === 0) el.textContent = d[0]; else el.innerHTML = d[k];
-        });
-        repintar(painel);
-      });
-    });
-  }
 
   /* nome do professor, guardado no navegador */
   (function professor(){
@@ -2540,7 +1965,7 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
   })();
 
   /* =====================================================================
-     18. ABERTURA
+     8. ABERTURA
      ===================================================================== */
   var inicio = parseInt((location.hash || '').replace('#', ''), 10);
   folhas.forEach(function(s){ s.classList.remove('on', 'tras'); });
@@ -2548,7 +1973,7 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
   ir((inicio >= 1 && inicio <= n) ? inicio - 1 : 0, false);
 
   /* =====================================================================
-     19. AUDITORIA DE TRANSBORDO (?audit)
+     9. AUDITORIA DE TRANSBORDO (?audit)
      ===================================================================== */
   if(location.search.indexOf('audit') >= 0){
     setTimeout(function(){
@@ -2561,8 +1986,7 @@ for(var _e of document.querySelectorAll("[data-img]")) _e.src=window.__IMG[_e.da
         s.classList.add('on');
         var baixo = 0, dir = 0, pior = '';
         s.querySelectorAll('*').forEach(function(el){
-          if(el.closest('.solta,.fundo,.astro-deco')) return;
-          if(el.classList.contains('abs')) return;
+          if(el.closest('.solta,.fundo,.astro-deco,.nau-passeio')) return;
           var r = el.getBoundingClientRect();
           if(!r.width && !r.height) return;
           var b = (r.bottom - pr.top) / k, d = (r.right - pr.left) / k;
