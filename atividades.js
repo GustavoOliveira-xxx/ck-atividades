@@ -5,27 +5,24 @@ window.ACERVO_CK = [
     subtitulo: "Movimento literário do Renascimento",
     disciplina: "Língua Portuguesa",
     sigla: "LP",
-    tipo: "Apresentação interativa em HTML",
+    tipo: "Apresentação em HTML · 11 fólios",
     data: "2026-09-25",
     turma: "2º C — M-Tec Informática para Internet",
     resumo:
       "Onze fólios sobre o Classicismo, montados como uma carta náutica do século XVI: velino, " +
       "tinta ferro-gálica, ouro e lacre, com as páginas virando como as de um livro. O conteúdo " +
       "vai do que foi o movimento ao início em Portugal com Sá de Miranda em 1527, passando pelas " +
-      "dez características, pelos quatro autores centrais, por Camões, por Os Lusíadas e pela " +
-      "mistura entre cristianismo e mitologia. Cada fólio tem um instrumento próprio: esfera " +
-      "armilar, rosa dos ventos de dez pontas com agulha, astrolábio giratório dos dez cantos, " +
-      "carrossel 3D dos autores, cortina que se arrasta entre a Idade Média e o Renascimento, " +
-      "balança que inclina, carta lacrada e um quiz de seis perguntas. Oito fólios têm foto de " +
-      "fundo em sépia sobre o velino, que entra derivando a cada virada de página. No celular a " +
+      "dez características, pelos quatro autores centrais, por Camões, por Os Lusíadas, pela " +
+      "mistura entre cristianismo e mitologia e pelas curiosidades. Tudo fica à vista no fólio: " +
+      "quem apresenta fala, não clica. O movimento está na decoração — esfera armilar girando, " +
+      "rosa dos ventos, astrolábio dos dez cantos, balança que oscila, caravela cruzando a maré, " +
+      "pó de ouro e fotos de fundo em sépia que entram derivando a cada virada. No celular a " +
       "apresentação se reorganiza em coluna, com texto em tamanho de leitura. Arquivo único, com " +
       "as imagens embutidas: abre offline, em qualquer navegador, a 60 quadros por segundo.",
     destaques: [
       "11 fólios · 6 integrantes",
-      "11 interações diferentes",
+      "Conteúdo todo à vista",
       "Esfera armilar e astrolábio",
-      "Rosa dos ventos de 10 pontas",
-      "Carrossel 3D arrastável",
       "Fotos de fundo em sépia",
       "Lê bem no celular",
       "60 fps · funciona offline",
@@ -41,22 +38,8 @@ window.ACERVO_CK = [
       {
         rotulo: "Abrir apresentação",
         href: "atividades/classicismo/apresentacao-classicismo.html",
-        tipo: "11 fólios interativos",
+        tipo: "11 fólios · arquivo único",
         icone: "slides",
-      },
-      {
-        rotulo: "Roteiro da equipe",
-        href: "atividades/classicismo/ROTEIRO-APRESENTACAO.md",
-        tipo: "Divisão dos fólios entre os 6 integrantes",
-        icone: "doc",
-        baixar: true,
-      },
-      {
-        rotulo: "Pacote de entrega",
-        href: "atividades/classicismo/entrega-classicismo-ck.zip",
-        tipo: "ZIP · apresentação, PDF, roteiro e imagens",
-        icone: "doc",
-        baixar: true,
       },
     ],
     status: "pronta",
