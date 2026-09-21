@@ -604,20 +604,22 @@ img{-webkit-user-drag:none;user-select:none}
 .metas i{font-style:normal;border:1px solid rgba(168,121,28,.55);padding:6px 10px;
   color:var(--tinta-2);background:rgba(255,252,243,.6)}
 
-.equipe{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.pessoa{position:relative;padding:11px 14px 11px 58px;overflow:hidden;
+/* Duas colunas: com o nome sozinho no cartão, três colunas quebravam os nomes
+   compridos em duas linhas e a fileira ficava desencontrada. */
+.equipe{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+/* Cartão de uma linha só: o nome fica centrado ao lado da inicial, sem a
+   segunda linha de fólios que havia antes. */
+.pessoa{position:relative;min-height:60px;padding:12px 15px 12px 60px;overflow:hidden;
+  display:grid;align-items:center;
   background:linear-gradient(150deg,rgba(255,252,243,.92),rgba(233,217,184,.76));
   border:1px solid var(--linha);transition:transform .3s ease,border-color .3s ease;will-change:transform}
 .pessoa:hover{transform:translate3d(0,-4px,0);border-color:rgba(142,35,34,.6)}
-.pessoa .av{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+.pessoa .av{position:absolute;left:13px;top:50%;transform:translateY(-50%);
   width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
   background:linear-gradient(140deg,#d6aa46,#8a6318);
   font:700 16px/1 var(--serif);color:#fff8ea}
 .pessoa.lid .av{background:linear-gradient(140deg,#b8433a,#7e1f1e)}
-.pessoa b{display:block;font:700 15.2px/1.22 var(--serif);color:var(--tinta)}
-.pessoa span{display:block;margin-top:3px;font:600 10px/1 var(--ui);letter-spacing:.17em;
-  text-transform:uppercase;color:var(--tinta-3)}
-.pessoa.lid span{color:var(--lacre)}
+.pessoa b{display:block;font:700 16px/1.24 var(--serif);color:var(--tinta)}
 
 /* ======================= NAVEGAÇÃO ======================= */
 .folio{position:absolute;left:0;right:0;bottom:22px;z-index:10;text-align:center;
@@ -822,7 +824,7 @@ body.deitado .dica-nav{display:none}
     </div>
 
     <div class="equipe rv d3" style="margin-top:22px">
-      <div class="pessoa lid"><span class="av">G</span><b>Gustavo Oliveira dos Santos</b>div>
+      <div class="pessoa lid"><span class="av">G</span><b>Gustavo Oliveira dos Santos</b></div>
       <div class="pessoa"><span class="av">É</span><b>Éric Estrela Vieira</b></div>
       <div class="pessoa"><span class="av">G</span><b>Gabriel Heanna dos Reis</b></div>
       <div class="pessoa"><span class="av">P</span><b>Paulo Henrique de Lima Silva</b></div>
