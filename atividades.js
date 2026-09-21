@@ -5,15 +5,15 @@ window.ACERVO_CK = [
     subtitulo: "Movimento literário do Renascimento",
     disciplina: "Língua Portuguesa",
     sigla: "LP",
-    tipo: "Apresentação em HTML · 11 fólios",
+    tipo: "Apresentação em HTML · 13 fólios",
     data: "2026-09-25",
     turma: "2º C — M-Tec Informática para Internet",
     resumo:
-      "Onze fólios sobre o Classicismo, montados como uma carta náutica do século XVI: velino, " +
+      "Treze fólios sobre o Classicismo, montados como uma carta náutica do século XVI: velino, " +
       "tinta ferro-gálica, ouro e lacre, com as páginas virando como as de um livro. O conteúdo " +
       "vai do que foi o movimento ao início em Portugal com Sá de Miranda em 1527, passando pelas " +
-      "dez características, pelos quatro autores centrais, por Camões, por Os Lusíadas, pela " +
-      "mistura entre cristianismo e mitologia e pelas curiosidades. Tudo fica à vista no fólio: " +
+      "dez características, pelo soneto, pelos quatro autores centrais, por Camões, por Os " +
+      "Lusíadas, pela mistura entre cristianismo e mitologia e pelas curiosidades. Tudo fica à vista no fólio: " +
       "quem apresenta fala, não clica. O movimento está na decoração — esfera armilar girando, " +
       "rosa dos ventos, astrolábio dos dez cantos, balança que oscila, caravela cruzando a maré, " +
       "pó de ouro e fotos de fundo em sépia que entram derivando a cada virada. A composição é a " +
@@ -21,10 +21,11 @@ window.ACERVO_CK = [
       "inteiro, sem reorganizar nada. Arquivo único, com as imagens embutidas: abre offline, em " +
       "qualquer navegador, a 60 quadros por segundo.",
     destaques: [
-      "11 fólios · 6 integrantes",
+      "13 fólios · 6 integrantes",
       "Conteúdo todo à vista",
       "Esfera armilar e astrolábio",
       "Retratos dos quatro autores",
+      "A virada e o mapa do soneto",
       "Mesma carta no PC e no celular",
       "60 fps · funciona offline",
     ],
@@ -39,7 +40,7 @@ window.ACERVO_CK = [
       {
         rotulo: "Abrir apresentação",
         href: "atividades/classicismo/apresentacao-classicismo.html",
-        tipo: "11 fólios · arquivo único",
+        tipo: "13 fólios · arquivo único",
         icone: "slides",
       },
     ],
