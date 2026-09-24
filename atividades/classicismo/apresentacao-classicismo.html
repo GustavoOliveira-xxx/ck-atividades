@@ -38,18 +38,14 @@ body{font-family:var(--serif);color:var(--tinta);-webkit-font-smoothing:antialia
 #palco{
   position:absolute;left:0;top:0;width:1600px;height:900px;
   transform-origin:0 0;overflow:hidden;
-  /* velino: gradientes estáticos, sem filtro e sem mesclagem — barato de compor */
   background:
     radial-gradient(64% 52% at 18% 14%, rgba(255,252,242,.92), rgba(255,252,242,0) 60%),
     radial-gradient(58% 60% at 86% 88%, rgba(204,176,128,.42), rgba(204,176,128,0) 62%),
     radial-gradient(120% 120% at 50% 40%, #f7edd8 0%, #efe1c3 46%, #e0cca4 74%, #cdb283 100%);
 }
-
-/* ---------- camada de carta: linhas de rumo, malha e textura (tudo estático) ---------- */
 #carta{position:absolute;inset:0;z-index:0;pointer-events:none}
 #rumos{position:absolute;inset:0;width:100%;height:100%;opacity:.34}
-/* Pó de ouro: doze motas com animação só de transform. Em canvas, a mesma
-   coisa custava a subida de uma textura inteira por quadro. */
+
 .po{position:absolute;inset:0;overflow:hidden}
 .po i{position:absolute;bottom:-14px;width:5px;height:5px;border-radius:50%;
   background:radial-gradient(circle,rgba(226,186,96,.95),rgba(184,140,50,0) 70%);
@@ -89,32 +85,22 @@ body{font-family:var(--serif);color:var(--tinta);-webkit-font-smoothing:antialia
 .cantoneira.so{bottom:22px;left:22px;transform:scaleY(-1)}
 .cantoneira.se{bottom:22px;right:22px;transform:scale(-1)}
 
-/* ---------- maré de tinta: uma única animação de translateX ---------- */
 .mare{position:absolute;left:0;right:0;bottom:44px;height:82px;z-index:1;pointer-events:none;opacity:.30;overflow:hidden}
 .mare svg{position:absolute;left:0;top:0;width:3200px;height:82px;animation:maré 26s linear infinite}
 .mare.funda svg{animation-duration:38s;animation-direction:reverse;opacity:.6}
 @keyframes maré{from{transform:translate3d(0,0,0)}to{transform:translate3d(-1600px,0,0)}}
 
-/* ======================= INSTRUMENTOS 3D ======================= */
-
-/* A esfera armilar é desenhada no canvas (ver bloco 4 do script):
-   sete aros com sombreamento de profundidade, numa única camada de composição.
-   Em CSS 3D, os mesmos aros custavam metade do orçamento de cada quadro. */
-
-/* Astrolábio / rosa dos ventos em disco — duas coroas girando em sentidos opostos */
 .astro-deco{position:absolute;pointer-events:none;z-index:1;border-radius:50%;
   animation:girar 72s linear infinite}
 .astro-deco.inv{animation-duration:96s;animation-direction:reverse}
 @keyframes girar{to{transform:rotate(360deg)}}
 
-/* Selo de lacre */
 .lacre{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;position:relative;
   background:radial-gradient(56% 56% at 36% 28%,#c4463c,#8e2322 58%,#5e1513);
   box-shadow:0 12px 26px rgba(70,16,14,.45),inset 0 2px 6px rgba(255,180,170,.34),inset 0 -6px 14px rgba(0,0,0,.4);
   font:700 27px/1 var(--serif);color:#f6d9c8;letter-spacing:.06em;
   clip-path:polygon(50% 0,63% 6%,76% 3%,84% 14%,96% 20%,96% 34%,100% 48%,95% 61%,98% 74%,86% 82%,79% 94%,65% 94%,52% 100%,39% 95%,26% 97%,18% 86%,5% 79%,5% 65%,0 51%,6% 38%,3% 25%,15% 17%,22% 5%,36% 6%)}
 
-/* ======================= PÁGINAS ======================= */
 .slide{
   position:absolute;inset:0;z-index:2;padding:42px 72px 78px;
   display:none;contain:layout paint style;isolation:isolate;
@@ -129,7 +115,7 @@ body{font-family:var(--serif);color:var(--tinta);-webkit-font-smoothing:antialia
   from{opacity:0;transform:perspective(2400px) rotateY(34deg) translate3d(-70px,0,-120px)}
   to{opacity:1;transform:none}
 }
-/* sombra da folha virando — some sozinha, não fica animando */
+
 .slide.on::before{
   content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
   background:linear-gradient(100deg,rgba(52,38,16,.42),rgba(52,38,16,.10) 34%,transparent 62%);
@@ -142,7 +128,6 @@ body{font-family:var(--serif);color:var(--tinta);-webkit-font-smoothing:antialia
 .d1{animation-delay:.04s}.d2{animation-delay:.10s}.d3{animation-delay:.16s}.d4{animation-delay:.22s}
 .d5{animation-delay:.28s}.d6{animation-delay:.34s}.d7{animation-delay:.40s}
 
-/* ======================= TIPOGRAFIA ======================= */
 .folio-topo{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
 .folio-topo b{font:700 12.5px/1 var(--ui);letter-spacing:.34em;text-transform:uppercase;color:var(--lacre)}
 .folio-topo span{font:italic 400 16px/1 var(--serif);color:var(--tinta-3);letter-spacing:.02em}
@@ -163,7 +148,6 @@ h1 .cap{font-size:1.24em;color:var(--ouro);text-shadow:0 2px 0 rgba(255,255,255,
 .corpo b{color:var(--tinta);font-weight:700}
 .corpo em{font-style:italic;color:var(--lacre)}
 
-/* capitular iluminada */
 .capitular{
   float:left;margin:4px 14px 2px 0;width:74px;height:74px;display:grid;place-items:center;
   font:700 46px/1 var(--serif);color:#fdf6e4;
@@ -177,12 +161,11 @@ h1 .cap{font-size:1.24em;color:var(--ouro);text-shadow:0 2px 0 rgba(255,255,255,
 .legenda{font:600 12.5px/1.5 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-3)}
 .legenda b{color:var(--lacre)}
 
-/* ======================= PEÇAS DE CONTEÚDO ======================= */
 .grade{display:grid;gap:18px}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
 
-/* ficha de velino com canto dobrado */
+
 .ficha{
   position:relative;padding:17px 20px;overflow:hidden;
   background:linear-gradient(158deg,rgba(255,252,243,.94),rgba(238,226,201,.78));
@@ -206,7 +189,6 @@ h1 .cap{font-size:1.24em;color:var(--ouro);text-shadow:0 2px 0 rgba(255,255,255,
 .ficha li{padding-left:18px;position:relative}
 .ficha li::before{content:"❧";position:absolute;left:0;top:-1px;font-size:12px;color:var(--ouro)}
 
-/* cifra: número em destaque */
 .cifra{
   position:relative;padding:15px 18px;overflow:hidden;
   background:linear-gradient(180deg,rgba(255,252,243,.96),rgba(233,217,184,.9));
@@ -833,7 +815,7 @@ body.deitado .dica-nav{display:none}
     </div>
 
     <p class="legenda rv d5" style="margin-top:16px">
-      Professor(a):
+      Professora: Débora
       <b id="prof" contenteditable="true" spellcheck="false"
          title="Clique para escrever o nome do(a) professor(a)"
          style="border-bottom:2px dotted var(--ouro);padding:0 24px 2px;display:inline-block;
