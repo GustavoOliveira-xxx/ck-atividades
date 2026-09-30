@@ -14,7 +14,9 @@ window.ACERVO_CK = [
       "rodapé como barra de progresso, com um nó de fita para cada round. O conteúdo vai da ficha " +
       "técnica e do contexto da história a Adonis, Rocky, os personagens, o legado de Apollo, os " +
       "seis temas, a evolução no treino, a relação entre mentor e atleta, a grande luta, o impacto " +
-      "na franquia e a conclusão com o grupo. Os itens 3D estão em todos os slides: título em " +
+      "na franquia e a conclusão com o grupo. No fundo, um ringue 3D animado, com plateia e " +
+      "flashes, cuja câmera gira a cada slide; nas fotos, feixes de luz de arena. Os itens 3D " +
+      "estão em todos os slides: título em " +
       "relevo, luvas penduradas que balançam, claquete que bate, medalhões que viram, placa que " +
       "alterna Johnson e Creed, cinturão e prisma que giram com o mouse, escadaria que acende " +
       "degrau por degrau e rolo de filme curvado. Todo o conteúdo fica à vista: a interatividade " +
@@ -24,6 +26,7 @@ window.ACERVO_CK = [
     destaques: [
       "13 slides · 6 integrantes",
       "Conteúdo todo à vista",
+      "Ringue 3D animado no fundo",
       "Itens 3D em todos os slides",
       "Cordas do ringue como progresso",
       "Sumário, holofote e gongo",
