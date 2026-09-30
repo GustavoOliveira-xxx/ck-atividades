@@ -1,5 +1,59 @@
 window.ACERVO_CK = [
   {
+    id: "creed",
+    titulo: "Creed: Nascido para Lutar",
+    subtitulo: "Legado, identidade e superação",
+    disciplina: "Educação Física",
+    sigla: "EF",
+    tipo: "Apresentação em HTML · 13 slides",
+    data: "2026-09-30",
+    turma: "2º C — M-Tec Informática para Internet",
+    resumo:
+      "Treze slides sobre o filme Creed: Nascido para Lutar (2015), montados como uma noite de " +
+      "luta vista do corner: arena escura, luz de ringue e as três cordas do ringue atravessando o " +
+      "rodapé como barra de progresso, com um nó de fita para cada round. O conteúdo vai da ficha " +
+      "técnica e do contexto da história a Adonis, Rocky, os personagens, o legado de Apollo, os " +
+      "seis temas, a evolução no treino, a relação entre mentor e atleta, a grande luta, o impacto " +
+      "na franquia e a conclusão com o grupo. Os itens 3D estão em todos os slides: título em " +
+      "relevo, luvas penduradas que balançam, claquete que bate, medalhões que viram, placa que " +
+      "alterna Johnson e Creed, cinturão e prisma que giram com o mouse, escadaria que acende " +
+      "degrau por degrau e rolo de filme curvado. Todo o conteúdo fica à vista: a interatividade " +
+      "está no sumário, no holofote, no gongo opcional e nas peças que se deixam girar. Arquivo " +
+      "único, com imagens e fontes embutidas: abre offline, a 60 quadros por segundo, e entra " +
+      "sozinho em modo leve em computador sem placa de vídeo.",
+    destaques: [
+      "13 slides · 6 integrantes",
+      "Conteúdo todo à vista",
+      "Itens 3D em todos os slides",
+      "Cordas do ringue como progresso",
+      "Sumário, holofote e gongo",
+      "Mesma composição no PC e no celular",
+      "60 fps · funciona offline",
+    ],
+    tags: [
+      "Seminário", "Cinema", "Filme", "Creed", "Rocky", "Boxe", "Esporte",
+      "HTML", "JavaScript", "3D", "Interativo", "Apresentação",
+    ],
+    cor: "#d42331",
+    href: "atividades/creed/apresentacao-creed.html",
+    recursos: [
+      {
+        rotulo: "Abrir apresentação",
+        href: "atividades/creed/apresentacao-creed.html",
+        tipo: "13 slides · arquivo único",
+        icone: "slides",
+      },
+      {
+        rotulo: "Documento Word",
+        href: "atividades/creed/documentacao-creed.docx",
+        tipo: "Documentação e roteiro de fala",
+        icone: "doc",
+        baixar: true,
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "classicismo",
     titulo: "Classicismo",
     subtitulo: "Movimento literário do Renascimento",
