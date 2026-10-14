@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Fato ou Ruído? · Análise crítica da notícia sobre IA no Medicare</title>
+  <link rel="icon" type="image/webp" href="assets/logo-ck.webp">
+
+  <meta name="description"
+    content="Página interativa de análise crítica da reportagem do Jornal Nacional sobre o agente de IA que acessou um portal do Medicare australiano. Interfaces Web II, 2º C, ETEC Taboão da Serra.">
+  <meta name="author" content="Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva">
+  <meta name="theme-color" content="#07050d">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <canvas class="cena" id="cena" aria-hidden="true"></canvas>
+
+  <header class="topo" id="topo">
+    <div class="topo__barra">
+      <a class="marca" href="#conteudo" aria-label="Fato ou Ruído, início">
+        <img class="marca__logo" src="assets/logo-ck.webp" alt="Logo Conscious Knowledge" width="44" height="44">
+        <span class="marca__nome">Fato ou Ruído?</span>
+      </a>
+
+      <button class="menu-botao" type="button" id="menuBotao" aria-expanded="false" aria-controls="menu">
+        <span class="menu-botao__linhas" aria-hidden="true"></span>
+        <span class="sr">Abrir menu</span>
+      </button>
+
+      <nav class="menu" id="menu" aria-label="Seções da página">
+        <ul>
+          <li><a href="#noticia">Notícia</a></li>
+          <li><a href="#classificar">Classificar</a></li>
+          <li><a href="#fontes">Fontes</a></li>
+          <li><a href="#riscos">Riscos</a></li>
+          <li><a href="#parecer">Parecer</a></li>
+          <li><a href="#placar">Placar</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="progresso" aria-hidden="true"><span id="progressoBarra"></span></div>
+  </header>
+
+  <main id="conteudo">
+
+    <section class="abertura" id="noticia" aria-labelledby="tituloNoticia">
+      <div class="abertura__texto">
+        <p class="selo">Análise crítica · Interfaces Web II · 2º C</p>
+        <h1 id="tituloNoticia">Uma IA entrou no sistema de saúde da Austrália. <em>O que é fato nessa história?</em></h1>
+        <p class="abertura__lead">
+          Em 23 de setembro de 2026, na Assembleia Geral da ONU, o primeiro-ministro Anthony Albanese disse que um
+          agente de inteligência artificial da OpenAI acessou sem autorização um portal de estatísticas do Medicare,
+          o sistema público de saúde australiano. Esta página ajuda você a separar fatos de opiniões, pesar as fontes
+          e escrever o seu próprio parecer.
+        </p>
+
+        <div class="abertura__acoes">
+          <a class="botao botao--primario" href="#classificar">Começar a análise</a>
+          <a class="botao botao--fantasma"
+            href="https://g1.globo.com/jornal-nacional/noticia/2026/09/24/australia-investiga-invasao-do-sistema-de-saude-pela-ia.ghtml"
+            target="_blank" rel="noopener">Ler a reportagem no G1 <span class="sr">(abre em nova aba)</span></a>
+        </div>
+      </div>
+
+      <div class="prisma-palco" aria-hidden="true">
+        <div class="prisma" id="prisma">
+          <span class="prisma__face prisma__face--fato">Fato</span>
+          <span class="prisma__face prisma__face--opiniao">Opinião</span>
+          <span class="prisma__face prisma__face--incerto">Não confirmado</span>
+        </div>
+        <div class="prisma-palco__chao"></div>
+      </div>
+
+      <div class="resumo">
+        <article class="cartao cartao--resumo" data-tilt>
+          <h2>O que a reportagem relata</h2>
+          <ul class="lista-marcada">
+            <li>O agente <strong>teria alcançado arquivos públicos e não públicos</strong> e chegou a gravar arquivos no sistema.</li>
+            <li>Segundo o governo, a empresa só comunicou o caso em <strong>10 de setembro</strong>, cerca de três meses depois.</li>
+            <li>A OpenAI declarou <strong>não ter encontrado indícios</strong> de acesso a prontuários ou dados de pacientes.</li>
+            <li>O governo abriu investigação, avalia medidas legais e iniciou uma <strong>revisão urgente</strong> das regras sobre IA.</li>
+            <li>Um executivo da empresa admitiu no Parlamento que a resposta <strong>"não foi suficientemente boa"</strong>.</li>
+          </ul>
+        </article>
+
+        <article class="cartao cartao--alerta" data-tilt>
+          <h2>Onde as fontes divergem</h2>
+          <ul class="lista-marcada lista-marcada--alerta">
+            <li>A data da invasão aparece como <strong>18 de junho</strong> em uma fonte e <strong>18 de julho</strong> em outra.</li>
+            <li>O governo alertou que <strong>outros portais</strong> poderiam ter sido afetados, mas não confirmou.</li>
+            <li>Uma organização independente alega <strong>atividades desde março</strong>; as autoridades não confirmaram.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="linha" aria-labelledby="tituloLinha">
+        <h2 class="linha__titulo" id="tituloLinha">Linha do tempo do caso</h2>
+        <ol class="linha__lista" id="linhaDoTempo"></ol>
+        <p class="linha__legenda">
+          <span class="ponto ponto--fato"></span> confirmado
+          <span class="ponto ponto--incerto"></span> divergente ou não confirmado
+        </p>
+      </div>
+    </section>
+
+    <section class="secao" id="classificar" aria-labelledby="tituloClassificar">
+      <header class="secao__cabeca">
+        <p class="selo">Exercício 1</p>
+        <h2 id="tituloClassificar">Fato, opinião ou não confirmado?</h2>
+        <p>
+          Leia cada afirmação e escolha a classificação. <strong>Fato verificável</strong> pode ser conferido em
+          documentos ou falas oficiais. <strong>Opinião</strong> é um julgamento. <strong>Não confirmado</strong> é o
+          que alguém disse, mas ainda não foi apurado.
+        </p>
+      </header>
+
+      <div class="painel" role="status" aria-live="polite">
+        <p class="painel__item"><span id="respondidas">0</span> de 6 respondidas</p>
+        <p class="painel__item painel__item--destaque"><span id="acertos">0</span> acertos</p>
+        <p class="painel__item"><span id="pontosClassificacao">0</span> de 60 pontos</p>
+      </div>
+
+      <div class="afirmacoes" id="afirmacoes"></div>
+
+      <div class="acoes-linha">
+        <button class="botao botao--fantasma" type="button" id="mostrarGabarito">Mostrar a resposta da dupla</button>
+        <button class="botao botao--texto" type="button" id="recomecar">Recomeçar o exercício</button>
+      </div>
+    </section>
+
+    <section class="secao" id="fontes" aria-labelledby="tituloFontes">
+      <header class="secao__cabeca">
+        <p class="selo">Exercício 2</p>
+        <h2 id="tituloFontes">Quanto dá para confiar?</h2>
+        <p>
+          Marque as perguntas cuja resposta é <strong>sim</strong>. O nível de confiança é calculado na hora:
+          marcadas ÷ 6 × 100.
+        </p>
+      </header>
+
+      <div class="confianca">
+        <form class="cartao checklist" id="checklist" aria-describedby="checklistAjuda">
+          <fieldset>
+            <legend>Checklist de fontes</legend>
+            <p class="sr" id="checklistAjuda">Cada caixa marcada soma um sexto ao nível de confiança.</p>
+            <div id="perguntas"></div>
+          </fieldset>
+          <div class="acoes-linha">
+            <button class="botao botao--fantasma" type="button" id="compararChecklist">Comparar com a dupla</button>
+            <button class="botao botao--texto" type="reset">Limpar</button>
+          </div>
+        </form>
+
+        <div class="medidor" aria-live="polite">
+          <div class="medidor__disco" id="medidorDisco">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="medidor__trilho" cx="60" cy="60" r="52"></circle>
+              <circle class="medidor__arco" id="medidorArco" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <p class="medidor__valor"><span id="confianca">0</span>%</p>
+          </div>
+          <p class="medidor__rotulo" id="confiancaRotulo">Marque as perguntas ao lado.</p>
+        </div>
+      </div>
+
+      <h3 class="subtitulo">Avaliação das fontes citadas</h3>
+      <div class="filtros" role="group" aria-label="Filtrar fontes por confiabilidade">
+        <button class="filtro is-ativo" type="button" data-nivel="todas" aria-pressed="true">Todas</button>
+        <button class="filtro" type="button" data-nivel="alta" aria-pressed="false">Alta</button>
+        <button class="filtro" type="button" data-nivel="media" aria-pressed="false">Média</button>
+        <button class="filtro" type="button" data-nivel="baixa" aria-pressed="false">Baixa</button>
+      </div>
+
+      <div class="tabela-rolagem" tabindex="0" role="region" aria-labelledby="legendaFontes">
+        <table class="tabela">
+          <caption id="legendaFontes">Fontes citadas na reportagem e o peso de cada uma</caption>
+          <thead>
+            <tr>
+              <th scope="col">Fonte</th>
+              <th scope="col">O que disse</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Interesse no caso</th>
+              <th scope="col">Confiabilidade</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaFontes"></tbody>
+        </table>
+      </div>
+      <p class="nota">Toque ou passe o mouse em uma linha para ver o motivo da nota.</p>
+    </section>
+
+    <section class="secao" id="riscos" aria-labelledby="tituloRiscos">
+      <header class="secao__cabeca">
+        <p class="selo">Riscos, responsáveis e prevenção</p>
+        <h2 id="tituloRiscos">O que deu errado e como evitar</h2>
+        <p>Gire cada cartão para ver quem responde pelo problema e o que poderia ter impedido o caso.</p>
+      </header>
+
+      <div class="riscos" id="riscosGrade"></div>
+    </section>
+
+    <section class="secao" id="parecer" aria-labelledby="tituloParecer">
+      <header class="secao__cabeca">
+        <p class="selo">Exercício 3</p>
+        <h2 id="tituloParecer">Meu parecer crítico</h2>
+        <p>Escolha o principal risco e responda: quem tem responsabilidade e como evitar casos assim? Mínimo de 80 palavras.</p>
+      </header>
+
+      <div class="parecer">
+        <form class="cartao formulario" id="formParecer" novalidate>
+          <div class="campo">
+            <label for="nome">Seu nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" required minlength="3"
+              aria-describedby="erroNome">
+            <p class="campo__erro" id="erroNome" aria-live="polite"></p>
+          </div>
+
+          <div class="campo">
+            <label for="turma">Turma</label>
+            <select id="turma" name="turma" required aria-describedby="erroTurma">
+              <option value="">Selecione</option>
+              <option>2º A</option>
+              <option>2º B</option>
+              <option selected>2º C</option>
+              <option>Outra</option>
+            </select>
+            <p class="campo__erro" id="erroTurma" aria-live="polite"></p>
+          </div>
+
+          <fieldset class="campo" aria-describedby="erroRisco">
+            <legend>Principal risco identificado</legend>
+            <div class="opcoes" id="opcoesRisco"></div>
+            <p class="campo__erro" id="erroRisco" aria-live="polite"></p>
+          </fieldset>
+
+          <div class="campo">
+            <label for="texto">Parecer</label>
+            <textarea id="texto" name="texto" rows="9" required aria-describedby="contador erroTexto"
+              placeholder="Quem tem responsabilidade e como evitar casos assim?"></textarea>
+            <div class="contador" id="contador">
+              <span class="contador__barra"><span id="contadorBarra"></span></span>
+              <span><span id="palavras">0</span> / 80 palavras</span>
+            </div>
+            <p class="campo__erro" id="erroTexto" aria-live="polite"></p>
+          </div>
+
+          <div class="campo campo--linha">
+            <input id="confirmo" name="confirmo" type="checkbox" required aria-describedby="erroConfirmo">
+            <label for="confirmo">Separei no meu texto o que é fato do que ainda não foi confirmado.</label>
+          </div>
+          <p class="campo__erro" id="erroConfirmo" aria-live="polite"></p>
+
+          <div class="acoes-linha">
+            <button class="botao botao--primario" type="submit">Validar parecer</button>
+            <button class="botao botao--texto" type="button" id="usarModelo">Ver o parecer da dupla</button>
+          </div>
+          <p class="aviso" id="avisoForm" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="cartao resultado" id="resultado" aria-labelledby="tituloResultado" hidden>
+          <h3 id="tituloResultado">Parecer validado</h3>
+          <p class="resultado__meta" id="resultadoMeta"></p>
+          <p class="resultado__texto" id="resultadoTexto"></p>
+          <button class="botao botao--fantasma" type="button" id="baixar">Baixar parecer (.txt)</button>
+        </aside>
+      </div>
+
+      <article class="cartao modelo" id="modelo" hidden>
+        <h3>Parecer da dupla</h3>
+        <p class="resultado__meta">Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva · risco principal:
+          acesso não autorizado a sistemas públicos · <span id="palavrasModelo"></span> palavras</p>
+        <p id="textoModelo"></p>
+      </article>
+    </section>
+
+    <section class="secao" id="placar" aria-labelledby="tituloPlacar">
+      <header class="secao__cabeca">
+        <p class="selo">Placar</p>
+        <h2 id="tituloPlacar">Você é um leitor crítico?</h2>
+        <p>A pontuação junta os acertos da classificação (até 60 pontos), o checklist preenchido (até 15) e o parecer validado (25).</p>
+      </header>
+
+      <div class="placar">
+        <div class="moeda" id="moeda" aria-hidden="true">
+          <span class="moeda__face moeda__face--frente" id="moedaValor">0</span>
+          <span class="moeda__face moeda__face--verso">CK</span>
+        </div>
+        <div class="placar__detalhe">
+          <p class="placar__total" aria-live="polite"><span id="total">0</span> de 100 pontos</p>
+          <p class="placar__nivel" id="nivel">Comece pelo exercício 1.</p>
+          <ul class="placar__partes">
+            <li>Classificação <strong id="parteClassificacao">0</strong>/60</li>
+            <li>Checklist <strong id="parteChecklist">0</strong>/15</li>
+            <li>Parecer <strong id="parteParecer">0</strong>/25</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__grade">
+      <div>
+        <img class="rodape__logo" src="assets/logo-ck.webp" alt="Logo Conscious Knowledge" width="72" height="72">
+        <p class="rodape__marca">Conscious Knowledge</p>
+      </div>
+      <div>
+        <h2 class="rodape__titulo">Dupla</h2>
+        <ul>
+          <li>Gustavo Oliveira dos Santos</li>
+          <li>Paulo Henrique de Lima Silva</li>
+        </ul>
+        <p>2º C · Informática para Internet · ETEC Taboão da Serra</p>
+        <p>Interfaces Web II · Prof. Clayton de Almeida Souza · Entrega: 23/10/2026</p>
+      </div>
+      <div>
+        <h2 class="rodape__titulo">Links</h2>
+        <ul>
+          <li><a href="https://g1.globo.com/jornal-nacional/noticia/2026/09/24/australia-investiga-invasao-do-sistema-de-saude-pela-ia.ghtml"
+              target="_blank" rel="noopener">Reportagem original (G1)</a></li>
+          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank" rel="noopener">MDN: HTML</a></li>
+          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank" rel="noopener">MDN: CSS</a></li>
+          <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript" target="_blank" rel="noopener">MDN: JavaScript</a></li>
+          <li><a href="https://github.com/GustavoOliveira-xxx/ck-atividades" target="_blank" rel="noopener">Acervo CK no GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="rodape__nota">
+      Análise feita a partir do resumo dos fatos fornecido na atividade. Fatos e suposições estão separados em toda a página.
+    </p>
+    <div class="rodape__acoes">
+      <button class="botao botao--texto" type="button" id="alternarMovimento" aria-pressed="false">Reduzir animações</button>
+      <a class="botao botao--texto" href="#topo">Voltar ao topo</a>
+    </div>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/cena.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

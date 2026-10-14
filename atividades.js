@@ -1,5 +1,64 @@
 window.ACERVO_CK = [
   {
+    id: "analise-critica-ia",
+    titulo: "Fato ou Ruído?",
+    subtitulo: "Análise crítica da notícia sobre IA no Medicare",
+    disciplina: "Interface Web II",
+    sigla: "IW",
+    tipo: "Página interativa + relatório em PDF",
+    data: "2026-10-23",
+    turma: "2º C · M-Tec Informática para Internet",
+    resumo:
+      "Página de análise crítica da reportagem do Jornal Nacional sobre o agente de IA da OpenAI " +
+      "que acessou sem autorização um portal do Medicare, o sistema público de saúde da Austrália. " +
+      "O leitor classifica seis afirmações como fato, opinião ou não confirmado e recebe o motivo " +
+      "de cada resposta; marca o checklist de fontes e vê o nível de confiança calculado na hora; " +
+      "filtra a tabela das seis fontes citadas por confiabilidade; gira os cartões 3D dos quatro " +
+      "riscos para ver responsáveis e prevenção; e escreve o próprio parecer em um formulário " +
+      "validado, com contador de 80 palavras e download em texto. Tudo soma num placar de 100 " +
+      "pontos. HTML, CSS e JavaScript puro, com fundo 3D em canvas, Dockerfile para publicar " +
+      "em container nginx e relatório em PDF no padrão do manual do CPS.",
+    destaques: [
+      "Dupla · 4º bimestre",
+      "6 afirmações com feedback",
+      "Checklist com nível de confiança",
+      "Tabela de fontes filtrável",
+      "Cartões 3D de riscos",
+      "Formulário validado · 80 palavras",
+      "Placar de 100 pontos",
+      "Dockerfile com nginx",
+    ],
+    tags: [
+      "Projeto", "Análise crítica", "Notícia", "IA", "Segurança Digital",
+      "Formulário", "Tabela", "DOM", "HTML", "CSS", "JavaScript", "Docker",
+      "3D", "Responsivo",
+    ],
+    cor: "#a855f7",
+    href: "atividades/analise-critica-ia/index.html",
+    recursos: [
+      {
+        rotulo: "Abrir página",
+        href: "atividades/analise-critica-ia/index.html",
+        tipo: "Página interativa",
+        icone: "app",
+      },
+      {
+        rotulo: "Arquivo único",
+        href: "atividades/analise-critica-ia/analise-critica-ia.html",
+        tipo: "HTML que abre offline",
+        icone: "codigo",
+      },
+      {
+        rotulo: "Relatório em PDF",
+        href: "atividades/analise-critica-ia/relatorio-analise-critica-ia.pdf",
+        tipo: "Análise, telas e Docker",
+        icone: "doc",
+        baixar: true,
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "creed",
     titulo: "Creed: Nascido para Lutar",
     subtitulo: "Legado, identidade e superação",
