@@ -125,7 +125,7 @@ https://gustavooliveira-xxx.github.io/ck-atividades/atividades/analise-critica-i
 
 - O link do G1 não abriu no ambiente em que a página foi produzida. Toda a análise usa o resumo dos fatos e os pontos de divergência que estão na folha da atividade. Abram a reportagem e confiram antes de entregar.
 - A classificação das afirmações e a avaliação do checklist são as respostas da dupla, com justificativa. A afirmação 1 foi tratada como fato porque foi declarada pelo governo e reconhecida pela empresa; o tamanho exato do acesso ainda está sob investigação.
-- Os prints do Killercoda precisam ser feitos pela dupla, porque o laboratório só funciona com a conta de cada um.
+- As evidências da execução no Killercoda (prints com a explicação de cada comando) estão na seção 8.1 do relatório.
 
 ## Referências
 
