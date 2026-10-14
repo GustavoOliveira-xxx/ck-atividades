@@ -1010,18 +1010,15 @@ td b{color:var(--ink-0)}
     <div class="malha c32 rv d3">
       <div class="cod">
         <div class="barra"><em></em><em></em><em></em><span>js/api.js — chamarGemini()</span></div>
-        <pre id="cod1" style="font-size:12.1px;line-height:1.45"><c>// 1. controlador para poder abortar a requisição</c>
-<k>const</k> controlador = <k>new</k> <f>AbortController</f>();
+        <pre id="cod1" style="font-size:12.1px;line-height:1.45"><k>const</k> controlador = <k>new</k> <f>AbortController</f>();
 <k>const</k> relogio = <f>setTimeout</f>(() => controlador.<f>abort</f>(), <s>30000</s>);
 
-<c>// 2. o corpo no formato que o Gemini espera</c>
 <k>const</k> corpo = {
   contents: [{ role: <s>"user"</s>, parts: [{ text: pergunta }] }],
   systemInstruction: { parts: [{ text: instrucao }] },
   generationConfig: { ...GERACAO }
 };
 
-<c>// 3. a requisição — async/await, sem .then encadeado</c>
 <k>const</k> resposta = <k>await</k> <f>fetch</f>(`${BASE}/${modelo}:generateContent`, {
   method: <s>"POST"</s>,
   headers: {
@@ -1032,13 +1029,11 @@ td b{color:var(--ink-0)}
   signal: controlador.signal
 });
 
-<c>// 4. fetch só rejeita em falha de rede: 4xx/5xx passam</c>
 <k>if</k> (!resposta.ok) {
   <k>const</k> { error } = <k>await</k> resposta.<f>json</f>().<f>catch</f>(() => ({}));
   <k>throw</k> <f>traduzirHttp</f>(resposta.status, error?.message);
 }
 
-<c>// 5. leitura defensiva do JSON aninhado</c>
 <k>const</k> { candidates } = <k>await</k> resposta.<f>json</f>();
 <k>const</k> [primeiro] = candidates ?? [];
 <k>return</k> primeiro?.content?.parts?.[<s>0</s>]?.text ?? <s>""</s>;</pre>

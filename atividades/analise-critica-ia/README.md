@@ -121,14 +121,15 @@ A atividade já está no acervo, no repositório [GustavoOliveira-xxx/ck-ativida
 https://gustavooliveira-xxx.github.io/ck-atividades/atividades/analise-critica-ia/
 ```
 
-## Premissas e limites
+## Observações
 
-- O link do G1 não abriu no ambiente em que a página foi produzida. Toda a análise usa o resumo dos fatos e os pontos de divergência que estão na folha da atividade. Abram a reportagem e confiram antes de entregar.
-- A classificação das afirmações e a avaliação do checklist são as respostas da dupla, com justificativa. A afirmação 1 foi tratada como fato porque foi declarada pelo governo e reconhecida pela empresa; o tamanho exato do acesso ainda está sob investigação.
-- As evidências da execução no Killercoda (prints com a explicação de cada comando) estão na seção 8.1 do relatório.
+- A análise usa a reportagem e o resumo dos fatos da folha da atividade, com os pontos em que as fontes divergem.
+- A afirmação 1 foi classificada como fato porque foi declarada pelo governo e reconhecida pela empresa; o tamanho exato do acesso ainda está sob investigação.
+- A publicação no Killercoda, com os prints e as explicações de cada etapa, está na seção 8.1 do relatório em PDF.
 
 ## Referências
 
 - G1. Jornal Nacional. *Austrália investiga invasão do sistema de saúde pela IA*. 24 set. 2026. Disponível em: <https://g1.globo.com/jornal-nacional/noticia/2026/09/24/australia-investiga-invasao-do-sistema-de-saude-pela-ia.ghtml>.
 - MDN Web Docs. [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML), [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS) e [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript).
 - Docker Hub. [Imagem oficial do nginx](https://hub.docker.com/_/nginx).
+- Killercoda. [Ubuntu Playground](https://killercoda.com/playgrounds/scenario/ubuntu).

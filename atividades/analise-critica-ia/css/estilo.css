@@ -1520,16 +1520,11 @@ textarea:focus {
   margin: 0 0 4px;
 }
 
-.rodape__nota {
-  max-width: var(--largura);
-  margin: 28px auto 0 !important;
-  padding-top: 20px;
-  border-top: 1px solid var(--linha);
-}
-
 .rodape__acoes {
   max-width: var(--largura);
-  margin: 16px auto 0;
+  margin: 28px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--linha);
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
