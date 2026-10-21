@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Lista de Estudos</title>
+  <meta name="description" content="Atividade prática de Interfaces Web II: lista de estudos com jQuery e DOM, por Gustavo Oliveira dos Santos.">
+  <meta name="author" content="Gustavo Oliveira dos Santos">
+  <meta name="theme-color" content="#050409">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/webp" href="img/logo-ck.webp">
+
+  <!-- Fontes da identidade Conscious Knowledge (se não carregarem, o CSS usa fontes do sistema) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CSS separado -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- jQuery por CDN (precisa de internet) e depois o nosso script -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="pular" href="#campoAtividade">Pular para o campo de atividade</a>
+
+  <!-- Cenário 3D decorativo: preenchido pelo script.js, ignorado por leitores de tela -->
+  <div class="cena" id="cena3d" aria-hidden="true">
+    <div class="piso"></div>
+  </div>
+
+  <header class="topo">
+    <div class="marca">
+      <div class="marca-logo">
+        <span class="anel" aria-hidden="true"></span>
+        <img src="img/logo-ck.webp" alt="Logo Conscious Knowledge" width="620" height="620">
+      </div>
+      <div class="marca-texto">
+        <span class="marca-nome">Conscious Knowledge</span>
+        <span class="marca-sub">Interfaces Web II · jQuery e DOM</span>
+      </div>
+    </div>
+    <a class="voltar" href="../../index.html"><span aria-hidden="true">←</span> Acervo CK</a>
+  </header>
+
+  <main>
+    <section class="painel" id="painel" aria-labelledby="titulo">
+      <div class="painel-brilho" aria-hidden="true"></div>
+
+      <p class="selo">Atividade prática</p>
+      <h1 id="titulo">Minha Lista de Estudos</h1>
+      <p class="intro">Digite o que você precisa estudar e clique em <strong>Adicionar</strong> <span class="sem-quebra">(ou aperte <kbd>Enter</kbd>).</span></p>
+
+      <div class="entrada" id="entrada">
+        <label for="campoAtividade" class="rotulo">Atividade de estudo</label>
+        <div class="entrada-linha">
+          <input id="campoAtividade" type="text" placeholder="Digite uma atividade"
+                 maxlength="80" autocomplete="off" aria-describedby="mensagem">
+          <button id="btnAdicionar" type="button">
+            <span class="btn-icone" aria-hidden="true">+</span>
+            <span>Adicionar</span>
+          </button>
+        </div>
+      </div>
+
+      <p id="mensagem" role="status" aria-live="polite"></p>
+
+      <div class="lista-cabecalho">
+        <h2>Atividades</h2>
+        <p id="contador" aria-live="polite">Atividades: 0</p>
+      </div>
+
+      <ul id="listaAtividades" aria-label="Lista de atividades de estudo"></ul>
+    </section>
+
+    <section class="explica" aria-labelledby="titulo-explica">
+      <h2 id="titulo-explica">Entendendo o código</h2>
+      <p class="explica-intro">Respostas das perguntas da atividade. Clique em cada pergunta para abrir.</p>
+
+      <div class="perguntas">
+        <details class="pergunta">
+          <summary><span class="num" aria-hidden="true">1</span><span class="q">Para que serve o seletor <code>$("#campoAtividade")</code>?</span></summary>
+          <p>Ele usa o seletor de <strong>id</strong> do jQuery (o <code>#</code> significa id, igual no CSS) para encontrar na página o elemento com <code>id="campoAtividade"</code>, que é o campo de texto. Com o campo selecionado, o código lê o que foi digitado com <code>.val()</code>, limpa o campo com <code>.val("")</code> e devolve o cursor para ele com <code>.focus()</code>.</p>
+        </details>
+
+        <details class="pergunta">
+          <summary><span class="num" aria-hidden="true">2</span><span class="q">Qual é a função do evento <code>.on("click", ...)</code>?</span></summary>
+          <p>Ele liga um evento ao botão. É como dizer ao navegador: "quando alguém clicar no <code>#btnAdicionar</code>, execute esta função". Sem o <code>.on()</code> a função até existe, mas nunca roda. Aqui a função chamada no clique é <code>adicionarAtividade</code>.</p>
+        </details>
+
+        <details class="pergunta">
+          <summary><span class="num" aria-hidden="true">3</span><span class="q">Por que usamos <code>if (atividade === "")</code>?</span></summary>
+          <p>É a validação. Antes de criar o item, o código confere se o texto está vazio. Como o <code>.trim()</code> tira os espaços do começo e do fim, quem digita só espaços também cai nessa condição. Se estiver vazio, aparece a mensagem de erro e o <code>return</code> encerra a função, então nenhum item em branco entra na lista e o contador não sobe à toa. O <code>===</code> compara o valor e o tipo.</p>
+        </details>
+
+        <details class="pergunta">
+          <summary><span class="num" aria-hidden="true">4</span><span class="q">Qual é a função de <code>.append()</code> neste código?</span></summary>
+          <p>O <code>.append()</code> coloca o novo <code>&lt;li&gt;</code>, criado com <code>$("&lt;li&gt;").text(atividade)</code>, no final da <code>&lt;ul id="listaAtividades"&gt;</code>. É a parte que mexe no DOM: a página ganha um elemento novo sem precisar recarregar. Como o texto entra com <code>.text()</code>, o que a pessoa digita aparece como texto comum e não vira código HTML.</p>
+        </details>
+
+        <details class="pergunta">
+          <summary><span class="num" aria-hidden="true">5</span><span class="q">O que a variável <code>total</code> armazena?</span></summary>
+          <p>A quantidade de atividades adicionadas desde que a página abriu. Ela começa em 0 (<code>let total = 0</code>), soma 1 com <code>total++</code> a cada atividade válida e é usada para mostrar "Atividades: X". É <code>let</code> porque o valor muda, e fica fora da função para não voltar a zero a cada clique. Como nada é salvo no navegador, ao recarregar a página ela recomeça do 0.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p><strong>Gustavo Oliveira dos Santos</strong> · Interfaces Web II · Prof. Clayton de Almeida Souza</p>
+    <p>2º C · M-Tec Informática para Internet · Etec de Taboão da Serra · Entrega: 30/10/2026</p>
+  </footer>
+
+  <noscript>
+    <p class="aviso-js">Esta página precisa de JavaScript ativado para adicionar atividades.</p>
+  </noscript>
+</body>
+</html>
