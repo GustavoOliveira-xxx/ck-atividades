@@ -19,7 +19,6 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
 
   <candidatos>
 
-    <!-- ===================== PRESIDENTE ===================== -->
     <candidato cargo="Presidente" partido="PT" numero="13" foto="luis-inacio-lula">
       <nome>Luiz Inácio Lula da Silva</nome>
       <partido sigla="PT">Partido dos Trabalhadores</partido>
@@ -64,7 +63,6 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
       </propostas>
     </candidato>
 
-    <!-- ===================== GOVERNADOR ===================== -->
     <candidato cargo="Governador" partido="Republicanos" numero="10" foto="tarcisio-de-freitas">
       <nome>Tarcísio de Freitas</nome>
       <partido sigla="Republicanos">Republicanos</partido>
@@ -111,7 +109,6 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
       </propostas>
     </candidato>
 
-    <!-- ===================== SENADOR ===================== -->
     <candidato cargo="Senador" partido="PP" numero="111" foto="guilherme-derrite">
       <nome>Guilherme Derrite</nome>
       <partido sigla="PP">Progressistas</partido>
@@ -156,7 +153,6 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
       </propostas>
     </candidato>
 
-    <!-- ===================== DEPUTADO FEDERAL ===================== -->
     <candidato cargo="Deputado Federal" partido="PSOL" numero="5010" foto="guilherme-boulos">
       <nome>Guilherme Boulos</nome>
       <partido sigla="PSOL">Partido Socialismo e Liberdade</partido>
@@ -202,7 +198,6 @@ const xmlTexto = `<?xml version="1.0" encoding="UTF-8"?>
       </propostas>
     </candidato>
 
-    <!-- ===================== DEPUTADO ESTADUAL ===================== -->
     <candidato cargo="Deputado Estadual" partido="Republicanos" numero="10010" foto="bruna-furlan">
       <nome>Bruna Furlan</nome>
       <partido sigla="Republicanos">Republicanos</partido>

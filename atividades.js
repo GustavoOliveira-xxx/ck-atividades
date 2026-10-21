@@ -5,18 +5,16 @@ window.ACERVO_CK = [
     subtitulo: "Seletores jQuery, eventos, if e DOM",
     disciplina: "Interface Web II",
     sigla: "IW",
-    tipo: "Página interativa com jQuery",
+    tipo: "Página com jQuery + respostas em Word",
     data: "2026-10-30",
     turma: "2º C · M-Tec Informática para Internet",
     resumo:
-      "Lista de estudos inspirada no Painel de Tarefas da aula do Prof. Clayton. A pessoa digita " +
-      "uma atividade, clica em Adicionar ou aperta Enter, e o item entra na lista criado pelo DOM " +
-      "com .append(); o campo vazio (ou só com espaços) é barrado por um if com mensagem de erro, " +
-      "o campo é limpo a cada inclusão e o contador mostra quantas atividades já foram adicionadas. " +
-      "O clique e o Enter chamam a mesma função, sem duplicar a lógica. A página traz as respostas " +
-      "das cinco perguntas da atividade e o visual da CK: cubos 3D no fundo, painel que inclina com " +
-      "o mouse, itens que entram girando e faíscas ao adicionar, tudo desligado para quem pede " +
-      "menos movimento. HTML, CSS e jQuery em arquivos separados, como pede o checklist.",
+      "Lista de estudos feita a partir do Painel de Tarefas da aula. Você digita uma atividade, " +
+      "clica em Adicionar e ela entra na lista; se o campo estiver vazio aparece uma mensagem, o " +
+      "campo fica limpo depois de cada inclusão e o contador mostra quantas atividades já foram " +
+      "adicionadas. Também fiz o desafio extra de adicionar com a tecla Enter, usando a mesma " +
+      "função do botão. HTML, CSS e jQuery em arquivos separados, do jeito que a atividade pede, " +
+      "e as respostas das cinco perguntas em um documento do Word.",
     destaques: [
       "Individual · 4º bimestre",
       "jQuery 3.7.1",
@@ -24,34 +22,33 @@ window.ACERVO_CK = [
       "Desafio extra: Enter",
       "Contador de atividades",
       "5 perguntas respondidas",
-      "Cubos 3D em CSS",
-      "Acessível e responsivo",
     ],
     tags: [
       "Atividade prática", "jQuery", "Eventos", "DOM", "Validação",
-      "HTML", "CSS", "JavaScript", "3D", "Responsivo",
+      "HTML", "CSS", "JavaScript",
     ],
-    cor: "#fec800",
+    cor: "#2563eb",
     href: "atividades/minha-lista-estudos/index.html",
     recursos: [
       {
         rotulo: "Abrir página",
         href: "atividades/minha-lista-estudos/index.html",
-        tipo: "Lista interativa",
+        tipo: "Lista de estudos",
         icone: "app",
       },
       {
         rotulo: "Pasta para entrega",
         href: "atividades/minha-lista-estudos/MinhaListaEstudos.zip",
-        tipo: "index.html, style.css e script.js",
+        tipo: "Código e respostas",
         icone: "codigo",
         baixar: true,
       },
       {
         rotulo: "Respostas",
-        href: "https://github.com/GustavoOliveira-xxx/ck-atividades/blob/main/atividades/minha-lista-estudos/RESPOSTAS.md",
-        tipo: "As 5 perguntas da atividade",
+        href: "atividades/minha-lista-estudos/Respostas_MinhaListaEstudos_Gustavo.docx",
+        tipo: "Documento do Word",
         icone: "doc",
+        baixar: true,
       },
     ],
     status: "pronta",
