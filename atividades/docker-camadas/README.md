@@ -1,5 +1,11 @@
 # Aula 22 — o que você precisa fazer
 
+## Relatório final da dupla
+
+[Baixar o relatório final em PDF](Relatorio_Docker_Gustavo_Paulo_2C.pdf).
+
+O relatório tem seis páginas, com os nomes de Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, turma 2°C, e da professora Stephany Martins Conceicao. Inclui as quatro evidências obrigatórias, uma captura complementar, legendas e as quatro respostas. As cinco capturas reais foram fornecidas pela dupla e conferidas com o enunciado. A formatação aplica as orientações do manual CPS ao relatório curto. O envio à professora ainda precisa ser feito pela dupla.
+
 **Prazo informado no briefing: 23/10/2026.** O horário e o canal de envio não constam no ZIP. Confira a atividade no ambiente da escola. Este roteiro prepara a entrega; não comprova execução.
 
 Dupla: **Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva**. Equipe: Conscious Knowledge. Turma informada no perfil: **2°C**, Informática para Internet, ETEC Taboão da Serra.

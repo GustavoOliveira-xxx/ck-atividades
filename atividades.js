@@ -5,16 +5,16 @@ window.ACERVO_CK = [
     "subtitulo": "Aula 22 · imagens v1/v2 e evidências reais",
     "disciplina": "Computação em Nuvem para Web",
     "sigla": "CN",
-    "tipo": "Laboratório Docker + roteiro + relatório editável",
+    "tipo": "Relatório em PDF + evidências + laboratório Docker",
     "data": "2026-10-23",
     "turma": "2º C · M-Tec Informática para Internet",
-    "resumo": "Preparação da atividade sobre FROM, COPY, histórico de imagens e diferença entre imagem e container. Inclui os arquivos das versões 1 e 2, comandos para executar pessoalmente no Killercoda e relatório editável para inserir quatro capturas reais e revisar as respostas. A execução Docker, as evidências e a entrega ainda estão pendentes.",
+    "resumo": "Relatório da dupla Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, turma 2°C, professora Stephany Martins Conceicao. Reúne as quatro evidências exigidas, uma captura complementar, legendas e quatro respostas. PDF formatado conforme as orientações do manual CPS aplicáveis ao relatório. Pronto para envio à professora; entrega acadêmica não confirmada.",
     "destaques": [
       "Dupla · 4º bimestre",
-      "Dockerfile com nginx:alpine",
-      "Versões 1 e 2 preparadas",
-      "4 prints reais pendentes",
-      "4 respostas para revisar"
+      "5 capturas reais",
+      "4 questões respondidas",
+      "PDF com 6 páginas",
+      "Formatação conforme manual CPS"
     ],
     "tags": [
       "Atividade prática",
@@ -27,12 +27,19 @@ window.ACERVO_CK = [
       "HTML"
     ],
     "cor": "#a855f7",
-    "href": "atividades/docker-camadas/relatorio.html",
+    "href": "atividades/docker-camadas/Relatorio_Docker_Gustavo_Paulo_2C.pdf",
     "recursos": [
       {
-        "rotulo": "Abrir relatório editável",
+        "rotulo": "Baixar relatório final",
+        "href": "atividades/docker-camadas/Relatorio_Docker_Gustavo_Paulo_2C.pdf",
+        "tipo": "PDF com as evidências e respostas",
+        "icone": "doc",
+        "baixar": true
+      },
+      {
+        "rotulo": "Modelo editável do relatório",
         "href": "atividades/docker-camadas/relatorio.html",
-        "tipo": "Inserir os prints reais",
+        "tipo": "Modelo de apoio para novas edições",
         "icone": "app"
       },
       {
@@ -50,7 +57,7 @@ window.ACERVO_CK = [
         "baixar": true
       }
     ],
-    "status": "andamento"
+    "status": "pronta"
   },
   {
     id: "minha-lista-estudos",
