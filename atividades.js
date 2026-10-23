@@ -1,5 +1,58 @@
 window.ACERVO_CK = [
   {
+    "id": "docker-camadas",
+    "titulo": "Camadas e execução de instruções no Docker",
+    "subtitulo": "Aula 22 · imagens v1/v2 e evidências reais",
+    "disciplina": "Computação em Nuvem para Web",
+    "sigla": "CN",
+    "tipo": "Laboratório Docker + roteiro + relatório editável",
+    "data": "2026-10-23",
+    "turma": "2º C · M-Tec Informática para Internet",
+    "resumo": "Preparação da atividade sobre FROM, COPY, histórico de imagens e diferença entre imagem e container. Inclui os arquivos das versões 1 e 2, comandos para executar pessoalmente no Killercoda e relatório editável para inserir quatro capturas reais e revisar as respostas. A execução Docker, as evidências e a entrega ainda estão pendentes.",
+    "destaques": [
+      "Dupla · 4º bimestre",
+      "Dockerfile com nginx:alpine",
+      "Versões 1 e 2 preparadas",
+      "4 prints reais pendentes",
+      "4 respostas para revisar"
+    ],
+    "tags": [
+      "Atividade prática",
+      "Docker",
+      "Dockerfile",
+      "Nginx",
+      "Containers",
+      "Camadas",
+      "Killercoda",
+      "HTML"
+    ],
+    "cor": "#a855f7",
+    "href": "atividades/docker-camadas/relatorio.html",
+    "recursos": [
+      {
+        "rotulo": "Abrir relatório editável",
+        "href": "atividades/docker-camadas/relatorio.html",
+        "tipo": "Inserir os prints reais",
+        "icone": "app"
+      },
+      {
+        "rotulo": "Baixar passo a passo",
+        "href": "atividades/docker-camadas/README.md",
+        "tipo": "Comandos, prints e entrega",
+        "icone": "doc",
+        "baixar": true
+      },
+      {
+        "rotulo": "Dockerfile do laboratório",
+        "href": "atividades/docker-camadas/site-aula2/Dockerfile",
+        "tipo": "FROM e COPY",
+        "icone": "codigo",
+        "baixar": true
+      }
+    ],
+    "status": "andamento"
+  },
+  {
     id: "minha-lista-estudos",
     titulo: "Minha Lista de Estudos",
     subtitulo: "Seletores jQuery, eventos, if e DOM",
