@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atividade de Revisão · Interfaces Web II · Gustavo Oliveira dos Santos</title>
+  <meta name="author" content="Gustavo Oliveira dos Santos">
+  <style>
+    @page {
+      size: A4;
+      margin: 3cm 2cm 2cm 3cm;
+
+      @top-right {
+        content: counter(page);
+        font: 10pt Arial, "Liberation Sans", sans-serif;
+        vertical-align: bottom;
+        padding-bottom: 0.6cm;
+      }
+    }
+
+    @page pre {
+      @top-right {
+        content: none;
+      }
+    }
+
+    html {
+      font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+      font-size: 12pt;
+      color: #000;
+      background: #fff;
+    }
+
+    body {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    p {
+      margin: 0 0 6pt;
+      text-align: justify;
+      text-indent: 1.25cm;
+    }
+
+    p.sem-recuo {
+      text-indent: 0;
+    }
+
+    .pre {
+      page: pre;
+    }
+
+    .folha {
+      break-after: page;
+    }
+
+    .capa,
+    .rosto {
+      height: 24.6cm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      font-size: 14pt;
+      font-weight: bold;
+    }
+
+    .capa p,
+    .rosto p {
+      text-align: center;
+      text-indent: 0;
+      margin: 0;
+    }
+
+    .caixa-alta {
+      text-transform: uppercase;
+    }
+
+    .titulo-trabalho {
+      text-transform: uppercase;
+    }
+
+    .titulo-trabalho span {
+      display: block;
+      text-transform: none;
+      font-weight: bold;
+    }
+
+    .natureza {
+      margin-left: 8cm !important;
+      text-align: justify !important;
+      font-size: 11pt;
+      font-weight: normal;
+      line-height: 1.15;
+    }
+
+    .identificacao {
+      font-size: 12pt;
+      font-weight: normal;
+      line-height: 1.4;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-size: 12pt;
+      margin: 0;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 18pt;
+    }
+
+    h1.centro {
+      text-align: center;
+    }
+
+    .secao {
+      break-before: page;
+    }
+
+    h2 {
+      font-weight: bold;
+      margin: 18pt 0 12pt;
+      break-after: avoid;
+    }
+
+    h3 {
+      font-weight: bold;
+      margin: 12pt 0 6pt;
+      break-after: avoid;
+    }
+
+    .sumario ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sumario li {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4pt;
+    }
+
+    .sumario li .rotulo {
+      white-space: nowrap;
+    }
+
+    .sumario li.nivel1 {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .sumario li.nivel2 {
+      padding-left: 0;
+    }
+
+    .sumario .pontos {
+      flex: 1;
+      border-bottom: 1px dotted #000;
+      transform: translateY(-4px);
+    }
+
+    figure.quadro {
+      margin: 10pt 0 12pt;
+      break-inside: avoid;
+    }
+
+    figure.quadro figcaption {
+      font-size: 10pt;
+      line-height: 1.2;
+      margin-bottom: 4pt;
+    }
+
+    figure.quadro pre {
+      margin: 0;
+      padding: 6pt 8pt;
+      border: 1px solid #000;
+      font: 9.5pt/1.3 "Courier New", "Liberation Mono", monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    figure.quadro .fonte {
+      font-size: 10pt;
+      line-height: 1.2;
+      margin-top: 3pt;
+    }
+
+    table.tempo {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+      line-height: 1.25;
+    }
+
+    table.tempo th,
+    table.tempo td {
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      padding: 4pt 6pt;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    table.tempo th {
+      font-weight: bold;
+    }
+
+    .questao {
+      margin-bottom: 12pt;
+    }
+
+    .questao .pergunta {
+      font-weight: bold;
+      text-indent: 0;
+      break-after: avoid;
+    }
+
+    .questao .fonte-pesquisa {
+      text-indent: 0;
+      font-size: 11pt;
+      line-height: 1.3;
+    }
+
+    .exercicio {
+      margin-bottom: 8pt;
+      break-inside: avoid;
+    }
+
+    .exercicio ol {
+      margin: 0 0 4pt;
+      padding-left: 1.6cm;
+      list-style: lower-alpha;
+    }
+
+    .referencias p {
+      text-align: left;
+      text-indent: 0;
+      line-height: 1;
+      margin: 0 0 12pt;
+      overflow-wrap: anywhere;
+    }
+
+    code {
+      font-family: "Courier New", "Liberation Mono", monospace;
+      font-size: 11pt;
+    }
+
+    body.modo-capa .corpo {
+      display: none;
+    }
+
+    body.modo-corpo .capa {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="folha pre capa">
+    <div>
+      <p class="caixa-alta">Centro Estadual de Educação Tecnológica Paula Souza</p>
+      <p class="caixa-alta">ETEC Taboão da Serra</p>
+      <p>Ensino Médio com Habilitação Profissional de Técnico em Informática para Internet</p>
+    </div>
+    <p>Gustavo Oliveira dos Santos</p>
+    <p class="titulo-trabalho">Atividade de Revisão de Interfaces Web II:<span>JavaScript, jQuery e DOM; IA e Segurança
+        Digital</span></p>
+    <div>
+      <p>Taboão da Serra</p>
+      <p>2026</p>
+    </div>
+  </section>
+
+  <div class="corpo">
+    <section class="folha pre rosto">
+      <p>Gustavo Oliveira dos Santos</p>
+      <div>
+        <p class="titulo-trabalho">Atividade de Revisão de Interfaces Web II:<span>JavaScript, jQuery e DOM; IA e
+            Segurança Digital</span></p>
+      </div>
+      <p class="natureza">Atividade avaliativa apresentada ao componente curricular Interfaces Web II, do curso de
+        Informática para Internet (2º C) da ETEC Taboão da Serra, como revisão dos trabalhos Minha Lista de Estudos e
+        Fato ou Ruído?, sob orientação do Prof. Clayton de Almeida Souza.</p>
+      <div>
+        <p>Taboão da Serra</p>
+        <p>2026</p>
+      </div>
+    </section>
+
+    <section class="folha pre sumario">
+      <h1 class="centro">Sumário</h1>
+      <ol id="sumario"></ol>
+    </section>
+
+    <section class="secao" id="s1" data-sumario="1 INTRODUÇÃO">
+      <h1>1 Introdução</h1>
+      <p>Este trabalho é a minha resolução da Atividade de Revisão de Interfaces Web II, entregue em 23/10/2026. Ele
+        segue a mesma ordem do material do professor: primeiro um resumo de JavaScript, jQuery e DOM, que retoma a
+        atividade Minha Lista de Estudos; depois um resumo sobre IA e Segurança Digital, que retoma a análise crítica
+        feita no trabalho Fato ou Ruído?; e, por fim, as 15 questões dissertativas, respondidas com as minhas palavras
+        e com a fonte de pesquisa de cada resposta.</p>
+      <p>Os exemplos de código vêm dos meus próprios projetos, que estão no repositório ck-atividades no GitHub. No
+        final há exercícios de fixação com gabarito. A mesma revisão também foi feita como página interativa, com a
+        lista funcionando em jQuery, busca nas questões e os exercícios com correção na hora.</p>
+      <p class="sem-recuo"><strong>Identificação:</strong> Gustavo Oliveira dos Santos, 2º C, Informática para
+        Internet, ETEC Taboão da Serra. Professor: Clayton de Almeida Souza. Atividade individual.</p>
+      <p class="sem-recuo" style="text-align:left"><strong>Página interativa:</strong> <span id="linkSite"></span></p>
+    </section>
+
+    <section class="secao" id="s2" data-sumario="2 RESUMO: JAVASCRIPT, JQUERY E DOM">
+      <h1>2 Resumo: JavaScript, jQuery e DOM</h1>
+      <div id="resumoJs"></div>
+    </section>
+
+    <section class="secao" id="s3" data-sumario="3 RESUMO: IA E SEGURANÇA DIGITAL">
+      <h1>3 Resumo: IA e Segurança Digital</h1>
+      <div id="resumoIa"></div>
+    </section>
+
+    <section class="secao" id="s4" data-sumario="4 QUESTIONÁRIO DISSERTATIVO">
+      <h1>4 Questionário dissertativo</h1>
+      <p>As respostas abaixo foram escritas a partir do material da aula, da documentação oficial e dos meus próprios
+        projetos. Em cada uma está indicada a fonte de pesquisa. Pela orientação da atividade, uma questão com dúvida
+        receberia um asterisco (*) e a descrição da dificuldade; nesta entrega nenhuma questão foi marcada.</p>
+      <div id="questoes"></div>
+    </section>
+
+    <section class="secao" id="s5" data-sumario="5 EXERCÍCIOS DE FIXAÇÃO">
+      <h1>5 Exercícios de fixação</h1>
+      <p>Para revisar antes da avaliação, montei seis exercícios rápidos sobre as duas partes. O gabarito comentado está
+        logo depois. Na página interativa eles são corrigidos automaticamente.</p>
+      <div id="exercicios"></div>
+      <h2 data-sumario="5.1 Gabarito comentado">5.1 Gabarito comentado</h2>
+      <div id="gabarito"></div>
+    </section>
+
+    <section class="secao" id="s6" data-sumario="6 CONSIDERAÇÕES FINAIS">
+      <h1>6 Considerações finais</h1>
+      <p>Revisando os dois trabalhos juntos, percebi que eles usam a mesma base. Na Minha Lista de Estudos, o jQuery
+        lê o campo, o if valida e o .append() coloca o item novo no DOM. No Fato ou Ruído?, o JavaScript faz algo
+        parecido, só que com afirmações de uma notícia guardadas em um array de objetos, botões criados pelo DOM e um
+        formulário validado. Nos dois casos a página só fica interativa porque o código reage a eventos e altera a
+        árvore do DOM.</p>
+      <p>Na parte de IA e segurança, o ponto principal foi separar o que é fato, o que é opinião e o que ainda não foi
+        confirmado, e conferir se as fontes concordam. O caso da Austrália mostra que até as datas podem divergir
+        entre veículos, então vale sempre procurar a fonte original. Também ficou claro que segurança digital não é
+        só bloquear: é registrar, monitorar e avisar rápido quando algo dá errado.</p>
+    </section>
+
+    <section class="secao referencias" id="sRef" data-sumario="REFERÊNCIAS">
+      <h1 class="centro">Referências</h1>
+      <div id="referencias"></div>
+    </section>
+  </div>
+
+  <script src="js/dados.js"></script>
+  <script>
+    (function () {
+      const parametros = new URLSearchParams(location.search);
+      document.body.classList.add(parametros.get("modo") === "capa" ? "modo-capa" : "modo-corpo");
+      const paginas = JSON.parse(parametros.get("paginas") || "{}");
+      const SITE = "https://gustavooliveira-xxx.github.io/ck-atividades/atividades/resumo-interfaces-web-ii/";
+
+      const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      let numQuadro = 0;
+
+      function quadro(titulo, codigo) {
+        numQuadro++;
+        return `<figure class="quadro">
+          <figcaption>Quadro ${numQuadro} - ${esc(titulo)}</figcaption>
+          <pre>${esc(codigo)}</pre>
+          <div class="fonte">Fonte: Do próprio autor, 2026.</div>
+        </figure>`;
+      }
+
+      document.getElementById("linkSite").textContent = SITE;
+
+      document.getElementById("resumoJs").innerHTML =
+        `<p></p>` +
+        RESUMO_JS.map((item, i) => `
+        <h2 data-sumario="2.${i + 1} ${esc(item.titulo)}">2.${i + 1} ${esc(item.titulo)}</h2>
+        <p>${esc(item.texto)}</p>
+        ${quadro(item.titulo, item.codigo)}`).join("");
+      document.querySelector("#resumoJs > p").textContent =
+        "Os tópicos abaixo resumem a Parte 1 do material (SOUZA, 2026) e mostram onde cada conceito aparece no código da Minha Lista de Estudos (SANTOS, 2026).";
+
+      document.getElementById("resumoIa").innerHTML =
+        `<p>Esta parte resume a Parte 2 do material (SOUZA, 2026) junto com a análise que fiz no trabalho Fato ou Ruído? (SANTOS; SILVA, 2026). Os dados do caso foram conferidos em reportagens (JORNAL NACIONAL, 2026; HILDEBRAND, 2026; OPENAI..., 2026).</p>` +
+        RESUMO_IA.map((item, i) => `
+        <h2 data-sumario="3.${i + 1} ${esc(item.titulo)}">3.${i + 1} ${esc(item.titulo)}</h2>
+        <p>${esc(item.texto)}</p>`).join("") +
+        `<h2 data-sumario="3.6 Linha do tempo do caso">3.6 Linha do tempo do caso</h2>
+        <figure class="quadro">
+          <figcaption>Quadro ${++numQuadro} - Linha do tempo e grau de confirmação</figcaption>
+          <table class="tempo">
+            <thead><tr><th>Data</th><th>Acontecimento</th><th>Situação</th></tr></thead>
+            <tbody>${LINHA_DO_TEMPO.map((t) => `<tr><td>${esc(t.data)}</td><td>${esc(t.fato)}</td><td>${{ fato: "Fato", divergente: "Fontes divergem", incerto: "Não confirmado" }[t.tipo]}</td></tr>`).join("")}</tbody>
+          </table>
+          <div class="fonte">Fonte: Do próprio autor, 2026, com base em Hildebrand (2026), OpenAI... (2026) e no material da aula.</div>
+        </figure>`;
+
+      document.getElementById("questoes").innerHTML =
+        `<h2 data-sumario="4.1 Parte 1: JavaScript, jQuery e DOM (questões 1 a 10)">4.1 Parte 1: JavaScript, jQuery e DOM (questões 1 a 10)</h2>` +
+        QUESTOES.map((q) => {
+          const titulo = q.n === 11
+            ? `<h2 data-sumario="4.2 Parte 2: IA e Segurança Digital (questões 11 a 15)">4.2 Parte 2: IA e Segurança Digital (questões 11 a 15)</h2>`
+            : "";
+          const fontes = q.fontes.map((c) => `${FONTES[c].curta} (${FONTES[c].cit})`).join("; ");
+          return `${titulo}
+          <div class="questao">
+            <p class="pergunta">${q.n}. ${esc(q.pergunta)}</p>
+            <p><strong>Resposta:</strong> ${esc(q.resposta)}</p>
+            ${q.codigo ? quadro("Exemplo da questão " + q.n, q.codigo) : ""}
+            <p class="fonte-pesquisa"><strong>Fonte de pesquisa:</strong> ${esc(fontes)}.</p>
+          </div>`;
+        }).join("");
+
+      document.getElementById("exercicios").innerHTML = PRATICA.map((p, i) => `
+        <div class="exercicio">
+          <p class="sem-recuo"><strong>Exercício ${i + 1}.</strong> ${esc(p.pergunta)}</p>
+          <ol>${p.opcoes.map((o) => `<li>${esc(o)}</li>`).join("")}</ol>
+        </div>`).join("");
+
+      document.getElementById("gabarito").innerHTML = PRATICA.map((p, i) =>
+        `<p class="sem-recuo"><strong>${i + 1}. Alternativa ${"abc"[p.certa]}</strong> (${esc(p.opcoes[p.certa])}). ${esc(p.porque)}</p>`).join("");
+
+      document.getElementById("referencias").innerHTML =
+        referenciasOrdenadas().map((f) => `<p>${esc(f.abnt)}</p>`).join("");
+
+      const itens = [];
+      document.querySelectorAll(".corpo [data-sumario]").forEach((el) => {
+        const nivel = el.tagName === "SECTION" ? 1 : 2;
+        itens.push({ texto: el.dataset.sumario, nivel });
+      });
+      document.getElementById("sumario").innerHTML = itens.map((it) => `
+        <li class="nivel${it.nivel}"><span class="rotulo">${esc(it.texto)}</span><span class="pontos"></span><span>${paginas[it.texto] || "?"}</span></li>`).join("");
+      window.ITENS_SUMARIO = itens.map((i) => i.texto);
+      document.body.dataset.pronto = "1";
+    })();
+  </script>
+</body>
+
+</html>

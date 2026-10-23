@@ -1,0 +1,7 @@
+_capa.pdf
+_corpo.pdf
+__pycache__/
+*.pyc
+Respostas_Revisao_IWII_*.txt
+.DS_Store
+Thumbs.db

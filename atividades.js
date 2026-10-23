@@ -1,5 +1,60 @@
 window.ACERVO_CK = [
   {
+    id: "resumo-interfaces-web-ii",
+    titulo: "Atividade de Revisão",
+    subtitulo: "jQuery, DOM e IA · resumo e 15 questões",
+    disciplina: "Interface Web II",
+    sigla: "IW",
+    tipo: "Página interativa + relatório em PDF",
+    data: "2026-10-23",
+    turma: "2º C · M-Tec Informática para Internet",
+    resumo:
+      "Revisão dos dois últimos trabalhos, a Minha Lista de Estudos e o Fato ou Ruído?. O resumo " +
+      "explica DOM, jQuery, $(document).ready(), seletores, .on(), .val(), .text(), .append(), let, " +
+      "const e if com o código da lista, e depois o caso da IA no Medicare: fato, opinião e não " +
+      "confirmado, avaliação de fontes e segurança digital. As 15 questões estão respondidas com a " +
+      "fonte de pesquisa de cada uma. Na página, a lista roda ao vivo com jQuery e tabela, as " +
+      "questões têm busca, filtros e o botão para marcar dúvida com asterisco, e há seis exercícios " +
+      "com correção na hora.",
+    destaques: [
+      "Individual · 4º bimestre",
+      "15 questões com fonte",
+      "Lista ao vivo com jQuery",
+      "Tabela e formulário",
+      "Marcar dúvida (*)",
+      "6 exercícios com placar",
+      "PDF no padrão CPS",
+    ],
+    tags: [
+      "Revisão", "jQuery", "DOM", "Eventos", "IA", "Segurança Digital",
+      "Formulário", "Tabela", "HTML", "CSS", "JavaScript", "3D", "Responsivo",
+    ],
+    cor: "#ffc72c",
+    href: "atividades/resumo-interfaces-web-ii/index.html",
+    recursos: [
+      {
+        rotulo: "Abrir página",
+        href: "atividades/resumo-interfaces-web-ii/index.html",
+        tipo: "Resumo, lista e questões",
+        icone: "app",
+      },
+      {
+        rotulo: "Arquivo único",
+        href: "atividades/resumo-interfaces-web-ii/revisao-interfaces-web-ii.html",
+        tipo: "HTML que abre offline",
+        icone: "codigo",
+      },
+      {
+        rotulo: "Relatório em PDF",
+        href: "atividades/resumo-interfaces-web-ii/relatorio-revisao-interfaces-web-ii.pdf",
+        tipo: "Resumo e 15 respostas",
+        icone: "doc",
+        baixar: true,
+      },
+    ],
+    status: "pronta",
+  },
+  {
     "id": "docker-camadas",
     "titulo": "Camadas e execução de instruções no Docker",
     "subtitulo": "Aula 22 · imagens v1/v2 e evidências reais",

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Revisão de Interfaces Web II · jQuery, DOM e IA</title>
+  <link rel="icon" type="image/webp" href="assets/logo-ck.webp">
+
+  <meta name="description"
+    content="Resumo e questionário da Atividade de Revisão de Interfaces Web II: JavaScript, jQuery e DOM; IA e Segurança Digital. Gustavo Oliveira dos Santos, 2º C, ETEC Taboão da Serra.">
+  <meta name="author" content="Gustavo Oliveira dos Santos">
+  <meta name="theme-color" content="#07050d">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <canvas class="cena" id="cena" aria-hidden="true"></canvas>
+
+  <header class="topo">
+    <div class="topo__barra">
+      <a class="marca" href="#inicio" aria-label="Revisão Interfaces Web II, início">
+        <img class="marca__logo" src="assets/logo-ck.webp" alt="Logo Conscious Knowledge" width="44" height="44">
+        <span class="marca__nome">Revisão <b>IW II</b></span>
+      </a>
+
+      <button class="menu-botao" type="button" id="menuBotao" aria-expanded="false" aria-controls="menu">
+        <span class="menu-botao__linhas" aria-hidden="true"></span>
+        <span class="sr">Abrir menu</span>
+      </button>
+
+      <nav class="menu" id="menu" aria-label="Seções da página">
+        <ul>
+          <li><a href="#parte1">jQuery e DOM</a></li>
+          <li><a href="#laboratorio">Laboratório</a></li>
+          <li><a href="#parte2">IA e Segurança</a></li>
+          <li><a href="#questoes">15 questões</a></li>
+          <li><a href="#pratica">Prática</a></li>
+          <li><a href="#referencias">Fontes</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="progresso" aria-hidden="true"><span id="progressoBarra"></span></div>
+  </header>
+
+  <main id="conteudo">
+
+    <section class="abertura" id="inicio" aria-labelledby="tituloPagina">
+      <div class="abertura__texto">
+        <p class="selo">Atividade de Revisão · Interfaces Web II · 4º bimestre</p>
+        <h1 id="tituloPagina">Do clique no botão ao <em>clique na notícia</em>.</h1>
+        <p class="abertura__lead">
+          Resumo dos dois últimos trabalhos, a <strong>Minha Lista de Estudos</strong> (jQuery, eventos, if e DOM)
+          e o <strong>Fato ou Ruído?</strong> (análise crítica do caso da IA no Medicare), com exemplos de código,
+          as 15 questões respondidas com fonte e exercícios para praticar.
+        </p>
+
+        <div class="abertura__acoes">
+          <a class="botao botao--primario" href="#questoes">Ver as 15 respostas</a>
+          <a class="botao botao--fantasma" href="#laboratorio">Testar a lista ao vivo</a>
+        </div>
+
+        <dl class="ficha" aria-label="Identificação">
+          <div><dt>Aluno</dt><dd id="fAluno">Gustavo Oliveira dos Santos</dd></div>
+          <div><dt>Turma</dt><dd>2º C · Informática para Internet</dd></div>
+          <div><dt>Escola</dt><dd>ETEC Taboão da Serra</dd></div>
+          <div><dt>Professor</dt><dd>Clayton de Almeida Souza</dd></div>
+          <div><dt>Entrega</dt><dd><time datetime="2026-10-23">23/10/2026</time></dd></div>
+        </dl>
+      </div>
+
+      <div class="arvore-palco" id="arvorePalco" aria-hidden="true">
+        <div class="arvore" id="arvore3d">
+          <span class="no no--html">&lt;html&gt;</span>
+          <span class="no no--body">&lt;body&gt;</span>
+          <span class="no no--main">&lt;main&gt;</span>
+          <span class="no no--input">#campoAtividade</span>
+          <span class="no no--btn">#btnAdicionar</span>
+          <span class="no no--ul">#listaAtividades</span>
+          <span class="no no--li">&lt;li&gt;</span>
+          <span class="no no--li2">&lt;li&gt;</span>
+          <span class="arvore__chao"></span>
+        </div>
+        <p class="arvore__legenda">A árvore do DOM da Minha Lista de Estudos</p>
+      </div>
+    </section>
+
+    <section class="secao" id="parte1" aria-labelledby="tituloParte1">
+      <header class="secao__cabeca">
+        <p class="secao__num">Parte 1</p>
+        <h2 id="tituloParte1">Resumo: JavaScript, jQuery e DOM</h2>
+        <p class="secao__intro">O que aprendi fazendo a Minha Lista de Estudos. Cada cartão traz o conceito e o trecho de
+          código onde ele aparece. O botão <em>Copiar</em> copia o exemplo.</p>
+      </header>
+      <div class="cartoes" id="cartoesJs"></div>
+    </section>
+
+    <section class="secao" id="laboratorio" aria-labelledby="tituloLab">
+      <header class="secao__cabeca">
+        <p class="secao__num">Laboratório</p>
+        <h2 id="tituloLab">Minha Lista de Estudos, ao vivo</h2>
+        <p class="secao__intro">O mesmo código da atividade, rodando com jQuery 3.7.1. Adicione pelo botão ou com
+          <kbd>Enter</kbd>. A tabela e o registro de eventos mostram o que cada método fez no DOM.</p>
+      </header>
+
+      <div class="lab">
+        <form class="painel lab__form" id="formLista" novalidate>
+          <h3>Adicionar atividade</h3>
+          <div class="campo">
+            <label for="campoAtividade">Atividade</label>
+            <input id="campoAtividade" name="atividade" type="text" maxlength="80" autocomplete="off"
+              placeholder="Ex.: Revisar seletores do jQuery" aria-describedby="mensagem">
+          </div>
+          <div class="campo">
+            <label for="campoParte">Assunto</label>
+            <select id="campoParte" name="parte">
+              <option value="jQuery e DOM">jQuery e DOM</option>
+              <option value="IA e Segurança">IA e Segurança</option>
+              <option value="Revisão geral">Revisão geral</option>
+            </select>
+          </div>
+          <div class="lab__botoes">
+            <button class="botao botao--primario" id="btnAdicionar" type="button">Adicionar</button>
+            <button class="botao botao--fantasma" id="btnLimpar" type="button">Limpar lista</button>
+          </div>
+          <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+          <p id="contador" class="contador" aria-live="polite">Atividades: 0</p>
+        </form>
+
+        <div class="painel lab__tabela">
+          <h3>Tabela das atividades</h3>
+          <div class="tabela-rolagem" tabindex="0" role="region" aria-label="Tabela de atividades, role para ver tudo">
+            <table>
+              <caption class="sr">Atividades adicionadas na lista</caption>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Atividade</th>
+                  <th scope="col">Assunto</th>
+                  <th scope="col">Situação</th>
+                  <th scope="col"><span class="sr">Ações</span></th>
+                </tr>
+              </thead>
+              <tbody id="corpoTabela">
+                <tr class="vazio"><td colspan="5">Nenhuma atividade ainda. Que tal a primeira?</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="painel lab__log">
+          <h3>Registro de eventos</h3>
+          <ol id="registro" class="registro" aria-live="polite" aria-label="Últimos métodos executados"></ol>
+        </div>
+
+        <div class="painel lab__seletores">
+          <h3>Teste os seletores</h3>
+          <p>Clique para ver quais elementos do laboratório cada seletor encontra.</p>
+          <div class="seletores" role="group" aria-label="Seletores">
+            <button type="button" class="chip" data-seletor="#campoAtividade">$("#campoAtividade")</button>
+            <button type="button" class="chip" data-seletor=".botao">$(".botao")</button>
+            <button type="button" class="chip" data-seletor="#corpoTabela tr">$("#corpoTabela tr")</button>
+            <button type="button" class="chip" data-seletor=".erro">$(".erro")</button>
+          </div>
+          <p class="seletores__resultado" id="resultadoSeletor" aria-live="polite">Nenhum seletor testado.</p>
+        </div>
+      </div>
+      <p class="aviso-js" id="avisoJquery" hidden>Não foi possível carregar o jQuery (sem internet?). O resto da página
+        funciona normalmente.</p>
+    </section>
+
+    <section class="secao" id="parte2" aria-labelledby="tituloParte2">
+      <header class="secao__cabeca">
+        <p class="secao__num">Parte 2</p>
+        <h2 id="tituloParte2">Resumo: IA e Segurança Digital</h2>
+        <p class="secao__intro">O caso do agente de IA no portal do Medicare, do jeito que analisei no trabalho Fato ou
+          Ruído?.</p>
+      </header>
+
+      <div class="cartoes cartoes--texto" id="cartoesIa"></div>
+
+      <h3 class="subtitulo">Linha do tempo</h3>
+      <ol class="tempo" id="linhaTempo"></ol>
+
+      <h3 class="subtitulo">Riscos e prevenção <small>(gire os cartões)</small></h3>
+      <div class="riscos" id="riscos">
+        <button class="risco" type="button" aria-pressed="false">
+          <span class="risco__face risco__frente"><b>Acesso não autorizado</b><span>O agente chegou a áreas não públicas
+              depois de ser bloqueado.</span></span>
+          <span class="risco__face risco__verso"><b>Prevenção</b><span>Controle de acesso forte e correção das falhas
+              encontradas.</span></span>
+        </button>
+        <button class="risco" type="button" aria-pressed="false">
+          <span class="risco__face risco__frente"><b>Aviso atrasado</b><span>Acesso em junho, governo avisado só em 10 de
+              setembro.</span></span>
+          <span class="risco__face risco__verso"><b>Prevenção</b><span>Prazo obrigatório para comunicar incidentes
+              (regulação).</span></span>
+        </button>
+        <button class="risco" type="button" aria-pressed="false">
+          <span class="risco__face risco__frente"><b>Falha de monitoramento</b><span>As tentativas repetidas não
+              geraram alerta a tempo.</span></span>
+          <span class="risco__face risco__verso"><b>Prevenção</b><span>Logs de acesso e alertas para tentativas
+              insistentes.</span></span>
+        </button>
+        <button class="risco" type="button" aria-pressed="false">
+          <span class="risco__face risco__frente"><b>Agente sem limites</b><span>A IA estava em teste e mesmo assim
+              agiu fora do previsto.</span></span>
+          <span class="risco__face risco__verso"><b>Prevenção</b><span>Limitar o que o agente pode acessar e acompanhar
+              o que ele faz.</span></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="secao" id="questoes" aria-labelledby="tituloQuestoes">
+      <header class="secao__cabeca">
+        <p class="secao__num">Parte 3</p>
+        <h2 id="tituloQuestoes">Questionário dissertativo: 15 questões</h2>
+        <p class="secao__intro">Respostas com as minhas palavras e a fonte de pesquisa de cada uma. Se tiver dúvida em
+          alguma, use <strong>Marcar dúvida (*)</strong> e escreva a principal dificuldade: o asterisco aparece na
+          questão e vai junto no arquivo exportado.</p>
+      </header>
+
+      <div class="filtros painel" role="search">
+        <div class="campo campo--busca">
+          <label for="buscaQuestao">Buscar nas questões</label>
+          <input id="buscaQuestao" type="search" placeholder="Ex.: append, fonte, Enter">
+        </div>
+        <div class="filtros__grupo" role="group" aria-label="Filtrar por parte">
+          <button type="button" class="chip is-ativo" data-filtro="todas" aria-pressed="true">Todas</button>
+          <button type="button" class="chip" data-filtro="js" aria-pressed="false">jQuery e DOM (1 a 10)</button>
+          <button type="button" class="chip" data-filtro="ia" aria-pressed="false">IA e Segurança (11 a 15)</button>
+          <button type="button" class="chip" data-filtro="duvida" aria-pressed="false">Com dúvida (*)</button>
+        </div>
+        <p class="filtros__info" id="infoQuestoes" aria-live="polite"></p>
+      </div>
+
+      <div class="questoes" id="listaQuestoes"></div>
+
+      <div class="exportar">
+        <button class="botao botao--primario" id="btnExportar" type="button">Baixar respostas (.txt)</button>
+        <p>O arquivo leva as 15 respostas, as fontes e as dúvidas marcadas.</p>
+      </div>
+    </section>
+
+    <section class="secao" id="pratica" aria-labelledby="tituloPratica">
+      <header class="secao__cabeca">
+        <p class="secao__num">Exercícios</p>
+        <h2 id="tituloPratica">Pratique antes da prova</h2>
+        <p class="secao__intro">Seis perguntas rápidas sobre as duas partes. Cada resposta mostra o porquê.</p>
+      </header>
+      <div class="pratica" id="listaPratica"></div>
+      <div class="placar painel" aria-live="polite">
+        <p><span id="placarAcertos">0</span> de <span id="placarTotal">6</span> acertos</p>
+        <div class="placar__barra"><span id="placarBarra"></span></div>
+        <button class="botao botao--fantasma" id="btnRefazer" type="button">Refazer exercícios</button>
+      </div>
+    </section>
+
+    <section class="secao" id="referencias" aria-labelledby="tituloRef">
+      <header class="secao__cabeca">
+        <p class="secao__num">Fontes</p>
+        <h2 id="tituloRef">Referências</h2>
+      </header>
+      <ol class="referencias" id="listaReferencias"></ol>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <img src="assets/logo-ck.webp" alt="" width="36" height="36">
+    <p>Gustavo Oliveira dos Santos · 2º C · ETEC Taboão da Serra · 2026</p>
+    <p><a href="../../index.html">Voltar ao acervo CK</a> · <a href="relatorio-revisao-interfaces-web-ii.pdf">Baixar o
+        PDF</a></p>
+    <button class="botao botao--fantasma botao--pequeno" id="btnMovimento" type="button" aria-pressed="false">Reduzir
+      animações</button>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.7.1.min.js"><\/script>')</script>
+  <script src="js/laboratorio.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/cena.js"></script>
+</body>
+
+</html>
