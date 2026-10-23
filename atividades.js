@@ -60,16 +60,16 @@ window.ACERVO_CK = [
     "subtitulo": "Aula 22 · imagens v1/v2 e evidências reais",
     "disciplina": "Computação em Nuvem para Web",
     "sigla": "CN",
-    "tipo": "Relatório em PDF + evidências + laboratório Docker",
+    "tipo": "Relatórios individuais em PDF + laboratório Docker",
     "data": "2026-10-23",
     "turma": "2º C · M-Tec Informática para Internet",
-    "resumo": "Relatório da dupla Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, turma 2°C, professora Stephany Martins Conceicao. Reúne as quatro evidências exigidas, uma captura complementar, legendas e quatro respostas. PDF formatado conforme as orientações do manual CPS aplicáveis ao relatório. Pronto para envio à professora; entrega acadêmica não confirmada.",
+    "resumo": "Versões individuais para Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, turma 2°C, professora Stephany Martins Conceicao. Cada PDF contém autoria individual, redação própria, quatro respostas e as evidências da prática realizada em dupla. Os recortes variam, preservando os resultados originais e a identificação da execução compartilhada.",
     "destaques": [
-      "Dupla · 4º bimestre",
-      "5 capturas reais",
-      "4 questões respondidas",
-      "PDF com 6 páginas",
-      "Formatação conforme manual CPS"
+      "2 relatórios individuais",
+      "Prática realizada em dupla",
+      "4 questões em cada PDF",
+      "6 páginas por relatório",
+      "Formatação do manual CPS"
     ],
     "tags": [
       "Atividade prática",
@@ -82,10 +82,24 @@ window.ACERVO_CK = [
       "HTML"
     ],
     "cor": "#a855f7",
-    "href": "atividades/docker-camadas/Relatorio_Docker_Gustavo_Paulo_2C.pdf",
+    "href": "atividades/docker-camadas/relatorio.html",
     "recursos": [
       {
-        "rotulo": "Baixar relatório final",
+        "rotulo": "Relatório individual de Gustavo",
+        "href": "atividades/docker-camadas/Relatorio_Docker_Gustavo_2C.pdf",
+        "tipo": "PDF · Gustavo Oliveira dos Santos",
+        "icone": "doc",
+        "baixar": true
+      },
+      {
+        "rotulo": "Relatório individual de Paulo",
+        "href": "atividades/docker-camadas/Relatorio_Docker_Paulo_2C.pdf",
+        "tipo": "PDF · Paulo Henrique de Lima Silva",
+        "icone": "doc",
+        "baixar": true
+      },
+      {
+        "rotulo": "Relatório conjunto anterior",
         "href": "atividades/docker-camadas/Relatorio_Docker_Gustavo_Paulo_2C.pdf",
         "tipo": "PDF com as evidências e respostas",
         "icone": "doc",

@@ -1,10 +1,15 @@
 # Aula 22 — o que você precisa fazer
 
-## Relatório final da dupla
+## Relatórios para envio individual
 
-[Baixar o relatório final em PDF](Relatorio_Docker_Gustavo_Paulo_2C.pdf).
+- [Gustavo Oliveira dos Santos - PDF individual](Relatorio_Docker_Gustavo_2C.pdf).
+- [Paulo Henrique de Lima Silva - PDF individual](Relatorio_Docker_Paulo_2C.pdf).
 
-O relatório tem seis páginas, com os nomes de Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, turma 2°C, e da professora Stephany Martins Conceicao. Inclui as quatro evidências obrigatórias, uma captura complementar, legendas e as quatro respostas. As cinco capturas reais foram fornecidas pela dupla e conferidas com o enunciado. A formatação aplica as orientações do manual CPS ao relatório curto. O envio à professora ainda precisa ser feito pela dupla.
+Cada versão tem seis páginas, identificação individual, turma 2°C, professora Stephany Martins Conceicao, redação própria, quatro respostas e as quatro evidências obrigatórias, além da comparação complementar. Os documentos identificam a prática realizada em dupla e a origem compartilhada das capturas. Os recortes e enquadramentos variam sem modificar os resultados do terminal. A formatação aplica as orientações do manual CPS ao relatório curto.
+
+Cada aluno deve revisar sua versão e efetuar o envio na atividade da professora. O envio acadêmico ainda não foi confirmado.
+
+A [versão conjunta anterior](Relatorio_Docker_Gustavo_Paulo_2C.pdf) permanece disponível para referência. O formulário HTML abaixo é um modelo de apoio para edições.
 
 **Prazo informado no briefing: 23/10/2026.** O horário e o canal de envio não constam no ZIP. Confira a atividade no ambiente da escola. Este roteiro prepara a entrega; não comprova execução.
 
