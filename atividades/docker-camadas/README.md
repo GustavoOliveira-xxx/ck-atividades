@@ -8,9 +8,9 @@ Dupla: **Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva**. Equipe: C
 
 O enunciado da Aula 22 trata de **Computação em Nuvem para Web**. O `PROMPT.md` usa “Interfaces Web II” e Clayton de Almeida Souza; os PTDs usam “Computação em Nuvem para Web I”, turma 2A e outros docentes. Confira a disciplina/professor na atividade da escola antes de entregar. O relatório deixa o professor para preencher e usa a turma do perfil, 2°C.
 
-Baixe a branch `codex/atividade-docker-camadas-2026-10-23` pelo GitHub: selecione a branch, **Code → Download ZIP**, e extraia no computador. Guarde a pasta `atividades/docker-camadas` inteira. Abra `relatorio.html` com dois cliques no navegador; ela funciona localmente e não executa Docker.
+Abra o [repositório ck-atividades na main](https://github.com/GustavoOliveira-xxx/ck-atividades/tree/main), confirme que a branch selecionada é **main**, clique em **Code → Download ZIP** e extraia no computador. Guarde a pasta `atividades/docker-camadas` inteira. Abra `relatorio.html` com dois cliques no navegador; ela funciona localmente e não executa Docker.
 
-Este material está no repositório `GustavoOliveira-xxx/ck-atividades`, na pasta `atividades/docker-camadas`. Você não precisa mesclar a PR para fazer o laboratório.
+Este material está no repositório `GustavoOliveira-xxx/ck-atividades`, na pasta `atividades/docker-camadas`. Todos os arquivos preparados já estão na **main**; a PR de publicação foi integrada. O roteiro abaixo baixa diretamente a main.
 
 ## 2. Abra o laboratório
 
@@ -20,7 +20,7 @@ Digite uma linha por vez e aguarde o resultado. Não copie o prefixo `$` ou `roo
 
 ```bash
 docker --version
-git clone --depth 1 --branch codex/atividade-docker-camadas-2026-10-23 https://github.com/GustavoOliveira-xxx/ck-atividades.git ck-atividades-docker
+git clone --depth 1 --branch main https://github.com/GustavoOliveira-xxx/ck-atividades.git ck-atividades-docker
 cd ck-atividades-docker/atividades/docker-camadas/site-aula2
 pwd
 ls -a
@@ -127,7 +127,7 @@ Confira `web-v2` em execução e ambas as tags disponíveis. Um print extra dess
 ## 8. Salve as evidências e complete o relatório
 
 1. No Windows, use Win+Shift+S e salve cada captura como PNG na pasta de evidências do seu computador. No Mac, use Shift+Command+4. Capture o comando e a saída real, com fonte legível. Evite incluir abas pessoais, senhas e identificadores desnecessários.
-2. Abra a cópia local de `relatorio.html`. Clique nos textos sublinhados para corrigir identificação, professor, legendas e respostas. Informe a data real da execução; não confunda com o prazo.
+2. Abra a cópia local de `relatorio.html` ou o [relatório publicado no Acervo CK](https://gustavooliveira-xxx.github.io/ck-atividades/atividades/docker-camadas/relatorio.html). Clique nos textos sublinhados para corrigir identificação, professor, legendas e respostas. Informe a data real da execução; não confunda com o prazo.
 3. Insira as quatro imagens nos campos numerados. As imagens ficam somente na página aberta; não há envio automático nem salvamento automático.
 4. Leia as quatro respostas e adapte a redação ao que compreendeu. Confirme que cada legenda corresponde ao resultado real. Se a saída não coincidiu, resolva o erro ou descreva a divergência; não apresente uma expectativa como resultado.
 5. Clique em **Baixar relatório HTML** para guardar uma cópia com imagens e textos incorporados. Reabra o HTML baixado para verificar que ficou completo. Guarde também os PNGs originais. Se o navegador cancelar o download, mantenha a página aberta até salvar o PDF no próximo passo e preserve os prints separadamente; não conte com salvamento automático. O relatório preenchido pode conter dados acadêmicos: não é necessário adicioná-lo ao repositório público.
