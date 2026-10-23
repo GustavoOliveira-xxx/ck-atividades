@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatório Docker — CK</title>
+<style>
+:root{color-scheme:light;--purple:#6020a2;--gold:#ffdf70}*{box-sizing:border-box}body{margin:0;background:#f1edf6;color:#19171d;font:16px/1.55 Arial,sans-serif}a{color:#55218b}header,.tools{max-width:960px;margin:24px auto;padding:0 24px}header p{margin:6px 0}.brand{font-weight:bold;color:var(--purple)}.tools{padding:20px 24px;background:#e6dced;border-radius:12px}button{font:inherit;cursor:pointer;border:2px solid var(--purple);border-radius:6px;padding:10px 14px;background:white;color:#411069;margin:4px}button.primary{background:var(--purple);color:white}button:focus-visible,input:focus-visible,[contenteditable]:focus-visible{outline:3px solid #9b6a00;outline-offset:3px}.actions{display:flex;flex-wrap:wrap;gap:6px}.sheet{max-width:960px;margin:24px auto;padding:38px 50px;background:white;box-shadow:0 5px 24px #27134210}h1{font-size:26px;line-height:1.25;margin:0 0 20px;color:#171219}h2{font-size:20px;margin:28px 0 14px}h3{font-size:16px;line-height:1.5;margin:16px 0 5px}p{margin:0 0 10px}.identity p{margin:0 0 5px}[contenteditable]{border-bottom:1px dashed #836a9b;min-height:1.5em;overflow-wrap:anywhere}#status{font-weight:bold;color:#733400;margin:16px 0}#status.complete{color:#195b32}table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;text-align:left}caption{text-align:left;font-weight:bold;margin-bottom:5px}th,td{border-bottom:1px solid #d5cbdc;padding:7px;vertical-align:top}figure{margin:20px 0 30px;break-inside:avoid}.placeholder{padding:38px 12px;text-align:center;border:1px dashed #aa9cb9;color:#5b5069}.evidence{display:block;max-width:100%;max-height:260px;margin:12px auto;object-fit:contain}.evidence:not([src]){display:none}.caption,.source{font-size:14px}.source{margin-top:6px}.upload{display:block;background:#f5f1f8;padding:12px;margin:8px 0}.upload input{max-width:100%;display:block;margin-top:8px}.upload button{font-size:14px}.refs{font-size:12px;overflow-wrap:anywhere}.tools label{display:block;margin:15px 0}.tools p{font-size:14px}#message{color:#55218b;font-weight:bold}noscript{display:block;padding:12px;background:#fff0ce}footer{text-align:center;margin:20px;font-size:13px}
+@media(max-width:620px){.sheet{margin:16px 10px;padding:24px 18px}header,.tools{margin:16px 10px;padding:16px}h1{font-size:23px}.actions button{width:100%}table{font-size:12px}th,td{padding:5px}}
+@page{size:A4;margin:3cm 2cm 2cm 3cm}
+@media print{body{background:white;color:black;font:12pt/1.5 Arial,sans-serif}.no-print{display:none!important}.sheet{margin:0;padding:0;max-width:none;box-shadow:none;break-after:page}.sheet:last-of-type{break-after:auto}h1{font-size:16pt}h2{font-size:13pt;margin:14pt 0 8pt}h3{font-size:12pt;margin:10pt 0 3pt}p{margin-bottom:6pt}.identity{font-size:11pt;line-height:1.3}[contenteditable]{border:none}table{font-size:10pt;margin:10pt 0}th,td{padding:4pt}.caption,.source,.refs{font-size:10pt;line-height:1.2}.evidence{max-height:60mm;max-width:160mm}.placeholder{height:55mm;padding:20mm 5mm}figure{margin:8pt 0 20pt}.refs{margin-top:12pt}#status{font-size:10pt;line-height:1.2;margin:8pt 0}a{color:black;text-decoration:none}}
+</style>
+</head>
+<body>
+<header class="no-print">
+<p class="brand">CONSCIOUS KNOWLEDGE · AULA 22</p>
+<p>Complete seu relatório com as capturas reais do Killercoda.</p>
+<p>Os textos sublinhados são editáveis. Este arquivo não executa Docker nem envia dados para um servidor. Consulte o roteiro README.md fornecido junto dele.</p>
+</header>
+<noscript class="no-print">Ative JavaScript para inserir imagens, salvar a cópia preenchida e conferir as pendências. Sem JavaScript, os textos continuam disponíveis para leitura.</noscript>
+<div class="tools no-print">
+<p><strong>Salve antes de fechar.</strong> Não há salvamento automático. “Baixar relatório HTML” guarda as imagens e o texto em um novo arquivo. Preserve também os prints originais.</p>
+<label><input type="checkbox" id="reviewed"> Revisei os dados, as quatro capturas reais, as legendas e as respostas. As legendas correspondem à minha execução.</label>
+<div class="actions"><button type="button" id="save">Baixar relatório HTML</button><button type="button" id="print" class="primary">Imprimir ou salvar PDF</button></div>
+<p id="message" role="status" aria-live="polite"></p>
+</div>
+<main>
+<section class="sheet">
+<h1>Camadas e execução de instruções no Docker</h1>
+<div class="identity">
+<p><strong>Instituição:</strong> ETEC Taboão da Serra</p>
+<p><strong>Curso:</strong> Informática para Internet · <strong>Turma:</strong> <span contenteditable="true" role="textbox" aria-label="Turma">2°C</span></p>
+<p><strong>Dupla:</strong> <span contenteditable="true" role="textbox" aria-label="Nomes da dupla">Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva</span></p>
+<p><strong>Equipe:</strong> Conscious Knowledge</p>
+<p><strong>Disciplina:</strong> <span contenteditable="true" role="textbox" aria-label="Disciplina">Computação em Nuvem para Web</span></p>
+<p><strong>Professor ou professora:</strong> <span id="teacher" contenteditable="true" role="textbox" aria-label="Professor ou professora">Confirmar no ambiente da escola</span></p>
+<p><strong>Data da execução:</strong> <span id="date" contenteditable="true" role="textbox" aria-label="Data real da execução">Preencher após executar</span></p>
+</div>
+<p id="status" role="status">PENDENTE — inserir as quatro evidências e revisar os dados.</p>
+<p>Objetivo: compreender a ordem das instruções do Dockerfile, observar o histórico das imagens e distinguir a construção de uma imagem da execução de um container.</p>
+<table class="no-print"><caption>Registro das evidências</caption><thead><tr><th scope="col">Figura</th><th scope="col">Comando e conteúdo</th><th scope="col">Imagem anexada</th></tr></thead><tbody>
+<tr><th scope="row">1</th><td>docker history projeto:v1</td><td data-state="1">Pendente</td></tr>
+<tr><th scope="row">2</th><td>curl com Versão 1</td><td data-state="2">Pendente</td></tr>
+<tr><th scope="row">3</th><td>docker images com v1 e v2</td><td data-state="3">Pendente</td></tr>
+<tr><th scope="row">4</th><td>curl com Versão 2</td><td data-state="4">Pendente</td></tr>
+</tbody></table>
+<h2>Respostas às questões de interpretação</h2>
+<h3>1 Por que o container antigo não mudou ao editar index.html?</h3>
+<p contenteditable="true" role="textbox" aria-label="Resposta 1">O COPY colocou uma cópia do arquivo na imagem durante o build. O web-v1 usa essa imagem, sem compartilhar a pasta local por volume. Editar o arquivo não atualiza a cópia existente; é preciso construir outra imagem e criar um container com ela.</p>
+<h3>2 Qual a função de docker history?</h3>
+<p contenteditable="true" role="textbox" aria-label="Resposta 2">Mostrar o histórico de criação da imagem, incluindo instruções e tamanhos associados às entradas. Assim podemos localizar COPY e etapas da imagem base. Não é o log do servidor nem um mapa exato de todos os arquivos ou camadas físicas.</p>
+<h3>3 Por que parar o antigo antes de usar a mesma porta 8080?</h3>
+<p contenteditable="true" role="textbox" aria-label="Resposta 3">O web-v1 ocupa a publicação da porta TCP 8080 do ambiente. Outro container não pode usar a mesma combinação de endereço, porta e protocolo ao mesmo tempo. O stop libera a porta; o rm remove o container parado, sem apagar sua imagem.</p>
+<h3>4 Qual a diferença entre construir imagem e executar container?</h3>
+<p contenteditable="true" role="textbox" aria-label="Resposta 4">O docker build processa o Dockerfile e gera uma imagem com os arquivos. O docker run cria e inicia um container a partir dela. Uma imagem pode gerar vários containers. Construir v2 não atualiza o container antigo automaticamente.</p>
+</section>
+<section class="sheet">
+<h2>Evidências da versão 1</h2>
+<figure data-figure="1"><h3>Figura 1 — Histórico da imagem projeto:v1</h3>
+<label class="upload no-print">Selecionar print 1 em PNG, JPEG ou WebP, até 8 MB<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="1"><button type="button" data-remove="1">Remover print 1</button></label>
+<p class="placeholder">PENDENTE — inserir captura real de docker history projeto:v1</p>
+<img class="evidence" id="evidence-1" alt="Captura real do histórico de projeto:v1">
+<figcaption class="caption" contenteditable="true" role="textbox" aria-label="Legenda 1">O comando docker history projeto:v1 mostra o histórico de criação da imagem, incluindo COPY e etapas herdadas de nginx:alpine.</figcaption><p class="source">Fonte: captura da dupla no Killercoda, após a execução.</p></figure>
+<figure data-figure="2"><h3>Figura 2 — Resposta HTTP da versão 1</h3>
+<label class="upload no-print">Selecionar print 2 em PNG, JPEG ou WebP, até 8 MB<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="2"><button type="button" data-remove="2">Remover print 2</button></label>
+<p class="placeholder">PENDENTE — inserir captura real de curl com Versão 1</p>
+<img class="evidence" id="evidence-2" alt="Captura real de curl mostrando a versão 1 e a equipe">
+<figcaption class="caption" contenteditable="true" role="textbox" aria-label="Legenda 2">O curl consulta a porta 8080 e retorna o HTML com Versão 1 e a equipe; essa é a página servida pelo web-v1, criado a partir de projeto:v1.</figcaption><p class="source">Fonte: captura da dupla no Killercoda, após a execução.</p></figure>
+</section>
+<section class="sheet">
+<h2>Evidências da atualização para a versão 2</h2>
+<figure data-figure="3"><h3>Figura 3 — Imagens das duas versões</h3>
+<label class="upload no-print">Selecionar print 3 em PNG, JPEG ou WebP, até 8 MB<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="3"><button type="button" data-remove="3">Remover print 3</button></label>
+<p class="placeholder">PENDENTE — inserir captura real de docker images com v1 e v2</p>
+<img class="evidence" id="evidence-3" alt="Captura real de docker images com as tags v1 e v2">
+<figcaption class="caption" contenteditable="true" role="textbox" aria-label="Legenda 3">O docker images lista projeto com as tags v1 e v2, mostrando que as imagens das duas versões coexistem depois da nova construção.</figcaption><p class="source">Fonte: captura da dupla no Killercoda, após a execução.</p></figure>
+<figure data-figure="4"><h3>Figura 4 — Resposta HTTP do novo container</h3>
+<label class="upload no-print">Selecionar print 4 em PNG, JPEG ou WebP, até 8 MB<input type="file" accept="image/png,image/jpeg,image/webp" data-upload="4"><button type="button" data-remove="4">Remover print 4</button></label>
+<p class="placeholder">PENDENTE — inserir captura real de curl com Versão 2</p>
+<img class="evidence" id="evidence-4" alt="Captura real de curl mostrando a versão 2 e a turma">
+<figcaption class="caption" contenteditable="true" role="textbox" aria-label="Legenda 4">Após a substituição por web-v2, o curl retorna Versão 2 - página atualizada e a turma; o novo container utiliza projeto:v2.</figcaption><p class="source">Fonte: captura da dupla no Killercoda, após a execução.</p></figure>
+<div class="refs"><strong>Referências de apoio</strong><p>AULA 22. Camadas e execução de instruções. Material fornecido com a atividade. DOCKER. <a href="https://docs.docker.com/reference/cli/docker/image/history/">docker image history</a>; <a href="https://docs.docker.com/reference/dockerfile/">Dockerfile reference</a>. Consulta em 23 out. 2026.</p></div>
+</section>
+</main>
+<footer class="no-print">Antes de entregar, confira a prévia do PDF e o canal da escola. Anexar uma imagem não verifica se seu conteúdo é correto; essa revisão cabe à dupla.</footer>
+<script>
+(() => {
+  'use strict';
+  const $ = (s) => document.querySelector(s);
+  const images = [...document.querySelectorAll('.evidence')];
+  const message = (text) => { $('#message').textContent = text; };
+  const isAttached = (img) => /^data:image\/(png|jpeg|webp);base64,/.test(img.getAttribute('src') || '');
+  const detailsReady = () => {
+    const teacher = $('#teacher').textContent.trim();
+    const date = $('#date').textContent.trim();
+    return teacher && date && !/confirmar|preencher/i.test(teacher + ' ' + date);
+  };
+  const complete = () => images.every(isAttached) && detailsReady() && $('#reviewed').checked;
+  function refresh() {
+    for (const img of images) {
+      const id = img.id.split('-')[1];
+      const attached = isAttached(img);
+      $('[data-state="' + id + '"]').textContent = attached ? 'Anexada' : 'Pendente';
+      $('[data-figure="' + id + '"] .placeholder').hidden = attached;
+      $('[data-figure="' + id + '"] .source').hidden = !attached;
+    }
+    const count = images.filter(isAttached).length;
+    $('#status').textContent = complete() ? 'Quatro evidências anexadas; revisão confirmada pela dupla.' : 'PENDENTE — ' + count + '/4 evidências anexadas. Confira professor, data real, legendas e respostas e marque a revisão.';
+    $('#status').classList.toggle('complete', Boolean(complete()));
+  }
+  function changed() { $('#reviewed').checked = false; refresh(); }
+  document.querySelectorAll('[contenteditable]').forEach((el) => {
+    el.addEventListener('input', changed);
+    el.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const selection = window.getSelection();
+      if (!selection.rangeCount) return;
+      const range = selection.getRangeAt(0);
+      range.deleteContents();
+      const text = document.createTextNode(e.clipboardData.getData('text/plain'));
+      range.insertNode(text); range.setStartAfter(text); range.collapse(true);
+      selection.removeAllRanges(); selection.addRange(range); changed();
+    });
+  });
+  document.querySelectorAll('[data-upload]').forEach((input) => {
+    input.addEventListener('change', async () => {
+      const file = input.files[0];
+      if (!file) return;
+      if (!['image/png','image/jpeg','image/webp'].includes(file.type) || file.size > 8 * 1024 * 1024) {
+        message('Escolha uma captura PNG, JPEG ou WebP de até 8 MB.'); input.value = ''; return;
+      }
+      try {
+        const data = await new Promise((resolve,reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+        const probe = new Image(); probe.src = data; await probe.decode();
+        const target = $('#evidence-' + input.dataset.upload); target.src = data;
+        changed(); message('Print ' + input.dataset.upload + ' anexado. Confira a legenda e baixe o HTML para guardar suas alterações.');
+      } catch { message('Não foi possível ler essa imagem. Escolha outra captura.'); }
+    });
+  });
+  document.querySelectorAll('[data-remove]').forEach((button) => button.addEventListener('click', () => {
+    $('#evidence-' + button.dataset.remove).removeAttribute('src');
+    $('[data-upload="' + button.dataset.remove + '"]').value = '';
+    changed(); message('Imagem removida desta cópia aberta.');
+  }));
+  $('#reviewed').addEventListener('change', refresh);
+  $('#print').addEventListener('click', () => {
+    refresh();
+    if (!complete()) { message('Antes do PDF final, anexe os quatro prints, preencha professor e data e confirme a revisão. Você pode baixar o HTML incompleto para continuar depois.'); return; }
+    window.print();
+  });
+  $('#save').addEventListener('click', () => {
+    refresh();
+    const clone = document.documentElement.cloneNode(true);
+    const check = clone.querySelector('#reviewed');
+    if ($('#reviewed').checked) check.setAttribute('checked',''); else check.removeAttribute('checked');
+    clone.querySelector('#message').textContent = '';
+    const blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], {type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a'); link.href = url; link.download = 'relatorio-preenchido-docker.html';
+    document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    message('Cópia gerada para download. Verifique o arquivo salvo antes de fechar esta página.');
+  });
+  window.addEventListener('beforeprint', refresh);
+  refresh();
+})();
+</script>
+</body>
+</html>
