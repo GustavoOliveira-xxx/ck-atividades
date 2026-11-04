@@ -1,0 +1,9 @@
+[
+  { "nome": "Rafael Lima",   "posicao": "Atacante", "jogos": 20, "gols": 15 },
+  { "nome": "Bruno Teles",   "posicao": "Meia",     "jogos": 22, "gols": 6 },
+  { "nome": "Carlos Mota",   "posicao": "Zagueiro", "jogos": 25, "gols": 2 },
+  { "nome": "Diego Rocha",   "posicao": "Atacante", "jogos": 18, "gols": 9 },
+  { "nome": "Eduardo Paz",   "posicao": "Goleiro",  "jogos": 24, "gols": 0 },
+  { "nome": "Felipe Cruz",   "posicao": "Meia",     "jogos": 21, "gols": 8 },
+  { "nome": "Gustavo Reis",  "posicao": "Zagueiro", "jogos": 19, "gols": 1 }
+]

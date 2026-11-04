@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mesmos dados do JSON, agora em XML: toda informação é TEXTO entre tags -->
+<jogadores>
+  <jogador><nome>Rafael Lima</nome><posicao>Atacante</posicao><jogos>20</jogos><gols>15</gols></jogador>
+  <jogador><nome>Bruno Teles</nome><posicao>Meia</posicao><jogos>22</jogos><gols>6</gols></jogador>
+  <jogador><nome>Carlos Mota</nome><posicao>Zagueiro</posicao><jogos>25</jogos><gols>2</gols></jogador>
+  <jogador><nome>Diego Rocha</nome><posicao>Atacante</posicao><jogos>18</jogos><gols>9</gols></jogador>
+  <jogador><nome>Eduardo Paz</nome><posicao>Goleiro</posicao><jogos>24</jogos><gols>0</gols></jogador>
+  <jogador><nome>Felipe Cruz</nome><posicao>Meia</posicao><jogos>21</jogos><gols>8</gols></jogador>
+  <jogador><nome>Gustavo Reis</nome><posicao>Zagueiro</posicao><jogos>19</jogos><gols>1</gols></jogador>
+</jogadores>

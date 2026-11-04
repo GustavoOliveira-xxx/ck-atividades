@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- Declara que o documento é HTML5 -->
+<html lang="pt-br"> <!-- Idioma da página: português do Brasil -->
+<head>
+  <meta charset="UTF-8"> <!-- Acentos funcionando corretamente -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Layout responsivo no celular -->
+  <title>Ciência de Dados no Esporte</title>
+  <link rel="stylesheet" href="style.css"> <!-- Liga o CSS (aparência) -->
+
+  <!-- AULA 2 - INSTALAÇÃO DO jQUERY POR CDN (precisa de internet) -->
+  <!-- Este <script> DEVE vir ANTES do script.js, senão aparece "$ is not defined" -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- PLANO B (sem internet): se a CDN falhar, window.jQuery não existe e carregamos a cópia local da pasta -->
+  <script>window.jQuery || document.write('<script src="jquery-3.7.1.min.js"><\/script>');</script>
+
+  <!-- NOVA FUNCIONALIDADE (Trilha 3) - Chart.js 4.5.1 pela CDN jsDelivr, com versão FIXA -->
+  <!-- Versão fixa: se a biblioteca lançar uma versão nova com mudanças, nosso gráfico não quebra -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <!-- PLANO B (sem internet): mesma ideia do jQuery. Se window.Chart não existe, usa a cópia local -->
+  <script>window.Chart || document.write('<script src="chart.umd.min.js"><\/script>');</script>
+
+  <!-- defer = só executa o script depois que o HTML foi lido -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Tag semântica: cabeçalho da página -->
+  <header>
+    <h1>⚽ Ciência de Dados no Esporte</h1>
+    <p>Painel de estatísticas do futebol (dados fictícios)</p>
+  </header>
+
+  <!-- Tag semântica: conteúdo principal -->
+  <main>
+
+    <!-- SEÇÃO 1: controles (cada elemento tem um id para o jQuery selecionar com $("#id")) -->
+    <section class="controles">
+      <button id="btnJson" type="button">Carregar JSON</button>   <!-- AJAX com JSON -->
+      <button id="btnXml" type="button">Carregar XML</button>     <!-- AJAX com XML -->
+      <input id="busca" type="text" placeholder="Buscar jogador..."> <!-- evento "input" -->
+      <select id="filtroPosicao">                                  <!-- evento "change" -->
+        <option>Todas</option>
+        <option>Atacante</option>
+        <option>Meia</option>
+        <option>Zagueiro</option>
+        <option>Goleiro</option>
+      </select>
+      <button id="btnOrdenar" type="button">Ordenar por média</button>
+      <button id="btnTema" type="button">Tema claro/escuro</button> <!-- cookie -->
+    </section>
+
+    <!-- Mensagens de sucesso (.ok) ou erro (.erro) escritas pelo JavaScript -->
+    <p id="mensagem"></p>
+
+    <!-- SEÇÃO 2: tabela de dados (o <tbody> começa VAZIO e é preenchido pelo JS) -->
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Jogador</th><th>Posição</th><th>Jogos</th><th>Gols</th><th>Média</th><th>Remover</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaCorpo"></tbody>
+      </table>
+      <p id="resumoTexto"></p> <!-- total de gols, média e artilheiro -->
+    </section>
+
+    <!-- SEÇÃO NOVA: gráfico de gols por jogador (Chart.js desenha dentro do <canvas>) -->
+    <section class="grafico" aria-labelledby="tituloGrafico">
+      <div class="grafico-topo">
+        <h2 id="tituloGrafico">Gols por jogador</h2>
+        <!-- troca o que o gráfico mostra: total de gols ou média por jogo -->
+        <button id="btnMetrica" type="button" aria-pressed="false">Ver média por jogo</button>
+      </div>
+      <!-- a caixa com altura fixa evita que o gráfico cresça sem parar (responsive do Chart.js) -->
+      <div class="grafico-caixa">
+        <!-- role="img" + aria-label: o leitor de tela lê um resumo, já que o canvas é só desenho -->
+        <canvas id="graficoGols" role="img" aria-label="Gráfico de gols por jogador"></canvas>
+      </div>
+      <!-- legenda das cores (mesma regra da tabela) e avisos de erro do gráfico -->
+      <p class="grafico-legenda"><span class="cor-destaque"></span> média de gols ≥ 0,5 &nbsp; <span class="cor-normal"></span> demais jogadores</p>
+      <p id="graficoAviso" role="status"></p>
+    </section>
+
+    <!-- SEÇÃO 3: formulário para adicionar jogador (com label, como pede o padrão da turma) -->
+    <section class="novo">
+      <h2>Novo jogador</h2>
+      <label for="novoNome">Nome</label>
+      <input id="novoNome" type="text">
+      <label for="novaPosicao">Posição</label>
+      <select id="novaPosicao">
+        <option>Atacante</option><option>Meia</option><option>Zagueiro</option><option>Goleiro</option>
+      </select>
+      <label for="novoJogos">Jogos</label>
+      <input id="novoJogos" type="number" min="0">
+      <label for="novoGols">Gols</label>
+      <input id="novoGols" type="number" min="0">
+      <button id="btnAdicionar" type="button">Adicionar</button>
+      <button id="btnExportar" type="button">Exportar JSON</button>
+    </section>
+
+    <!-- Área onde o JSON exportado será mostrado -->
+    <pre id="saidaJson"></pre>
+  </main>
+
+  <!-- Tag semântica: rodapé -->
+  <footer>Interface Web II • ETEC Taboão da Serra<br>Nova funcionalidade: Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva • 2°C</footer>
+</body>
+</html>

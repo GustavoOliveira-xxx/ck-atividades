@@ -1,5 +1,62 @@
 window.ACERVO_CK = [
   {
+    id: "nova-funcionalidade-ia",
+    titulo: "Nova Funcionalidade com IA",
+    subtitulo: "Painel do Esporte · gráfico de gols com Chart.js",
+    disciplina: "Interface Web II",
+    sigla: "IW",
+    tipo: "Projeto web + documento de evidências",
+    data: "2026-11-04",
+    turma: "2º C · M-Tec Informática para Internet",
+    resumo:
+      "Dupla Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, Prof. Clayton de Almeida Souza. " +
+      "No Painel do Esporte foi acrescentado um gráfico de gols por jogador com a biblioteca Chart.js, " +
+      "que muda junto com a tabela ao carregar JSON ou XML, adicionar, remover, buscar, filtrar, ordenar " +
+      "e trocar o tema. Tem plano B local para funcionar sem internet e aviso na tela se a biblioteca " +
+      "não carregar. O documento registra os três prompts, o código original da IA, as adaptações, " +
+      "os erros que a IA cometeu, 16 testes e a justificativa da biblioteca.",
+    destaques: [
+      "Trilha 3 · biblioteca",
+      "Chart.js 4.5.1 + plano B",
+      "3 quadros de evidência",
+      "16 testes registrados",
+      "Prints com Console F12",
+    ],
+    tags: ["Projeto", "IA", "Chart.js", "jQuery", "AJAX", "JSON", "XML", "Gráfico", "Responsivo"],
+    cor: "#1f7a3d",
+    href: "atividades/nova-funcionalidade-ia/projeto/index.html",
+    recursos: [
+      {
+        rotulo: "Abrir projeto",
+        href: "atividades/nova-funcionalidade-ia/projeto/index.html",
+        tipo: "Painel do Esporte com gráfico",
+        icone: "app",
+      },
+      {
+        rotulo: "Projeto em ZIP",
+        href: "atividades/nova-funcionalidade-ia/PainelEsporte_NovaFunc_Gustavo_Paulo.zip",
+        tipo: "Para abrir no Live Server",
+        icone: "codigo",
+        baixar: true,
+      },
+      {
+        rotulo: "Documento Word",
+        href: "atividades/nova-funcionalidade-ia/Evidencias_NovaFuncionalidade_IA_Gustavo_Paulo.docx",
+        tipo: "Evidências editáveis",
+        icone: "doc",
+        baixar: true,
+      },
+      {
+        rotulo: "Documento PDF",
+        href: "atividades/nova-funcionalidade-ia/Evidencias_NovaFuncionalidade_IA_Gustavo_Paulo.pdf",
+        tipo: "Versão final",
+        icone: "doc",
+        baixar: true,
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "resumo-interfaces-web-ii",
     titulo: "Atividade de Revisão",
     subtitulo: "jQuery, DOM e IA · resumo e 15 questões",

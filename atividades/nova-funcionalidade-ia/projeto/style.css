@@ -1,0 +1,61 @@
+/* ===== VARIÁVEIS CSS (:root) - mudar aqui muda o site inteiro ===== */
+:root {
+  --fundo: #eef5ee;      /* cor de fundo da página */
+  --cartao: #ffffff;     /* cor do cartão principal */
+  --texto: #1b2b1b;      /* cor do texto */
+  --campo: #1f7a3d;      /* verde de gramado: botões e cabeçalho */
+  --destaque: #fff3b0;   /* amarelo: jogadores com média alta */
+}
+
+/* Tema escuro: ativado pelo jQuery com $("body").toggleClass("escuro") */
+body.escuro {
+  --fundo: #14201a;
+  --cartao: #1f2f26;
+  --texto: #e8f3e8;
+  --destaque: #5c5200;
+}
+
+body { font-family: Arial, sans-serif; background: var(--fundo); color: var(--texto); margin: 0; }
+header { background: var(--campo); color: #fff; padding: 16px 24px; }
+header h1 { margin: 0; }
+main { max-width: 820px; margin: 24px auto; padding: 24px; background: var(--cartao); border-radius: 12px; }
+
+/* FLEXBOX: alinha os controles lado a lado e quebra linha quando falta espaço */
+.controles { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.novo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+input, select { padding: 8px; }
+button { padding: 8px 12px; border: 0; border-radius: 6px; background: var(--campo); color: #fff; cursor: pointer; }
+button:hover { opacity: .85; }            /* estado :hover */
+.btn-remover { background: #dc2626; padding: 4px 8px; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px; border-bottom: 1px solid #8884; text-align: left; }
+tr.destaque { background: var(--destaque); }  /* linha criada com .toggleClass("destaque") */
+tr:hover { outline: 2px solid var(--campo); } /* realce ao passar o mouse */
+
+/* Classes de feedback usadas por mostrar() no JavaScript */
+.erro { color: #dc2626; font-weight: bold; }
+.ok { color: #16a34a; font-weight: bold; }
+
+pre { background: #1e293b; color: #a5f3fc; padding: 12px; border-radius: 8px; overflow-x: auto; }
+footer { text-align: center; padding: 16px; font-size: .85rem; }
+
+/* ===== NOVA FUNCIONALIDADE: GRÁFICO DE GOLS (Chart.js) ===== */
+.grafico { margin-top: 24px; }
+.grafico-topo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.grafico-topo h2 { margin: 0; }
+.grafico-caixa { position: relative; height: 320px; margin-top: 12px; }  /* o Chart.js ocupa 100% desta caixa */
+.grafico-legenda { font-size: .85rem; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.cor-destaque, .cor-normal { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
+.cor-destaque { background: #e0b400; }   /* mesma ideia do --destaque da tabela */
+.cor-normal { background: var(--campo); }
+#btnMetrica[aria-pressed="true"] { background: #14532d; }  /* botão "apertado" fica mais escuro */
+button:focus-visible { outline: 3px solid #e0b400; outline-offset: 2px; } /* foco visível no teclado */
+
+/* RESPONSIVO: em telas pequenas o cartão ocupa mais espaço */
+@media (max-width: 600px) {
+  main { margin: 8px; padding: 12px; }
+  th, td { padding: 4px; font-size: .85rem; }
+  .grafico-caixa { height: 260px; }      /* gráfico um pouco menor no celular */
+}
