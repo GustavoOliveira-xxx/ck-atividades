@@ -73,7 +73,7 @@ body.escuro {
 
 /* ===== BASE ===== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+html { scroll-behavior: smooth; scroll-padding-top: 130px; /* espaço para o cabeçalho fixo não cobrir o título da seção */ }
 body {
   margin: 0;
   font-family: var(--fonte);
