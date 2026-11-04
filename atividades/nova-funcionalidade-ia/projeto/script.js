@@ -69,7 +69,7 @@ $(document).ready(function () {
     salvarCookie("tema", tema, 7);                // lembra a escolha por 7 dias
     if (grafico !== null) { atualizarGrafico(grafico.listaAtual); } // [NOVO] troca as cores do gráfico junto com o tema
   }
-  aplicarTema(lerCookie("tema") || "claro");      // || = se o cookie for null, usa "claro"
+  aplicarTema(lerCookie("tema") || "escuro");     // || = se o cookie for null, usa "escuro" [NOVO: tema escuro é o padrão da CK]
 
   // ===================================================================
   // BLOCO 3 (AULA 3): FUNÇÕES + DOM
@@ -277,14 +277,14 @@ $(document).ready(function () {
       // Operador ternário escolhe o valor de cada barra: gols ou média (mediaGols já existe no BLOCO 3)
       const valores = lista.map(function (j) { return metrica === "gols" ? j.gols : mediaGols(j); });
       // Mesma regra da tabela: média >= LIMITE_DESTAQUE ganha a cor de destaque
-      const cores = lista.map(function (j) { return mediaGols(j) >= LIMITE_DESTAQUE ? "#e0b400" : corDoTema("--campo"); });
+      const cores = lista.map(function (j) { return mediaGols(j) >= LIMITE_DESTAQUE ? corDoTema("--barra-ouro") : corDoTema("--campo"); });
       const corTexto = corDoTema("--texto");           // cor das letras (muda no tema escuro)
-      const corGrade = "rgba(136, 136, 136, 0.25)";    // linhas de fundo bem fraquinhas
+      const corGrade = "rgba(163, 8, 200, 0.16)";      // linhas de fundo bem fraquinhas, no roxo da CK
 
       if (grafico === null) {                          // 1ª vez: cria o gráfico
         grafico = new Chart(document.getElementById("graficoGols"), {
           type: "bar",                                 // gráfico de barras
-          data: { labels: [], datasets: [{ label: "Gols", data: [], backgroundColor: [], borderRadius: 6 }] },
+          data: { labels: [], datasets: [{ label: "Gols", data: [], backgroundColor: [], borderRadius: 10, maxBarThickness: 64 }] },
           options: {
             responsive: true,                          // acompanha o tamanho da tela
             maintainAspectRatio: false,                // usa a altura da .grafico-caixa do CSS

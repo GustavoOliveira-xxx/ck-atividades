@@ -25,13 +25,17 @@ Trilha: **3. Biblioteca extra**, gráfico de gols por jogador que se atualiza so
 - Botão **Ver média por jogo** alterna o gráfico entre total de gols e média.
 - Acompanha o tema claro/escuro (cookie do projeto original).
 - Se o Chart.js não carregar, aparece um aviso na tela e a tabela continua funcionando.
+- Visual na identidade **Conscious Knowledge (CK)**: preto, roxo elétrico e amarelo-dourado, logo original da CK, vinheta de abertura, bola de futebol 3D que gira com o mouse ou o dedo, cartões 3D, campo em perspectiva, contadores animados e tema claro/escuro.
+- Acessibilidade: atalho "Pular para o conteúdo", foco visível no teclado, textos alternativos, contraste conferido e respeito a "reduzir movimento" do sistema.
 
 ## Arquivos
 
 | Arquivo | O que mudou |
 |---|---|
-| `index.html` | Script do Chart.js (CDN com versão fixa + plano B local), seção `.grafico` com `#graficoGols`, `#btnMetrica`, `#tituloGrafico`, `#graficoAviso`; créditos no rodapé |
-| `style.css` | Bloco "NOVA FUNCIONALIDADE: GRÁFICO DE GOLS" |
+| `index.html` | Estrutura nova no estilo CK (cabeçalho, hero, KPIs, seções numeradas, rodapé), script do Chart.js (CDN com versão fixa + plano B local), seção `.grafico` com `#graficoGols`, `#btnMetrica`, `#tituloGrafico`, `#graficoAviso`; créditos no rodapé |
+| `style.css` | Refeito na identidade CK (variáveis de cor, temas, 3D, responsivo); bloco "NOVA FUNCIONALIDADE: GRÁFICO DE GOLS" |
+| `ck-efeitos.js` | Novo: só efeitos visuais (vinheta, bola 3D no canvas, cartões 3D, revelar ao rolar, contadores). A funcionalidade não depende dele |
+| `assets/` | Logo da CK, favicon e fontes Inter, Space Grotesk e JetBrains Mono (licença SIL OFL, texto em `assets/fontes`) |
 | `script.js` | BLOCO 7 (novo) e linhas marcadas com `[NOVO]` nos blocos 1, 2 e 3 |
 | `chart.umd.min.js` | Cópia local do Chart.js 4.5.1 (licença MIT), usada sem internet |
 | `jogadores.json`, `jogadores.xml`, `jquery-3.7.1.min.js` | Originais, sem alteração |
@@ -54,3 +58,5 @@ Troque o endereço do repositório se o nome for outro.
 - Projeto base: Prof. Clayton de Almeida Souza (dados fictícios).
 - Nova funcionalidade: Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, com auxílio de IA (Claude, Anthropic), documentado no Word de evidências.
 - Chart.js: https://www.chartjs.org (licença MIT). jQuery: https://jquery.com (licença MIT).
+- Fontes Inter, Space Grotesk e JetBrains Mono: licença SIL Open Font License 1.1.
+- Identidade visual e logo: Conscious Knowledge.

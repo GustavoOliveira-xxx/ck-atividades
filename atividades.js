@@ -14,16 +14,18 @@ window.ACERVO_CK = [
       "que muda junto com a tabela ao carregar JSON ou XML, adicionar, remover, buscar, filtrar, ordenar " +
       "e trocar o tema. Tem plano B local para funcionar sem internet e aviso na tela se a biblioteca " +
       "não carregar. O documento registra os três prompts, o código original da IA, as adaptações, " +
-      "os erros que a IA cometeu, 16 testes e a justificativa da biblioteca.",
+      "os erros que a IA cometeu, os testes e a justificativa da biblioteca. O visual segue a identidade " +
+      "da CK, com vinheta do logo, bola de futebol 3D que gira com o mouse, cartões 3D e tema claro/escuro.",
     destaques: [
       "Trilha 3 · biblioteca",
       "Chart.js 4.5.1 + plano B",
-      "3 quadros de evidência",
-      "16 testes registrados",
+      "4 quadros de evidência",
+      "19 testes registrados",
       "Prints com Console F12",
+      "Visual CK com bola 3D",
     ],
-    tags: ["Projeto", "IA", "Chart.js", "jQuery", "AJAX", "JSON", "XML", "Gráfico", "Responsivo"],
-    cor: "#1f7a3d",
+    tags: ["Projeto", "IA", "Chart.js", "jQuery", "AJAX", "JSON", "XML", "Gráfico", "3D", "Canvas", "Acessibilidade", "Responsivo"],
+    cor: "#a308c8",
     href: "atividades/nova-funcionalidade-ia/projeto/index.html",
     recursos: [
       {
