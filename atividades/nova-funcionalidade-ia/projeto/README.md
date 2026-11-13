@@ -56,7 +56,7 @@ Troque o endereço do repositório se o nome for outro.
 ## Créditos
 
 - Projeto base: Prof. Clayton de Almeida Souza (dados fictícios).
-- Nova funcionalidade: Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, com auxílio de IA (Claude, Anthropic), documentado no Word de evidências.
+- Nova funcionalidade: Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva, documentada no Word de evidências.
 - Chart.js: https://www.chartjs.org (licença MIT). jQuery: https://jquery.com (licença MIT).
 - Fontes Inter, Space Grotesk e JetBrains Mono: licença SIL Open Font License 1.1.
 - Identidade visual e logo: Conscious Knowledge.

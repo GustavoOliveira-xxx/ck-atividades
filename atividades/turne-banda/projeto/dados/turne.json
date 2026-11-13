@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "cidade": "São Paulo",
+    "estado": "SP",
+    "local": "Allianz Parque",
+    "data_formatada": "21/11/2026",
+    "horario": "21:00",
+    "capacidade_total": 45000,
+    "ingressos_vendidos": 45000,
+    "preco_medio": 280,
+    "status": "Esgotado"
+  },
+  {
+    "id": 2,
+    "cidade": "Campinas",
+    "estado": "SP",
+    "local": "Estádio Brinco de Ouro",
+    "data_formatada": "22/11/2026",
+    "horario": "20:00",
+    "capacidade_total": 29000,
+    "ingressos_vendidos": 26100,
+    "preco_medio": 190,
+    "status": "Últimos Ingressos"
+  },
+  {
+    "id": 3,
+    "cidade": "Rio de Janeiro",
+    "estado": "RJ",
+    "local": "Jeunesse Arena",
+    "data_formatada": "28/11/2026",
+    "horario": "21:30",
+    "capacidade_total": 15000,
+    "ingressos_vendidos": 15000,
+    "preco_medio": 260,
+    "status": "Esgotado"
+  },
+  {
+    "id": 4,
+    "cidade": "Belo Horizonte",
+    "estado": "MG",
+    "local": "Arena MRV",
+    "data_formatada": "29/11/2026",
+    "horario": "20:00",
+    "capacidade_total": 46000,
+    "ingressos_vendidos": 31280,
+    "preco_medio": 220,
+    "status": "Confirmado"
+  },
+  {
+    "id": 5,
+    "cidade": "Curitiba",
+    "estado": "PR",
+    "local": "Pedreira Paulo Leminski",
+    "data_formatada": "05/12/2026",
+    "horario": "21:00",
+    "capacidade_total": 25000,
+    "ingressos_vendidos": 23500,
+    "preco_medio": 210,
+    "status": "Últimos Ingressos"
+  },
+  {
+    "id": 6,
+    "cidade": "Porto Alegre",
+    "estado": "RS",
+    "local": "Arena do Grêmio",
+    "data_formatada": "06/12/2026",
+    "horario": "20:00",
+    "capacidade_total": 55000,
+    "ingressos_vendidos": 30250,
+    "preco_medio": 200,
+    "status": "Confirmado"
+  },
+  {
+    "id": 7,
+    "cidade": "Brasília",
+    "estado": "DF",
+    "local": "Ginásio Nilson Nelson",
+    "data_formatada": "12/12/2026",
+    "horario": "21:00",
+    "capacidade_total": 16000,
+    "ingressos_vendidos": 16000,
+    "preco_medio": 230,
+    "status": "Esgotado"
+  },
+  {
+    "id": 8,
+    "cidade": "Salvador",
+    "estado": "BA",
+    "local": "Arena Fonte Nova",
+    "data_formatada": "19/12/2026",
+    "horario": "21:00",
+    "capacidade_total": 50000,
+    "ingressos_vendidos": 28500,
+    "preco_medio": 180,
+    "status": "Confirmado"
+  }
+]

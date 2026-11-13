@@ -1,10 +1,3 @@
-/* =====================================================================
-   PAINEL DO ESPORTE · identidade visual Conscious Knowledge (CK)
-   Paleta CK: preto tinta, roxo elétrico e amarelo-dourado
-   Dupla: Gustavo Oliveira dos Santos e Paulo Henrique de Lima Silva (2°C)
-   ===================================================================== */
-
-/* ===== FONTES DA CK (arquivos locais, licença SIL OFL 1.1) ===== */
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap; src: url("assets/fontes/inter-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap; src: url("assets/fontes/inter-latin-500-normal.woff2") format("woff2"); }
 @font-face { font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap; src: url("assets/fontes/inter-latin-600-normal.woff2") format("woff2"); }
@@ -17,26 +10,24 @@
 @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url("assets/fontes/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 700; font-display: swap; src: url("assets/fontes/jetbrains-mono-latin-700-normal.woff2") format("woff2"); }
 
-/* ===== VARIÁVEIS CSS (:root) - mudar aqui muda o site inteiro ===== */
-/* Tema CLARO da CK (lavanda clara). O tema escuro fica em body.escuro */
 :root {
-  --tinta: #050407;           /* preto da marca */
-  --roxo: #a308c8;            /* roxo CK */
-  --roxo-fundo: #640187;      /* roxo profundo */
-  --roxo-claro: #d58bff;      /* roxo para TEXTO sobre fundo escuro (contraste) */
-  --ouro: #fccf02;            /* amarelo-dourado CK */
-  --ouro-texto: #8a6b00;      /* ouro escurecido para texto no tema claro */
+  --tinta: #050407;
+  --roxo: #a308c8;
+  --roxo-fundo: #640187;
+  --roxo-claro: #d58bff;
+  --ouro: #fccf02;
+  --ouro-texto: #8a6b00;
 
-  --fundo: #f6f1fb;           /* cor de fundo da página */
+  --fundo: #f6f1fb;
   --fundo-2: #ece2f6;
-  --cartao: rgba(255, 255, 255, .82); /* cor do cartão principal */
+  --cartao: rgba(255, 255, 255, .82);
   --borda: rgba(100, 1, 135, .16);
-  --texto: #1b0f26;           /* cor do texto */
+  --texto: #1b0f26;
   --texto-2: #4b3a5c;
   --texto-3: #6f5f80;
-  --campo: #8a07ad;           /* cor principal: botões, barras do gráfico (o nome vem do projeto original) */
-  --destaque: rgba(252, 207, 2, .28);  /* fundo das linhas com média alta */
-  --barra-ouro: #e0b400;      /* barras com média alta no gráfico */
+  --campo: #8a07ad;
+  --destaque: rgba(252, 207, 2, .28);
+  --barra-ouro: #e0b400;
   --erro: #c4162a;
   --ok: #0f8a4f;
   --sombra: 0 18px 50px rgba(64, 0, 90, .14);
@@ -51,7 +42,6 @@
   color-scheme: light;
 }
 
-/* Tema escuro (padrão da CK): ativado pelo jQuery com $("body").toggleClass("escuro") */
 body.escuro {
   --fundo: #050407;
   --fundo-2: #0c0812;
@@ -71,9 +61,8 @@ body.escuro {
   color-scheme: dark;
 }
 
-/* ===== BASE ===== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 130px; /* espaço para o cabeçalho fixo não cobrir o título da seção */ }
+html { scroll-behavior: smooth; scroll-padding-top: 130px;  }
 body {
   margin: 0;
   font-family: var(--fonte);
@@ -88,13 +77,11 @@ h1, h2, h3 { font-family: var(--fonte-titulo); line-height: 1.1; margin: 0; lett
 a { color: inherit; }
 ::selection { background: var(--roxo); color: #fff; }
 
-/* texto só para leitor de tela */
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .pular { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--ouro); color: var(--tinta); padding: 10px 16px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: top .2s; }
 .pular:focus { top: 12px; }
 :focus-visible { outline: 3px solid var(--ouro); outline-offset: 3px; border-radius: 8px; }
 
-/* ===== VINHETA DE ABERTURA ===== */
 .vinheta {
   position: fixed; inset: 0; z-index: 90; display: grid; place-items: center;
   background: radial-gradient(circle at 50% 50%, #1c0828 0%, #050407 70%);
@@ -108,7 +95,6 @@ a { color: inherit; }
 @keyframes anelPulsa { 0% { transform: scale(.3); opacity: 0; } 70% { opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
 @keyframes vinhetaSai { to { opacity: 0; visibility: hidden; } }
 
-/* ===== FUNDO DECORATIVO ===== */
 .fundo { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .aurora { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .55; animation: flutua 18s ease-in-out infinite alternate; }
 .a1 { width: 520px; height: 520px; background: var(--roxo); top: -160px; left: -140px; }
@@ -123,7 +109,6 @@ body:not(.escuro) .a3 { opacity: .16; }
   background-size: 56px 56px;
   mask-image: radial-gradient(circle at 50% 20%, #000 0%, transparent 75%);
 }
-/* campo de futebol em perspectiva 3D, no rodapé da tela */
 .campo-3d { position: absolute; left: 50%; bottom: -8vh; width: 1400px; height: 60vh; transform: translateX(-50%); perspective: 600px; opacity: .5; }
 .campo-linhas {
   position: absolute; inset: 0; transform: rotateX(68deg); transform-origin: 50% 100%;
@@ -138,7 +123,6 @@ body:not(.escuro) .a3 { opacity: .16; }
 body:not(.escuro) .campo-3d { opacity: .3; }
 @keyframes campoAnda { to { background-position: 0 0, 0 0, 140px 0; } }
 
-/* ===== CABEÇALHO ===== */
 .topo {
   position: sticky; top: 12px; z-index: 50;
   width: var(--largura); margin: 12px auto 0;
@@ -160,7 +144,6 @@ body:not(.escuro) .campo-3d { opacity: .3; }
 .icone-tema { width: 16px; height: 16px; border-radius: 50%; background: var(--ouro); box-shadow: 0 0 12px var(--ouro); transition: transform .5s var(--ease), box-shadow .5s; }
 body.escuro .icone-tema { background: transparent; box-shadow: inset -5px -3px 0 0 var(--ouro); transform: rotate(-30deg); }
 
-/* ===== BOTÕES ===== */
 button, .btn-cta, .btn-fantasma {
   font: 600 .95rem var(--fonte);
   padding: 11px 18px; border: 1px solid transparent; border-radius: 14px;
@@ -170,7 +153,7 @@ button, .btn-cta, .btn-fantasma {
   transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .25s;
   box-shadow: 0 6px 20px rgba(163, 8, 200, .28);
 }
-button:hover, .btn-cta:hover, .btn-fantasma:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(163, 8, 200, .45); filter: brightness(1.08); } /* estado :hover */
+button:hover, .btn-cta:hover, .btn-fantasma:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(163, 8, 200, .45); filter: brightness(1.08); }
 button:active { transform: translateY(0) scale(.98); }
 .btn-sec { background: transparent; color: var(--texto); border-color: var(--borda); box-shadow: none; }
 .btn-sec:hover { border-color: var(--roxo); background: rgba(163, 8, 200, .1); }
@@ -178,13 +161,11 @@ button:active { transform: translateY(0) scale(.98); }
 .btn-ouro:hover, .btn-cta:hover { box-shadow: 0 12px 32px rgba(252, 207, 2, .45); }
 .btn-fantasma { background: transparent; color: var(--texto); border-color: var(--borda); box-shadow: none; }
 .btn-tema { padding: 9px 14px; border-radius: 999px; }
-#btnMetrica[aria-pressed="true"] { background: linear-gradient(135deg, var(--roxo) 0%, var(--roxo-fundo) 100%); color: #fff; } /* botão "apertado" */
+#btnMetrica[aria-pressed="true"] { background: linear-gradient(135deg, var(--roxo) 0%, var(--roxo-fundo) 100%); color: #fff; }
 
-/* botões criados pelo JavaScript dentro da tabela */
 .btn-remover { width: 34px; height: 34px; padding: 0; border-radius: 10px; background: rgba(255, 93, 108, .14); color: var(--erro); border: 1px solid rgba(255, 93, 108, .35); box-shadow: none; font-weight: 700; }
 .btn-remover:hover { background: var(--erro); color: #fff; box-shadow: 0 6px 18px rgba(255, 93, 108, .4); }
 
-/* ===== HERO ===== */
 main { width: var(--largura); margin: 0 auto; }
 .hero { overflow-x: clip; display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; min-height: min(78vh, 720px); padding: 56px 0 24px; }
 .selo { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--borda); background: var(--cartao); font: 500 .82rem var(--fonte-mono); color: var(--texto-2); letter-spacing: .02em; }
@@ -208,14 +189,12 @@ body:not(.escuro) .grad { background-image: linear-gradient(110deg, var(--roxo-f
 @keyframes gira { to { transform: rotateX(72deg) rotateZ(360deg); } }
 .dica-3d { position: absolute; bottom: 2%; margin: 0; font: 500 .78rem var(--fonte-mono); color: var(--texto-3); }
 
-/* ===== FAIXA DE TAGS ===== */
 .faixa-moldura { overflow: hidden; margin: 0 calc(50% - 50vw) 32px; padding: 16px 0; }
 .faixa { overflow: hidden; margin: 0 -20px; padding: 14px 0; border-block: 1px solid var(--borda); background: linear-gradient(90deg, rgba(163, 8, 200, .12), rgba(252, 207, 2, .08), rgba(163, 8, 200, .12)); transform: rotate(-1.2deg); }
 .faixa-trilho { display: flex; width: max-content; animation: rolar 32s linear infinite; }
 .faixa span { font: 600 1.05rem var(--fonte-titulo); color: var(--texto-2); white-space: nowrap; padding-right: 8px; letter-spacing: .04em; text-transform: uppercase; }
 @keyframes rolar { to { transform: translateX(-50%); } }
 
-/* ===== KPIs ===== */
 .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 72px; }
 .kpi { position: relative; padding: 22px; border-radius: var(--raio); background: var(--cartao); border: 1px solid var(--borda); box-shadow: var(--sombra); overflow: hidden; }
 .kpi::after { content: ""; position: absolute; inset: auto -30% -60% auto; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(163, 8, 200, .35), transparent 70%); }
@@ -227,14 +206,11 @@ body:not(.escuro) .kpi-icone { color: var(--roxo-fundo); }
 .kpi-valor { margin: 0; font: 700 2.2rem var(--fonte-titulo); transform: translateZ(40px); }
 .kpi-texto { font-size: 1.45rem; line-height: 1.2; padding-top: 6px; color: var(--ouro-texto); }
 
-/* efeito 3D ao passar o mouse (o ck-efeitos.js atualiza --rx e --ry) */
 .tilt { transform-style: preserve-3d; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s var(--ease), box-shadow .5s var(--ease); will-change: transform; }
 .tilt:hover { box-shadow: var(--sombra), var(--brilho); }
-/* luz que segue o mouse dentro do cartão */
 .tilt::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(252, 207, 2, .1), transparent 45%); opacity: 0; transition: opacity .3s; }
 .tilt:hover::before { opacity: 1; }
 
-/* ===== BLOCOS / SEÇÕES ===== */
 .bloco { margin-bottom: 80px; }
 .bloco-cab { margin-bottom: 20px; }
 .numero { margin: 0 0 8px; font: 600 .85rem var(--fonte-mono); color: var(--ouro-texto); letter-spacing: .08em; text-transform: uppercase; }
@@ -243,7 +219,6 @@ body:not(.escuro) .kpi-icone { color: var(--roxo-fundo); }
 .vidro { background: var(--cartao); border: 1px solid var(--borda); box-shadow: var(--sombra); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .vidro::after { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: linear-gradient(135deg, rgba(163, 8, 200, .5), transparent 35%, transparent 65%, rgba(252, 207, 2, .4)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
 
-/* FLEXBOX: alinha os controles lado a lado e quebra linha quando falta espaço */
 .controles { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
 .campo-busca { flex: 1 1 200px; }
 input, select {
@@ -256,38 +231,34 @@ body.escuro select option { background: #140c1d; color: var(--texto); }
 input:focus, select:focus { outline: none; border-color: var(--roxo); box-shadow: 0 0 0 4px rgba(163, 8, 200, .2); }
 input::placeholder { color: var(--texto-3); }
 
-/* Classes de feedback usadas por mostrar() no JavaScript */
 #mensagem { min-height: 1.5em; margin: 10px 0; }
 .erro { color: var(--erro); font-weight: 700; }
 .ok { color: var(--ok); font-weight: 700; }
 .ok::before { content: "✓ "; }
 .erro::before { content: "⚠ "; }
 
-/* TABELA */
 .tabela-caixa { overflow-x: auto; border-radius: 16px; border: 1px solid var(--borda); }
 table { width: 100%; border-collapse: collapse; min-width: 560px; }
 th, td { padding: 13px 16px; text-align: left; }
 th { font: 600 .78rem var(--fonte-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--texto-3); background: rgba(163, 8, 200, .08); }
 td { border-top: 1px solid var(--borda); font-variant-numeric: tabular-nums; }
 tbody tr { transition: background .25s, transform .25s var(--ease); animation: linhaEntra .5s var(--ease) both; }
-tbody tr:hover { background: rgba(163, 8, 200, .1); }    /* realce ao passar o mouse */
-tr.destaque { background: var(--destaque); }               /* linha criada com .toggleClass("destaque") */
+tbody tr:hover { background: rgba(163, 8, 200, .1); }
+tr.destaque { background: var(--destaque); }
 tr.destaque td:first-child { box-shadow: inset 4px 0 0 var(--ouro); font-weight: 600; }
 tbody tr:nth-child(2) { animation-delay: .04s; } tbody tr:nth-child(3) { animation-delay: .08s; } tbody tr:nth-child(4) { animation-delay: .12s; }
 tbody tr:nth-child(5) { animation-delay: .16s; } tbody tr:nth-child(6) { animation-delay: .2s; } tbody tr:nth-child(7) { animation-delay: .24s; }
 @keyframes linhaEntra { from { opacity: 0; transform: translateY(8px); } }
 #resumoTexto { margin: 16px 0 0; color: var(--texto-2); font: 500 .88rem var(--fonte-mono); }
 
-/* ===== NOVA FUNCIONALIDADE: GRÁFICO DE GOLS (Chart.js) ===== */
 .grafico-topo { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
-.grafico-caixa { position: relative; height: 360px; }  /* o Chart.js ocupa 100% desta caixa */
+.grafico-caixa { position: relative; height: 360px; }
 .grafico-legenda { font-size: .88rem; color: var(--texto-2); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 16px 0 0; }
 .cor-destaque, .cor-normal { display: inline-block; width: 14px; height: 14px; border-radius: 4px; }
 .cor-destaque { background: var(--barra-ouro); box-shadow: 0 0 10px rgba(252, 207, 2, .6); }
 .cor-normal { background: var(--campo); box-shadow: 0 0 10px rgba(163, 8, 200, .6); margin-left: 12px; }
 #graficoAviso { margin: 8px 0 0; min-height: 1.2em; }
 
-/* ===== FORMULÁRIO NOVO JOGADOR ===== */
 .novo { display: grid; grid-template-columns: 2fr 1.3fr 1fr 1fr; gap: 16px; align-items: end; }
 .campo label { display: block; margin-bottom: 6px; font-weight: 600; font-size: .88rem; color: var(--texto-2); }
 .novo-acoes { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -295,19 +266,16 @@ pre { margin: 16px 0 0; background: #0b0710; color: #f2d76b; padding: 0; border-
 pre:empty { border: 0; margin: 0; }
 pre:not(:empty) { padding: 18px 20px; box-shadow: inset 0 0 40px rgba(163, 8, 200, .15); }
 
-/* ===== RODAPÉ ===== */
 .rodape { width: var(--largura); margin: 0 auto 32px; padding: 28px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; border-radius: var(--raio); background: var(--cartao); border: 1px solid var(--borda); }
 .rodape-marca { display: flex; align-items: center; gap: 14px; }
 .rodape-marca img { width: 72px; height: 72px; filter: drop-shadow(0 0 16px rgba(163, 8, 200, .5)); }
 .rodape p { margin: 0; color: var(--texto-2); font-size: .92rem; }
 .rodape-texto p + p { margin-top: 6px; font-size: .84rem; color: var(--texto-3); }
 
-/* ===== REVELAR AO ROLAR (classe .visivel colocada pelo ck-efeitos.js) ===== */
 .js .revelar { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .js .revelar.visivel { opacity: 1; transform: none; }
 .js .tilt.revelar.visivel { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
 
-/* ===== RESPONSIVO ===== */
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 36px; }
   .hero-3d { max-width: 340px; order: -1; }
@@ -325,12 +293,11 @@ pre:not(:empty) { padding: 18px 20px; box-shadow: inset 0 0 40px rgba(163, 8, 20
   .kpi-texto { font-size: 1.1rem; }
   .cartao { padding: 16px; }
   .novo { grid-template-columns: 1fr; }
-  .grafico-caixa { height: 280px; }      /* gráfico um pouco menor no celular */
+  .grafico-caixa { height: 280px; }
   th, td { padding: 10px; font-size: .88rem; }
   .texto-tema { display: none; }
 }
 
-/* ===== MOVIMENTO REDUZIDO: respeita a configuração do sistema ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .vinheta { display: none; }
@@ -338,7 +305,6 @@ pre:not(:empty) { padding: 18px 20px; box-shadow: inset 0 0 40px rgba(163, 8, 20
   .tilt { transform: none !important; }
 }
 
-/* ===== IMPRESSÃO: mostra tudo, sem efeitos ===== */
 @media print {
   .vinheta, .fundo, .faixa, .hero-3d, .topo nav, .btn-tema { display: none !important; }
   .js .revelar { opacity: 1 !important; transform: none !important; }

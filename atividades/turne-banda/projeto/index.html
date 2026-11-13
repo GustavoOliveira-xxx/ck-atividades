@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050407">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Painel da turnê Eco Lunar Brasil 2026 com JSON, jQuery e AJAX. Interfaces Web II, ETEC Taboão da Serra, 2º C.">
+  <title>Eco Lunar · Turnê Brasil 2026 · CK</title>
+  <link rel="icon" type="image/png" href="assets/favicon-ck.png">
+  <script>document.documentElement.classList.add("js");try{if(sessionStorage.getItem("ecoLunarVinheta")){document.documentElement.classList.add("sem-vinheta");}}catch(e){}</script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="pular" href="#painel">Pular para o painel da turnê</a>
+
+  <div class="vinheta" id="vinheta" aria-hidden="true">
+    <div class="vinheta-eclipse"><span class="vinheta-lua"></span><span class="vinheta-sombra"></span></div>
+    <img src="assets/logo-ck.webp" alt="" width="150" height="150">
+    <p class="vinheta-texto">Conscious Knowledge apresenta</p>
+    <p class="vinheta-banda">ECO LUNAR</p>
+  </div>
+
+  <div class="fundo" aria-hidden="true">
+    <canvas id="estrelas"></canvas>
+    <div class="holofote holofote-a"></div>
+    <div class="holofote holofote-b"></div>
+    <div class="holofote holofote-c"></div>
+    <div class="piso-palco"><div class="piso-grade"></div></div>
+    <div class="neblina"></div>
+    <div class="luz-mouse"></div>
+  </div>
+
+  <header class="topo">
+    <a class="marca" href="#inicio" aria-label="Conscious Knowledge, voltar ao início">
+      <img src="assets/logo-ck.webp" alt="" width="44" height="44">
+      <span><strong>Conscious</strong> Knowledge</span>
+    </a>
+    <nav class="menu" aria-label="Seções da página">
+      <a href="#metricas">Métricas</a>
+      <a href="#rota">Rota</a>
+      <a href="#shows">Shows</a>
+      <a href="#creditos">Créditos</a>
+    </nav>
+    <div class="equalizador" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio" aria-labelledby="titulo-banda">
+      <div class="hero-texto revelar">
+        <p class="selo"><span class="ponto-vivo"></span> Interfaces Web II · ETEC Taboão da Serra · 2º C</p>
+        <h1 id="titulo-banda">
+          <span class="titulo-eco" data-texto="ECO LUNAR">ECO LUNAR</span>
+          <span class="titulo-sub">Turnê Brasil <b>2026</b></span>
+        </h1>
+        <p class="hero-chamada">Painel de produção da turnê: 8 cidades, uma lua e um arquivo JSON lido em segundo plano pelo AJAX do jQuery.</p>
+        <div class="hero-acoes">
+          <a class="botao botao-ouro" href="#shows">Ver os shows</a>
+          <a class="botao botao-vidro" href="#rota">Rota no mapa</a>
+        </div>
+      </div>
+      <div class="hero-lua revelar" aria-hidden="true">
+        <div class="orbita orbita-1"></div>
+        <div class="orbita orbita-2"></div>
+        <canvas id="lua-3d" width="520" height="520"></canvas>
+        <p class="dica-lua">Arraste para girar a lua</p>
+      </div>
+    </section>
+
+    <div class="letreiro" aria-hidden="true"><div class="letreiro-trilho" id="letreiro"><span>ECO LUNAR · TURNÊ BRASIL 2026 ·</span></div></div>
+
+    <section class="bloco" id="metricas" aria-labelledby="titulo-metricas">
+      <header class="bloco-cab revelar">
+        <p class="sobretitulo">Painel de métricas</p>
+        <h2 id="titulo-metricas">Números da turnê</h2>
+        <p class="bloco-desc" id="resumo-filtro" aria-live="polite">Carregando os números...</p>
+      </header>
+      <div class="grade-metricas">
+        <article class="metrica tilt revelar">
+          <span class="metrica-icone" aria-hidden="true">♪</span>
+          <p class="metrica-rotulo">Shows na tela</p>
+          <p class="metrica-valor" id="metrica-shows">0</p>
+          <p class="metrica-extra" id="metrica-shows-extra">de 0 na agenda</p>
+        </article>
+        <article class="metrica tilt revelar">
+          <span class="metrica-icone" aria-hidden="true">◉</span>
+          <p class="metrica-rotulo">Cidades visitadas</p>
+          <p class="metrica-valor" id="metrica-cidades">0</p>
+          <p class="metrica-extra" id="metrica-estados">0 estados</p>
+        </article>
+        <article class="metrica metrica-destaque tilt revelar">
+          <span class="metrica-icone" aria-hidden="true">★</span>
+          <p class="metrica-rotulo">Ingressos vendidos</p>
+          <p class="metrica-valor" id="metrica-ingressos">0</p>
+          <p class="metrica-extra" id="metrica-capacidade">de 0 lugares</p>
+        </article>
+        <article class="metrica tilt revelar">
+          <span class="metrica-icone" aria-hidden="true">◐</span>
+          <p class="metrica-rotulo">Ocupação média</p>
+          <p class="metrica-valor" id="metrica-ocupacao">0%</p>
+          <div class="metrica-barra" aria-hidden="true"><span id="metrica-ocupacao-barra"></span></div>
+        </article>
+        <article class="metrica tilt revelar">
+          <span class="metrica-icone" aria-hidden="true">$</span>
+          <p class="metrica-rotulo">Receita estimada</p>
+          <p class="metrica-valor metrica-valor-menor" id="metrica-receita">R$ 0</p>
+          <p class="metrica-extra">vendidos × preço médio</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bloco" id="rota" aria-labelledby="titulo-rota">
+      <header class="bloco-cab revelar">
+        <p class="sobretitulo">Logística</p>
+        <h2 id="titulo-rota">Rota da turnê</h2>
+        <p class="bloco-desc">Cada ponto fica na latitude e longitude da cidade, ligado na ordem das datas. Clique num ponto para abrir os detalhes do show.</p>
+      </header>
+      <div class="rota-palco revelar">
+        <div class="rota-plano" id="rota-turne"></div>
+      </div>
+    </section>
+
+    <section class="bloco" id="shows" aria-labelledby="titulo-shows">
+      <header class="bloco-cab revelar">
+        <p class="sobretitulo">Agenda oficial</p>
+        <h2 id="titulo-shows">Shows da turnê</h2>
+      </header>
+
+      <div class="barra-ferramentas revelar" role="search">
+        <div class="campo campo-busca">
+          <label for="input-busca">Buscar cidade, estado ou local</label>
+          <div class="campo-caixa">
+            <span class="campo-icone" aria-hidden="true">⌕</span>
+            <input id="input-busca" type="search" placeholder="Ex.: Curitiba" autocomplete="off" aria-describedby="atalho-busca">
+            <kbd id="atalho-busca" title="Atalho do teclado">/</kbd>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="filtro-status">Status</label>
+          <select id="filtro-status">
+            <option value="Todos">Todos os status</option>
+            <option value="Esgotado">Esgotado</option>
+            <option value="Últimos Ingressos">Últimos Ingressos</option>
+            <option value="Confirmado">Confirmado</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="ordenar-por">Ordenar por</label>
+          <select id="ordenar-por">
+            <option value="data">Data do show</option>
+            <option value="vendidos">Mais vendidos</option>
+            <option value="ocupacao">Maior ocupação</option>
+            <option value="cidade">Cidade (A a Z)</option>
+          </select>
+        </div>
+        <button class="botao botao-vidro botao-limpar" id="btn-limpar" type="button">Limpar filtros</button>
+      </div>
+
+      <div class="chips-status" id="chips-status" role="group" aria-label="Filtro rápido por status"></div>
+
+      <div class="status-linha">
+        <div id="status-carregamento" class="status-carregamento" role="status" aria-live="polite">Preparando o palco...</div>
+        <button class="botao-recarregar" id="btn-recarregar" type="button">Recarregar via AJAX</button>
+      </div>
+      <p class="contador-resultados" id="contador-resultados" aria-live="polite"></p>
+
+      <div id="grid-shows" class="grid-shows"></div>
+    </section>
+  </main>
+
+  <footer class="rodape" id="creditos">
+    <div class="rodape-marca">
+      <img src="assets/logo-ck.webp" alt="Logo Conscious Knowledge" width="64" height="64">
+      <div>
+        <p class="rodape-nome"><strong>Conscious</strong> Knowledge</p>
+        <p>Atividade Prática: Organizando a Turnê de uma Banda</p>
+      </div>
+    </div>
+    <div class="rodape-info">
+      <p><strong>Grupo:</strong> Gustavo Oliveira dos Santos, Paulo Henrique de Lima Silva e Gabriel Heanna dos Reis</p>
+      <p><strong>Professor:</strong> Clayton de Almeida Souza · Interfaces Web II · ETEC Taboão da Serra · 2º C</p>
+      <p class="rodape-aviso">A banda Eco Lunar e os números da turnê são fictícios, criados para a atividade.</p>
+    </div>
+    <a class="botao botao-vidro" href="../../../index.html">Voltar ao Acervo CK</a>
+  </footer>
+
+  <dialog class="dialogo" id="dialogo-show" aria-labelledby="dialogo-titulo">
+    <div class="ingresso" id="dialogo-conteudo"></div>
+    <button class="dialogo-fechar" id="dialogo-fechar" type="button" aria-label="Fechar detalhes">×</button>
+  </dialog>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/jquery-3.7.1.min.js"><\/script>');</script>
+  <script src="js/script.js"></script>
+  <script src="js/palco-3d.js"></script>
+</body>
+</html>

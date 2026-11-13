@@ -1,5 +1,63 @@
 window.ACERVO_CK = [
   {
+    id: "turne-banda",
+    titulo: "Organizando a Turnê de uma Banda",
+    subtitulo: "Eco Lunar · Turnê Brasil 2026 com JSON, jQuery e AJAX",
+    disciplina: "Interface Web II",
+    sigla: "IW",
+    tipo: "Projeto web + relatório de evidências",
+    data: "2026-11-12",
+    turma: "2º C · M-Tec Informática para Internet",
+    resumo:
+      "Grupo Gustavo Oliveira dos Santos, Paulo Henrique de Lima Silva e Gabriel Heanna dos Reis, " +
+      "Prof. Clayton de Almeida Souza. Painel da turnê fictícia Eco Lunar com 8 shows lidos de um JSON " +
+      "por $.ajax (beforeSend, success, error e complete). Pelo botão Play do laboratório o error usa uma " +
+      "lista de contingência com os mesmos shows. Cards com badges e barras de ingressos, busca e filtro em " +
+      "tempo real com .filter(), métricas somadas com .reduce(), mapa da rota e detalhes em formato de " +
+      "ingresso. Visual da CK com vinheta, céu de estrelas e lua 3D que gira com o mouse.",
+    destaques: [
+      "8 shows em JSON",
+      "AJAX + plano B do laboratório",
+      "Filtros e métricas ao vivo",
+      "Rota no mapa",
+      "Lua 3D em canvas",
+      "Relatório das etapas 0 a 5",
+    ],
+    tags: ["Projeto", "jQuery", "AJAX", "JSON", "Filtros", "3D", "Canvas", "Acessibilidade", "Responsivo"],
+    cor: "#fccf02",
+    href: "atividades/turne-banda/projeto/index.html",
+    recursos: [
+      {
+        rotulo: "Abrir painel",
+        href: "atividades/turne-banda/projeto/index.html",
+        tipo: "Eco Lunar · Turnê Brasil 2026",
+        icone: "app",
+      },
+      {
+        rotulo: "Código em ZIP",
+        href: "atividades/turne-banda/TurneBanda_Gustavo_Paulo_Gabriel_2C.zip",
+        tipo: "Pasta turne-banda",
+        icone: "codigo",
+        baixar: true,
+      },
+      {
+        rotulo: "Relatório Word",
+        href: "atividades/turne-banda/Gustavo_Paulo_Gabriel_2C_TurneBanda.docx",
+        tipo: "Evidências editáveis",
+        icone: "doc",
+        baixar: true,
+      },
+      {
+        rotulo: "Relatório PDF",
+        href: "atividades/turne-banda/Gustavo_Paulo_Gabriel_2C_TurneBanda.pdf",
+        tipo: "Versão final",
+        icone: "doc",
+        baixar: true,
+      },
+    ],
+    status: "pronta",
+  },
+  {
     id: "nova-funcionalidade-ia",
     titulo: "Nova Funcionalidade com IA",
     subtitulo: "Painel do Esporte · gráfico de gols com Chart.js",

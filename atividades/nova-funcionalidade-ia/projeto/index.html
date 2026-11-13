@@ -1,48 +1,34 @@
 <!DOCTYPE html>
-<!-- Declara que o documento é HTML5 -->
-<html lang="pt-br"> <!-- Idioma da página: português do Brasil -->
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8"> <!-- Acentos funcionando corretamente -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Layout responsivo no celular -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050407">
   <meta name="description" content="Painel de estatísticas do futebol com gráfico de gols por jogador. Interface Web II, ETEC Taboão da Serra.">
   <title>Ciência de Dados no Esporte · CK</title>
   <link rel="icon" type="image/png" href="assets/favicon-ck.png">
-  <!-- liga as animações de entrada e pula a vinheta se ela já apareceu nesta sessão -->
   <script>document.documentElement.classList.add("js");try{if(sessionStorage.getItem("ckVinheta")){document.documentElement.classList.add("sem-vinheta");}}catch(e){}</script>
 
-  <!-- Fontes da CK (Inter, Space Grotesk e JetBrains Mono) ficam na pasta assets/fontes: funcionam sem internet -->
-  <link rel="stylesheet" href="style.css"> <!-- Liga o CSS (aparência) -->
+  <link rel="stylesheet" href="style.css">
 
-  <!-- AULA 2 - INSTALAÇÃO DO jQUERY POR CDN (precisa de internet) -->
-  <!-- Este <script> DEVE vir ANTES do script.js, senão aparece "$ is not defined" -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <!-- PLANO B (sem internet): se a CDN falhar, window.jQuery não existe e carregamos a cópia local da pasta -->
   <script>window.jQuery || document.write('<script src="jquery-3.7.1.min.js"><\/script>');</script>
 
-  <!-- NOVA FUNCIONALIDADE (Trilha 3) - Chart.js 4.5.1 pela CDN jsDelivr, com versão FIXA -->
-  <!-- Versão fixa: se a biblioteca lançar uma versão nova com mudanças, nosso gráfico não quebra -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
-  <!-- PLANO B (sem internet): mesma ideia do jQuery. Se window.Chart não existe, usa a cópia local -->
   <script>window.Chart || document.write('<script src="chart.umd.min.js"><\/script>');</script>
 
-  <!-- ck-efeitos.js = só o visual da CK (vinheta, bola 3D, cartões 3D, contadores). Vem antes do script.js -->
   <script src="ck-efeitos.js" defer></script>
-  <!-- defer = só executa o script depois que o HTML foi lido -->
   <script src="script.js" defer></script>
 </head>
 <body class="escuro">
 
-  <!-- Atalho para quem navega pelo teclado pular direto para o conteúdo -->
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- Vinheta de abertura com o logo da CK (some sozinha; clique para pular) -->
   <div class="vinheta" id="vinheta" aria-hidden="true">
     <div class="vinheta-anel"></div>
     <img src="assets/logo-ck.webp" alt="" width="220" height="220">
   </div>
 
-  <!-- Fundo decorativo: aurora roxa/dourada e campo de futebol em 3D -->
   <div class="fundo" aria-hidden="true">
     <div class="aurora a1"></div>
     <div class="aurora a2"></div>
@@ -51,7 +37,6 @@
     <div class="grade"></div>
   </div>
 
-  <!-- Tag semântica: cabeçalho da página -->
   <header class="topo">
     <a class="marca" href="#inicio" aria-label="Conscious Knowledge, início">
       <img src="assets/logo-ck.webp" alt="" width="44" height="44">
@@ -63,16 +48,13 @@
       <a href="#novo">Novo jogador</a>
       <a href="#creditos">Créditos</a>
     </nav>
-    <!-- botão de tema do projeto original (cookie de 7 dias), agora no cabeçalho -->
     <button id="btnTema" class="btn-tema" type="button" aria-label="Alternar tema claro ou escuro">
       <span class="icone-tema" aria-hidden="true"></span><span class="texto-tema">Tema</span>
     </button>
   </header>
 
-  <!-- Tag semântica: conteúdo principal -->
   <main id="conteudo">
 
-    <!-- HERO: título, chamada e a bola 3D (arraste para girar) -->
     <section class="hero" id="inicio">
       <div class="hero-texto revelar">
         <p class="selo"><span class="ponto"></span> Interface Web II · ETEC Taboão da Serra</p>
@@ -94,7 +76,6 @@
       </div>
     </section>
 
-    <!-- Faixa de tags rolando (decorativa) -->
     <div class="faixa-moldura" aria-hidden="true">
     <div class="faixa">
       <div class="faixa-trilho">
@@ -104,7 +85,6 @@
     </div>
     </div>
 
-    <!-- KPIs: números lidos do #resumoTexto pelo ck-efeitos.js -->
     <section class="kpis" aria-label="Resumo do elenco">
       <article class="kpi tilt revelar"><span class="kpi-icone" aria-hidden="true">◎</span><p class="kpi-rotulo">Jogadores</p><p class="kpi-valor" id="kpiJogadores">0</p></article>
       <article class="kpi tilt revelar"><span class="kpi-icone" aria-hidden="true">⚽</span><p class="kpi-rotulo">Gols</p><p class="kpi-valor" id="kpiGols">0</p></article>
@@ -112,7 +92,6 @@
       <article class="kpi tilt revelar destaque-ouro"><span class="kpi-icone" aria-hidden="true">✦</span><p class="kpi-rotulo">Artilheiro</p><p class="kpi-valor kpi-texto" id="kpiArtilheiro">-</p></article>
     </section>
 
-    <!-- SEÇÃO 1: controles + tabela (cada elemento tem um id para o jQuery selecionar com $("#id")) -->
     <section class="bloco revelar" id="painel" aria-labelledby="tituloPainel">
       <header class="bloco-cab">
         <p class="numero">01 · Painel</p>
@@ -121,15 +100,15 @@
 
       <div class="cartao vidro">
         <div class="controles">
-          <button id="btnJson" type="button" class="btn">Carregar JSON</button>   <!-- AJAX com JSON -->
-          <button id="btnXml" type="button" class="btn">Carregar XML</button>     <!-- AJAX com XML -->
+          <button id="btnJson" type="button" class="btn">Carregar JSON</button>
+          <button id="btnXml" type="button" class="btn">Carregar XML</button>
           <label class="campo-busca">
             <span class="sr">Buscar jogador</span>
-            <input id="busca" type="text" placeholder="Buscar jogador..."> <!-- evento "input" -->
+            <input id="busca" type="text" placeholder="Buscar jogador...">
           </label>
           <label class="campo-select">
             <span class="sr">Filtrar por posição</span>
-            <select id="filtroPosicao">                                  <!-- evento "change" -->
+            <select id="filtroPosicao">
               <option>Todas</option>
               <option>Atacante</option>
               <option>Meia</option>
@@ -140,10 +119,8 @@
           <button id="btnOrdenar" type="button" class="btn btn-sec">Ordenar por média</button>
         </div>
 
-        <!-- Mensagens de sucesso (.ok) ou erro (.erro) escritas pelo JavaScript -->
         <p id="mensagem" role="status"></p>
 
-        <!-- a tabela fica numa caixa com rolagem própria no celular -->
         <div class="tabela-caixa">
           <table>
             <caption class="sr">Jogadores, posição, jogos, gols e média de gols por jogo</caption>
@@ -155,33 +132,27 @@
             <tbody id="tabelaCorpo"></tbody>
           </table>
         </div>
-        <p id="resumoTexto"></p> <!-- total de gols, média e artilheiro -->
+        <p id="resumoTexto"></p>
       </div>
     </section>
 
-    <!-- SEÇÃO NOVA: gráfico de gols por jogador (Chart.js desenha dentro do <canvas>) -->
     <section class="bloco grafico revelar" id="grafico" aria-labelledby="tituloGrafico">
       <header class="bloco-cab">
         <p class="numero">02 · Gráfico</p>
         <div class="grafico-topo">
           <h2 id="tituloGrafico">Gols por jogador</h2>
-          <!-- troca o que o gráfico mostra: total de gols ou média por jogo -->
           <button id="btnMetrica" type="button" class="btn btn-ouro" aria-pressed="false">Ver média por jogo</button>
         </div>
       </header>
       <div class="cartao vidro tilt tilt-leve">
-        <!-- a caixa com altura fixa evita que o gráfico cresça sem parar (responsive do Chart.js) -->
         <div class="grafico-caixa">
-          <!-- role="img" + aria-label: o leitor de tela lê um resumo, já que o canvas é só desenho -->
           <canvas id="graficoGols" role="img" aria-label="Gráfico de gols por jogador"></canvas>
         </div>
-        <!-- legenda das cores (mesma regra da tabela) e avisos de erro do gráfico -->
         <p class="grafico-legenda"><span class="cor-destaque"></span> média de gols ≥ 0,5 <span class="cor-normal"></span> demais jogadores</p>
         <p id="graficoAviso" role="status"></p>
       </div>
     </section>
 
-    <!-- SEÇÃO 3: formulário para adicionar jogador (com label, como pede o padrão da turma) -->
     <section class="bloco revelar" id="novo" aria-labelledby="tituloNovo">
       <header class="bloco-cab">
         <p class="numero">03 · Cadastro</p>
@@ -212,12 +183,10 @@
         </div>
       </div>
 
-      <!-- Área onde o JSON exportado será mostrado -->
       <pre id="saidaJson" aria-label="JSON exportado"></pre>
     </section>
   </main>
 
-  <!-- Tag semântica: rodapé -->
   <footer class="rodape" id="creditos">
     <div class="rodape-marca">
       <img src="assets/logo-ck.webp" alt="Logo Conscious Knowledge" width="72" height="72" loading="lazy">
